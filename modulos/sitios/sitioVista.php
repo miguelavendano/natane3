@@ -151,10 +151,13 @@
             
             $complete = "";
             $empresa = '';
+            $global = new Global_var();
+            $url = $global->url_usuario;            
             foreach ($datos as $valor){
-                $aux = $this->seguidores;                
+                $aux = $this->seguidores;        
+                $aux = str_ireplace('{url}', $url, $aux);
                 $aux = str_ireplace('{empresa}', $empresa, $aux);            
-                $aux = str_ireplace('{id_usuario}', $valor->id, $aux);            
+                $aux = str_ireplace('{id}', $valor->id, $aux);            
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);            
                 $aux = str_ireplace('{nombre}', $valor->nick, $aux);            
                 $complete .= $aux;
@@ -170,10 +173,12 @@
         public function refactory_gustaria($datos){            
             
             $quiere = "";
-            
+            $global = new Global_var();
+            $url = $global->url_usuario;
             foreach ($datos as $valor){
                 $aux = $this->gustaria;
-                $aux = str_ireplace('{id_usuario}', $valor->id, $aux);            
+                $aux = str_ireplace('{url}', $url, $aux);            
+                $aux = str_ireplace('{id}', $valor->id, $aux);            
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);            
                 $aux = str_ireplace('{nombre}', $valor->nick, $aux);  
                 $quiere .= $aux;

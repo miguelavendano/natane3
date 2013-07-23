@@ -12,7 +12,7 @@
         
         public function __construct() {
             
-            $this->modelempresas = new ModelEmpresas();
+            $this->modelempresas = new ModelEmpresa();
             
         }       
         
