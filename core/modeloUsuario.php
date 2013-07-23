@@ -46,11 +46,13 @@ class ModelUsuarios{
 				->save();
 
 		$minodo->id = $minodo->node->getId();
-                echo $minodo->id;
+                //echo $minodo->id;
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Usuario');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
 	}      
+        
+        
         public function get_usuario($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
@@ -116,61 +118,6 @@ class ModelUsuarios{
                 
             
                 foreach($result as $row) {
-                    
-                    $usuario = new Usuario();  
-                    $usuario->id = $row['']->getId();
-                    $usuario->type = $row['']->getProperty('type');
-                    $usuario->nick = $row['']->getProperty('nick');
-                    $usuario->imagen = $row['']->getProperty('imagen');
-                    array_push($array, $usuario);
-                    
-                    
-                }
-                return $array;
-            }
-
-        }        
-        
-        
-        public function get_visitantes($queryString){
-            
-            
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);
-            
-            $result = $query->getResultSet();
-            
-            $array = array();
-            
-            if($result){
-                
-            
-                foreach($result as $row) {
-                    $usuario = new Usuario();
-                    $usuario->id = $row['']->getId();
-                    $usuario->nick = $row['']->getProperty('nick');
-                    $usuario->imagen = $row['']->getProperty('imagen');
-                    array_push($array, $usuario);
-                    
-                    
-                }
-                return $array;
-            }
-
-        }
-        
-        public function get_desean($queryString){
-            
-            
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);
-            
-            $result = $query->getResultSet();
-            
-            $array = array();
-            
-            if($result){
-                
-            
-                foreach($result as $row) {
                     $usuario = new Usuario();
                     $usuario->id = $row['']->getId();
                     $usuario->nick = $row['']->getProperty('nick');
@@ -183,5 +130,6 @@ class ModelUsuarios{
             }
 
         }        
+        
         
 }

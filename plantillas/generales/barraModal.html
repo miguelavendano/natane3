@@ -6,7 +6,7 @@
         </div>
 
         <div class="modal-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data">                        
                 <div class="control-group">
                     <label class="control-label" for="imper">Imagen de perfil: </label>
                     <div class="controls">
@@ -23,29 +23,29 @@
                 <div class="control-group">
                     <label class="control-label" for="nom">Nombres: </label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="nom">
+                        <input type="text" class="input-xlarge" id="Enom" name="nom" value="">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="ape">Apellidos: </label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="ape">
+                        <input type="text" class="input-xlarge" id="Eape" name="ape" value="">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="mail">Email: </label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="mail">
+                        <input type="text" class="input-xlarge" id="Email" name="mail" value="">
                     </div>
                 </div>       
                 <div class="control-group">
                     <label class="control-label" for="genero">Genero: </label>
                     <div class="controls">
                         <label class="radio"> 
-                            <input type="radio" id="genero" value="option1" name="opR">Masculino
+                            <input type="radio" id="Egenero" value="Masculino" name="Egenero">Masculino
                         </label>
                         <label class="radio"> 
-                            <input type="radio" id="genero" value="option2" name="opR">Femenino
+                            <input type="radio" id="Egenero" value="Femenino" name="Egenero">Femenino
                         </label>            
                     </div>
                 </div>
@@ -59,16 +59,16 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="nom">Cambiar Contraseña: </label>
+                    <label class="control-label" for="pass1">Cambiar Contraseña: </label>
                     <div class="controls">
-                        <input type="password" class="input-xlarge" id="pass">              
+                        <input type="password" class="input-xlarge" id="Epass1" value="" name="pass1">              
                         <span class="help-inline">minimo 6 caracteres entre letras y números</span>      
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="nom">Confirma tu Contraseña: </label>
+                    <label class="control-label" for="pass2">Confirma tu Contraseña: </label>
                     <div class="controls">
-                        <input type="password" class="input-xlarge" id="pass2">
+                        <input type="password" class="input-xlarge" id="Epass2" value="" name="pass2">
                     </div>
                 </div>                      
             </form>
@@ -90,63 +90,61 @@
         <div class="modal-body">
             <form class="form-horizontal">
                 <div class="control-group">
-                    <label class="control-label" for="nom">Nombres: </label>
+                    <label class="control-label" for="Rnom">Nombres: </label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="nom" required> 
+                        <input type="text" class="input-xlarge" id="Rnom" required> 
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="ape">Apellidos: </label>
+                    <label class="control-label" for="Rape">Apellidos: </label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="ape" required>
+                        <input type="text" class="input-xlarge" id="Rape" required>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="mail">Email: </label>
+                    <label class="control-label" for="Rmail">Email: </label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="mail" required>
+                        <input type="text" class="input-xlarge" id="Rmail" required>
                     </div>
                 </div>       
                 <div class="control-group">
-                    <label class="control-label" for="genero">Genero: </label>
+                    <label class="control-label" for="Rgenero">Genero: </label>
                     <div class="controls">
                         <label class="radio"> 
-                            <input type="radio" id="genero" value="option1" name="opR">Masculino
+                            <input type="radio" name="Rgenero" value="Masculino" id="RgeneroM">Masculino
                         </label>
                         <label class="radio"> 
-                            <input type="radio" id="genero" value="option2" name="opR">Femenino
+                            <input type="radio" name="Rgenero" value="Femenino" id="RgeneroF">Femenino
                         </label>            
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">Fecha de Nacimiento: </label>
+                    <label class="control-label" for="Rnaci">Fecha de Nacimiento: </label>
                     <div class="controls">
                         <div class="input-append date" id="dp_reg" data-date="12/02/2013" data-date-format="dd-mm-yyyy">
-                            <input class="span2" size="16" value="12/02/2013" readonly="readonly" type="text">
+                            <input class="span2" id="Rnaci" size="16" value="12/02/2013" readonly="readonly" type="text">
                                 <span class="add-on"><i class="icon-calendar"></i></span>
                         </div>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="nom">Contraseña: </label>
+                    <label class="control-label" for="Rpass1">Contraseña: </label>
                     <div class="controls">
-                        <input type="password" class="span2" id="pass" required>
-                            <span class="help-inline">minimo 6 caracteres entre letras y números</span>
+                        <input type="password" class="span2" id="Rpass1" required>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="nom">Confirma tu Contraseña: </label>
+                    <label class="control-label" for="Rpass2">Confirma tu Contraseña: </label>
                     <div class="controls">
-                        <input type="password" class="span2" id="pass2" required>
+                        <input type="password" class="span2" id="Rpass2" required>
                     </div>
                 </div>
-            </form>          
+            </form>                    
         </div>
-
         <div class="modal-footer">
-            <a href="#" class="btn btn-modal-si">Guardar Cambios</a>
-            <a href="#" class="btn btn-modal-no" data-dismiss="modal">Cerrar</a>
-        </div>
+            <a class="btn btn-modal-si" id="registrar">Registrarme</a>
+            <a class="btn btn-modal-no" data-dismiss="modal">Cerrar</a>
+        </div>          
     </div>
 
             <!-- iniciar sesion-->
@@ -179,20 +177,13 @@
                             Ingresar usando Facebook
                         </button>  
                     </div>
-                </div>       
-                <div class="control-group">          
-                    <div class="controls">
-                        <button type="submit" class="btn btn-primary">
-                            <span><i class="icon-twitter"></i></span>
-                            Ingresar usando Twitter</button>  
-                    </div>
-                </div>
+                </div>                       
             </form>
         </div>
 
         <div class="modal-footer">
-            <a href="#" class="btn btn-modal-si">Ingresar</a>
-            <a href="#" class="btn btn-modal-no" data-dismiss="modal">Cerrar</a>
+            <a class="btn btn-modal-si">Ingresar</a>
+            <a class="btn btn-modal-no" data-dismiss="modal">Cerrar</a>
         </div>
     </div>
     
@@ -210,7 +201,7 @@
                     <div class="span12">                  
                         <div class="row-fluid control-group">
                             <div class="span10 titu_exp">
-                                <input type="text" class="input-xlarge" id="Texp" placeholder="Titulo de tu experiencia...">
+                                <input type="text" class="input-xlarge" id="Exptitulo" placeholder="Titulo de tu experiencia...">
                             </div>
                             <div class="span2 b_car_im">
                                 <label class="cabinet">
@@ -222,7 +213,7 @@
                         <div class="row-fluid">
                             <div class="span12 text_exp">
                                 <div class="control-group">
-                                    <textarea rows="4" class="span12" id="miexpe" placeholder="Escribe todas las experiencias que viviste en este sitio...¡TODO!"></textarea>
+                                    <textarea rows="4" class="span12" id="Expdesc" placeholder="Escribe todas las experiencias que viviste en este sitio...¡TODO!"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +226,7 @@
         </div>
 
         <div class="modal-footer">
-            <a href="#" class="btn btn-modal-si">Compartir</a>
-            <a href="#" class="btn btn-modal-no" data-dismiss="modal">Cerrar</a>
+            <a class="btn btn-modal-si" id="experiencia">Compartir</a>
+            <a class="btn btn-modal-no" data-dismiss="modal">Cerrar</a>
         </div>
     </div>
