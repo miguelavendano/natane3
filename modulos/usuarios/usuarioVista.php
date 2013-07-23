@@ -112,16 +112,25 @@
             
             
             foreach ($datos as $valor){
+                $global = new Global_var();
                 $empresa = '';
+                $nombre = '';
+                $url = '';
                 $aux = $this->segui;
                 echo $valor->type;
                 if($valor->type == "Empresa"){                                    	         
                     $empresa = 'style="background-color: #CBFEC1"';
+                    $nombre = $valor->nombre;
+                    $url = $global->url_empresa;
+                }else{
+                    $nombre = $valor->nick;
+                    $url = $global->url_usuario;
                 }            
                 $aux = str_ireplace('{empresa}', $empresa, $aux);            
-                $aux = str_ireplace('{id_usuario}', $valor->id, $aux);            
-                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);            
-                $aux = str_ireplace('{nombre}', $valor->nick, $aux);            
+                $aux = str_ireplace('{id}', $valor->id, $aux);
+                $aux = str_ireplace('{url}', $url, $aux);
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                $aux = str_ireplace('{nombre}', $nombre, $aux);
                 $complete .= $aux;
             }
             

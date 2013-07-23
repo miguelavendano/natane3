@@ -48,7 +48,7 @@
             
             return $this->modelo->get_visitantes();
             
-        }        
+        }
         
         
         public function desean(){
@@ -76,19 +76,14 @@
 
     $idsitio = $_GET['id'];
     $validar = new Validar();
-    
+
     if($validar->validar_id($idsitio, "Sitio")){
         $usuairo = new Sitios($idsitio);
-        $usuairo->main();        
+        $usuairo->main();
         
     }else{
         
         header('Location: /natane3/Index/');
     }
-    
-
-
-
-
 
 ?>

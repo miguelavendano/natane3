@@ -56,7 +56,7 @@
             $this->vista->refactory_usuario($this->datos_usuario());
             $this->vista->refactory_amigos($this->amigos());
             $this->vista->refactory_experiencias($this->experiencias());
-//            $this->vista->refactory_gustaria($this->gustaria());            
+            //$this->vista->refactory_gustaria($this->gustaria());            
             $this->vista->refactory_contenido();
             $this->vista->refactory_total();
             
