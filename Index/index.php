@@ -36,10 +36,8 @@
         
         public function main(){
             
-            echo "probando 1 main";
             $this->vista->refactory_slider($this->slider());                        
             $this->vista->refactory_ferrocarril($this->ferrocarril());                        
-            echo "probando 2 main";
             $this->vista->refactory_index();
             $this->vista->refactory();
 

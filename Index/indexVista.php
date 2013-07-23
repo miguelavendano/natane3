@@ -40,9 +40,11 @@
                 <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
             </div>';  
             
-            $this->metas = '<meta charset="utf-8">';
+            $this->metas = '<meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                ';
             
-            $this->links='
+            $this->links='                
                 <title> {TITULO} </title>
                 <link href="{CSS}/bootstrap.css" rel="stylesheet">    
                 <link href="{CSS}/bootstrap-responsive.css" rel="stylesheet">        
@@ -51,7 +53,7 @@
                 <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
                 <link href="{CSS}/estilos_ferrocarril.css" rel="stylesheet">    
                 <link href="{CSS}/datepicker.css" rel="stylesheet" />
-                <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />                            
+                <link href="{CSS}/font-awesome.min.css" rel="stylesheet" /> 
             ';
 
         }
