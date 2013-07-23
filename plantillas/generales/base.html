@@ -3,8 +3,6 @@
 <head>    <!-- -->
     {metas}  <!--Incluidas en cada vista -->
     {links}    <!--Incluidas en cada vista -->
-
-
 </head>
 <body onload="initialize()">
     {head} <!-- en "generales" -->
@@ -40,8 +38,8 @@
     <script src="{JS}/bootstrap-datepicker.js"></script>            
     <script>
       $(function(){
-        $('#dp_edi').datepicker();     
-        $('#dp_reg').datepicker();     
+        $('#dp_reg').datepicker();               
+        $('#dp_edi').datepicker();             
       });
     </script>    
 
@@ -92,6 +90,8 @@
                 });
             });
     </script>
+    
+    <script src="{JS}/guardaDatos.js"></script>
     
 </body>
 </html>

@@ -198,6 +198,60 @@ class ModelSitios{
         }
    
         
+                public function get_query($queryString, $aleatorio){
+            
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);
+            $result = $query->getResultSet();
+            $nodos = array();
+            
+            foreach ($result as $row){
+                //echo $row['']->getId()."<br>";
+                array_push($nodos, $row['']->getId());                
+            }                
+            
+            $nodale='';
+            
+            $comparativo = array();
+            
+            for($i=0; count($comparativo)<10; $i++){
+                
+                $n = rand(0,count($nodos)-1);
+                
+                if(in_array($n, $comparativo)){
+                    
+                }else{
+                    $nodale.=$nodos[$n];
+                    array_push($comparativo, $n);
+                    if(count($comparativo)<10){
+                        $nodale.=",";
+                    }                        
+                }
+
+            }
+            
+            //echo "nodale= ".$nodale;
+            
+            $losconsulta = "START n=node(".$nodale.") RETURN n";
+            $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
+            $respuesta = $consul->getResultSet();       
+            
+            $arsitios = array();
+            
+            foreach ($respuesta as $row){
+                $sitio = new Sitio();
+                $sitio->id = $row['']->getId();
+                $sitio->nombre = $row['']->getProperty('nombre');
+                $sitio->descripcion = $row['']->getProperty('descripcion');
+                $sitio->tipo = $row['']->getProperty('tipo');
+                $sitio->imagen = $row['']->getProperty('imagen');
+                array_push($arsitios, $sitio);
+            }
+            
+            return $arsitios;  
+
+        }
+        
         
         
       
