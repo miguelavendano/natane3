@@ -23,7 +23,7 @@
             
             $query = "START n=node(*) WHERE n.type='Sitio' RETURN n;";
             
-            $resultado = $this->modelsitios->get_query($query, 0);
+            $resultado = $this->modelsitios->get_sitio_aleatorio($query, 10);
 
             return $resultado;
             
