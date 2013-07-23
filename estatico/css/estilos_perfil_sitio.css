@@ -1,0 +1,106 @@
+.redesweb{
+	padding:5px;
+
+}
+.redes{
+	height: 50px;
+}
+
+.maps{
+	height:400px;
+}
+
+
+.detalle_sitio{
+	height: 320px;
+}
+
+.actividades{
+	height: 200px;
+}
+
+#galeria{
+	position: absolute;
+	z-index: 100;
+	margin-top: 300px;
+}
+
+.comparte{
+  margin: 0 auto;
+  width: 65%;
+}
+
+.botones-comparte{
+	margin: 0 auto;
+	width: 65%;
+}
+
+
+/************************ PESTAÑA DE IMAGENES ************************/
+#content .box {
+  width: 150px;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 12px;
+}
+
+/************************ PESTAÑA DE EXPERIENCIAS ************************/
+.experiencia{	
+	margin-top: 15px;
+	padding: 8px;
+	width:inherit;
+	height: 125px;
+	background: #F3F3F3;
+	border: 1px solid #88bfe8;
+/*	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px; */
+}
+.experiencia .imagen-experiencia{
+	padding-left: 25px;
+	float: left;	
+	width: 100%;
+	height: 125px;
+}
+
+.experiencia .imagen-experiencia .im1{
+	position: absolute;
+	float: left;
+  	z-index: 1;
+   	width: 120px;
+	height: 100px;
+}
+.experiencia .imagen-experiencia .im2{	
+	
+	padding: 10px 0px 0px 25px;	
+	position: absolute;
+	float: left;
+  	z-index: 2;
+   	width: 120px;
+	height: 100px;
+}
+.experiencia .imagen-experiencia .im3{
+	
+	padding: 20px 0px 0px 50px;
+	position: absolute;
+	float: left;
+  	z-index: 3;
+   	width: 120px;
+	height: 100px;
+}
+.experiencia .info_ex{	
+	float: left;	
+	width: 100%;
+	height: 90px;	
+	margin-top: 0px;
+}
+.experiencia .info_ex h4{
+	margin: 5px 0px 5px 20px;
+	
+}
+.experiencia .info_ex p{
+	margin-top: 0px;
+	font: Arial;
+	font-size: 12px;
+	
+}

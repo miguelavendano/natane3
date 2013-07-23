@@ -1,0 +1,30 @@
+
+/*Forulario de ingreso - pagina index*/
+
+.ingresar h3{
+	float: center;
+	margin-left: 30px;
+	color: white;
+	
+}
+
+.ingresar form{
+
+	margin-left: 5px;
+}
+
+
+.ingresar{	
+	float: right;
+	position: absolute;
+	z-index: 100;
+	margin-top: 50px;
+	margin-left: 15px;
+	background: green;
+	width: 250px;
+	height: 250px;	
+	opacity: 0.5;
+	color: white;
+	border-radius: 5px;
+}
+

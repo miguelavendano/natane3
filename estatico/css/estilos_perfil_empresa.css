@@ -1,0 +1,26 @@
+.maps{
+	height:300px;
+}
+
+.detalle_sitio{
+	height: 320px;
+}
+
+.actividades{
+	height: 200px;
+}
+
+#galeria{
+	position: absolute;
+	z-index: 100;
+	margin-top: 300px;
+}
+
+/************************ PESTAÑA DE IMAGENES ************************/
+#content .box {
+  width: 150px;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 12px;
+}
+

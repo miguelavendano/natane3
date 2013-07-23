@@ -1,0 +1,84 @@
+/************************ PERFIL DE USUARIO ************************/
+.perfil{
+	margin-top: 0px;	
+}
+#P_usuario{
+	padding-top: 40px;
+}
+
+#P_usuario .opciones .navbar-inner{
+	min-height: 40px;
+	padding-left: 7px; 	
+} 
+
+#P_usuario .opciones .navbar .nav > li {	
+  	padding-top: 5px;    
+}
+
+#P_usuario .opciones .navbar .nav > li > a {
+  	padding: 5px 5px 5px;
+  	font-size: 12px;
+  	font-weight: bold;
+} 
+
+.usuario{
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+/*	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;  */
+	background-color: #F3F3F3;
+}
+.usuario .nombre h3{
+	text-align: center;	
+}
+.usuario .foto_perfil{
+	margin: 0px auto;		
+	width: 200px;
+	height: 200px;	
+}
+.usuario .foto_perfil img{	
+	width: 100%;
+	height: 100%;
+}
+.usuario .info{
+	padding: 15px;
+	/* border: 1px solid blue; */
+}
+
+/************************ PESTAÑA DE EXPERIENCIAS ************************/
+/*
+.experiencia{	
+	margin-bottom: 15px;
+	padding: 8px;
+	width: auto;	
+	background: white;
+	border: 1px solid #88bfe8;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	cursor: pointer;
+}
+.experiencia .im_exp{
+ 	padding-left: 10px;
+	height: 125px;	
+	margin-bottom: 10px;
+	float: left;			
+	margin: 0 auto;
+}
+
+
+.experiencia .im_exp img{
+	margin: 0 auto;
+	height: 100%;
+}
+
+.experiencia .info_exp h4{
+	margin: 5px 0px 5px 20px;	
+}
+.experiencia .info_exp p{
+	margin-top: 0px;
+	font: Arial;
+	font-size: 12px;
+}
+*/

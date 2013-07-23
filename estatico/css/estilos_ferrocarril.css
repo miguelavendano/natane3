@@ -1,0 +1,115 @@
+.list_carousel.responsive{
+	width: auto;
+	margin-left: 0;
+}
+.list_carousel{
+	background-color: #F3F3F3;
+	/*background-color: #ccc;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;		*/
+}
+.list_carousel ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;											
+}
+.list_carousel li{	
+	margin: 10px;
+	padding-bottom: 15px;
+	display: block;
+	float: left;
+ 	background-color: white;
+ 	border: 1px solid #ccc;
+/* 	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;  */
+	box-shadow: 0px 7px 5px #888888;
+	position: relative;
+	z-index: 1;
+}
+
+.list_carousel .ferro-titulo{
+	width: 200px;
+	height: 30px;
+	color: green;	
+	font-weight: bold;
+	font-size: 15px;	
+	text-align: center;
+ 	overflow: hidden;
+ 	margin: 0 auto;
+ 	padding-bottom: 5px;
+ 	border-bottom: 1px solid #ccc;
+}
+
+.list_carousel .img-ferro{
+	width: auto;
+	height: 150px;
+	margin: 0px auto;
+	padding: 10px;
+}
+.list_carousel .img-ferro img{
+  width: 100%;
+  height: 100%;
+} 
+
+.prev {
+	position: relative;
+	float: left;
+	bottom: 150px;
+	right: 20px;
+	z-index: 2;
+}
+.next {
+	position: relative;	
+	float: right;
+	bottom: 150px;
+	left: 20px;
+	z-index: 2;	
+}
+a.prev, a.next {
+	background: url(img/miscellaneous_sprite.png) no-repeat transparent;
+	width: 45px;
+	height: 50px;
+}
+a.prev {			float: left;
+					background-position: 0 0; }
+a.prev:hover {		background-position: 0 -50px; }
+a.prev.disabled {	background-position: 0 -100px !important;  }
+
+a.next {			float: right;
+					background-position: -50px 0; }
+a.next:hover {		background-position: -50px -50px; }
+a.next.disabled {	background-position: -50px -100px !important;  }
+a.prev.disabled, a.next.disabled {
+	cursor: default;
+}
+
+a.prev span, a.next span {
+	display: none;
+}
+
+.paginas {
+ /* float: left;  */
+	width: 100%;
+	text-align: center;	
+}
+.paginas a {
+	background: url(img/miscellaneous_sprite.png) 0 -300px no-repeat transparent;
+	width: 15px;
+	height: 15px;
+	margin: 0 5px 0 0;
+	display: inline-block;
+}
+.paginas a.selected {
+	background-position: -25px -300px;
+	cursor: default;
+}
+.paginas a span {
+	display: none;
+} 
+
+
+ 
+

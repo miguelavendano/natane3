@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Clase con las propiedades de una Imagen
+ * (nombre, descripcion y comentarios) 
+ */
+class Imagen
+{
+	public $id = null;
+	public $nombre = '';
+	public $descripcion = '';
+	public $comentario1 = '';
+        public $type = '';
+	public $node = null;
+        
+        public function __construct() {
+            
+        }
+                
+}
+
+
+?>

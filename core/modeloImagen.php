@@ -1,0 +1,41 @@
+<?php
+
+require_once('coneccion.php');
+require_once('Imagen.php');
+
+
+use Everyman\Neo4j\Node,
+    Everyman\Neo4j\Index;
+
+class ModelImagen{
+    
+        public function __construct() {
+            
+        }
+        
+        
+        /**
+         * funcion para crear el nodo tipo Imagen
+         * parametros: objeto tipo Imagen
+         */	
+	public static function crearNodoImagen(Imagen $minodo)
+	{
+		if (!$minodo->node) {
+			$minodo->node = new Node(Neo4Play::client());
+		}
+
+		$minodo->node->setProperty('nombre', $minodo->nombre)                        
+				->setProperty('descripcion', $minodo->descripcion)
+				->setProperty('comentario1', $minodo->comentario1)
+                                ->setProperty('type', $minodo->type)
+				->save();
+
+		$minodo->id = $minodo->node->getId();
+                echo $minodo->id;
+		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Imagen');
+		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
+                
+	}      
+        
+        
+}

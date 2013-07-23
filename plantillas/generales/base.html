@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <!-- -->
+    {metas}  <!--Incluidas en cada vista -->
+    {links}    <!--Incluidas en cada vista -->
+
+
+</head>
+<body onload="initialize()">
+    {head} <!-- en "generales" -->
+
+    {contenido} <!-- construido en cada modulo -->
+    
+    <footer>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <p class="color_p2">&copy; Company 2012</p>
+                        </div>
+                        <div class="span6">
+                            <p class="color_p3">&copy; Company 2012</p>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </footer>   
+    
+    
+    
+    <script src="{JS}/bootstrap-modal.js"></script>   <!--modal--> 
+    <script src="{JS}/jquery.js"></script>   
+    <script src="{JS}/jquery-1.8.2.min.js"></script>    
+    <script src="{JS}/bootstrap.min.js"></script>  <!--modal-->    
+    <script src="{JS}/jquery.masonry.min.js"></script>
+
+    <!--Calendario-->
+    <script src="{JS}/bootstrap-datepicker.js"></script>            
+    <script>
+      $(function(){
+        $('#dp_edi').datepicker();     
+        $('#dp_reg').datepicker();     
+      });
+    </script>    
+
+    <!--Boton cargar imagen-->
+    <script src="{JS}/si.files.js"></script>
+    <script>
+       SI.Files.stylizeAll();    
+    </script>
+
+    <!-- Elementos para el carrusel --> 
+    <script src="{JS}/bootstrap-transition.js"></script>
+    <script src="{JS}/lazy-bootstrap-carousel.js"></script>    
+    <script type="text/javascript" language="javascript">    
+        $(function(){
+            $('.carousel').carousel();
+        });
+    </script>
+
+    <!-- ....Elementos para el ferrocaril de imagenes.... -->   
+        <!-- include jQuery + carouFredSel plugin -->
+    <script type="text/javascript" language="javascript" src="{JS}/jquery.carouFredSel-6.1.0-packed.js"></script>
+        <!-- optionally include helper plugins -->
+    <script type="text/javascript" language="javascript" src="{JS}/helper-plugins/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" language="javascript" src="{JS}/helper-plugins/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" language="javascript" src="{JS}/helper-plugins/jquery.ba-throttle-debounce.min.js"></script>
+
+    <script type="text/javascript" language="javascript">
+            $(function() {
+                //  Responsive layout, resizing the items
+                $('#foo').carouFredSel({
+                    responsive: true,
+                    prev: '#prev',
+                    next: '#next',                  
+                    //width: '100%',                    
+                    pagination: "#paginas",
+                    mousewheel: true,
+                    swipe: {
+                        onMouse: true,
+                        onTouch: true
+                    },                    
+                    items: {
+                        width: 300,
+                        visible: {
+                            min: 1,
+                            max: 4                            
+                        }
+                    }
+                });
+            });
+    </script>
+    
+</body>
+</html>
