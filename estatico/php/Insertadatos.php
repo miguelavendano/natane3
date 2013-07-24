@@ -46,44 +46,51 @@ if(isset($_POST['opcion'])){
             $twit='https://twitter.com/JulianDVarelaP';
             $you='http://www.youtube.com/user/GisoftCo';
 
-            $minodo = new Usuario();
-            $minodo->nombre = $_POST['nombre'];
-            $minodo->apellido = $_POST['apellido'];
-            $minodo->imagen = $img;
-            $minodo->nick = $nik;
-            $minodo->genero = $_POST['genero'];
-            $minodo->fecha_nacimiento = $_POST['nacimiento'];
-            $minodo->ciudad_origen = $orig;
-            $minodo->lugar_recidencia = $reci;
-            $minodo->correo = $_POST['mail'];
-            $minodo->sitio_web = $web;    
-            $minodo->facebook = $face;
-            $minodo->twitter = $twit;
-            $minodo->youtube = $you;
-            $minodo->contraseña = $_POST['contra1'];
-            $minodo->type = 'Usuario';
-
-            ModelUsuarios::crearNodoUsuario($minodo); //crea el nodo del Usuario 
-            $band=$minodo->id;  //obtengo el id del nodo creado
+            $nodo_usuario = new Usuario();
+            $nodo_usuario->nombre = $_POST['nombre'];
+            $nodo_usuario->apellido = $_POST['apellido'];
+            $nodo_usuario->imagen = $img;
+            $nodo_usuario->nick = $nik;
+            $nodo_usuario->genero = $_POST['genero'];
+            $nodo_usuario->fecha_nacimiento = $_POST['nacimiento'];
+            $nodo_usuario->ciudad_origen = $orig;
+            $nodo_usuario->lugar_recidencia = $reci;
+            $nodo_usuario->correo = $_POST['mail'];
+            $nodo_usuario->sitio_web = $web;    
+            $nodo_usuario->facebook = $face;
+            $nodo_usuario->twitter = $twit;
+            $nodo_usuario->youtube = $you;
+            $nodo_usuario->contraseña = $_POST['contra1'];
+            $nodo_usuario->type = 'Usuario';
+            ModelUsuarios::crearNodoUsuario($nodo_usuario); //crea el nodo del Usuario 
+            
+            $band=$nodo_usuario->id;  //obtengo el id del nodo creado
             $band=$band." true";
             
         break;
 
         case "experiencia":                       
             
+            $nodo_experiencia = new Experiencia();
+            $nodo_experiencia->nombre = $_POST['titulo'];
+            $nodo_experiencia->descripcion = $_POST['descripcion'];
+            $nodo_experiencia->type = 'Experiencia';            
+            ModelExperiencia::crearNodoExperiencia($nodo_experiencia);  //crea el nodo de la experiencia
             
-            $minodo = new Experiencia();
-            $minodo->nombre = $_POST['titulo'];
-            $minodo->descripcion = $_POST['descripcion'];
-            $minodo->type = 'Experiencia';
-            
-            ModelExperiencia::crearNodoExperiencia($minodo);  //crea el nodo de la experiencia
-            
-            $id_exp = $minodo->id;  //obtengo el id del nodo creado            
-                        
+            $id_exp = $nodo_experiencia->id;  //obtengo el id del nodo creado                                    
             ModeloRelaciones::crearRelacion($_POST['autor'], $id_exp, "Comparte");   //crea la relacion entre el autor y la experiencia
-            
-            
+
+            /*
+            $nodo_imagen = new Imagen();
+            $nodo_imagen->nombre = $_POST['nom_img'];
+            $nodo_imagen->descripcion = $_POST['desc_img'];
+            $nodo_imagen->comentario1 = "";
+            $nodo_imagen->type = 'Imagen';  
+            ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
+
+            $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
+            ModeloRelaciones::crearRelacion($id_exp, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
+            */
             $band="true";
             
         break;

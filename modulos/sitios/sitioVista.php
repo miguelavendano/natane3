@@ -57,7 +57,7 @@
                      
             $this->metas = '<meta charset="utf-8">
                             <title>{TITULO}</title>
-                            <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">                            
                             <meta name="description" content="">
                             <meta name="author" content="">
                             <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> <!-- google maps -->';
