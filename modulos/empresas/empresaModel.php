@@ -3,17 +3,21 @@
     require_once('../../core/modeloEmpresa.php');    
     require_once('../../librerias/neo4jphp.phar');
     require_once('../../librerias/Neo4Play.php');    
+    require_once('../../core/modeloSitio.php');    
+    
     
 
     class EmpresaModel{
         
         public $modelempresas;
+        public $modelemsitios;
         public $id_empresa;
         
         
         public function __construct($id) {
             
             $this->modelempresas = new ModelEmpresa();
+            $this->modelemsitios = new ModelSitios();
             $this->id_empresa= $id;
             
         }       
@@ -36,31 +40,31 @@
 
         public function get_ferrocarril(){
 
-            $query = "START n=node(1,2,3,4,5) RETURN n";
+            $query = "START n=node(*) WHERE n.type='Sitio' RETURN n;";
             
-            $resultado = $this->modelempresas->get_prueba($query);
+            $resultado = $this->modelemsitios->get_sitio_aleatorio($query, 10);
 
-            return $resultado;            
+            return $resultado;     
 
             
         }        
         
         
-        public function get_seguidores(){   
+        public function get_amigos(){   
+
             
-            
-            $query = "START n=node(1,2,3,4,5,10,11) RETURN n";
-            $resultado = $this->modelempresas->get_prueba($query);
+            $query = "START n=node(".$this->id_empresa.") MATCH n-[:Amigo]->b RETURN b";
+            $resultado = $this->modelempresas->get_amigos($query);
 
             return $resultado;
             
         }          
         
-        public function get_gustaria(){   
+        public function get_clientes_aliados(){   
             
+            $query = "start n=node(".$this->id_empresa.") match n<-[:Partner|Cliente]->b return b";
             
-            $query = "START n=node(5, 3, 2, 4, 10, 1) RETURN n";            
-            $resultado = $this->modelempresas->get_prueba($query);
+            $resultado = $this->modelempresas->get_clientes_aliados($query);
 
             return $resultado;
             

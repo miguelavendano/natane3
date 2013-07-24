@@ -198,7 +198,7 @@ class ModelSitios{
         }
    
         
-                public function get_query($queryString, $aleatorio){
+        public function get_query($queryString, $aleatorio){
             
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);

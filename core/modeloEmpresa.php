@@ -2,6 +2,8 @@
 
 require_once('coneccion.php');
 require_once('Empresa.php');
+require_once('Usuario.php');
+
 
 
 use Everyman\Neo4j\Node,
@@ -145,5 +147,63 @@ class ModelEmpresa{
 
         }        
         
+        
+        public function get_amigos($queryString){
+            
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);
+            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){
+                
+            
+                foreach($result as $row) {
+                    
+                    $usuario = new Usuario();  
+                    $usuario->id = $row['']->getId();
+                    $usuario->type = $row['']->getProperty('type');
+                    $usuario->nick = $row['']->getProperty('nick');
+                    $usuario->nombre = $row['']->getProperty('nombre');
+                    $usuario->imagen = $row['']->getProperty('imagen');
+                    array_push($array, $usuario);
+                    
+                    
+                }
+                return $array;
+            }
+
+        }        
+
+        public function get_clientes_aliados($queryString){  
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);
+            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){
+                
+            
+                foreach($result as $row) {
+                    
+                    $usuario = new Usuario();  
+                    $usuario->id = $row['']->getId();
+                    $usuario->type = $row['']->getProperty('type');
+                    $usuario->nick = $row['']->getProperty('nick');
+                    $usuario->nombre = $row['']->getProperty('nombre');
+                    $usuario->imagen = $row['']->getProperty('imagen');
+                    array_push($array, $usuario);
+                    
+                    
+                }
+                return $array;
+            }            
+            
+            
+        }
         
 }

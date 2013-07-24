@@ -35,42 +35,45 @@
             
         }        
         
-        public function seguidores(){
+        public function amigos(){
             
-            return $this->modelo->get_seguidores();
+            return $this->modelo->get_amigos();
             
             
         }
-        
-        //----------------------
 
+        public function clientes_aliados(){
+            
+            return $this->modelo->get_clientes_aliados();
+            
+        }                
+        
         public function ferrocarril(){
 
             $ferro = $this->modelo->get_ferrocarril();
             
             return $ferro;
             
-        }        
+        }                
+        
+        //----------------------
+
+
         
         
-        public function gustaria(){
-            
-            return $this->modelo->get_gustaria();
-            
-        }        
+
         
         
 
         
         public function servicios(){
 
-            $resutlados = $this->modelo->get_servicios();
+            $resutlados = $this->modelo->get_servicios();           
             
-            
-            return $resutlados;
-            
+            return $resutlados;            
             
         }   
+        
         
         public function experiencias(){
             
@@ -84,9 +87,9 @@
             
             $this->vista->refactory_slider( $this->slider_empresa());
             $this->vista->refactory_contacto( $this->datos_contacto());
-//            $this->vista->refactory_seguidores( $this->seguidores());
-//            $this->vista->refactory_gustaria( $this->gustaria());
-//            $this->vista->refactory_ferrocarril( $this->ferrocarril());            
+            $this->vista->refactory_amigos( $this->amigos());
+            $this->vista->refactory_clientes_aliados( $this->clientes_aliados());
+            $this->vista->refactory_ferrocarril( $this->ferrocarril());            
 //            $this->vista->refactory_servicios($this->servicios());
 //            $this->vista->refactory_experiencias($this->experiencias());
             $this->vista->refactory_contenido();

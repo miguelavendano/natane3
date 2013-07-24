@@ -152,51 +152,76 @@
 
         }
         
-        public function refactory_seguidores($datos){
+        public function refactory_amigos($datos){
             
+            ///_------------
             $complete = "";
-            for ($i=0; $i<5 ; $i++){
+            $global = new Global_var();
+            $url = $global->url_usuario;
+            foreach ($datos as $valor){
                 $aux = $this->seguidores;
-                $aux = str_ireplace('{imagen}', $datos[$i]->img, $aux);            
-                $aux = str_ireplace('{nombre}', $datos[$i]->name, $aux);            
-                $complete .= $aux;
+                $aux = str_ireplace('{url}', $url, $aux);            
+                $aux = str_ireplace('{id}', $valor->id, $aux);            
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);            
+                $aux = str_ireplace('{nombre}', $valor->nick, $aux);  
+                $complete.= $aux;
             }
             
             $this->seguidores = $complete;
             $this->actualizar_diccionarios();
+            
+
         }
                       
         
 
-        public function refactory_gustaria($datos){            
+        public function refactory_clientes_aliados($datos){            
             
-            $quiere = "";
+            $complete = "";
             
-            for ($i=0; $i<5 ; $i++){
+            
+            foreach ($datos as $valor){
+                $global = new Global_var();
+                $empresa = '';
+                $nombre = '';
+                $url = '';
                 $aux = $this->gustaria;
-                $aux = str_ireplace('{imagen}', $datos[$i]->img, $aux);            
-                $aux = str_ireplace('{nombre}', $datos[$i]->name, $aux);                            
-                $quiere .= $aux;
+                echo $valor->type;
+                if($valor->type == "Empresa"){                                    	         
+                    $empresa = 'style="background-color: #CBFEC1"';
+                    $nombre = $valor->nombre;
+                    $url = $global->url_empresa;
+                }else{
+                    $nombre = $valor->nick;
+                    $url = $global->url_usuario;
+                }            
+                $aux = str_ireplace('{empresa}', $empresa, $aux);            
+                $aux = str_ireplace('{id}', $valor->id, $aux);
+                $aux = str_ireplace('{url}', $url, $aux);
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                $aux = str_ireplace('{nombre}', $nombre, $aux);
+                $complete .= $aux;
             }
             
-            $this->gustaria = $quiere;            
+            $this->gustaria = $complete;
             $this->actualizar_diccionarios();
-            
-            
+
         }        
         
         public function refactory_ferrocarril(array $datos){  // contruye el ferrocarril
+
             
             $elementos="";     // variable que construirá los elementos de ferrocarril
             $aux="";                        
             
             
-            for ($i=0; $i<count($datos); $i++){   // construye los elementos del ferrocarril
+            foreach ($datos as $valor){   // construye los elementos del ferrocarril
                 
                 $aux = $this->elemento_ferro;                  
-                $aux = str_ireplace("{icono}", $datos[$i]->tipo, $aux);                
-                $aux = str_ireplace("{nombre}", $datos[$i]->name, $aux);                
-                $aux = str_ireplace("{imagen}", $datos[$i]->img, $aux);                                              
+                $aux = str_ireplace("{id_sitio}", $valor->id, $aux);
+                $aux = str_ireplace("{icono}", $valor->tipo, $aux);                
+                $aux = str_ireplace("{nombre}", $valor->nombre, $aux);                
+                $aux = str_ireplace("{imagen}", $valor->imagen, $aux);                                              
                 
                 $elementos = $elementos.$aux;  
                 
@@ -207,7 +232,35 @@
             // termina de ensamblar los elementos del ferrocarril con la estructura general del mismo            
             $this->ferrocarril = str_ireplace("{contenido_ferro}", $elementos, $this->ferrocarril);
             
-            $this->actualizar_diccionarios();// actualiza los valores del diccionarios de datos
+            $this->actualizar_diccionarios();// actualiza los valores del diccionarios de datos            
+            
+            
+            
+            
+            
+            
+            
+//            $elementos="";     // variable que construirá los elementos de ferrocarril
+//            $aux="";                        
+//            
+//            
+//            for ($i=0; $i<count($datos); $i++){   // construye los elementos del ferrocarril
+//                
+//                $aux = $this->elemento_ferro;                  
+//                $aux = str_ireplace("{icono}", $datos[$i]->tipo, $aux);                
+//                $aux = str_ireplace("{nombre}", $datos[$i]->name, $aux);                
+//                $aux = str_ireplace("{imagen}", $datos[$i]->img, $aux);                                              
+//                
+//                $elementos = $elementos.$aux;  
+//                
+//                
+//                
+//            }
+//            
+//            // termina de ensamblar los elementos del ferrocarril con la estructura general del mismo            
+//            $this->ferrocarril = str_ireplace("{contenido_ferro}", $elementos, $this->ferrocarril);
+//            
+//            $this->actualizar_diccionarios();// actualiza los valores del diccionarios de datos
             
         }            
 
