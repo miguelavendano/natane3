@@ -8,18 +8,20 @@
     class EmpresaModel{
         
         public $modelempresas;
+        public $id_empresa;
         
         
-        public function __construct() {
+        public function __construct($id) {
             
             $this->modelempresas = new ModelEmpresa();
+            $this->id_empresa= $id;
             
         }       
         
         public function get_contacto(){
             
-            $query = "START n=node(2) RETURN n";            
-            $resultado = $this->modelempresas->get_prueba($query);
+            $query = "START n=node(".$this->id_empresa.") RETURN n";            
+            $resultado = $this->modelempresas->get_contacto($query);
 
             return $resultado;
                         

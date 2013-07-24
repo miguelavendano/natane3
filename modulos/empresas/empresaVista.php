@@ -9,7 +9,8 @@
         public $modal;
         public $links;
         public $metas;
-
+        public $nombre;
+        
         public $empresa; 
         public $servicios;
         public $expe;
@@ -89,7 +90,8 @@
                                         'ferrocarril' => $this->ferrocarril,
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
-                                        'experiencias'=> $this->expe);
+                                        'experiencias'=> $this->expe,
+                                        'nombre_empresa'=>$this->nombre);
             
             
         }
@@ -110,7 +112,8 @@
                                         'ferrocarril' => $this->ferrocarril,
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
-                                        'experiencias'=> $this->expe);
+                                        'experiencias'=> $this->expe,
+                                        'nombre_empresa'=>$this->nombre);
             
             
         }
@@ -132,13 +135,14 @@
         
         
         public function refactory_contacto($datos){                
-            
-            $this->contacto = str_ireplace('{tel}',$datos[0]->name ,$this->contacto );
-            $this->contacto = str_ireplace('{dir}',$datos[0]->name ,$this->contacto );
-            $this->contacto = str_ireplace('{correo}',$datos[0]->name ,$this->contacto );
-            $this->contacto = str_ireplace('{facebook}',$datos[0]->name ,$this->contacto );
-            $this->contacto = str_ireplace('{twitter}',$datos[0]->name ,$this->contacto );
-            $this->contacto = str_ireplace('{google}',$datos[0]->name ,$this->contacto );         
+
+            $this->nombre = $datos[0]->nombre;
+            $this->contacto = str_ireplace('{tel}',$datos[0]->telefono ,$this->contacto );
+            $this->contacto = str_ireplace('{dir}',$datos[0]->direccion ,$this->contacto );
+            $this->contacto = str_ireplace('{correo}',$datos[0]->correo ,$this->contacto );
+            $this->contacto = str_ireplace('{facebook}',$datos[0]->facebook ,$this->contacto );
+            $this->contacto = str_ireplace('{twitter}',$datos[0]->twitter ,$this->contacto );
+            $this->contacto = str_ireplace('{google}',$datos[0]->youtube ,$this->contacto );         
             
             $this->descripcion = "un empresa excelente para  todo !! ";
 

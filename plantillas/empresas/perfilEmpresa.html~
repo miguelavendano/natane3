@@ -3,7 +3,7 @@
 
         <div class="row-fluid">   
             <div class="span9">
-                <h1>{nombre_empresa}</h1> 
+                <h1>{nombre}</h1> 
             </div>
             <div class="span3">
                 <a class="btn btn-custom4" data-toggle="dropdown" href="#">Confio en esta empresa</a>

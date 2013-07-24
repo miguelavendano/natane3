@@ -11,10 +11,10 @@
         public $modelo;
         
         
-        public function __construct() {
+        public function __construct($id) {
             
             $this->vista = new EmpresaVista();
-            $this->modelo = new EmpresaModel();
+            $this->modelo = new EmpresaModel($id);
             
         }       
         
@@ -34,6 +34,15 @@
             return $slider;
             
         }        
+        
+        public function seguidores(){
+            
+            return $this->modelo->get_seguidores();
+            
+            
+        }
+        
+        //----------------------
 
         public function ferrocarril(){
 
@@ -51,12 +60,7 @@
         }        
         
         
-        public function seguidores(){
-            
-            return $this->modelo->get_seguidores();
-            
-            
-        }
+
         
         public function servicios(){
 
@@ -80,11 +84,11 @@
             
             $this->vista->refactory_slider( $this->slider_empresa());
             $this->vista->refactory_contacto( $this->datos_contacto());
-            $this->vista->refactory_seguidores( $this->seguidores());
-            $this->vista->refactory_gustaria( $this->gustaria());
-            $this->vista->refactory_ferrocarril( $this->ferrocarril());            
-            $this->vista->refactory_servicios($this->servicios());
-            $this->vista->refactory_experiencias($this->experiencias());
+//            $this->vista->refactory_seguidores( $this->seguidores());
+//            $this->vista->refactory_gustaria( $this->gustaria());
+//            $this->vista->refactory_ferrocarril( $this->ferrocarril());            
+//            $this->vista->refactory_servicios($this->servicios());
+//            $this->vista->refactory_experiencias($this->experiencias());
             $this->vista->refactory_contenido();
             $this->vista->refactory_total();
             
@@ -92,18 +96,19 @@
     }
 
 
-//    $id = $_GET('id');
-//    $validar = new Validar();
-//    
-//    if($validar->validar_id($id, "Usuario")){     
-//        
-        $empresas = new Empresas();
+    $id = $_GET['id'];
+    
+    $validar = new Validar();
+    
+    if($validar->validar_id($id, "Empresa")){     
+        
+        $empresas = new Empresas($id);
         $empresas->main();
         
-//    }else{
-//        
-//        header('Location: /natane3/Index/');
-//    }    
-//    
-//    
+    }else{
+        
+        header('Location: /natane3/Index/');
+    }        
+    
+            
 ?>

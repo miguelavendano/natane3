@@ -13,6 +13,7 @@ use Everyman\Neo4j\Node,
     Everyman\Neo4j\Cypher\Query,
     Everyman\Neo4j\Command,
     Everyman\Neo4j\Query\Row;
+
 class ModelExperiencia{
     
         public function __construct() {
