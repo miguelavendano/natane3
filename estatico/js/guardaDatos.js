@@ -17,17 +17,11 @@ $(document).ready(function(){
                            
                             alert(data);
                             alert("ENtro al ajax");
-
+                            //document.location.href="http://localhost/natane3/modulos/consultas/consulta.php";   
                         }
                     });          
            });    
-    
-    $("#test").click(function(){
-        alert("lo toco");
-        document.location.href="http://localhost/natane3/modulos/consultas/consulta.php";   
-        //window.location="http://localhost/natane3/modulos/consultas/consulta.php";   
-    });
-    
+   
 
     /*
      * Registro de un nuevo Usuario
@@ -104,6 +98,66 @@ $(document).ready(function(){
                 });          
 
         });
+
+
+    $("#BeditarU").click(function(){
+        
+            $("#editar_perfil").css({display:'inline'});   
+            $(".pestañas").css({display:'none'});
+            //$("#Enom").val("julian");
+
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");            
+
+            $.ajax({
+                url:'/natane3/estatico/php/Insertadatos.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'editarU',                            
+                    autor: id_url[1]                    
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+                    alert("cargando...");
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                
+                $("#Enom").val("nombre");
+                /*
+                "apellido"
+                "imagen"
+                "nick"
+                "genero"
+                "f_nace"
+                "city"
+                "recide"
+                "mail"
+                "s_web"
+                "face"
+                "twi"
+                "you"
+                "pass"
+                
+                }
+            });            
+            
+ /*
+    -moz-transition-duration: 1s;
+    -webkit-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+    */
+    });
+    
+
+    $("#cancel_edicion").click(function(){
+        
+             $("#editar_perfil").css({display:'none'});   
+             $(".pestañas").css({display:'inline'});
+            
+    });    
+    
+            
         
 
 });

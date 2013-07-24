@@ -95,6 +95,32 @@ if(isset($_POST['opcion'])){
             
         break;
     
+        case "editarU":                       
+            
+            $modelusuarios = new ModelUsuarios();
+            
+            $query = "START n=node(".$_POST['autor'].") RETURN n";                        
+            $resultado = $modelusuarios->get_usuario($query);
+            $band = array(
+                "nombre"=> $resultado[0]->nombre,
+                "apellido"=> $resultado[0]->apellido,
+                "imagen"=> $resultado[0]->imagen,
+                "nick"=> $resultado[0]->nick,
+                "genero"=> $resultado[0]->genero,
+                "f_nace"=> $resultado[0]->fecha_nacimiento,
+                "city"=> $resultado[0]->ciudad_origen,
+                "recide"=> $resultado[0]->lugar_recidencia,
+                "mail"=> $resultado[0]->correo,
+                "s_web"=> $resultado[0]->sitio_web,
+                "face"=> $resultado[0]->facebook,
+                "twi"=> $resultado[0]->twitter,
+                "you"=> $resultado[0]->youtube,
+                "pass"=> $resultado[0]->contraseña
+            );
+                        
+           $band = json_encode($band);
+            
+        break;    
     
         default : break; 
             

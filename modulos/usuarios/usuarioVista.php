@@ -20,7 +20,6 @@
         public $dic_contenido;
         public $dic_datos_user;        
         
-
         
         
         public function __construct() {
@@ -33,7 +32,9 @@
             $this->perfil = file_get_contents('../../plantillas/usuario/perfilUsuario.html');
             $this->segui = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->usuario = file_get_contents('../../plantillas/usuario/datos_usuario.html');
-            $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');
+            $this->editar = file_get_contents('../../plantillas/usuario/editar_perfil.html');
+            $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
+            
             $this->gustaria = $this->expe;
                      
             $this->metas = '<meta charset="utf-8">
@@ -52,45 +53,39 @@
                             <link href="{CSS}/datepicker.css" rel="stylesheet" />
                             <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    
                             <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />';            
-
             
             
-            
-            $this->dic_general = array('metas' => $this->metas,
-                                    'links' => $this->links ,
-                                    'head' => $this->head ,
-                                    'contenido' => $this->perfil
-                                    );
+            $this->dic_general = array( 'metas' => $this->metas,
+                                        'links' => $this->links ,
+                                        'head' => $this->head ,
+                                        'contenido' => $this->perfil
+                                        );
             
             $this->dic_contenido = array('datos_usuario' => $this->usuario, 
                                         'seguidores' => $this->segui, 
                                         'le_gustaria_ir' => $this->gustaria,
                                         'modales'=> $this->modal,
+                                        'editar_perfil'=>$this->editar,
                                         'experiencia'=>$this->expe);
-            
-            
-            
-            
-
         }
+        
         
         public function actualizar_diccionarios(){
             
-            $this->dic_general = array('metas' => $this->metas,
-                                    'links' => $this->links ,
-                                    'head' => $this->head ,
-                                    'contenido' => $this->perfil);
+            $this->dic_general = array( 'metas' => $this->metas,
+                                        'links' => $this->links ,
+                                        'head' => $this->head ,
+                                        'contenido' => $this->perfil);
             
             $this->dic_contenido = array('datos_usuario' => $this->usuario, 
                                         'seguidores' => $this->segui, 
                                         'le_gustaria_ir' => $this->gustaria,
                                         'modales'=> $this->modal,
-                                        'experiencia'=>$this->expe);
-            
-            
+                                        'editar_perfil'=> $this->editar,
+                                        'experiencia'=>$this->expe);           
         }
         
-        public function refactory_usuario( $datos){
+        public function refactory_usuario($datos){
                 
             $this->usuario = str_ireplace('{nombre}',$datos[0]->nick ,$this->usuario );
             $this->usuario = str_ireplace('{genero}',$datos[0]->genero ,$this->usuario );

@@ -67,6 +67,7 @@ class ModelUsuarios{
                 foreach($result as $row) {
                     $usuario = new Usuario();
                     $usuario->id = $row['']->getId();
+                    
                     $usuario->nick = $row['']->getProperty('nick');
                     $usuario->imagen = $row['']->getProperty('imagen');
                     $usuario->genero = $row['']->getProperty('genero');    
@@ -74,29 +75,25 @@ class ModelUsuarios{
                     $usuario->lugar_recidencia = $row['']->getProperty('lugar_recidencia');
                     $usuario->correo = $row['']->getProperty('correo');
                     $usuario->sitio_web = $row['']->getProperty('sitio_web');                    
+                                        
                     
+                        $usuario->nombre = $row['']->getProperty('nombre');
+                        $usuario->apellido = $row['']->getProperty('apellido');
+                        //$usuario->imagen = $row['']->getProperty('imagen');
+                        //$usuario->nick = $row['']->getProperty('nick');
+                        //$usuario->genero = $row['']->getProperty('genero');    
+                        //$usuario->fecha_nacimiento = $row['']->getProperty('fecha_nacimiento');
+                        $usuario->ciudad_origen = $row['']->getProperty('ciudad_origen');
+                        //$usuario->lugar_recidencia = $row['']->getProperty('lugar_recidencia');
+                        //$usuario->correo = $row['']->getProperty('correo');
+                        //$usuario->sitio_web = $row['']->getProperty('sitio_web');
+                        $usuario->facebook = $row['']->getProperty('facebook');
+                        $usuario->twitter = $row['']->getProperty('twitter');
+                        $usuario->youtube = $row['']->getProperty('youtube');
+                        $usuario->contraseña = $row['']->getProperty('contraseña');
+                        //$usuario->type = $row['']->getProperty('type');                    
                     
                     array_push($array, $usuario);
-                    
-//                                $usuario->nick = $row['']->getProperty('nombre');
-//				$usuario->nick = $row['']->getProperty('apellido');
-//				$usuario->nick = $row['']->getProperty('imagen');
-//				$usuario->nick = $row['']->getProperty('nick');
-//                                $usuario->nick = $row['']->getProperty('genero');    
-//                                $usuario->nick = $row['']->getProperty('fecha_nacimiento');
-//                                $usuario->nick = $row['']->getProperty('ciudad_origen');
-//                                $usuario->nick = $row['']->getProperty('lugar_recidencia');
-//                                $usuario->nick = $row['']->getProperty('correo');
-//                                $usuario->nick = $row['']->getProperty('sitio_web');
-//                                $usuario->nick = $row['']->getProperty('facebook');
-//                                $usuario->nick = $row['']->getProperty('twitter');
-//                                $usuario->nick = $row['']->getProperty('youtube');
-//                                $usuario->nick = $row['']->getProperty('contraseña');
-//                                $usuario->nick = $row['']->getProperty('type');                    
-                    
-                    
-                    
-                    
                     
                 }
                 return $array;

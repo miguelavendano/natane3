@@ -5,7 +5,11 @@
             <div class="row-fluid">
                 <div class="span12">
                     <div class="row-fluid">
-                        <div class="span3">		
+                        <div class="span3">
+                            <a class="btn btn-primary" id="BeditarU"> 
+                                <i class="icon-wrench"></i>
+                                Editar Perfil
+                            </a>
                 <!--        <div class="opciones">
                                 <div class="navbar">
                                     <div class="navbar-inner">          
@@ -36,11 +40,13 @@
                                     {seguidores}   <!-- usa a "generales/seguidores.html" -->
                             </div> <!-- seguidores -->
 
-                            <div class="row-fluid"><hr></hr></div>
+                            <div class="row-fluid"><hr /></div>
                         </div>   <!-- span3 -->
 
-                        <div class="span9">
-                        	<div class="pestañas" >
+                        <div class="span9" id="contenidoU">
+                            {editar_perfil}
+                            
+                            <div class="pestañas" >
                                 <div class="tabbable">
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#1" data-toggle="tab">Experiencias</a></li>
@@ -55,7 +61,7 @@
                                     
                                         <div class="tab-pane" id="2"> 
 
-                                            {le_gustaria_ir} <!-- usando usuario/experiencia tambien>
+                                            {le_gustaria_ir} <!-- usando usuario/experiencia tambien>--->
 
                                         </div>   <!-- pestaña 2 -->
 
