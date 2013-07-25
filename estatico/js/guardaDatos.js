@@ -124,18 +124,29 @@ $(document).ready(function(){
                 
                         $("#Enom").val(data.nombre);
                         $("#Eape").val(data.apellido);
-                        $("#Email").val(data.mail);
-                        //$("input[name='Egenero']").val(data.genero);
+                        $("#Email").val(data.mail);                        
                         $("#Enaci").val(data.f_nace);
                         $("#Epass1").val(data.pass);                
-                        $("#Enick").val(data.nick);
-                        //$("#Eimagen").val(data.imagen);
+                        $("#Enick").val(data.nick);                        
                         $("#Ecity").val(data.city);
                         $("#Erecide").val(data.recide);
                         $("#Es_web").val(data.s_web);
                         $("#Eface").val(data.face);
                         $("#Etwi").val(data.twi);
                         $("#Eyou").val(data.you);
+                        //$("#Eimagen").val(data.imagen);
+                        
+                        if(data.genero=="Masculino"){                            
+                            $("#EgeneroM").attr("checked",true);                            
+                            $("#EgeneroF").attr("checked",false);
+                        }                            
+                        else{
+                             document.getElementById('EgeneroM').checked=false;
+                             document.getElementById('EgeneroF').checked=true;                                                        
+
+                        }
+                            
+                        
                 
                 }
             });            
@@ -164,7 +175,7 @@ $(document).ready(function(){
                     apellido: $("#Eape").val(),
                     mail: $("#Email").val(),                    
                     f_nace: $("#Enaci").val(),
-                    genero: $("input[name='Egenero']").val(),
+                    genero: $("input[name='Egenero']:checked").val(),
                     pass: $("#Epass1").val(),                
                     nick: $("#Enick").val(),                    
                     city: $("#Ecity").val(),
