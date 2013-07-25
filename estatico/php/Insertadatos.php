@@ -122,6 +122,27 @@ if(isset($_POST['opcion'])){
             
         break;    
     
+        case "guardar_edicionU":                                                                      
+           
+            ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['nombre']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['apellido']);            
+            //ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", );         
+            ModelUsuarios::editar_usuario($_POST['usuario'], "nick", $_POST['nick']);            
+            ModelUsuarios::editar_usuario($_POST['usuario'], "genero",$_POST['genero']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "fecha_nacimiento", $_POST['f_nace']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "ciudad_origen", $_POST['city']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "lugar_recidencia", $_POST['recide']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "correo", $_POST['mail']); 
+            ModelUsuarios::editar_usuario($_POST['usuario'], "sitio_web", $_POST['s_web']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "facebook", $_POST['face']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "twitter", $_POST['twit']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "youtube", $_POST['youtube']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "contraseña", $_POST['pass']);
+            
+            $band="true";
+            
+        break;    
+    
         default : break; 
             
     }    

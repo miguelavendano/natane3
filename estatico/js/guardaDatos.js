@@ -122,21 +122,20 @@ $(document).ready(function(){
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                 
-                $("#Enom").val("nombre");
-                /*
-                "apellido"
-                "imagen"
-                "nick"
-                "genero"
-                "f_nace"
-                "city"
-                "recide"
-                "mail"
-                "s_web"
-                "face"
-                "twi"
-                "you"
-                "pass"
+                        $("#Enom").val(data.nombre);
+                        $("#Eape").val(data.apellido);
+                        $("#Email").val(data.mail);
+                        //$("input[name='Egenero']").val(data.genero);
+                        $("#Enaci").val(data.f_nace);
+                        $("#Epass1").val(data.pass);                
+                        $("#Enick").val(data.nick);
+                        //$("#Eimagen").val(data.imagen);
+                        $("#Ecity").val(data.city);
+                        $("#Erecide").val(data.recide);
+                        $("#Es_web").val(data.s_web);
+                        $("#Eface").val(data.face);
+                        $("#Etwi").val(data.twi);
+                        $("#Eyou").val(data.you);
                 
                 }
             });            
@@ -148,7 +147,52 @@ $(document).ready(function(){
     transition-duration: 1s;
     */
     });
-    
+
+
+    $("#guarda_edicion").click(function(){
+
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/Insertadatos.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'guardar_edicionU',                   
+                    usuario: id_url[1],
+                    nombre: $("#Enom").val(),
+                    apellido: $("#Eape").val(),
+                    mail: $("#Email").val(),                    
+                    f_nace: $("#Enaci").val(),
+                    genero: $("input[name='Egenero']").val(),
+                    pass: $("#Epass1").val(),                
+                    nick: $("#Enick").val(),                    
+                    city: $("#Ecity").val(),
+                    recide: $("#Erecide").val(),
+                    s_web: $("#Es_web").val(),
+                    face: $("#Eface").val(),
+                    twit: $("#Etwi").val(),
+                    youtube: $("#Eyou").val()                    
+                    //imagen: $("#Epass1").val(data.imagen),
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+                    alert("Debe confirmar su identidad, para realizar los cambios.");                                        
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+
+                        if(/true/.test(data)) {                                
+                            alert("Cambios guardados.");
+                            document.location.reload();                                     
+                        }
+                        else alert("No se han podido realizar los cambios"); 
+
+                                                    
+                }
+            });            
+            
+    });    
+
 
     $("#cancel_edicion").click(function(){
         

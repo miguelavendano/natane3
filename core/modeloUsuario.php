@@ -52,7 +52,16 @@ class ModelUsuarios{
                 
 	}      
         
-        
+	//funcion que edita una propiedad de un nodo y si no existe la crea
+	public static function editar_usuario($idnodo, $propiedad, $detalle)
+	{
+		//Obtengo toda la informacion del nodo
+		$editar = Neo4Play::client()->getNode($idnodo);
+		//edita la propiedad y si no existe la crea
+		$editar->setProperty($propiedad,$detalle)
+		    	->save();
+	}            
+                    
         public function get_usuario($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
