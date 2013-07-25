@@ -95,10 +95,38 @@ $(document).ready(function(){
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
-                    alert("cargando...");
+
+                    $("#reload").css({visibility: 'visible',
+                                        opacity:'1',
+                                        position: 'fixed',
+                                        top: '200px',
+                                        right: '50px',
+                                        left: '50px',
+                                        width: 'auto',
+                                        margin: '0 auto'                                        
+                                    });   
+
+                    
+                    $(".reload-backdrop").css({ position: 'fixed',
+                                                top: '0',
+                                                right: '0',
+                                                bottom: '0',
+                                                left: '0',
+                                                zIindex: '1040',
+                                                background: '#000000',
+                                                opacity:'0.4'
+                                            });
+  
+                    //<div class="modal-backdrop"></div>
+                    
+                   
                 }
                 ,success: function(data,textStatus,jqXHR){                           
-                
+                    
+                    //$("#reload").css({visibility: 'hidden'});   
+                    //$("body").css({opacity:'1'});
+                    
+                    
                         $("#Enom").val(data.nombre);
                         $("#Eape").val(data.apellido);
                         $("#Email").val(data.mail);                        
@@ -178,7 +206,7 @@ $(document).ready(function(){
     $("#cancel_edicion").click(function(){
         
              $("#editar_perfil").css({display:'none'});   
-             $(".pestañas").css({display:'inline'});            
+             $(".pestañas").css({display:'inline'});                         
              
     });    
     

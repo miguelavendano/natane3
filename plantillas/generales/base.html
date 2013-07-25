@@ -6,9 +6,13 @@
 </head>
 <body onload="initialize()">
     {head} <!-- en "generales" -->
+   
+    <img id="reload" alt="carga" src="{IMG_SYS}/reloader.gif" style="position: fixed; z-index: 999; visibility: hidden;">    
+    <div class="reload-backdrop"></div>
 
-    {contenido} <!-- construido en cada modulo -->
     
+    {contenido} <!-- construido en cada modulo -->  
+ 
     <footer>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -25,7 +29,7 @@
             </div>          
         </div>
     </footer>   
-    
+
     
     
     <script src="{JS}/bootstrap-modal.js"></script>   <!--modal--> 
