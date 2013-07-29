@@ -1,4 +1,4 @@
-<?php
+<?php    
     require_once('../core/coneccion.php');
     include_once 'indexVista.php';
     include_once 'indexModel.php';
@@ -45,7 +45,7 @@
 
     }
     
-   
+
 $obje = new IndexControl();
 $obje->main();
 

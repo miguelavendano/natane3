@@ -3,7 +3,7 @@
 
         <div class="row-fluid">   
             <div class="span9">
-                <h1>{nombre_empresa}</h1> 
+                <h1>{nombre}</h1> 
             </div>
             <div class="span3">
                 <a class="btn btn-custom4" data-toggle="dropdown" href="#">Confio en esta empresa</a>
@@ -87,7 +87,7 @@
 
                             <div class="row-fluid">
                                 <div class="seguidores">                            
-                                    <h3><a href="#seguidores">Amigos</a></h3>
+                                    <h3><a href="#seguidores">Visitantes</a></h3>
                                     {seguidores}
                                 </div> <!-- seguidores -->                        
                             </div>
@@ -97,7 +97,7 @@
                             <div class="row-fluid">
 
                                 <div class="seguidores">                            
-                                    <h3><a href="#seguidores">Clientes/Aliados</a></h3>
+                                    <h3><a href="#seguidores">Quieren visitarlo</a></h3>
                                     {gustaria}
                                 </div> <!-- seguidores -->   
 

@@ -112,7 +112,7 @@ echo "busca 3";
     echo "busca 4";
 echo "Relaciones de usuarios";
     
-//    $obj->relacionesUsuario($obj->usuario, $obj->empresa,"Cliente", 10);
+//    $obj->relacionesUsuario($obj->usuario, $obj->empresa,"Cliente", 50);
         //$obj->relacionesUsuario($obj->usuario, $obj->sitio,"Fan", 35);
 //    $obj->relacionesUsuario($obj->usuario, $obj->sitio,"Desea", 35);
     //$obj->relacionesUsuario($obj->usuario, $obj->usuario,"Amigo", 40);
@@ -121,15 +121,15 @@ echo "Relaciones de usuarios";
 //                        
 //echo "Relaciones de empresas";
 //    
-//    $obj->relacionesUsuario($obj->empresa, $obj->empresa,"Partner", 10);
-//    $obj->relacionesUsuario($obj->empresa, $obj->sitio,"Servicio", 5);   
-    $obj->relacionesUsuario($obj->empresa, $obj->usuario,"Amigo", 20);
-//    $obj->relacionesUsuario($obj->empresa, $obj->experiencia,"Comparte", 30);
+//    $obj->relacionesUsuario($obj->empresa, $obj->empresa,"Partner", 20);
+//    $obj->relacionesUsuario($obj->empresa, $obj->sitio,"Servicio", 50);   
+//    $obj->relacionesUsuario($obj->empresa, $obj->usuario,"Amigo", 20);
+    $obj->relacionesUsuario($obj->empresa, $obj->experiencia,"Comparte", 10);
 //    $obj->relacionesUsuario($obj->empresa, $obj->departamento,"Ubicado", 1);
 //
 //echo "Relaciones de experiencias";
 //    
-//    $obj->relacionesUsuario($obj->experiencia, $obj->empresa,"Etiqueta", 5);
+    $obj->relacionesUsuario($obj->experiencia, $obj->empresa,"Etiqueta", 30);
 //    $obj->relacionesUsuario($obj->experiencia, $obj->sitio,"Albun", 30);   
 //    $obj->relacionesUsuario($obj->experiencia, $obj->usuario,"Etiqueta", 5);
 //    $obj->relacionesUsuario($obj->experiencia, $obj->img,"Img", 70);    
