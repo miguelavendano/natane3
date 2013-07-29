@@ -50,8 +50,7 @@ class ModelEmpresa{
                                 ->setProperty('type', $minodo->type)
 				->save();        
                       
-		$minodo->id = $minodo->node->getId();
-                echo $minodo->id;
+		$minodo->id = $minodo->node->getId();                
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Empresa');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
 	}      
@@ -101,7 +100,7 @@ class ModelEmpresa{
             $nodos = array();
             
             foreach ($result as $row){
-                //echo $row['']->getId()."<br>";
+                
                 array_push($nodos, $row['']->getId());                
             }                
             
@@ -125,7 +124,7 @@ class ModelEmpresa{
 
             }
             
-            //echo "nodale= ".$nodale;
+            
             
             $losconsulta = "START n=node(".$nodale.") RETURN n";
             $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);

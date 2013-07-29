@@ -30,8 +30,7 @@ class ModelImagen{
                                 ->setProperty('type', $minodo->type)
 				->save();
 
-		$minodo->id = $minodo->node->getId();
-                echo $minodo->id;
+		$minodo->id = $minodo->node->getId();                
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Imagen');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 

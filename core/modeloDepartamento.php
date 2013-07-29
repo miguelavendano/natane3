@@ -32,7 +32,7 @@ class ModelDepartamento{
 				->save();
 
 		$minodo->id = $minodo->node->getId();
-                echo $minodo->id;
+                
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Departamento');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 

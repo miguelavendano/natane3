@@ -45,18 +45,18 @@ class Validar{
             
             if($opcion == $caso){
                 
-                echo "prueba 1";
+                
                 return 1;                
                 
             }else{
                 
-                echo "prueba 2";
+                
                 return 0;
             }
 
         }else{
             
-            echo "prueba 3";
+            
             return 0;
         }
         

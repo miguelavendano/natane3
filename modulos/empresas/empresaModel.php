@@ -3,7 +3,8 @@
     require_once('../../core/modeloEmpresa.php');    
     require_once('../../librerias/neo4jphp.phar');
     require_once('../../librerias/Neo4Play.php');    
-    require_once('../../core/modeloSitio.php');    
+    require_once('../../core/modeloSitio.php');  
+    require_once('../../core/modeloExperiencia.php');  
     
     
 
@@ -11,6 +12,7 @@
         
         public $modelempresas;
         public $modelemsitios;
+        public $modelexpe;
         public $id_empresa;
         
         
@@ -18,6 +20,7 @@
             
             $this->modelempresas = new ModelEmpresa();
             $this->modelemsitios = new ModelSitios();
+            $this->modelexpe = new ModelExperiencia();
             $this->id_empresa= $id;
             
         }       
@@ -81,9 +84,9 @@
         
         public function get_experiencias(){   
             
-            
-            $query = "START n=node(1, 2, 3, 11) RETURN n";            
-            $resultado = $this->modelempresas->get_prueba($query);
+
+            $query = "START n=node(".$this->id_empresa.") match n<-[:Comparte|Etiqueta]->b return b;";            
+            $resultado = $this->modelexpe->get_experiencias($query);
 
             return $resultado;
             

@@ -96,7 +96,7 @@
             $this->vista->refactory_clientes_aliados( $this->clientes_aliados());
             $this->vista->refactory_ferrocarril( $this->ferrocarril());            
 //            $this->vista->refactory_servicios($this->servicios());
-//            $this->vista->refactory_experiencias($this->experiencias());
+            $this->vista->refactory_experiencias($this->experiencias());
             $this->vista->refactory_contenido();
             $this->vista->refactory_total();
             

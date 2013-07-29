@@ -89,6 +89,46 @@ class ModelExperiencia{
         }        
 
         
+        
+        
+        public function get_experiencias($queryString){
+            
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();            
+            $array = array();
+            
+            if($result){
+
+                foreach($result as $row) {
+                    $experiencia = new Experiencia();
+                    $experiencia->id = $row['']->getId();
+                    
+                    
+                    $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
+                    
+                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
+                    
+                    if($queryRes){
+                        $res = $queryRes->getResultSet();                                        
+                        $experiencia->imagen= $res[0]->offsetGet('');
+                        //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
+                    }else{
+                        $experiencia->imagen= "no hay";}
+                    
+                    $experiencia->nombre = $row['']->getProperty('nombre');
+                    $experiencia->descripcion = $row['']->getProperty('descripcion');
+                    array_push($array, $experiencia);
+                    $res=null;
+                    
+                    
+                }
+                return $array;
+            }
+
+        }        
+        
+        
         public function get_imagenes_galeria($queryString){
             
            

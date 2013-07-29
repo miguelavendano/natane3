@@ -299,9 +299,9 @@
             
             foreach ($datos as $valor){
                 $aux = $this->expe;
-                $aux = str_ireplace('{imagen}', $valor->img, $aux);
-                $aux = str_ireplace('{dirigido_a}', $valor->name, $aux);
-                $aux = str_ireplace('{comentario}', "un muy buen lugar para pasear con la familia", $aux);
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
+                $aux = str_ireplace('{comentario}',$valor->descripcion , $aux);
                 
                 $experiencias .= $aux;
             }

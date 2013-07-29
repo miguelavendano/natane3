@@ -30,7 +30,7 @@ class ModelSitios{
                                         
                 }else{
                     array_push($vector, $n); 
-                    echo $n."<br>";                    
+                  
                 }   
             }           
             
@@ -65,8 +65,7 @@ class ModelSitios{
                                 ->setProperty('type', $minodo->type)
 				->save();
 
-		$minodo->id = $minodo->node->getId();
-                echo $minodo->id;
+		$minodo->id = $minodo->node->getId();                
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Sitio');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
@@ -74,20 +73,20 @@ class ModelSitios{
         
         public function get_sitio_aleatorio($queryString, $cant){
             
-            
+                        
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
             $result = $query->getResultSet();
             $nodos = array();
             
             foreach ($result as $row){
-                //echo $row['']->getId()."<br>";
+            
                 array_push($nodos, $row['']->getId());                
             }                
             
             $nodale='';
             
             $comparativo = array();
-            
+
             for($i=0; count($comparativo)<$cant; $i++){
                 
                 $n = rand(0,count($nodos)-1);
@@ -103,15 +102,15 @@ class ModelSitios{
                 }
 
             }
+
             
-            //echo "nodale= ".$nodale;
             
             $losconsulta = "START n=node(".$nodale.") RETURN n";
             $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
             $respuesta = $consul->getResultSet();       
             
             $arsitios = array();
-            
+
             foreach ($respuesta as $row){
                 $sitio = new Sitio();
                 $sitio->id = $row['']->getId();
@@ -121,7 +120,7 @@ class ModelSitios{
                 $sitio->imagen = $row['']->getProperty('imagen');
                 array_push($arsitios, $sitio);
             }
-            
+
             return $arsitios;  
 
         }
@@ -206,7 +205,7 @@ class ModelSitios{
             $nodos = array();
             
             foreach ($result as $row){
-                //echo $row['']->getId()."<br>";
+                
                 array_push($nodos, $row['']->getId());                
             }                
             
@@ -230,7 +229,7 @@ class ModelSitios{
 
             }
             
-            //echo "nodale= ".$nodale;
+
             
             $losconsulta = "START n=node(".$nodale.") RETURN n";
             $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
