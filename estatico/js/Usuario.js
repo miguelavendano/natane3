@@ -123,8 +123,8 @@ $(document).ready(function(){
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
-                    //$("#reload").css({visibility: 'hidden'});   
-                    //$("body").css({opacity:'1'});
+                    $("#reload").css({visibility: 'hidden'});   
+                    $(".reload-backdrop").css({visibility: 'hidden'});
                     
                     
                         $("#Enom").val(data.nombre);
