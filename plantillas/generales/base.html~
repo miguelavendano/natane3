@@ -7,8 +7,9 @@
 <body onload="initialize()">
     {head} <!-- en "generales" -->
    
-    <img id="reload" src="{IMG_SYS}/preload_hojas.gif" style="position: fixed; z-index: 999; visibility: hidden;">    
+    <img id="reload" alt="carga" src="{IMG_SYS}/reloader.gif" style="position: fixed; z-index: 999; visibility: hidden;">    
     <div class="reload-backdrop"></div>
+
     
     {contenido} <!-- construido en cada modulo -->  
  
