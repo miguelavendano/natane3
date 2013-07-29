@@ -56,6 +56,21 @@
             
         }                
         
+        
+        public function servicios(){
+
+            $resutlados = $this->modelo->get_servicios();           
+            
+            return $resutlados;            
+            
+        }           
+        
+        public function experiencias(){
+            
+            return $this->modelo->get_experiencias();
+            
+        }                
+        
         //----------------------
 
 
@@ -66,20 +81,10 @@
         
 
         
-        public function servicios(){
 
-            $resutlados = $this->modelo->get_servicios();           
-            
-            return $resutlados;            
-            
-        }   
         
         
-        public function experiencias(){
-            
-            return $this->modelo->get_experiencias();
-            
-        }        
+
         
         
         

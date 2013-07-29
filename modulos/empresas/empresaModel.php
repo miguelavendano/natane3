@@ -62,8 +62,7 @@
         
         public function get_clientes_aliados(){   
             
-            $query = "start n=node(".$this->id_empresa.") match n<-[:Partner|Cliente]->b return b";
-            
+            $query = "start n=node(".$this->id_empresa.") match n<-[:Partner|Cliente]->b return b";            
             $resultado = $this->modelempresas->get_clientes_aliados($query);
 
             return $resultado;
@@ -73,8 +72,8 @@
         public function get_servicios(){   
             
             
-            $query = "START n=node(1,2,3,4,5,1) RETURN n";            
-            $resultado = $this->modelempresas->get_prueba($query);
+            $query = "start n=node(".$this->id_empresa.") match n-[:Servicio]->b return b";
+            $resultado = $this->modelempresas->get_servicios($query);
             
             return $resultado;
             
