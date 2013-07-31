@@ -3,13 +3,13 @@ $(document).ready(function(){
     /*
      * Registro de un nuevo Sitio
      */
-    $("#registrarS").click(function(){
+    $("#registrar").click(function(){
         if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas         
                     $.ajax({
-                        url:'/natane3/estatico/php/opcionesSitio.php'
+                        url:'/natane3/estatico/php/opcionesEmpresa.php'
                         ,type:'POST'                    
                         ,data:{
-                            opcion:'registrarS',                            
+                            opcion:'registrar',                            
                             nombre: $("#Rnom").val(),
                             apellido: $("#Rape").val(),
                             mail: $("#Rmail").val(),
@@ -44,7 +44,7 @@ $(document).ready(function(){
     /*
      * Editar datos del Sitio
      */
-    $("#BeditarS").click(function(){
+    $("#BeditarU").click(function(){
         
             $("#editar_perfil").css({display:'inline'});   
             $(".pestañas").css({display:'none'});
@@ -54,10 +54,10 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");            
 
             $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion:'editarS',                            
+                    opcion:'editarU',                            
                     autor: id_url[1]                    
                 }
                 ,dataType:'JSON'
@@ -126,7 +126,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");  
             
             $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'guardar_edicionU',                   
@@ -176,13 +176,13 @@ $(document).ready(function(){
     /*
      * Crea la relacion "Amigo" entre dos usuarios
      */   
-    $("#SeguirS").click(function(){
+    $("#SeguirU").click(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             
             $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'relacion_amigo',                   

@@ -3,13 +3,13 @@ $(document).ready(function(){
     /*
      * Registro de un nuevo Usuario
      */
-    $("#registrar").click(function(){
+    $("#registrarU").click(function(){
         if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas         
                     $.ajax({
-                        url:'/natane3/estatico/php/Insertadatos.php'
+                        url:'/natane3/estatico/php/opcionesUsuario.php'
                         ,type:'POST'                    
                         ,data:{
-                            opcion:'registrar',                            
+                            opcion:'registrarU',                            
                             nombre: $("#Rnom").val(),
                             apellido: $("#Rape").val(),
                             mail: $("#Rmail").val(),
@@ -50,7 +50,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");            
             
                 $.ajax({
-                    url:'/natane3/estatico/php/Insertadatos.php'
+                    url:'/natane3/estatico/php/opcionesUsuario.php'
                     ,type:'POST'                    
                     ,data:{
                         opcion:'experiencia',                            
@@ -87,7 +87,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");            
 
             $.ajax({
-                url:'/natane3/estatico/php/Insertadatos.php'
+                url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'editarU',                            
@@ -159,7 +159,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");  
             
             $.ajax({
-                url:'/natane3/estatico/php/Insertadatos.php'
+                url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'guardar_edicionU',                   
@@ -215,7 +215,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");  
             
             $.ajax({
-                url:'/natane3/estatico/php/Insertadatos.php'
+                url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'relacion_amigo',                   
@@ -252,7 +252,7 @@ $(document).ready(function(){
         if($("#nickU").val().length > 1  || $("#claveU").val().length > 1){
                 
             $.ajax({
-                url:'/natane3/estatico/php/Insertadatos.php'
+                url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'login',

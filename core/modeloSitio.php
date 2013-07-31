@@ -62,6 +62,7 @@ class ModelSitios{
                                 ->setProperty('facebook', $minodo->facebook)
                                 ->setProperty('twitter', $minodo->twitter)
                                 ->setProperty('youtube', $minodo->youtube)                        
+                                ->setProperty('contraseña', $minodo->contraseña)
                                 ->setProperty('type', $minodo->type)
 				->save();
 

@@ -14,12 +14,14 @@ class Sitio
         public $ciudad = '';
 	public $telefono = '';
 	public $direccion = '';
-	public $correo = '';
 	public $latitud	= '';
-	public $longitud = '';
+	public $longitud = '';        
+	public $correo = '';
+        public $sitio_web= '';
 	public $facebook = '';
 	public $twitter = '';
 	public $youtube = '';
+        public $contraseña = '';
         public $type = '';
         
 	public $node = null;

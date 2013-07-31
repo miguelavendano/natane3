@@ -3,18 +3,15 @@ session_start();
 require_once('../../core/coneccion.php');
 require_once('../../core/modeloUsuario.php');
 require_once('../../core/modeloExperiencia.php');
-require_once '../../core/modeloRelaciones.php';
-
-
-
+require_once('../../core/modeloRelaciones.php');
 
 
 if(isset($_POST['opcion'])){
     
     $band="false";
-    $la_opcion=$_POST['opcion'];
+    $opcion=$_POST['opcion'];
             
-    switch ($la_opcion){
+    switch ($opcion){
         
         // BUSQUEDA
         case "busca":                       
@@ -34,9 +31,8 @@ if(isset($_POST['opcion'])){
         break;
 
         // Registro de un Usuario
-        case "registrar":                       
-
-          
+        case "registrarU":                       
+            /*
             $orig='Bogota';
             $reci='Villavicencio';
             $img='julian.jpg';               
@@ -45,21 +41,23 @@ if(isset($_POST['opcion'])){
             $face='http://www.facebook.com/AnDaLaTo';    
             $twit='https://twitter.com/JulianDVarelaP';
             $you='http://www.youtube.com/user/GisoftCo';
-
+            */
+            
             $nodo_usuario = new Usuario();
             $nodo_usuario->nombre = $_POST['nombre'];
-            $nodo_usuario->apellido = $_POST['apellido'];
-            $nodo_usuario->imagen = $img;
-            $nodo_usuario->nick = $nik;
+            $nodo_usuario->apellido = $_POST['apellido'];            
             $nodo_usuario->genero = $_POST['genero'];
             $nodo_usuario->fecha_nacimiento = $_POST['nacimiento'];
-            $nodo_usuario->ciudad_origen = $orig;
-            $nodo_usuario->lugar_recidencia = $reci;
             $nodo_usuario->correo = $_POST['mail'];
+            $nodo_usuario->imagen = $img;            
+            /*
+            $nodo_usuario->nick = $nik;
+            $nodo_usuario->ciudad_origen = $orig;
+            $nodo_usuario->lugar_recidencia = $reci;            
             $nodo_usuario->sitio_web = $web;    
             $nodo_usuario->facebook = $face;
             $nodo_usuario->twitter = $twit;
-            $nodo_usuario->youtube = $you;
+            $nodo_usuario->youtube = $you;*/
             $nodo_usuario->contraseña = $_POST['contra1'];
             $nodo_usuario->type = 'Usuario';
             ModelUsuarios::crearNodoUsuario($nodo_usuario); //crea el nodo del Usuario 
