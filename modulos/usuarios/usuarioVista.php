@@ -25,7 +25,7 @@
         public function __construct() {
             
             $this->base = file_get_contents('../../plantillas/generales/base.html');
-            $this->head = file_get_contents('../../plantillas/generales/head.html');
+            $this->head = file_get_contents('../../plantillas/generales/headUsuario.html');
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
             
             
@@ -103,8 +103,7 @@
         
         public function refactory_amigos($datos){
             
-            $complete = "";
-            
+            $complete = "";            
             
             foreach ($datos as $valor){
                 $global = new Global_var();

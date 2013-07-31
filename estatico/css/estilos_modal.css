@@ -1,7 +1,27 @@
 /* ........EFECTO BOTONES VENTANA MODAL........ */
-.btn-modal-si { background-color: hsl(132, 100%, 26%) !important; background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00ff32", endColorstr="#00841a"); background-image: -khtml-gradient(linear, left top, left bottom, from(#00ff32), to(#00841a)); background-image: -moz-linear-gradient(top, #00ff32, #00841a); background-image: -ms-linear-gradient(top, #00ff32, #00841a); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00ff32), color-stop(100%, #00841a)); background-image: -webkit-linear-gradient(top, #00ff32, #00841a); background-image: -o-linear-gradient(top, #00ff32, #00841a); background-image: linear-gradient(#00ff32, #00841a); border-color: #00841a #00841a hsl(132, 100%, 20%); color: #fff !important; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.39); -webkit-font-smoothing: antialiased; }
-.btn-modal-no { background-color: hsl(200, 100%, 23%) !important; background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#19b2ff", endColorstr="#004e75"); background-image: -khtml-gradient(linear, left top, left bottom, from(#19b2ff), to(#004e75)); background-image: -moz-linear-gradient(top, #19b2ff, #004e75); background-image: -ms-linear-gradient(top, #19b2ff, #004e75); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #19b2ff), color-stop(100%, #004e75)); background-image: -webkit-linear-gradient(top, #19b2ff, #004e75); background-image: -o-linear-gradient(top, #19b2ff, #004e75); background-image: linear-gradient(#19b2ff, #004e75); border-color: #004e75 #004e75 hsl(200, 100%, 15%); color: #fff !important; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.52); -webkit-font-smoothing: antialiased; }
-
+.btn-modal-red {
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #9E0529;
+	background-image: -moz-linear-gradient(top, #E8074E, #9E0529);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#E8074E), to(#9E0529));
+	background-image: -webkit-linear-gradient(top, #E8074E, #9E0529);
+	background-image: -o-linear-gradient(top, #E8074E, #9E0529);
+	background-image: linear-gradient(to bottom, #E8074E, #9E0529);
+	background-repeat: repeat-x;
+	border-color: #9E0529;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E8074E', endColorstr='#9E0529', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn-modal-red:hover,
+.btn-modal-red:active,
+.btn-modal-red.active,
+.btn-modal-red.disabled,
+.btn-modal-red[disabled] {
+	color: #FFFFFF;
+	background-color: #9E0529;
+}
 
 /* ........MODAL CONFIRMAR SALIDA........ */
 #modalconf .modal-header h3{

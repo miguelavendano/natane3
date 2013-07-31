@@ -1,4 +1,5 @@
 <?php    
+    session_start(); 
     require_once('../core/coneccion.php');
     include_once 'indexVista.php';
     include_once 'indexModel.php';
@@ -46,6 +47,8 @@
     }
     
 
+    $_SESSION['id']=2;
+    
 $obje = new IndexControl();
 $obje->main();
 

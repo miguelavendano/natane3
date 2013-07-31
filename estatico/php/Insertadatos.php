@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once('../../core/coneccion.php');
 require_once('../../core/modeloUsuario.php');
 require_once('../../core/modeloExperiencia.php');
@@ -97,10 +97,10 @@ if(isset($_POST['opcion'])){
     
         case "editarU":                       
             
-            $modelusuarios = new ModelUsuarios();
-            
+            $modelusuarios = new ModelUsuarios();            
             $query = "START n=node(".$_POST['autor'].") RETURN n";                        
             $resultado = $modelusuarios->get_usuario($query);
+            
             $band = array(
                 "nombre"=> $resultado[0]->nombre,
                 "apellido"=> $resultado[0]->apellido,
@@ -143,13 +143,41 @@ if(isset($_POST['opcion'])){
             
         break;    
     
-        default : break; 
+        case "relacion_amigo":                       
             
+            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['amigo'], "Amigo");   //crea la relacion de amistad
+            
+            $band = 'true';
+            
+        break;    
+
+        case "login":                                                                      
+
+            $modelusuarios = new ModelUsuarios();            
+            $query = "START n=node:Usuario(nombre='".$_POST['usuario']."') RETURN n";
+            $resultado = $modelusuarios->get_usuario($query);
+            
+            echo $resultado[0]->id."  --  ";            
+            echo $resultado[0]->correo."  --  ";
+            echo $resultado[0]->contraseña."  --  ";
+                  
+            
+            $_SESSION["id"] = $resultado[0]->id;
+            
+            if($_POST['usuario'] == $resultado[0]->correo && $_POST['clave'] == $resultado[0]->contraseña){
+                $band="true";   
+            }
+            else {
+                $band="false";
+            }
+            
+            
+        break;    
+    
+        default : break; 
     }    
     
     echo $band;
 }
 
 ?>
-
-       

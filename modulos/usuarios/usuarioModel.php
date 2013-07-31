@@ -25,32 +25,27 @@
         }       
         
         public function get_amigos(){   
-            
-            
+                        
             $query = "START a=node(".$this->id_user.") MATCH a<-[:Amigo]->b RETURN b;";            
             $resultado = $this->modelusuarios->get_amigos($query);
 
-            return $resultado;
-            
+            return $resultado;            
         }          
         
         public function get_resultados(){   
-            
-            
+                        
             $query = "START n=node(".$this->id_user.") RETURN n";            
             $resultado = $this->modelusuarios->get_usuario($query);
 
-            return $resultado;
-            
+            return $resultado;            
         }  
+        
         public function get_experiencias(){   
-            
-            
+                        
             $query = "start n=node(".$this->id_user.") match n<-[:Comparte|Etiqueta]->b return b;";            
             $resultado = $this->modelexpe->get_exper_usuario($query);
 
-            return $resultado;
-            
+            return $resultado;            
         }          
         
         public function get_gustaria(){   
@@ -59,8 +54,6 @@
             $resultado = $this->modelsitio->get_prueba($query);
 
             return $resultado;
-            
-            
         }   
         
 //        public function get_usuario_gustaria($queryString){           

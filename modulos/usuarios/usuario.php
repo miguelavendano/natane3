@@ -37,19 +37,14 @@
 
         public function gustaria(){
             
-            return $this->modelo->get_gustaria();
-            
+            return $this->modelo->get_gustaria();            
         }        
         
         
         public function amigos(){
             
-            return $this->modelo->get_amigos();
-            
-            
+            return $this->modelo->get_amigos();            
         }
-        
-        
         
         public function main(){
             
@@ -78,13 +73,5 @@
         header('Location: /natane3/Index/');
     }        
     
-    
-    
-    
-    
-
-
-
-
 
 ?>
