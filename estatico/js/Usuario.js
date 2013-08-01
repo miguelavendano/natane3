@@ -79,7 +79,7 @@ $(document).ready(function(){
      */
     $("#BeditarU").click(function(){
         
-            $("#editar_perfil").css({display:'inline'});   
+            $("#editarUsuario").css({display:'inline'});   
             $(".pestañas").css({display:'none'});
             //$("#Enom").val("julian");
 
@@ -200,7 +200,7 @@ $(document).ready(function(){
 
     $("#cancel_edicion").click(function(){
         
-             $("#editar_perfil").css({display:'none'});   
+             $("#editarUsuario").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                         
              
     });    

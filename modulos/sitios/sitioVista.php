@@ -22,7 +22,8 @@
         public $modales;       
         public $img_slider_act;
         public $img_slider;
-        public $descripcion;
+        public $descripcion;        
+        public $editar;
         
         public $dic_general;
         public $dic_contenido;
@@ -53,6 +54,7 @@
             $this->gustaria= $this->seguidores;
             $this->ferrocarril= file_get_contents('../../plantillas/generales/ferrocarril.html');
             $this->elemento_ferro= file_get_contents('../../plantillas/generales/elemento_ferro.html');
+            $this->editar = file_get_contents('../../plantillas/sitios/editarSitio.html');
             $this->modales= file_get_contents('../../plantillas/generales/barraModal.html');
                      
             $this->metas = '<meta charset="utf-8">
@@ -107,10 +109,10 @@
                                         'seguidores' => $this->seguidores, 
                                         'gustaria' => $this->gustaria, 
                                         'ferrocarril' => $this->ferrocarril,
+                                        'editarSitio' => $this->editar,
                                         'modales' => $this->modal,
                                         'nombre'=>$this->nombre,
-                                        'id_sitio'=>$this->id_sitio);
-            
+                                        'id_sitio'=>$this->id_sitio);            
             
         }
         

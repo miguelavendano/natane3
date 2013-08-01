@@ -12,6 +12,7 @@
 
         public $segui;
         public $usuario;
+        public $editar;
         public $expe;
         public $gustaria;
         public $perfil;
@@ -32,7 +33,7 @@
             $this->perfil = file_get_contents('../../plantillas/usuario/perfilUsuario.html');
             $this->segui = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->usuario = file_get_contents('../../plantillas/usuario/datos_usuario.html');
-            $this->editar = file_get_contents('../../plantillas/usuario/editar_perfil.html');
+            $this->editar = file_get_contents('../../plantillas/usuario/editarUsuario.html');
             $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
             
             $this->gustaria = $this->expe;
@@ -65,7 +66,7 @@
                                         'seguidores' => $this->segui, 
                                         'le_gustaria_ir' => $this->gustaria,
                                         'modales'=> $this->modal,
-                                        'editar_perfil'=>$this->editar,
+                                        'editarUsuario'=>$this->editar,
                                         'experiencia'=>$this->expe);
         }
         
@@ -81,7 +82,7 @@
                                         'seguidores' => $this->segui, 
                                         'le_gustaria_ir' => $this->gustaria,
                                         'modales'=> $this->modal,
-                                        'editar_perfil'=> $this->editar,
+                                        'editarUsuario'=> $this->editar,
                                         'experiencia'=>$this->expe);           
         }
         

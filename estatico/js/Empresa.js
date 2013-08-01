@@ -46,7 +46,7 @@ $(document).ready(function(){
      */
     $("#BeditarU").click(function(){
         
-            $("#editar_perfil").css({display:'inline'});   
+            $("#editarEmpresa").css({display:'inline'});   
             $(".pestañas").css({display:'none'});
             //$("#Enom").val("julian");
 
@@ -167,7 +167,7 @@ $(document).ready(function(){
 
     $("#cancel_edicion").click(function(){
         
-             $("#editar_perfil").css({display:'none'});   
+             $("#editarEmpresa").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                         
              
     });    
