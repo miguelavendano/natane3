@@ -44,7 +44,7 @@
 
         
             $this->base = file_get_contents('../../plantillas/generales/base.html');
-            $this->head = file_get_contents('../../plantillas/generales/head.html');
+            $this->head = file_get_contents('../../plantillas/generales/headSitio.html');
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
             
             $this->sitio= file_get_contents('../../plantillas/sitios/perfilSitio.html');   
@@ -81,13 +81,14 @@
                                     'contenido' => $this->sitio);
             
             $this->dic_contenido = array('slider_sitio' => $this->slider_sitio, 
+                                        'nombre'=>$this->nombre,
                                         'descripcion' => $this->descripcion, 
                                         'contacto' => $this->contacto, 
                                         'seguidores' => $this->seguidores, 
                                         'gustaria' => $this->gustaria, 
                                         'ferrocarril' => $this->ferrocarril,
-                                        'modales' => $this->modal,
-                                        'nombre'=>$this->nombre,
+                                        'editarSitio'=>$this->editar,
+                                        'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);
             
             
@@ -104,14 +105,14 @@
                                     'contenido' => $this->sitio);
             
             $this->dic_contenido = array('slider_sitio' => $this->slider_sitio, 
+                                        'nombre'=>$this->nombre,
                                         'descripcion' => $this->descripcion, 
                                         'contacto' => $this->contacto, 
                                         'seguidores' => $this->seguidores, 
                                         'gustaria' => $this->gustaria, 
                                         'ferrocarril' => $this->ferrocarril,
                                         'editarSitio' => $this->editar,
-                                        'modales' => $this->modal,
-                                        'nombre'=>$this->nombre,
+                                        'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);            
             
         }

@@ -44,7 +44,7 @@
                   
         
             $this->base = file_get_contents('../../plantillas/generales/base.html');
-            $this->head = file_get_contents('../../plantillas/generales/head.html');
+            $this->head = file_get_contents('../../plantillas/generales/headEmpresa.html');
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
             
             $this->empresa= file_get_contents('../../plantillas/empresas/perfilEmpresa.html');   

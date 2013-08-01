@@ -44,7 +44,7 @@ $(document).ready(function(){
     /*
      * Editar datos del Sitio
      */
-    $("#BeditarU").click(function(){
+    $("#BeditarE").click(function(){
         
             $("#editarEmpresa").css({display:'inline'});   
             $(".pestañas").css({display:'none'});

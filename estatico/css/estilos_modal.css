@@ -1,5 +1,5 @@
 /* ........EFECTO BOTONES VENTANA MODAL........ */
-.btn-modal-red {
+.btn-red {
 	color: #FFFFFF;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #9E0529;
@@ -14,11 +14,11 @@
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E8074E', endColorstr='#9E0529', GradientType=0);
 	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
-.btn-modal-red:hover,
-.btn-modal-red:active,
-.btn-modal-red.active,
-.btn-modal-red.disabled,
-.btn-modal-red[disabled] {
+.btn-red:hover,
+.btn-red:active,
+.btn-red.active,
+.btn-red.disabled,
+.btn-red[disabled] {
 	color: #FFFFFF;
 	background-color: #9E0529;
 }

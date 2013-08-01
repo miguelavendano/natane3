@@ -1,9 +1,9 @@
         <!-- editar perfil-->
-        <div id="editarPerfil" style="display: none">
+        <div id="editarSitio" style="display: none">
             <legend><h3>Editar Perfil</h3></legend>        
             <form class="form-horizontal">
                 <div class="control-group">
-                    <label class="control-label" for="Enom">Nombres: </label>
+                    <label class="control-label" for="Enom">Nombre: </label>
                     <div class="controls">
                         <input type="text" class="input-large" id="Enom" required> 
                     </div>
@@ -98,10 +98,11 @@
                         <input type="password" class="input-medium" id="Epass2" required>
                     </div>
                 </div>
-
-                <div class="well">
-                    <a class="btn btn-modal-si" id="guarda_edicion">Guardar Cambios</a>
-                    <a class="btn btn-modal-no" id="cancel_edicion">Cancelar</a>
-                </div>                          
+                <div class="control-group">                  
+                  <div class="controls">
+                    <a class="btn btn-primary" id="guarda_edicion">Guardar Cambios</a>
+                    <a class="btn btn-red" id="cancel_edicion">Cancelar</a>
+                  </div>
+                </div>                
             </form>   
         </div>            

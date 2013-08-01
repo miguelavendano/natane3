@@ -45,9 +45,9 @@ $(document).ready(function(){
      * Editar datos del Sitio
      */
     $("#BeditarS").click(function(){
-        
+
             $("#editarSitio").css({display:'inline'});   
-            $(".pestañas").css({display:'none'});
+            //$(".pestañas").css({display:'none'});
             //$("#Enom").val("julian");
 
             var mi_url=document.location.href;
@@ -113,7 +113,6 @@ $(document).ready(function(){
                         }                
                 }
             });            
-            
     });
 
 
