@@ -72,6 +72,54 @@ class ModelSitios{
                 
 	}      
         
+	//funcion que edita una propiedad de un sitio y si no existe la crea
+	public static function editar_sitio($idnodo, $propiedad, $detalle)
+	{
+		//Obtengo toda la informacion del nodo
+		$editar = Neo4Play::client()->getNode($idnodo);
+		//edita la propiedad y si no existe la crea
+		$editar->setProperty($propiedad,$detalle)
+		    	->save();
+	}    
+        
+
+        public function get_sitio($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){
+            
+                foreach($result as $row) {
+                    
+                    $sitio = new Sitio();
+                    $sitio->id = $row['']->getId();
+                    $sitio->nombre = $row['']->getProperty('nombre');
+                    $sitio->descripcion = $row['']->getProperty('descripcion');
+                    $sitio->imagen = $row['']->getProperty('imagen');
+                    $sitio->tipo_sitio = $row['']->getProperty('tipo_sitio');    
+                    $sitio->ciudad = $row['']->getProperty('ciudad');
+                    $sitio->direccion = $row['']->getProperty('direccion');                    
+                    $sitio->telefono = $row['']->getProperty('telefono');
+                    $sitio->latitud = $row['']->getProperty('latitud');
+                    $sitio->longitud = $row['']->getProperty('longitud');                    
+                    $sitio->correo = $row['']->getProperty('correo');
+                    $sitio->sitio_web = $row['']->getProperty('sitio_web');                    
+                    $sitio->facebook = $row['']->getProperty('facebook');
+                    $sitio->twitter = $row['']->getProperty('twitter');
+                    $sitio->youtube = $row['']->getProperty('youtube');
+                    $sitio->contraseña = $row['']->getProperty('contraseña');
+                    //$sitio->type = $row['']->getProperty('type');                                        
+                    array_push($array, $sitio);                    
+                }
+                return $array;
+            }            
+            
+        }
+        
+        
         public function get_sitio_aleatorio($queryString, $cant){
             
                         

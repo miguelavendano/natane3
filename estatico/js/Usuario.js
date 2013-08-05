@@ -103,7 +103,7 @@ $(document).ready(function(){
                                         right: '50px',
                                         left: '50px',
                                         width: 'auto',
-                                        margin: '0 auto'                                        
+                                        margin: '0 auto'
                                     });   
                     
                     $(".reload-backdrop").css({ position: 'fixed',
@@ -111,7 +111,7 @@ $(document).ready(function(){
                                                 right: '0',
                                                 bottom: '0',
                                                 left: '0',
-                                                zIindex: '1040',
+                                                zIindex: '99999',
                                                 background: '#000000',
                                                 opacity:'0.4'
                                             });                  
@@ -122,18 +122,18 @@ $(document).ready(function(){
                     $("#reload").css({visibility: 'hidden'});   
                     $(".reload-backdrop").css({visibility: 'hidden'});                    
                     
-                        $("#Enom").val(data.nombre);
-                        $("#Eape").val(data.apellido);
-                        $("#Email").val(data.mail);                        
-                        $("#Enaci").val(data.f_nace);
-                        $("#Epass1").val(data.pass);                
-                        $("#Enick").val(data.nick);                        
-                        $("#Ecity").val(data.city);
-                        $("#Erecide").val(data.recide);
-                        $("#Es_web").val(data.s_web);
-                        $("#Eface").val(data.face);
-                        $("#Etwi").val(data.twi);
-                        $("#Eyou").val(data.you);
+                        $("#EnomU").val(data.nombre);
+                        $("#EapeU").val(data.apellido);
+                        $("#EmailU").val(data.mail);                        
+                        $("#EnaciU").val(data.f_nace);
+                        $("#Epass1U").val(data.pass);                
+                        $("#EnickU").val(data.nick);                        
+                        $("#EcityU").val(data.city);
+                        $("#ErecideU").val(data.recide);
+                        $("#Es_webU").val(data.s_web);
+                        $("#EfaceU").val(data.face);
+                        $("#EtwiU").val(data.twi);
+                        $("#EyouU").val(data.you);
                         //$("#Eimagen").val(data.imagen);
                         
                         if(data.genero=="Masculino"){                            
@@ -153,7 +153,7 @@ $(document).ready(function(){
     /*
      * Guardar edicion de los datos del usuario
      */
-    $("#guarda_edicion").click(function(){
+    $("#guarda_edicion_usuario").click(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
@@ -164,19 +164,19 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'guardar_edicionU',                   
                     usuario: id_url[1],
-                    nombre: $("#Enom").val(),
-                    apellido: $("#Eape").val(),
-                    mail: $("#Email").val(),                    
-                    f_nace: $("#Enaci").val(),
-                    genero: $("input[name='Egenero']:checked").val(),
-                    pass: $("#Epass1").val(),                
-                    nick: $("#Enick").val(),                    
-                    city: $("#Ecity").val(),
-                    recide: $("#Erecide").val(),
-                    s_web: $("#Es_web").val(),
-                    face: $("#Eface").val(),
-                    twit: $("#Etwi").val(),
-                    youtube: $("#Eyou").val()                    
+                    nombre: $("#EnomU").val(),
+                    apellido: $("#EapeU").val(),
+                    mail: $("#EmailU").val(),                    
+                    f_nace: $("#EnaciU").val(),
+                    genero: $("input[name='EgeneroU']:checked").val(),                    
+                    nick: $("#EnickU").val(),                    
+                    city: $("#EcityU").val(),
+                    recide: $("#ErecideU").val(),
+                    s_web: $("#Es_webU").val(),
+                    face: $("#EfaceU").val(),
+                    twit: $("#EtwiU").val(),
+                    youtube: $("#EyouU").val(),
+                    pass: $("#Epass1U").val()
                     //imagen: $("#Epass1").val(data.imagen),
                 }
                 ,dataType:'JSON'
@@ -198,7 +198,7 @@ $(document).ready(function(){
      * Cancelar edicion de los datos del usuario
      */
 
-    $("#cancel_edicion").click(function(){
+    $("#cancel_edicion_usuario").click(function(){
         
              $("#editarUsuario").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                         

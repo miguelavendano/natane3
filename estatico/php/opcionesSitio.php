@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('../../core/coneccion.php');
-require_once('../../core/modeloUsuario.php');
+require_once('../../core/modeloSitio.php');
 require_once('../../core/modeloExperiencia.php');
 require_once('../../core/modeloRelaciones.php');
 
@@ -51,14 +51,12 @@ if(isset($_POST['opcion'])){
 
         case "editarS":                       
             
-            $modelusuarios = new ModelUsuarios();            
-            $query = "START n=node(".$_POST['autor'].") RETURN n";                        
-            $resultado = $modelusuarios->get_usuario($query);
+            $modelsitio = new ModelSitios();            
+            $query = "START n=node(".$_POST['sitio'].") RETURN n";                        
+            $resultado = $modelsitio->get_sitio($query);
             
             $band = array(
                 "nombre"=> $resultado[0]->nombre,
-                "imagen"=> $resultado[0]->imagen,
-                "tipo"=> $resultado[0]->tipo_sitio,
                 "desc"=> $resultado[0]->descripcion,
                 "city"=> $resultado[0]->ciudad,
                 "tel"=> $resultado[0]->telefono,
@@ -70,30 +68,32 @@ if(isset($_POST['opcion'])){
                 "face"=> $resultado[0]->facebook,
                 "twi"=> $resultado[0]->twitter,
                 "you"=> $resultado[0]->youtube,
-                "pass"=> $resultado[0]->contraseña
+                "pass"=> $resultado[0]->contraseña,
+                "tipo"=> $resultado[0]->tipo_sitio,
+                "imagen"=> $resultado[0]->imagen,
             );
                         
            $band = json_encode($band);
             
         break;    
     
-        case "guardar_edicionS":                                                                      
-           
-            ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['nombre']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['apellido']);            
-            //ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", );         
-            ModelUsuarios::editar_usuario($_POST['usuario'], "nick", $_POST['nick']);            
-            ModelUsuarios::editar_usuario($_POST['usuario'], "genero",$_POST['genero']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "fecha_nacimiento", $_POST['f_nace']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "ciudad_origen", $_POST['city']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "lugar_recidencia", $_POST['recide']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "correo", $_POST['mail']); 
-            ModelUsuarios::editar_usuario($_POST['usuario'], "sitio_web", $_POST['s_web']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "facebook", $_POST['face']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "twitter", $_POST['twit']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "youtube", $_POST['youtube']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "contraseña", $_POST['pass']);
-            
+        case "guardar_edicionS":  
+                        
+            ModelSitios::editar_sitio($_POST['sitio'], "nombre", $_POST['nombre']);
+            ModelSitios::editar_sitio($_POST['sitio'], "descripcion", $_POST['descri']);
+            ModelSitios::editar_sitio($_POST['sitio'], "ciudad", $_POST['city']);            
+            ModelSitios::editar_sitio($_POST['sitio'], "direccion",$_POST['direc']);
+            ModelSitios::editar_sitio($_POST['sitio'], "telefono", $_POST['tele']);
+            ModelSitios::editar_sitio($_POST['sitio'], "correo", $_POST['mail']);
+            ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat']);
+            ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lon']);             
+            ModelSitios::editar_sitio($_POST['sitio'], "sitio_web", $_POST['s_web']);
+            ModelSitios::editar_sitio($_POST['sitio'], "facebook", $_POST['face']);
+            ModelSitios::editar_sitio($_POST['sitio'], "twitter", $_POST['twit']);
+            ModelSitios::editar_sitio($_POST['sitio'], "youtube", $_POST['youtube']);
+            ModelSitios::editar_sitio($_POST['sitio'], "tipo_sitio", $_POST['tipoSitio']);
+            ModelSitios::editar_sitio($_POST['sitio'], "contraseña", $_POST['pass']);
+            //ModelSitios::editar_sitio($_POST['usuario'], "imagen", );    
             $band="true";
             
         break;    
