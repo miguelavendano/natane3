@@ -71,10 +71,10 @@ class ModelSitios{
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
 	}      
+
         
 	//funcion que edita una propiedad de un sitio y si no existe la crea
-	public static function editar_sitio($idnodo, $propiedad, $detalle)
-	{
+	public static function editar_sitio($idnodo, $propiedad, $detalle){
 		//Obtengo toda la informacion del nodo
 		$editar = Neo4Play::client()->getNode($idnodo);
 		//edita la propiedad y si no existe la crea
@@ -115,8 +115,7 @@ class ModelSitios{
                     array_push($array, $sitio);                    
                 }
                 return $array;
-            }            
-            
+            }                        
         }
         
         

@@ -16,10 +16,7 @@ if(isset($_POST['opcion'])){
         // Registro de un Usuario
         case "registrarS":                       
             
-            $orig='Bogota';
-            $reci='Villavicencio';
-            $img='acacias-meta.jpg';               
-            $nik=substr($_POST['nombre'],0,3)."_".substr($_POST['apellido'],0,3); 
+            $img='humadea.jpg;';
             $web=$_POST['nombre'].$_POST['apellido'].substr($_POST['apellido'],0,1).".com";
             $face='http://www.facebook.com/AnDaLaTo';    
             $twit='https://twitter.com/JulianDVarelaP';
@@ -28,20 +25,20 @@ if(isset($_POST['opcion'])){
             $nodo_sitio = new Sitio();
             $nodo_sitio->nombre = $_POST['nombre'];            
             $nodo_sitio->imagen = $img;
-            $nodo_sitio->tipo_sitio = '';
-            $nodo_sitio->descripcion = '';
-            $nodo_sitio->ciudad = '';
-            $nodo_sitio->telefono = '';
-            $nodo_sitio->direccion = '';
-            $nodo_sitio->latitud = '';
-            $nodo_sitio->longitud = '';
+            $nodo_sitio->tipo_sitio = $_POST['tipo'];
+            $nodo_sitio->descripcion = $_POST['desc'];
+            $nodo_sitio->ciudad = $_POST['city'];
+            $nodo_sitio->telefono = $_POST['tel'];
+            $nodo_sitio->direccion = $_POST['dir'];
+            $nodo_sitio->latitud = $_POST['lat'];
+            $nodo_sitio->longitud = $_POST['lon'];
             $nodo_sitio->correo = $_POST['mail'];
-            $nodo_sitio->sitio_web = $web;    
-            $nodo_sitio->facebook = $face;
-            $nodo_sitio->twitter = $twit;
-            $nodo_sitio->youtube = $you;
+            $nodo_sitio->empresa_web = $_POST['web'];    
+            $nodo_sitio->facebook = $_POST['face'];
+            $nodo_sitio->twitter = $_POST['twit'];
+            $nodo_sitio->youtube = $_POST['you'];
             $nodo_sitio->contraseña = $_POST['contra1'];
-            $nodo_sitio->type = 'Usuario';
+            $nodo_sitio->type = 'Sitio';
             ModelUsuarios::crearNodoUsuario($nodo_sitio); //crea el nodo del Usuario 
             
             $band=$nodo_sitio->id;  //obtengo el id del nodo creado
@@ -91,41 +88,10 @@ if(isset($_POST['opcion'])){
             ModelSitios::editar_sitio($_POST['sitio'], "facebook", $_POST['face']);
             ModelSitios::editar_sitio($_POST['sitio'], "twitter", $_POST['twit']);
             ModelSitios::editar_sitio($_POST['sitio'], "youtube", $_POST['youtube']);
-            ModelSitios::editar_sitio($_POST['sitio'], "tipo_sitio", $_POST['tipoSitio']);
+            ModelSitios::editar_sitio($_POST['sitio'], "tipo_sitio", $_POST['tsitio']);
             ModelSitios::editar_sitio($_POST['sitio'], "contraseña", $_POST['pass']);
             //ModelSitios::editar_sitio($_POST['usuario'], "imagen", );    
             $band="true";
-            
-        break;    
-    
-        case "relacion_amigo":                       
-            
-            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['amigo'], "Amigo");   //crea la relacion de amistad
-            
-            $band = 'true';
-            
-        break;    
-
-        case "login":                                                                      
-
-            $modelusuarios = new ModelUsuarios();            
-            $query = "START n=node:Usuario(nombre='".$_POST['usuario']."') RETURN n";
-            $resultado = $modelusuarios->get_usuario($query);
-            
-            echo $resultado[0]->id."  --  ";            
-            echo $resultado[0]->correo."  --  ";
-            echo $resultado[0]->contraseña."  --  ";
-                  
-            
-            $_SESSION["id"] = $resultado[0]->id;
-            
-            if($_POST['usuario'] == $resultado[0]->correo && $_POST['clave'] == $resultado[0]->contraseña){
-                $band="true";   
-            }
-            else {
-                $band="false";
-            }
-            
             
         break;    
     

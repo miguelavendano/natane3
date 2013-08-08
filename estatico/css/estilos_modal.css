@@ -1,28 +1,3 @@
-/* ........EFECTO BOTONES VENTANA MODAL........ */
-.btn-red {
-	color: #FFFFFF;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-	background-color: #9E0529;
-	background-image: -moz-linear-gradient(top, #E8074E, #9E0529);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#E8074E), to(#9E0529));
-	background-image: -webkit-linear-gradient(top, #E8074E, #9E0529);
-	background-image: -o-linear-gradient(top, #E8074E, #9E0529);
-	background-image: linear-gradient(to bottom, #E8074E, #9E0529);
-	background-repeat: repeat-x;
-	border-color: #9E0529;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E8074E', endColorstr='#9E0529', GradientType=0);
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-.btn-red:hover,
-.btn-red:active,
-.btn-red.active,
-.btn-red.disabled,
-.btn-red[disabled] {
-	color: #FFFFFF;
-	background-color: #9E0529;
-}
-
 /* ........MODAL CONFIRMAR SALIDA........ */
 #modalconf .modal-header h3{
 	text-align: center;	

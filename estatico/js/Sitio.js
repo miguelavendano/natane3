@@ -9,14 +9,21 @@ $(document).ready(function(){
                         url:'/natane3/estatico/php/opcionesSitio.php'
                         ,type:'POST'                    
                         ,data:{
-                            opcion:'registrarS',                            
-                            nombre: $("#Rnom").val(),
-                            apellido: $("#Rape").val(),
-                            mail: $("#Rmail").val(),
-                            genero: $("input[name='Rgenero']:checked").val(),
-                            nacimiento: $("#Rnaci").val(),
-                            contra1: $("#Rpass1").val(),
-                            contra2: $("#Rpass2").val()
+                            opcion:'registrarS',
+                            nombre: $("#RnomS").val(),
+                            desc: $("#RdesS").val(),
+                            tipo: $("input[name='RtipoS']:checked").val(),
+                            city: $("#RcityS").val(),
+                            dir: $("#RdirS").val(),
+                            tel: $("#RtelS").val(),
+                            mail: $("#RmailS").val(),
+                            lat: $("#RlatS").val(),
+                            lon: $("#RlonS").val(),
+                            web: $("#RwebS").val(),
+                            face: $("#RfaceS").val(),
+                            twit: $("#RtwiS").val(),
+                            you: $("#RyouS").val(),
+                            contra1: $("#Rpass1S").val()
                         }
                         ,dataType:'html'
                         ,beforeSend:function(jqXHR, settings ){
@@ -144,7 +151,7 @@ $(document).ready(function(){
                     face: $("#EfaceS").val(),
                     twit: $("#EtwiS").val(),
                     youtube: $("#EyouS").val(),
-                    tipoSitio: $("input[name='EtipoS']:checked").val(),
+                    tsitio: $("input[name='EtipoS']:checked").val(),
                     pass: $("#Epass1S").val()
                     //imagen: $("#Epass1").val(data.imagen),
                 }

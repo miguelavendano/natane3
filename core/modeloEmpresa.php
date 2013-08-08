@@ -56,6 +56,52 @@ class ModelEmpresa{
 	}      
 
         
+	//funcion que edita una propiedad de una empresa y si no existe la crea
+	public static function editar_empresa($idnodo, $propiedad, $detalle){
+		//Obtengo toda la informacion del nodo
+		$editar = Neo4Play::client()->getNode($idnodo);
+		//edita la propiedad y si no existe la crea
+		$editar->setProperty($propiedad,$detalle)
+		    	->save();
+	}    
+
+        
+        public function get_empresa($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){
+            
+                foreach($result as $row) {
+                    
+                    $empresa = new Sitio();
+                    $empresa->id = $row['']->getId();
+                    $empresa->nombre = $row['']->getProperty('nombre');
+                    $empresa->nit = $row['']->getProperty('nit');
+                    $empresa->descripcion = $row['']->getProperty('descripcion');
+                    $empresa->imagen = $row['']->getProperty('imagen');
+                    $empresa->ciudad = $row['']->getProperty('ciudad');
+                    $empresa->direccion = $row['']->getProperty('direccion');                    
+                    $empresa->telefono = $row['']->getProperty('telefono');
+                    $empresa->latitud = $row['']->getProperty('latitud');
+                    $empresa->longitud = $row['']->getProperty('longitud');                    
+                    $empresa->correo = $row['']->getProperty('correo');
+                    $empresa->sitio_web = $row['']->getProperty('sitio_web');                    
+                    $empresa->facebook = $row['']->getProperty('facebook');
+                    $empresa->twitter = $row['']->getProperty('twitter');
+                    $empresa->youtube = $row['']->getProperty('youtube');
+                    $empresa->contraseña = $row['']->getProperty('contraseña');
+                    //$empresa->type = $row['']->getProperty('type');                                        
+                    array_push($array, $empresa);                    
+                }
+                return $array;
+            }                        
+        }                
+
+        
         public function get_contacto($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
@@ -133,13 +179,13 @@ class ModelEmpresa{
             $arsitios = array();
             
             foreach ($respuesta as $row){
-                $sitio = new Sitio();
-                $sitio->id = $row['']->getId();
-                $sitio->nombre = $row['']->getProperty('nombre');
-                $sitio->descripcion = $row['']->getProperty('descripcion');
-                $sitio->tipo = $row['']->getProperty('tipo');
-                $sitio->imagen = $row['']->getProperty('imagen');
-                array_push($arsitios, $sitio);
+                $empresa = new Sitio();
+                $empresa->id = $row['']->getId();
+                $empresa->nombre = $row['']->getProperty('nombre');
+                $empresa->descripcion = $row['']->getProperty('descripcion');
+                $empresa->tipo = $row['']->getProperty('tipo');
+                $empresa->imagen = $row['']->getProperty('imagen');
+                array_push($arsitios, $empresa);
             }
             
             return $arsitios;  

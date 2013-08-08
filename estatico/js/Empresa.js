@@ -3,20 +3,27 @@ $(document).ready(function(){
     /*
      * Registro de un nuevo Sitio
      */
-    $("#registrar").click(function(){
+    $("#registrarE").click(function(){
         if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas         
                     $.ajax({
-                        url:'/natane3/estatico/php/opcionesEmpresa.php'
+                        url:'/natane3/estatico/php/opcionesSitio.php'
                         ,type:'POST'                    
                         ,data:{
-                            opcion:'registrar',                            
-                            nombre: $("#Rnom").val(),
-                            apellido: $("#Rape").val(),
-                            mail: $("#Rmail").val(),
-                            genero: $("input[name='Rgenero']:checked").val(),
-                            nacimiento: $("#Rnaci").val(),
-                            contra1: $("#Rpass1").val(),
-                            contra2: $("#Rpass2").val()
+                            opcion:'registrarE',
+                            nombre: $("#RnomE").val(),
+                            nit: $("#RnitE").val(),
+                            desc: $("#RdesE").val(),                            
+                            city: $("#RcityE").val(),
+                            dir: $("#RdirE").val(),
+                            tel: $("#RtelE").val(),
+                            mail: $("#RmailE").val(),
+                            lat: $("#RlatE").val(),
+                            lon: $("#RlonE").val(),                            
+                            web: $("#RwebE").val(),
+                            face: $("#RfaceE").val(),
+                            twit: $("#RtwiE").val(),
+                            you: $("#RyouE").val(),
+                            contra1: $("#Rpass1E").val()
                         }
                         ,dataType:'html'
                         ,beforeSend:function(jqXHR, settings ){
@@ -45,20 +52,20 @@ $(document).ready(function(){
      * Editar datos del Sitio
      */
     $("#BeditarE").click(function(){
-        
+
             $("#editarEmpresa").css({display:'inline'});   
-            $(".pestañas").css({display:'none'});
+            //$(".pestañas").css({display:'none'});
             //$("#Enom").val("julian");
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");            
 
             $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                url:'/natane3/estatico/php/opcionesSitio.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion:'editarU',                            
-                    autor: id_url[1]                    
+                    opcion:'editarE',                            
+                    empresa: id_url[1]                    
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
@@ -78,72 +85,65 @@ $(document).ready(function(){
                                                 right: '0',
                                                 bottom: '0',
                                                 left: '0',
-                                                zIindex: '1040',
+                                                zIindex: '99999',
                                                 background: '#000000',
                                                 opacity:'0.4'
-                                            });                  
+                                             });                  
                    
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
-                    $("#reload").css({visibility: 'hidden'});   
-                    $(".reload-backdrop").css({visibility: 'hidden'});                    
+                        $("#reload").css({visibility: 'hidden'});   
+                        $(".reload-backdrop").css({visibility: 'hidden'});                    
                     
-                        $("#Enom").val(data.nombre);
-                        $("#Eape").val(data.apellido);
-                        $("#Email").val(data.mail);                        
-                        $("#Enaci").val(data.f_nace);
-                        $("#Epass1").val(data.pass);                
-                        $("#Enick").val(data.nick);                        
-                        $("#Ecity").val(data.city);
-                        $("#Erecide").val(data.recide);
-                        $("#Es_web").val(data.s_web);
-                        $("#Eface").val(data.face);
-                        $("#Etwi").val(data.twi);
-                        $("#Eyou").val(data.you);
-                        //$("#Eimagen").val(data.imagen);
-                        
-                        if(data.genero=="Masculino"){                            
-                            $("#EgeneroM").attr("checked",true);                            
-                            $("#EgeneroF").attr("checked",false);
-                        }                            
-                        else{
-                             document.getElementById('EgeneroM').checked=false;
-                             document.getElementById('EgeneroF').checked=true;                                                        
-                        }                
+                        $("#EnomE").val(data.nombre);
+                        $("#EnitE").val(data.nit);
+                        $("#EdescE").val(data.desc);
+                        $("#EcityE").val(data.city);
+                        $("#EtelE").val(data.tel);                
+                        $("#EdirE").val(data.direc);
+                        $("#EmailE").val(data.mail);                        
+                        $("#ElatE").val(data.lat);
+                        $("#ElongE").val(data.lon);
+                        $("#Es_webE").val(data.s_web);
+                        $("#EfaceE").val(data.face);
+                        $("#EtwiE").val(data.twi);
+                        $("#EyouE").val(data.you);
+                        $("#Epass1E").val(data.pass);
+                        //$("#Eimagen").val(data.imagen);                        
+                      
                 }
             });            
-            
     });
 
 
     /*
      * Guardar edicion de los datos del sitio
      */
-    $("#guarda_edicion").click(function(){
+    $("#guarda_edicion_empresa").click(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             
             $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                url:'/natane3/estatico/php/opcionesSitio.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion: 'guardar_edicionU',                   
-                    usuario: id_url[1],
-                    nombre: $("#Enom").val(),
-                    apellido: $("#Eape").val(),
-                    mail: $("#Email").val(),                    
-                    f_nace: $("#Enaci").val(),
-                    genero: $("input[name='Egenero']:checked").val(),
-                    pass: $("#Epass1").val(),                
-                    nick: $("#Enick").val(),                    
-                    city: $("#Ecity").val(),
-                    recide: $("#Erecide").val(),
-                    s_web: $("#Es_web").val(),
-                    face: $("#Eface").val(),
-                    twit: $("#Etwi").val(),
-                    youtube: $("#Eyou").val()                    
+                    opcion: 'guardar_edicionE',
+                    sitio: id_url[1],
+                    nombre: $("#EnomE").val(),
+                    descri: $("#EdescE").val(),
+                    city: $("#EcityE").val(),                    
+                    direc: $("#EdirE").val(),
+                    tele: $("#EtelE").val(),                    
+                    mail: $("#EmailE").val(),                    
+                    lat: $("#ElatE").val(),                    
+                    lon: $("#ElongE").val(),
+                    s_web: $("#Es_webE").val(),
+                    face: $("#EfaceE").val(),
+                    twit: $("#EtwiE").val(),
+                    youtube: $("#EyouE").val(),                    
+                    pass: $("#Epass1E").val()
                     //imagen: $("#Epass1").val(data.imagen),
                 }
                 ,dataType:'JSON'
@@ -165,10 +165,10 @@ $(document).ready(function(){
      * Cancelar edicion de los datos del usuario
      */
 
-    $("#cancel_edicion").click(function(){
+    $("#cancel_edicion_empresa").click(function(){
         
              $("#editarEmpresa").css({display:'none'});   
-             $(".pestañas").css({display:'inline'});                         
+             //$(".pestañas").css({display:'inline'});                         
              
     });    
     
@@ -176,13 +176,13 @@ $(document).ready(function(){
     /*
      * Crea la relacion "Amigo" entre dos usuarios
      */   
-    $("#SeguirU").click(function(){
+    $("#SeguirE").click(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             
             $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                url:'/natane3/estatico/php/opcionesSitio.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'relacion_amigo',                   
@@ -197,7 +197,7 @@ $(document).ready(function(){
 
                         if(/true/.test(data)) {                    
                             html="<i class='icon-leaf'></i> Seguiendo";
-                            $("#SeguirU").html(html);                        
+                            $("#SeguirE").html(html);                        
                             
                             //html2="<div {empresa}><p><a href='{url}?id={id}'><img src='{IMG_NATANE}/{imagen}'/>{nombre}</a></p></div>";
                             //$('.seguidores').html($('.seguidores').html()+html2);                           

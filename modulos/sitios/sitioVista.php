@@ -209,8 +209,6 @@
                 
                 $elementos = $elementos.$aux;  
                 
-                
-                
             }
             
             // termina de ensamblar los elementos del ferrocarril con la estructura general del mismo            
