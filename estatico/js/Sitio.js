@@ -4,6 +4,15 @@ $(document).ready(function(){
      * Registro de un nuevo Sitio
      */
     $("#registrarS").click(function(){
+        $("#registrarSitio").css({display:'inline'});   
+    }); 
+
+
+    /*
+     * Guardar la creacion de un Sitio nuevo
+     */
+    $("#guarda_sitio").click(function(){
+                
         if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas         
                     $.ajax({
                         url:'/natane3/estatico/php/opcionesSitio.php'
@@ -11,7 +20,7 @@ $(document).ready(function(){
                         ,data:{
                             opcion:'registrarS',
                             nombre: $("#RnomS").val(),
-                            desc: $("#RdesS").val(),
+                            desc: $("#RdescS").val(),
                             tipo: $("input[name='RtipoS']:checked").val(),
                             city: $("#RcityS").val(),
                             dir: $("#RdirS").val(),
@@ -35,7 +44,8 @@ $(document).ready(function(){
                             
                             if(/true/.test(data)) {                                
                                 alert("Registro Exitoso  :D");                                                                          
-                                document.location.href="http://localhost/natane3/modulos/usuarios/usuario.php?id="+n[0];
+                                document.location.href="http://localhost/natane3/modulos/sitios/sitio.php?id="+n[0];
+                                
                             }
                             else alert("No se ha podido realizar su registro"); 
 
@@ -111,15 +121,31 @@ $(document).ready(function(){
                         $("#Epass1S").val(data.pass);
                         //$("#Eimagen").val(data.imagen);                        
                         
-                    /*
-                        if(data.tipo=="Masculino"){                            
-                            $("#EtipoS'].attr("checked",true);
-                        }                            
-                        else{
-                             document.getElementById('EgeneroM').checked=false;
-                             document.getElementById('EgeneroF').checked=true;                                                        
-                        }   
-                    */
+                        if(data.tipo=="icon-music"){
+                            $("input[name='EtipoS']").attr("checked",false);                                                           
+                            $("#Et_disco").attr("checked",true);     
+                        }
+                        else if(data.tipo=="icon-glass"){
+                            $("input[name='EtipoS']").attr("checked",false);                                                           
+                            $("#Et_bar").attr("checked",true);                            
+                        }
+                        else if(data.tipo=="icon-food"){
+                            $("input[name='EtipoS']").attr("checked",false);                                                           
+                            $("#Et_resta").attr("checked",true);                            
+                        }
+                        else if(data.tipo=="icon-suitcase"){
+                            $("input[name='EtipoS']").attr("checked",false);                                                           
+                            $("#Et_hotel").attr("checked",true);                            
+                        }
+                        else if(data.tipo=="icon-dribbble"){
+                            $("input[name='EtipoS']").attr("checked",false);                                                           
+                            $("#Et_recrea").attr("checked",true);                        
+                        }
+                        else if(data.tipo=="icon-road"){
+                            $("input[name='EtipoS']").attr("checked",false);                                                           
+                            $("#Et_camina").attr("checked",true);                        
+                        }
+                    
                 }
             });            
     });
@@ -170,15 +196,16 @@ $(document).ready(function(){
             });                        
     });    
 
+
     /*
      * Cancelar edicion de los datos del usuario
      */
+    $("#cancelarEdicionSitio").click(function(){        
+             $("#editarSitio").css({display:'none'});                
+    });    
 
-    $("#cancel_edicion_sitio").click(function(){
-        
-             $("#editarSitio").css({display:'none'});   
-             //$(".pestañas").css({display:'inline'});                         
-             
+    $("#cancelarRegistroSitio").click(function(){        
+             $("#registrarSitio").css({display:'none'});   
     });    
     
 

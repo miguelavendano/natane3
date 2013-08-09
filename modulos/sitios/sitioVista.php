@@ -24,6 +24,9 @@
         public $img_slider;
         public $descripcion;        
         public $editar;
+        public $registrar;
+        public $latitud;
+        public $longitud;
         
         public $dic_general;
         public $dic_contenido;
@@ -47,15 +50,16 @@
             $this->head = file_get_contents('../../plantillas/generales/headSitio.html');
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
             
-            $this->sitio= file_get_contents('../../plantillas/sitios/perfilSitio.html');   
-            $this->slider_sitio= file_get_contents('../../plantillas/sitios/slider_sitio.html');      
+            $this->sitio = file_get_contents('../../plantillas/sitios/perfilSitio.html');   
+            $this->slider_sitio = file_get_contents('../../plantillas/sitios/slider_sitio.html');      
             $this->contacto = file_get_contents('../../plantillas/sitios/contacto.html'); 
             $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
-            $this->gustaria= $this->seguidores;
-            $this->ferrocarril= file_get_contents('../../plantillas/generales/ferrocarril.html');
-            $this->elemento_ferro= file_get_contents('../../plantillas/generales/elemento_ferro.html');
+            $this->gustaria = $this->seguidores;
+            $this->ferrocarril = file_get_contents('../../plantillas/generales/ferrocarril.html');
+            $this->elemento_ferro = file_get_contents('../../plantillas/generales/elemento_ferro.html');
             $this->editar = file_get_contents('../../plantillas/sitios/editarSitio.html');
-            $this->modales= file_get_contents('../../plantillas/generales/barraModal.html');
+            $this->registrar = file_get_contents('../../plantillas/sitios/registrarSitio.html');
+            $this->modales = file_get_contents('../../plantillas/generales/barraModal.html');
                      
             $this->metas = '<meta charset="utf-8">
                             <title>{TITULO}</title>
@@ -71,14 +75,13 @@
                             <link href="{CSS}/estilos_ferrocarril.css" rel="stylesheet">
                             <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
                             <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />';
-
-            
-            
+    
             
             $this->dic_general = array('metas' => $this->metas,
                                     'links' => $this->links ,
                                     'head' => $this->head ,
                                     'contenido' => $this->sitio);
+
             
             $this->dic_contenido = array('slider_sitio' => $this->slider_sitio, 
                                         'nombre'=>$this->nombre,
@@ -88,14 +91,13 @@
                                         'gustaria' => $this->gustaria, 
                                         'ferrocarril' => $this->ferrocarril,
                                         'editarSitio'=>$this->editar,
+                                        'registrarSitio'=>$this->registrar,
+                                        'latitud'=>$this->latitud,                
+                                        'longitud'=>$this->longitud,                                
                                         'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);
-            
-            
-            
-            
-
         }
+        
         
         public function actualizar_diccionarios(){
             
@@ -112,6 +114,9 @@
                                         'gustaria' => $this->gustaria, 
                                         'ferrocarril' => $this->ferrocarril,
                                         'editarSitio' => $this->editar,
+                                        'registrarSitio'=>$this->registrar,                
+                                        'latitud'=>$this->latitud,                
+                                        'longitud'=>$this->longitud,                
                                         'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);            
             
@@ -136,19 +141,17 @@
         public function refactory_contacto($datos){                
             
             $this->nombre = $datos[0]->nombre;
-            $this->contacto = str_ireplace('{tel}',$datos[0]->telefono ,$this->contacto );
-            $this->contacto = str_ireplace('{dir}',$datos[0]->direccion ,$this->contacto );
-            $this->contacto = str_ireplace('{correo}',$datos[0]->correo ,$this->contacto );
-            $this->contacto = str_ireplace('{facebook}',$datos[0]->facebook ,$this->contacto );
-            $this->contacto = str_ireplace('{twitter}',$datos[0]->twitter ,$this->contacto );
-            $this->contacto = str_ireplace('{google}',$datos[0]->youtube ,$this->contacto );        
+            $this->contacto = str_ireplace('{tel}', $datos[0]->telefono, $this->contacto );
+            $this->contacto = str_ireplace('{dir}', $datos[0]->direccion, $this->contacto );
+            $this->contacto = str_ireplace('{correo}', $datos[0]->correo, $this->contacto );
+            $this->contacto = str_ireplace('{facebook}', $datos[0]->facebook, $this->contacto );
+            $this->contacto = str_ireplace('{twitter}', $datos[0]->twitter, $this->contacto );
+            $this->contacto = str_ireplace('{google}', $datos[0]->youtube, $this->contacto );        
             $this->descripcion = $datos[0]->descripcion;
 
             $this->actualizar_diccionarios();
-            
-
-
         }
+        
         
         public function refactory_visitantes($datos){
             
@@ -170,7 +173,6 @@
             $this->seguidores = $complete;
             $this->actualizar_diccionarios();
         }
-                      
         
 
         public function refactory_gustaria($datos){            
@@ -189,9 +191,8 @@
             
             $this->gustaria = $quiere;            
             $this->actualizar_diccionarios();
-            
-            
         }        
+        
         
         public function refactory_ferrocarril(array $datos){  // contruye el ferrocarril
             
@@ -203,7 +204,7 @@
                 
                 $aux = $this->elemento_ferro;                  
                 $aux = str_ireplace("{id_sitio}", $valor->id, $aux);
-                $aux = str_ireplace("{icono}", $valor->tipo, $aux);                
+                $aux = str_ireplace("{icono}", $valor->tipo_sitio, $aux);                
                 $aux = str_ireplace("{nombre}", $valor->nombre, $aux);                
                 $aux = str_ireplace("{imagen}", $valor->imagen, $aux);                                              
                 
@@ -217,11 +218,14 @@
             $this->actualizar_diccionarios();// actualiza los valores del diccionarios de datos
             
         }            
+     
 
-            
-            
+        public function refactory_mapa( $coordenadas ){            
+            $this->latitud = $coordenadas[0]->latitud;
+            $this->longitud = $coordenadas[0]->longitud;                      
+            $this->actualizar_diccionarios();
+        }        
         
-             
         
         public function refactory_contenido(){            
             
@@ -231,18 +235,15 @@
                 
             }           
             $this->actualizar_diccionarios();
-            
-            
         }        
         
         
         public function refactory_total(){
-            
-            
+                        
             $globales = new Global_var();         
             
             foreach ($this->dic_general as $clave=>$valor){
-                    
+                
                 $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
                 
             }
@@ -250,12 +251,8 @@
             foreach ($globales->global_var as $clave => $valor){
                 $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
             }            
-            
-            
+                        
             echo $this->base;
-            
-            
-            
         }
         
 

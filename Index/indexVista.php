@@ -95,10 +95,10 @@
             
             
             for ($i=0; $i<count($datos); $i++){   // construye los elementos del ferrocarril
-                
+                                      
                 $aux = $this->elemento_ferro;                  
                 $aux = str_ireplace("{id_sitio}", $datos[$i]->id, $aux);                
-                $aux = str_ireplace("{icono}", "icon-music", $aux);                
+                $aux = str_ireplace("{icono}", $datos[$i]->tipo_sitio, $aux);                
                 $aux = str_ireplace("{nombre}", $datos[$i]->nombre, $aux);                
                 $aux = str_ireplace("{imagen}", $datos[$i]->imagen, $aux);                                              
                 

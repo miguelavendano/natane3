@@ -7,7 +7,7 @@ require_once('../../core/modeloRelaciones.php');
 
 
 if(isset($_POST['opcion'])){
-    
+
     $band="false";
     $opcion=$_POST['opcion'];
             
@@ -15,9 +15,9 @@ if(isset($_POST['opcion'])){
 
         // Registro de un Usuario
         case "registrarS":                       
-            
+            echo $band;
             $img='humadea.jpg;';
-            $web=$_POST['nombre'].$_POST['apellido'].substr($_POST['apellido'],0,1).".com";
+            $web=$_POST['nombre']."_".substr($_POST['nombre'],0,1).".com";
             $face='http://www.facebook.com/AnDaLaTo';    
             $twit='https://twitter.com/JulianDVarelaP';
             $you='http://www.youtube.com/user/GisoftCo';
@@ -26,21 +26,26 @@ if(isset($_POST['opcion'])){
             $nodo_sitio->nombre = $_POST['nombre'];            
             $nodo_sitio->imagen = $img;
             $nodo_sitio->tipo_sitio = $_POST['tipo'];
-            $nodo_sitio->descripcion = $_POST['desc'];
+            $nodo_sitio->descripcion = $_POST['desc'];                        
             $nodo_sitio->ciudad = $_POST['city'];
             $nodo_sitio->telefono = $_POST['tel'];
             $nodo_sitio->direccion = $_POST['dir'];
             $nodo_sitio->latitud = $_POST['lat'];
             $nodo_sitio->longitud = $_POST['lon'];
-            $nodo_sitio->correo = $_POST['mail'];
-            $nodo_sitio->empresa_web = $_POST['web'];    
+            $nodo_sitio->correo = $_POST['mail'];            
+            /*$nodo_sitio->empresa_web = $_POST['web'];    
             $nodo_sitio->facebook = $_POST['face'];
             $nodo_sitio->twitter = $_POST['twit'];
-            $nodo_sitio->youtube = $_POST['you'];
+            $nodo_sitio->youtube = $_POST['you'];*/
+            $nodo_sitio->empresa_web = $web;
+            $nodo_sitio->facebook = $face;
+            $nodo_sitio->twitter = $twit;
+            $nodo_sitio->youtube = $you;            
             $nodo_sitio->contraseña = $_POST['contra1'];
             $nodo_sitio->type = 'Sitio';
-            ModelUsuarios::crearNodoUsuario($nodo_sitio); //crea el nodo del Usuario 
+            ModelSitios::crearNodoSitio($nodo_sitio); //crea el nodo del Sitio
             
+            $band="";
             $band=$nodo_sitio->id;  //obtengo el id del nodo creado
             $band=$band." true";
             
