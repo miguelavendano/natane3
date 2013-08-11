@@ -78,6 +78,11 @@
 
             return $resultado;                        
         } 
-        
+        /*
+        public function get_coordenadas_mapa(){            
+            $query = "START n=node(".$this->id_sitio.") RETURN n.latitud,n.longitud";
+            $resultado = $this->modelsitios->get_property_mapa($query,"latitud","longitud");
+            return $resultado;                        
+        }      */   
 
     }

@@ -126,7 +126,7 @@ class ModelSitios{
         /*
          * Retorna el valor de la propiedad especificada 
          * Parametros: consulta y propiedad del nodo
-              
+         */              
         public function get_property_sitio($queryString, $propiedad){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
@@ -142,9 +142,9 @@ class ModelSitios{
                 }
                 return $array;
            }
-        }*/
+        }
                 
-        public function get_property_mapa($queryString){
+        public function get_property_mapa($queryString,$latitud,$longitud){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();
@@ -154,15 +154,13 @@ class ModelSitios{
             if($result){
                 foreach($result as $row) {
                     $sitio = new Sitio();
-                    $sitio->latitud = $row['']->getProperty('latitud');
-                    $sitio->longitud = $row['']->getProperty('longitud');                    
+                    $sitio->latitud = $row['']->getProperty($latitud);
+                    $sitio->longitud = $row['']->getProperty($longitud);                    
                     array_push($array, $sitio);
                 }
                 return $array;
-           }        
-           
+           }                   
         }
-
         
         public function get_sitio_aleatorio($queryString, $cant){
             
