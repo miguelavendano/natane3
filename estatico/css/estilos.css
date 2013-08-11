@@ -243,61 +243,6 @@ section{
   font-size: 15px;
   padding-top: 10px;
 }
-/*
-.btn-azul{
-  background-color: hsl(232, 76%, 37%) !important;
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1629a6", endColorstr="#1629a6");
-  background-image: -khtml-gradient(linear, left top, left bottom, from(#1629a6), to(#1629a6));
-  background-image: -moz-linear-gradient(top, #1629a6, #1629a6);
-  background-image: -ms-linear-gradient(top, #1629a6, #1629a6);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1629a6), color-stop(100%, #1629a6));
-  background-image: -webkit-linear-gradient(top, #1629a6, #1629a6);
-  background-image: -o-linear-gradient(top, #1629a6, #1629a6);
-  background-image: linear-gradient(#1629a6, #1629a6);
-  border-color: #1629a6 #1629a6 hsl(232, 76%, 37%);
-  color: #fff !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
-  -webkit-font-smoothing: antialiased; 
-}
-.btn-azul.b-ca{
-  width: 100px;
-  height: 25px;
-  font-size: 15px;
-  padding-top: 10px;
-}
-*/
-/*
-.btn-azul.b-ca{
-  width: 120px;
-  height: 30px;
-  font-size: 15.3px;
-  padding-top: 12px;
-}*/
-
-.btn-verde{
-  background-color: hsl(120, 76%, 37%) !important;
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#16a616", endColorstr="#16a616");
-  background-image: -khtml-gradient(linear, left top, left bottom, from(#16a616), to(#16a616));
-  background-image: -moz-linear-gradient(top, #16a616, #16a616);
-  background-image: -ms-linear-gradient(top, #16a616, #16a616);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #16a616), color-stop(100%, #16a616));
-  background-image: -webkit-linear-gradient(top, #16a616, #16a616);
-  background-image: -o-linear-gradient(top, #16a616, #16a616);
-  background-image: linear-gradient(#16a616, #16a616);
-  border-color: #16a616 #16a616 hsl(120, 76%, 37%);
-  color: #fff !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
-  -webkit-font-smoothing: antialiased;  
-}
-.btn-verde.b-cv{
-  width: 100px;
-  height: 25px;
-  font-size: 15px;
-  padding-top: 10px;
-}
-
 
 @media screen and (max-width:1006px){
   section{

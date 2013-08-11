@@ -6,7 +6,7 @@
                     <div class="span12">
                       <div class="row-fluid">
                         <div class="span3">
-                            <a class="brand" href="#"><img alt="logo" src="{IMG_SYS}/Odin logo2.png"></a>
+                            <a class="brand" href="{URL_INICIO}"><img alt="logo" src="{IMG_SYS}/Odin logo2.png"></a>
                             <!-- <a class="brand" href="#">ODIN-Turismo social</a> -->
                         </div>
 
@@ -19,9 +19,13 @@
                         <div class="span4 busqueda">                            
                             <form class="navbar-form" method="post" enctype="multipart/form-data">                                        
                                 <input type="text" id="LoBusca" name="busca" placeholder="A donde quieres ir ?">
-                                <!--<button type="submit" class="btn btn-azul">Buscar</button>-->
-                                <input type="submit" class="btn btn-blue active" value="buscar" id="Busqueda"> <!-- este es el boton de mostrar -->
+                                <button type="submit" class="btn btn-blue active" id="Busqueda">
+                                    <!--<i class="icon-search"></i>-->
+                                    Buscar
+                                </button> <!-- este es el boton de mostrar -->
                                 <input name="opcion" type="hidden" value="Busqueda" > <!-- este entra en la funcion -->
+                                
+
                             </form>
                         </div>
                         
@@ -32,11 +36,17 @@
                                         <a data-toggle="modal" href="#modalexpe">Compartir Experiencia</a>
                                     </li>
                                     <li>
-                                        <a href="" data-toggle="modal" id="BeditarU">
-                                            <i class="icon-wrench"></i>
-                                                Editar Perfil
+                                        <a href="{URL_INICIO}">
+                                            <!--<i class="icon-screenshot"></i>-->
+                                            Explorar
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="" data-toggle="modal" id="BeditarU">
+                                            <!--<i class="icon-wrench"></i>-->
+                                                Editar Perfil
+                                        </a>
+                                    </li>                                    
                                 </ul>                  
                             </div>
                         </div>
