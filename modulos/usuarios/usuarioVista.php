@@ -16,6 +16,7 @@
         public $expe;
         public $gustaria;
         public $perfil;
+        public $comparte;
         
         public $dic_general;
         public $dic_contenido;
@@ -35,6 +36,8 @@
             $this->usuario = file_get_contents('../../plantillas/usuario/datos_usuario.html');
             $this->editar = file_get_contents('../../plantillas/usuario/editarUsuario.html');
             $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
+            $this->comparte = file_get_contents('../../plantillas/usuario/compartirExperiencia.html');
+            
             
             $this->gustaria = $this->expe;
                      
@@ -67,7 +70,9 @@
                                         'le_gustaria_ir' => $this->gustaria,
                                         'modales'=> $this->modal,
                                         'editarUsuario'=>$this->editar,
-                                        'experiencia'=>$this->expe);
+                                        'experiencia'=>$this->expe,
+                                        'comparteExp'=>$this->comparte
+                                        );
         }
         
         
@@ -83,7 +88,9 @@
                                         'le_gustaria_ir' => $this->gustaria,
                                         'modales'=> $this->modal,
                                         'editarUsuario'=> $this->editar,
-                                        'experiencia'=>$this->expe);           
+                                        'experiencia'=>$this->expe,
+                                        'comparteExp'=>$this->comparte  
+                                        );           
         }
         
         public function refactory_usuario($datos){

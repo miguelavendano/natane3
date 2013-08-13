@@ -1,10 +1,10 @@
 $(document).ready(function(){
-
+      
     /*
      * Registro de un nuevo Usuario
      */
     $("#registrarU").click(function(){
-        if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas         
+        if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas                            
                     $.ajax({
                         url:'/natane3/estatico/php/opcionesUsuario.php'
                         ,type:'POST'                    
@@ -39,13 +39,13 @@ $(document).ready(function(){
                 alert("Las contraseñas no coinciden");
                 }
         });
-        
-        
+
+      
     /*
      * Registro de una experiencia nueva
      */        
     $("#experiencia").click(function(){
-        
+       
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");            
             
@@ -85,7 +85,7 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");            
-
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
@@ -157,13 +157,21 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
-            
+
+/*
+            var dataform=new FormData(document.getElementById('formEditarUsuario'));            
+            console.log(dataform);
+
+            var form = $('#formEditarUsuario').serializeArray();
+            console.log(form);*/
+                 
+
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
-                ,data:{
+                ,data: {
                     opcion: 'guardar_edicionU',                   
-                    usuario: id_url[1],
+                    usuario: id_url[1],         
                     nombre: $("#EnomU").val(),
                     apellido: $("#EapeU").val(),
                     mail: $("#EmailU").val(),                    
@@ -176,8 +184,8 @@ $(document).ready(function(){
                     face: $("#EfaceU").val(),
                     twit: $("#EtwiU").val(),
                     youtube: $("#EyouU").val(),
-                    pass: $("#Epass1U").val()
-                    //imagen: $("#Epass1").val(data.imagen),
+                    imagen: $("#EfotoU").val(),
+                    pass: $("#Epass1U").val()                    
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
@@ -185,26 +193,101 @@ $(document).ready(function(){
                 }
                 ,success: function(data,textStatus,jqXHR){                           
 
-                        if(/true/.test(data)) {                                
-                            alert("Cambios guardados.");
-                            document.location.reload();                                     
+                        if(/true/.test(data)) {                                                            
+                            //document.location.reload();                                     
                         }
                         else alert("No se han podido realizar los cambios");                                                     
                 }
             });                        
     });    
 
+
     /*
      * Cancelar edicion de los datos del usuario
      */
-
-    $("#cancel_edicion_usuario").click(function(){
-        
+    $("#cancel_edicion_usuario").click(function(){        
              $("#editarUsuario").css({display:'none'});   
-             $(".pestañas").css({display:'inline'});                         
-             
+             $(".pestañas").css({display:'inline'});                                      
     });    
-    
+
+
+    /*
+     * Editar datos del Usuarios
+     */
+    $("#BcomparteExp").click(function(){        
+            $("#compartirExperiencia").css({display:'inline'});   
+            $(".pestañas").css({display:'none'});
+            //$("#Enom").val("julian");
+    });
+
+    /*
+     * Crea la relacion "Amigo" entre dos usuarios
+     */   
+    $("#creaExperiencia").click(function(){
+
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");       
+            
+            //var dataform = new FormData(document.getElementById('formExperiencia'));
+            //console.log(dataform);
+            
+            //document.getElementById('imagenes_experiencia').files.length;
+            var imgs = document.getElementById('imagenes_experiencia').files;                
+            console.log(imgs);                           
+                        
+            //var libros = JSON.parse(cadenaLibros);  
+            var dataform = [{'opcion': "experiencia",'titulo': $("#Exptitulo").val(),'descripcion': $("#Expdesc").val(),'autor': id_url[1]} ];
+            console.log(dataform);                           
+            
+            var datos = dataform.concat(imgs);            
+            console.log(datos);                           
+/*
+                $.ajax({
+                   url : 'php/upload.php',
+                   type : 'POST',
+                   data : imgs,
+                   processData : false, 
+                   contentType : false, 
+                   success : function(res){
+                       document.getElementById('response').innerHTML = res;
+                   }                
+                });
+  */          
+
+               $.ajax({
+                    url:'/natane3/estatico/php/opcionesUsuario.php'
+                    ,type:'POST'                    
+                    ,data: datos
+                    /*
+                    ,data:{
+                        opcion:'experiencia',                            
+                        titulo: $("#Exptitulo").val(),
+                        descripcion: $("#Expdesc").val(),
+                        autor: id_url[1]
+                    }*/
+                    ,dataType:'html'
+                    ,beforeSend:function(jqXHR, settings ){
+                        //alert("Se esta creando su experiencia");
+                    }
+                    ,success: function(data,textStatus,jqXHR){                           
+
+                            if(/true/.test(data)) {                                
+                                alert("Experiancia ingresada :D");                                                                          
+                                //document.location.reload();                                     
+                            }
+                            else alert("No se ha podido ingresar su experiencia"); 
+                    }
+                });   
+
+    });
+
+    /*
+     * Cancelar edicion de los datos del usuario
+     */
+    $("#cancelarExperiencia").click(function(){        
+             $("#compartirExperiencia").css({display:'none'});   
+             $(".pestañas").css({display:'inline'});                                      
+    });    
 
     /*
      * Crea la relacion "Amigo" entre dos usuarios

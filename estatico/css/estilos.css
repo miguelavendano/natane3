@@ -122,8 +122,12 @@ section{
   font-size: 12px;
 }
 
-
-
+.img_exp {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 0 5px 10px 0;
+}
+  
 /************************ Modal de notificaciones ************************/
 .notificacion{ 
   margin-bottom: 15px;

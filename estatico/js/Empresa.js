@@ -4,7 +4,7 @@ $(document).ready(function(){
      * Registro de un nuevo Sitio
      */
     $("#registrarE").click(function(){
-        if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas         
+        if($("#Rpass1E").val()==$("#Rpass2E").val()){  //valida contraseñas         
                     $.ajax({
                         url:'/natane3/estatico/php/opcionesSitio.php'
                         ,type:'POST'                    
@@ -35,7 +35,7 @@ $(document).ready(function(){
                             
                             if(/true/.test(data)) {                                
                                 alert("Registro Exitoso  :D");                                                                          
-                                document.location.href="http://localhost/natane3/modulos/usuarios/usuario.php?id="+n[0];
+                                document.location.href="http://localhost/natane3/modulos/empresa/empresa.php?id="+n[0];
                             }
                             else alert("No se ha podido realizar su registro"); 
 

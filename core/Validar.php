@@ -34,8 +34,11 @@ class Validar{
     }
     
     
-    
-    public function validar_id( $id, $caso){  // validar si el id que le pasan si corresponde a una sitio, empresa o usuario
+   
+/*
+ * validar si el ID que le pasan corresponde a una sitio, empresa o usuario
+ */    
+    public function validar_id( $id, $caso){  
         
         $array_ids = array('Empresa', 'Sitio', 'Experiencia', 'Imagen', 'Usuario');
         
@@ -44,27 +47,17 @@ class Validar{
         if(in_array($opcion, $array_ids)){                        
             
             if($opcion == $caso){
-                
-                
-                return 1;                
-                
+                return 1;        
             }else{
-                
-                
                 return 0;
             }
-
+            
         }else{
-            
-            
             return 0;
-        }
-        
-        
+        }        
     }
     
 }
-
 
 
 ?>

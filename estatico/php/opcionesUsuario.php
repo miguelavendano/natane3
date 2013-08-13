@@ -121,7 +121,7 @@ if(isset($_POST['opcion'])){
         break;    
     
         case "guardar_edicionU":                                                                      
-           
+            
             ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['nombre']);
             ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['apellido']);            
             //ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", );         
