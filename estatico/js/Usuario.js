@@ -48,6 +48,7 @@ $(document).ready(function(){
        
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");            
+            var id_user=id_url[1].split("#");  //61#compartirExperiencia         
             
                 $.ajax({
                     url:'/natane3/estatico/php/opcionesUsuario.php'
@@ -56,7 +57,7 @@ $(document).ready(function(){
                         opcion:'experiencia',                            
                         titulo: $("#Exptitulo").val(),
                         descripcion: $("#Expdesc").val(),
-                        autor: id_url[1]
+                        autor: id_user[0]
                     }
                     ,dataType:'html'
                     ,beforeSend:function(jqXHR, settings ){
@@ -84,14 +85,15 @@ $(document).ready(function(){
             //$("#Enom").val("julian");
 
             var mi_url=document.location.href;
-            var id_url=mi_url.split("=");            
+            var id_url=mi_url.split("="); 
+            var id_user=id_url[1].split("#");  //61#compartirExperiencia         
         
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'editarU',                            
-                    autor: id_url[1]                    
+                    autor: id_user[0]                    
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
@@ -157,6 +159,7 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
+            var id_user=id_url[1].split("#");  //61#compartirExperiencia                    
 
 /*
             var dataform=new FormData(document.getElementById('formEditarUsuario'));            
@@ -171,7 +174,7 @@ $(document).ready(function(){
                 ,type:'POST'                    
                 ,data: {
                     opcion: 'guardar_edicionU',                   
-                    usuario: id_url[1],         
+                    usuario: id_user[0],         
                     nombre: $("#EnomU").val(),
                     apellido: $("#EapeU").val(),
                     mail: $("#EmailU").val(),                    
@@ -225,20 +228,20 @@ $(document).ready(function(){
      */   
     $("#creaExperiencia").click(function(){
 
-        alert("crea");
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
+            var id_user=id_url[1].split("#");  //61#compartirExperiencia
             
             var dataform = new FormData(document.getElementById('formExperiencia'));            
             dataform.append( "opcion", "experiencia");            
-            dataform.append( "autor", id_url[1] );
-                        
+            dataform.append( "autor", id_user[0] );
+            
             /*
             //document.getElementById('imagenes_experiencia').files.length;
             var imgs = document.getElementById('imagenes_experiencia').files;                
             console.log(imgs);                           
             */
-
+            
                 $.ajax({
                    url : '/natane3/estatico/php/opcionesUsuario.php',
                    type : 'POST',
@@ -249,41 +252,12 @@ $(document).ready(function(){
 
                             if(/true/.test(data)) {                                
                                 alert("Experiancia ingresada :D");                                                                          
-                                //document.location.reload();                                     
+                                document.location.reload();                                     
                             }
                             else alert("No se ha podido ingresar su experiencia"); 
                     }
                 });
-  
-                      /*
-                    ,data:{
-                        opcion:'experiencia',                            
-                        titulo: $("#Exptitulo").val(),
-                        descripcion: $("#Expdesc").val(),
-                        autor: id_url[1]
-                    }*/
-/*
- *
-               $.ajax({
-                    url:'/natane3/estatico/php/opcionesUsuario.php'
-                    ,type:'POST'                    
-                    ,data: datos
-
-                    ,dataType:'html'
-                    ,beforeSend:function(jqXHR, settings ){
-                        //alert("Se esta creando su experiencia");
-                    }
-                    ,success: function(data,textStatus,jqXHR){                           
-
-                            if(/true/.test(data)) {                                
-                                alert("Experiancia ingresada :D");                                                                          
-                                //document.location.reload();                                     
-                            }
-                            else alert("No se ha podido ingresar su experiencia"); 
-                    }
-                });   
-                */
-
+                
     });
 
     /*
@@ -301,6 +275,7 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
+            var id_user=id_url[1].split("#");  //61#compartirExperiencia
             
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
@@ -308,7 +283,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'relacion_amigo',                   
                     usuario: '2',
-                    amigo: id_url[1]
+                    amigo: id_user[0]
                     //imagen: $("#Epass1").val(data.imagen),
                 }
                 ,dataType:'html'
