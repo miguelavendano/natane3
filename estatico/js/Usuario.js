@@ -225,46 +225,50 @@ $(document).ready(function(){
      */   
     $("#creaExperiencia").click(function(){
 
+        alert("crea");
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
             
-            //var dataform = new FormData(document.getElementById('formExperiencia'));
-            //console.log(dataform);
-            
+            var dataform = new FormData(document.getElementById('formExperiencia'));            
+            dataform.append( "opcion", "experiencia");            
+            dataform.append( "autor", id_url[1] );
+                        
+            /*
             //document.getElementById('imagenes_experiencia').files.length;
             var imgs = document.getElementById('imagenes_experiencia').files;                
             console.log(imgs);                           
-                        
-            //var libros = JSON.parse(cadenaLibros);  
-            var dataform = [{'opcion': "experiencia",'titulo': $("#Exptitulo").val(),'descripcion': $("#Expdesc").val(),'autor': id_url[1]} ];
-            console.log(dataform);                           
-            
-            var datos = dataform.concat(imgs);            
-            console.log(datos);                           
-/*
+            */
+
                 $.ajax({
-                   url : 'php/upload.php',
+                   url : '/natane3/estatico/php/opcionesUsuario.php',
                    type : 'POST',
-                   data : imgs,
+                   data : dataform,
                    processData : false, 
                    contentType : false, 
-                   success : function(res){
-                       document.getElementById('response').innerHTML = res;
-                   }                
-                });
-  */          
+                   success: function(data,textStatus,jqXHR){                           
 
-               $.ajax({
-                    url:'/natane3/estatico/php/opcionesUsuario.php'
-                    ,type:'POST'                    
-                    ,data: datos
-                    /*
+                            if(/true/.test(data)) {                                
+                                alert("Experiancia ingresada :D");                                                                          
+                                //document.location.reload();                                     
+                            }
+                            else alert("No se ha podido ingresar su experiencia"); 
+                    }
+                });
+  
+                      /*
                     ,data:{
                         opcion:'experiencia',                            
                         titulo: $("#Exptitulo").val(),
                         descripcion: $("#Expdesc").val(),
                         autor: id_url[1]
                     }*/
+/*
+ *
+               $.ajax({
+                    url:'/natane3/estatico/php/opcionesUsuario.php'
+                    ,type:'POST'                    
+                    ,data: datos
+
                     ,dataType:'html'
                     ,beforeSend:function(jqXHR, settings ){
                         //alert("Se esta creando su experiencia");
@@ -278,6 +282,7 @@ $(document).ready(function(){
                             else alert("No se ha podido ingresar su experiencia"); 
                     }
                 });   
+                */
 
     });
 

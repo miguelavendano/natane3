@@ -1,33 +1,33 @@
 $(document).ready(function(){
-  function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
+    
+        function vistaPreviaImagenes(evt) {
+          var files = evt.target.files; // FileList object
+          var id=0;
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
 
-    // Loop through the FileList and render image files as thumbnails.
-    for (var i = 0, f; f = files[i]; i++) {
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+            
+                var reader = new FileReader();
 
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        continue;
-      }
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                    // Render thumbnail.
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="img_exp" id="myimg',id++,'"src="', e.target.result,
+                                      '" title="', escape(theFile.name), '"/>'].join('');
+                    document.getElementById('list_img_exp').insertBefore(span, null);
+                  };
+                })(f);
 
-      var reader = new FileReader();
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
 
-      // Closure to capture the file information.
-      reader.onload = (function(theFile) {
-        return function(e) {
-          // Render thumbnail.
-          var span = document.createElement('span');
-          span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                            '" title="', escape(theFile.name), '"/>'].join('');
-          document.getElementById('list').insertBefore(span, null);
-        };
-      })(f);
-
-      // Read in the image file as a data URL.
-      reader.readAsDataURL(f);
-    }
-  }
-
-  document.getElementById('files_experiencia').addEventListener('change', handleFileSelect, false);
+        document.getElementById('imagenes_experiencia').addEventListener('change', vistaPreviaImagenes, false);
 
 });

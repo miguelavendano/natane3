@@ -68,26 +68,44 @@ if(isset($_POST['opcion'])){
         break;
 
         case "experiencia":                       
-            
+             /*            
             $nodo_experiencia = new Experiencia();
-            $nodo_experiencia->nombre = $_POST['titulo'];
-            $nodo_experiencia->descripcion = $_POST['descripcion'];
+            $nodo_experiencia->nombre = $_POST['Exptitulo'];
+            $nodo_experiencia->descripcion = $_POST['Expdesc'];;
             $nodo_experiencia->type = 'Experiencia';            
             ModelExperiencia::crearNodoExperiencia($nodo_experiencia);  //crea el nodo de la experiencia
             
             $id_exp = $nodo_experiencia->id;  //obtengo el id del nodo creado                                    
             ModeloRelaciones::crearRelacion($_POST['autor'], $id_exp, "Comparte");   //crea la relacion entre el autor y la experiencia
+*/
+            
+            $upload_folder ='../../estatico/imagenes/';
 
+            foreach($_FILES['imagenes_experiencia']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    //alamaceno la imagen
+                    $nombre_archivo = $_FILES["imagenes_experiencia"]['name'][$key];
+                    $tmp_archivo = $_FILES["imagenes_experiencia"]['tmp_name'][$key];            
+                    //$tipo_archivo = $_FILES["imagenes_experiencia"]['type'][$key];
+                    //$tamano_archivo = $_FILES["imagenes_experiencia"]['size'][$key];
+                    //almaceno la imagen en la carpeta del servidor
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nombre_archivo);                    
+/*
+                    //crea el nodo de cada una de las imagenes
+                    $nodo_imagen = new Imagen();
+                    $nodo_imagen->nombre = $nombre_archivo;
+                    $nodo_imagen->descripcion = "";
+                    $nodo_imagen->comentario1 = "";
+                    $nodo_imagen->type = 'Imagen';  
+                    ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
+
+                    $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
+                    ModeloRelaciones::crearRelacion($id_exp, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
+                    */
+                }
+            }
+            
             /*
-            $nodo_imagen = new Imagen();
-            $nodo_imagen->nombre = $_POST['nom_img'];
-            $nodo_imagen->descripcion = $_POST['desc_img'];
-            $nodo_imagen->comentario1 = "";
-            $nodo_imagen->type = 'Imagen';  
-            ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
-
-            $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
-            ModeloRelaciones::crearRelacion($id_exp, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
             */
             $band="true";
             
