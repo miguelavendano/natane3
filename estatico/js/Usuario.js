@@ -208,7 +208,7 @@ $(document).ready(function(){
     /*
      * Cancelar edicion de los datos del usuario
      */
-    $("#cancel_edicion_usuario").click(function(){        
+    $(".cancel_edicion_usuario").click(function(){        
              $("#editarUsuario").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
     });    
@@ -257,18 +257,115 @@ $(document).ready(function(){
                             }
                             else alert("No se ha podido ingresar su experiencia"); 
                     }
-                });
-                
+                });                
     });
 
 
     /*
-     * Cancelar edicion de los datos del usuario
+     * Cancelar creacino de una experiencia
      */
-    $("#cancelarExperiencia").click(function(){        
+    $(".cancelarExperiencia").click(function(){        
              $("#compartirExperiencia").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
     });    
+    
+    
+    /*
+     * Modifica la informacion de una experiencia
+     */   
+    $(".modifica_exp").click(function(){
+
+            $("#compartirExperiencia").css({display:'inline'});   
+            $(".pestañas").css({display:'none'});
+            //$("#Enom").val("julian");
+
+            id_exp=$(".info_exp").parent().attr('id');
+/*            
+            //elimino boton de compartir
+            var BcreaExp = document.getElementById("creaExperiencia");
+            BcreaExp.parentNode.removeChild(BcreaExp);            
+*/
+            document.getElementById("edita_crea_Exp").innerHTML = "Edita tu Experiencia";
+            
+  
+            var botonera = document.getElementById("botones_exp")
+            //botonera.innerHTML = ['<a class="btn btn-blue" id="guarda_edicionExp">Guardar</a>'];            
+            botonera.innerHTML = ['<a class="btn btn-blue" id="guarda_edicionExp">Guardar</a> <a class="btn btn-red cancelarExperiencia">Cerrar</a>'];
+        
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'editarExp',                            
+                    experiencia: id_exp                    
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+
+                    $("#reload").css({visibility: 'visible',
+                                        opacity:'1',
+                                        position: 'fixed',
+                                        top: '200px',
+                                        right: '50px',
+                                        left: '50px',
+                                        width: 'auto',
+                                        margin: '0 auto'
+                                    });   
+                    
+                    $(".reload-backdrop").css({ position: 'fixed',
+                                                top: '0',
+                                                right: '0',
+                                                bottom: '0',
+                                                left: '0',
+                                                zIindex: '99999',
+                                                background: '#000000',
+                                                opacity:'0.4'
+                                            });                  
+                   
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                    $("#reload").css({visibility: 'hidden'});   
+                    $(".reload-backdrop").css({visibility: 'hidden'});                    
+                    $("#imagenes_experiencia").css({display: 'none'});                    
+                    
+                    
+                    $("#Exptitulo").val(data.nombre);
+                    $("#Expdesc").val(data.descripcion);
+                    //$("#Eimagen").val(data.imagen);                        
+                }
+            });            
+                
+    });
+
+    /*
+     * Eliminar una experiencia
+     */   
+    $(".elimina_exp").click(function(){
+
+            id_exp=$(".info_exp").parent().attr('id');
+        
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'eliminarExp',                            
+                    experiencia: id_exp[0]                    
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                            if(/true/.test(data)) {                                
+                                alert("Experiancia Eliminada :D");                                                                          
+                                //document.location.reload();                                     
+                            }
+                            else alert("No se ha podido eliminar su experiencia"); 
+                }
+            });            
+                
+    });
 
 
     /*

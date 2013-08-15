@@ -43,7 +43,14 @@ class ModelExperiencia{
                 
 	}  
         
-        
+	//funcion que edita una propiedad de un usuario y si no existe la crea
+	public static function editar_experiencia($idnodo, $propiedad, $detalle){
+		//Obtengo toda la informacion del nodo
+		$editar = Neo4Play::client()->getNode($idnodo);
+		//edita la propiedad y si no existe la crea
+		$editar->setProperty($propiedad,$detalle)
+		    	->save();
+	}              
 
         public function get_exper_usuario($queryString){
             
@@ -90,7 +97,6 @@ class ModelExperiencia{
 
         
         
-        
         public function get_experiencias($queryString){
             
             
@@ -114,7 +120,8 @@ class ModelExperiencia{
                         $experiencia->imagen= $res[0]->offsetGet('');
                         //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
                     }else{
-                        $experiencia->imagen= "no hay";}
+                        $experiencia->imagen= "no hay";                        
+                        }
                     
                     $experiencia->nombre = $row['']->getProperty('nombre');
                     $experiencia->descripcion = $row['']->getProperty('descripcion');

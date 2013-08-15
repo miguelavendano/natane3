@@ -1,8 +1,8 @@
         <!-- Compartir Experiencia-->
         <div id="compartirExperiencia" style="display: none">
             <legend>
-                <a class="close" id="cancelarExperiencia">&times;</a>            
-                <h3>Comparte tu Experiencia</h3>                
+                <a class="close cancelarExperiencia">&times;</a>            
+                <h3 id="edita_crea_Exp">Comparte tu Experiencia</h3>                
             </legend>                             
             <form class="form-horizontal" id="formExperiencia" method=post enctype=multipart/form-data>              
                 <div class="row-fluid">
@@ -31,9 +31,9 @@
                         </div>                  
                     </div>
                 </div>                                
-                <div class="control-group">                  
+                <div id="botones_exp" class="control-group">                  
                     <a class="btn btn-blue" id="creaExperiencia">Compartir</a>
-                    <a class="btn btn-red" id="cancelarExperiencia">Cerrar</a>                            
+                    <a class="btn btn-red cancelarExperiencia">Cerrar</a>                            
                 </div>                
             </form>        
         </div>

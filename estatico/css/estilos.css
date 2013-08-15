@@ -97,7 +97,6 @@ section{
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  cursor: pointer;
 }
 .experiencia .im_exp{
   padding-left: 10px;
@@ -111,24 +110,21 @@ section{
 .experiencia .info_exp{
    margin: 5px 0 0 10px; 
    border: solid 1px #43E312;
-}
-.experiencia .info_exp h4{
-  margin: 8px 0px 5px 20px; 
 }*/
+.experiencia .info_exp h4{
+    color: #0088cc;    
+}
 .experiencia .info_exp p{
   margin-top: 0px;
   font: 13px Arial;
 }
-/*
-#opc_exp{
-    border: solid 1px #43E312;
-    width: 100%;
-    overflow: hidden;
-}   */
-#opc_exp li{
-    display: inline;
-    margin: 0;
-}
+
+.opc_exp button{
+    float: right;
+    padding: 5px;
+    margin-left: 5px;
+} 
+
 
 /* **************************CIRCULOS MENU************************** */
 /*

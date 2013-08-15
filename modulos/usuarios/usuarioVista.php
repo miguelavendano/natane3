@@ -149,6 +149,7 @@
             
             foreach ($datos as $valor){
                 $aux = $this->expe;
+                $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
                 $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
                 $aux = str_ireplace('{comentario}', $valor->descripcion, $aux);
