@@ -153,7 +153,6 @@ if(isset($_POST['opcion'])){
 
         case "editarExp":                       
             
-            $modelusuarios = new ModelUsuarios();            
             $modelexperiencia = new ModelExperiencia();
             $query = "START n=node(".$_POST['experiencia'].") RETURN n";                        
             $resultado = $modelexperiencia->get_experiencias($query);
@@ -166,7 +165,7 @@ if(isset($_POST['opcion'])){
            $band = json_encode($band);
             
         break;    
-    
+
         case "guardar_edicionExp":                                                                      
             
             ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['titulo']);
@@ -176,19 +175,10 @@ if(isset($_POST['opcion'])){
         break;        
 
         case "eliminarExp":                       
-            /*
-            $modelusuarios = new ModelUsuarios();            
-            $query = "START n=node(".$_POST['experiencia'].") RETURN n";                        
-            $resultado = $modelusuarios->get_usuario($query);
-
-            $band = array(
-                "nombre"=> $resultado[0]->nombre,
-                "descripcion"=> $resultado[0]->apellido
-            );
-                        
-           $band = json_encode($band);
-            */
-            $band = "true";
+            
+            //ModelExperiencia::eliminar_experiencia($_POST['experiencia']);
+            ModelExperiencia::relacionesExperiencia($_POST['experiencia'],'Img');
+           
         break;    
     
         case "relacion_amigo":                       

@@ -42,8 +42,10 @@ class ModelExperiencia{
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
 	}  
-        
-	//funcion que edita una propiedad de un usuario y si no existe la crea
+
+        /*
+         * Funcion que edita una propiedad de una experiencia y si no existe la crea
+         */        
 	public static function editar_experiencia($idnodo, $propiedad, $detalle){
 		//Obtengo toda la informacion del nodo
 		$editar = Neo4Play::client()->getNode($idnodo);
@@ -52,6 +54,17 @@ class ModelExperiencia{
 		    	->save();
 	}              
 
+        /*
+         * Funcion para Eliminara el nodo de una experiencia
+         */
+	public static function eliminar_experiencia($idnodo)
+	{
+		//Obtengo toda la informacion del nodo
+		$eliminar = Neo4Play::client()->getNode($idnodo);
+		//elimina el nodo
+		$eliminar->delete();			    	
+	}
+        
         public function get_exper_usuario($queryString){
             
             
@@ -137,8 +150,7 @@ class ModelExperiencia{
         
         
         public function get_imagenes_galeria($queryString){
-            
-           
+                       
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $imagen = $query->getResultSet();                                  
             
@@ -160,14 +172,21 @@ class ModelExperiencia{
 
 
                 array_push($img_galeria, $retorno);
-
-
             }    
-
-            return $img_galeria;
-            
-            
+            return $img_galeria;                      
         }
+        
+        /*
+         * Consulta todas las relaciones segun un tipo especifico
+         * recibe el nodo de la experiencia y el tiipo de relacion
+         */
+	public static function relacionesExperiencia($idNodo,$tipoRelacion)
+	{
+		$miNodo = Neo4Play::client()->getNode($idNodo);
+		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
+
+                echo $relaciones;
+	}        
         
         
 }

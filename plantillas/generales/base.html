@@ -69,7 +69,7 @@
                   return function(e) {
                     // Render thumbnail.
                     var span = document.createElement('span');
-                    span.innerHTML = ['<img class="img_exp" id="myimg',id++,'"src="', e.target.result,
+                    span.innerHTML = ['<img class="vista_imgExp" id="myimg',id++,'"src="', e.target.result,
                                       '" title="', escape(theFile.name), '"/>'].join('');
                     document.getElementById('list_img_exp').insertBefore(span, null);
                   };
