@@ -7,9 +7,13 @@ header .botones{
 }
 
 body{
-	background-color: #F3F3F3;
+    background-color: #F3F3F3;
+    /*background-image: url("../img/fondo2.jpg");*/
 }
 
+.opcionBarra{
+    cursor: pointer;
+}
 section{
 	float: inherit;
   max-width: 1100px;
@@ -97,37 +101,97 @@ section{
 }
 .experiencia .im_exp{
   padding-left: 10px;
-/*padding-right: 25px;  */
   height: 125px;  
-  margin-bottom: 10px;
-  float: left;      
-  margin: 0 auto;
+  margin: 5px 0 5px 0;
 }
-
-
 .experiencia .im_exp img{
   margin: 0 auto;
   height: 100%;
+}/*
+.experiencia .info_exp{
+   margin: 5px 0 0 10px; 
+   border: solid 1px #43E312;
 }
-
-/* .experiencia .info_exp{
-  border: 1px solid blue;
-} */
 .experiencia .info_exp h4{
-  margin: 5px 0px 5px 20px; 
-}
+  margin: 8px 0px 5px 20px; 
+}*/
 .experiencia .info_exp p{
   margin-top: 0px;
-  font: Arial;
-  font-size: 12px;
+  font: 13px Arial;
+}
+/*
+#opc_exp{
+    border: solid 1px #43E312;
+    width: 100%;
+    overflow: hidden;
+}   */
+#opc_exp li{
+    display: inline;
+    margin: 0;
 }
 
-.img_exp {
-    height: 75px;
-    border: 1px solid #000;
-    margin: 0 5px 10px 0;
+/* **************************CIRCULOS MENU************************** */
+/*
+.menu{
+width: 100%;
+overflow:hidden;
 }
-  
+
+.menu ul{
+margin: 0;
+padding: 0;
+font: bold 14px Verdana;
+list-style-type: none;
+text-align: center;
+}
+
+.menu li{
+display: inline;
+margin: 0;
+}
+
+.menu li a{
+    cursor: pointer;
+    display:inline-block;
+    text-align:center;
+    text-decoration: none;
+    color: white;
+    background: #232020;
+    margin: 0;
+    margin-right:5px; 
+    width:100px;
+    height:100px;
+    border-radius: 400px;
+    -moz-border-radius: 400px;
+    -webkit-border-radius: 400px;
+}
+.menu a .circle{ 
+    width: 90px;
+    height: 90px;
+    background: #8E8787; 
+    -moz-border-radius: 70px; 
+    -webkit-border-radius: 70px; 
+    border-radius: 70px;
+    position: relative;
+    top:5%;
+    left: 5%;
+}
+.menu a span{
+    position:relative;
+    top:40%;
+}
+.menu li a:visited{
+    color: white;
+}
+.menu a:hover{
+    opacity: .5;
+    -webkit-transition: opacity .5s ease;
+    -moz-transition: opacity .5s ease;
+    transition: opacity .5s ease;
+    cursor:pointer;
+}
+*/
+
 /************************ Modal de notificaciones ************************/
 .notificacion{ 
   margin-bottom: 15px;

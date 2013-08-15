@@ -174,7 +174,7 @@ $(document).ready(function(){
                 ,type:'POST'                    
                 ,data: {
                     opcion: 'guardar_edicionU',                   
-                    usuario: id_user[0],         
+                    usuario: id_user[0],   
                     nombre: $("#EnomU").val(),
                     apellido: $("#EapeU").val(),
                     mail: $("#EmailU").val(),                    
@@ -223,6 +223,7 @@ $(document).ready(function(){
             //$("#Enom").val("julian");
     });
 
+
     /*
      * Crea la relacion "Amigo" entre dos usuarios
      */   
@@ -260,6 +261,7 @@ $(document).ready(function(){
                 
     });
 
+
     /*
      * Cancelar edicion de los datos del usuario
      */
@@ -267,6 +269,7 @@ $(document).ready(function(){
              $("#compartirExperiencia").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
     });    
+
 
     /*
      * Crea la relacion "Amigo" entre dos usuarios
