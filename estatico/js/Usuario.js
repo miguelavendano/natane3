@@ -101,7 +101,7 @@ $(document).ready(function(){
                         $("#EfaceU").val(data.face);
                         $("#EtwiU").val(data.twi);
                         $("#EyouU").val(data.you);
-                        //$("#Eimagen").val(data.imagen);
+                        $("#foto_perfil").val(data.imagen);
                         
                         if(data.genero=="Masculino"){                            
                             $("#EgeneroM").attr("checked",true);                            
@@ -151,8 +151,9 @@ $(document).ready(function(){
                     face: $("#EfaceU").val(),
                     twit: $("#EtwiU").val(),
                     youtube: $("#EyouU").val(),
-                    imagen: $("#EfotoU").val(),
-                    pass: $("#Epass1U").val()                    
+                    imagen: $("#foto_perfil").val(),
+                    pass: $("#Epass1U").val()
+                    
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){

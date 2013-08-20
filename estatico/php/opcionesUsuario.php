@@ -85,11 +85,23 @@ if(isset($_POST['opcion'])){
             
         break;    
     
-        case "guardar_edicionU":                                                                      
+        case "guardar_edicionU":       
             
+            $upload_folder ='../../estatico/imagenes/';
+            $nombre_archivo = $_FILES['imagen']['name'];
+            $tmp_archivo = $_FILES['imagen']['tmp_name'];            
+            //$tipo_archivo = $_FILES['imagen']['type'];
+            //$tamano_archivo = $_FILES['imagen']['size'];
+            
+            echo $nombre_archivo;
+            $nomFofoPerfil = $_POST['usuario'].'_'.$nombre_archivo;
+            echo $nomFofoPerfil;
+
+            move_uploaded_file($tmp_archivo, $upload_folder.$nomFofoPerfil);   //guarda la imagen
+                    
             ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['nombre']);
             ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['apellido']);            
-            //ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", );         
+            //ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", $nomFofoPerfil);         
             ModelUsuarios::editar_usuario($_POST['usuario'], "nick", $_POST['nick']);            
             ModelUsuarios::editar_usuario($_POST['usuario'], "genero",$_POST['genero']);
             ModelUsuarios::editar_usuario($_POST['usuario'], "fecha_nacimiento", $_POST['f_nace']);
@@ -126,8 +138,8 @@ if(isset($_POST['opcion'])){
                     $tmp_archivo = $_FILES["imagenes_experiencia"]['tmp_name'][$key];            
                     //$tipo_archivo = $_FILES["imagenes_experiencia"]['type'][$key];
                     //$tamano_archivo = $_FILES["imagenes_experiencia"]['size'][$key];
-                    //almaceno la imagen en la carpeta del servidor
-                    
+
+                    //almaceno la imagen en la carpeta del servidor                    
                     $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$nombre_archivo;
                     
                     move_uploaded_file($tmp_archivo, $upload_folder.$nomImgExpUser);   //guarda la imagen
