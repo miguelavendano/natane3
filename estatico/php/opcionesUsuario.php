@@ -134,7 +134,7 @@ if(isset($_POST['opcion'])){
 
                     //crea el nodo de cada una de las imagenes
                     $nodo_imagen = new Imagen();
-                    $nodo_imagen->nombre = $nombre_archivo;
+                    $nodo_imagen->nombre = $nomImgExpUser;
                     $nodo_imagen->descripcion = "";
                     $nodo_imagen->comentario1 = "";
                     $nodo_imagen->type = 'Imagen';  
@@ -174,12 +174,33 @@ if(isset($_POST['opcion'])){
             
         break;        
 
-        case "eliminarExp":                       
+        case "eliminarExp":   
+
             
-            //ModelExperiencia::eliminar_experiencia($_POST['experiencia']);
-            ModelExperiencia::relacionesExperiencia($_POST['experiencia'],'Img');
+            
+            //elimino la relacion entre la experiencia y las imagenes
+            $modeloexperiencia = new ModelExperiencia();            
+            
+            // obtengo los id de las relaciones Img-Experiencia (Img) y luego las elimino
+            $ids_relacionImgExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Img");
+            $modeloexperiencia->eliminar_relacion_experiencia($ids_relacionImgExp); 
+                        
+            // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino            
+            $query = "START n=node(".$_POST['experiencia'].") MATCH n-[:Img]->i RETURN i;";
+            $ids_nodoImgExp = $modeloexperiencia->get_id_nodoImgExp($query);
+            $modeloexperiencia->eliminar_nodos_ImgExp($ids_nodoImgExp);
+            
+            // obtengo el id de la relacion Autor-Experiencia (Comparte) y luego la elimino
+            $id_relacionUserExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Comparte");
+            $modeloexperiencia->eliminar_relacion_experiencia($id_relacionUserExp); 
+            
+            // elimino el nodo de la experiencia
+            ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia
            
+            $band="true";
+            
         break;    
+    
     
         case "relacion_amigo":                       
             
