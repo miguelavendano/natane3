@@ -40,41 +40,6 @@ $(document).ready(function(){
                 }
         });
 
-      
-    /*
-     * Registro de una experiencia nueva
-     */        
-    $("#experiencia").click(function(){
-       
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");            
-            var id_user=id_url[1].split("#");  //61#compartirExperiencia         
-            
-                $.ajax({
-                    url:'/natane3/estatico/php/opcionesUsuario.php'
-                    ,type:'POST'                    
-                    ,data:{
-                        opcion:'experiencia',                            
-                        titulo: $("#Exptitulo").val(),
-                        descripcion: $("#Expdesc").val(),
-                        autor: id_user[0]
-                    }
-                    ,dataType:'html'
-                    ,beforeSend:function(jqXHR, settings ){
-                        //alert("Se esta creando su experiencia");
-                    }
-                    ,success: function(data,textStatus,jqXHR){                           
-
-                            if(/true/.test(data)) {                                
-                                alert("Experiancia ingresada :D");                                                                          
-                                document.location.reload();                                     
-                            }
-                            else alert("No se ha podido ingresar su experiencia"); 
-                    }
-                });          
-        });
-
-
     /*
      * Editar datos del Usuarios
      */
@@ -151,7 +116,6 @@ $(document).ready(function(){
             
     });
 
-
     /*
      * Guardar edicion de los datos del usuario
      */
@@ -204,7 +168,6 @@ $(document).ready(function(){
             });                        
     });    
 
-
     /*
      * Cancelar edicion de los datos del usuario
      */
@@ -213,9 +176,41 @@ $(document).ready(function(){
              $(".pestañas").css({display:'inline'});                                      
     });    
 
+    /*
+     * Registro de una experiencia nueva
+     */        
+    $("#experiencia").click(function(){
+       
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");            
+            var id_user=id_url[1].split("#");  //61#compartirExperiencia         
+            
+                $.ajax({
+                    url:'/natane3/estatico/php/opcionesUsuario.php'
+                    ,type:'POST'                    
+                    ,data:{
+                        opcion:'experiencia',                            
+                        titulo: $("#Exptitulo").val(),
+                        descripcion: $("#Expdesc").val(),
+                        autor: id_user[0]
+                    }
+                    ,dataType:'html'
+                    ,beforeSend:function(jqXHR, settings ){
+                        //alert("Se esta creando su experiencia");
+                    }
+                    ,success: function(data,textStatus,jqXHR){                           
+
+                            if(/true/.test(data)) {                                
+                                alert("Experiancia ingresada :D");                                                                          
+                                document.location.reload();                                     
+                            }
+                            else alert("No se ha podido ingresar su experiencia"); 
+                    }
+                });          
+        });
 
     /*
-     * Editar datos del Usuarios
+     * Muestra la interfaz de compartir experiencia
      */
     $("#BcomparteExp").click(function(){        
             $("#compartirExperiencia").css({display:'inline'});   
@@ -223,9 +218,8 @@ $(document).ready(function(){
             //$("#Enom").val("julian");
     });
 
-
     /*
-     * Crea la relacion "Amigo" entre dos usuarios
+     * Crea la experiencia del usuario
      */   
     $("#creaExperiencia").click(function(){
 
@@ -237,6 +231,7 @@ $(document).ready(function(){
             dataform.append( "opcion", "experiencia");            
             dataform.append( "autor", id_user[0] );
             
+            $("#imagenes_experiencia").css({display: 'none'});                    
             /*
             //document.getElementById('imagenes_experiencia').files.length;
             var imgs = document.getElementById('imagenes_experiencia').files;                
@@ -266,31 +261,17 @@ $(document).ready(function(){
     $(".cancelarExperiencia").click(function(){        
              $("#compartirExperiencia").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
-    });    
-    
-    
+    });        
+  
     /*
      * Modifica la informacion de una experiencia
-     */   
+     */
     $(".modifica_exp").click(function(){
 
-            $("#compartirExperiencia").css({display:'inline'});   
+            $("#editarExperiencia").css({display:'inline'});   
             $(".pestañas").css({display:'none'});
-            //$("#Enom").val("julian");
+            var id_exp = $(".info_exp").parent().attr('id');
 
-            var id_exp=$(".info_exp").parent().attr('id');
-/*            
-            //elimino boton de compartir
-            var BcreaExp = document.getElementById("creaExperiencia");
-            BcreaExp.parentNode.removeChild(BcreaExp);            
-*/
-            document.getElementById("edita_crea_Exp").innerHTML = "Edita tu Experiencia";
-            
-  
-            var botonera = document.getElementById("botones_exp")
-            //botonera.innerHTML = ['<a class="btn btn-blue" id="guarda_edicionExp">Guardar</a>'];            
-            botonera.innerHTML = ['<button class="btn btn-blue" id="guarda_edicionExp">Guardar</button> <button class="btn btn-red cancelarExperiencia">Cerrar</button>'];
-        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
@@ -325,18 +306,23 @@ $(document).ready(function(){
                 ,success: function(data,textStatus,jqXHR){                           
                     
                     $("#reload").css({visibility: 'hidden'});   
-                    $(".reload-backdrop").css({visibility: 'hidden'});                    
-                    $("#imagenes_experiencia").css({display: 'none'});                    
-                    
-                    
-                    $("#Exptitulo").val(data.nombre);
-                    $("#Expdesc").val(data.descripcion);
+                    $(".reload-backdrop").css({visibility: 'hidden'});                                     
+                   
+                    $("#ediExptitulo").val(data.nombre);
+                    $("#ediExpdesc").val(data.descripcion);
                     //$("#Eimagen").val(data.imagen);                        
                 }
-            });            
-                
+            });                            
     });
 
+    /*
+     * Cancelar creacino de una experiencia
+     */
+    $(".cancelEdiExp").click(function(){        
+             $("#editarExperiencia").css({display:'none'});   
+             $(".pestañas").css({display:'inline'});                                      
+    });  
+    
     /*
      * Guardar edicion de la experiencia
      */
@@ -349,9 +335,9 @@ $(document).ready(function(){
                 ,type:'POST'                    
                 ,data: {
                     opcion: 'guardar_edicionExp',                   
-                    usuario: id_exp,   
-                    titulo: $("#Exptitulo").val(),
-                    descripcion: $("#Expdesc").val()
+                    experiencia: id_exp,   
+                    titulo: $("#ediExptitulo").val(),
+                    descripcion: $("#ediExpdesc").val()
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
@@ -393,8 +379,7 @@ $(document).ready(function(){
                             }
                             else alert("No se ha podido eliminar su experiencia"); 
                 }
-            });            
-                
+            });                            
     });
 
 
@@ -468,8 +453,6 @@ $(document).ready(function(){
         else{
             alert("no se pudo iniciar sesion, intente ingresando con su cuenta de facebook")
         }
-          
-
     });
     
 

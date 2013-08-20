@@ -17,6 +17,7 @@
         public $gustaria;
         public $perfil;
         public $comparte;
+        public $editExp;
         
         public $dic_general;
         public $dic_contenido;
@@ -37,6 +38,8 @@
             $this->editar = file_get_contents('../../plantillas/usuario/editarUsuario.html');
             $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
             $this->comparte = file_get_contents('../../plantillas/usuario/compartirExperiencia.html');
+            $this->editExp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');
+            
             
             
             $this->gustaria = $this->expe;
@@ -71,7 +74,8 @@
                                         'modales'=> $this->modal,
                                         'editarUsuario'=>$this->editar,
                                         'experiencia'=>$this->expe,
-                                        'comparteExp'=>$this->comparte
+                                        'comparteExp'=>$this->comparte,
+                                        'editaExp'=>$this->editExp
                                         );
         }
         
@@ -89,7 +93,8 @@
                                         'modales'=> $this->modal,
                                         'editarUsuario'=> $this->editar,
                                         'experiencia'=>$this->expe,
-                                        'comparteExp'=>$this->comparte  
+                                        'comparteExp'=>$this->comparte,
+                                        'editaExp'=>$this->editExp                    
                                         );           
         }
         

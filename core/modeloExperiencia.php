@@ -124,7 +124,7 @@ class ModelExperiencia{
                     }
                     return $id_relaciones;
                 }			
-		//else echo "El nodo <b>NO</b> tiene relaciones";
+		else return null;//echo "El nodo <b>NO</b> tiene relaciones";
 	}	
         
         

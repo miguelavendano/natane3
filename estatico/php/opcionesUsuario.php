@@ -167,35 +167,38 @@ if(isset($_POST['opcion'])){
         break;    
 
         case "guardar_edicionExp":                                                                      
-            
+
             ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['titulo']);
-            ModelExperiencia::editar_experiencia($_POST['usuario'], "descripcion", $_POST['descripcion']);            
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['descripcion']);            
             $band="true";
             
         break;        
 
         case "eliminarExp":   
-
-            
             
             //elimino la relacion entre la experiencia y las imagenes
             $modeloexperiencia = new ModelExperiencia();            
             
-            // obtengo los id de las relaciones Img-Experiencia (Img) y luego las elimino
+            // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino
             $ids_relacionImgExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Img");
-            $modeloexperiencia->eliminar_relacion_experiencia($ids_relacionImgExp); 
+            
+            if($ids_relacionImgExp){
+                $modeloexperiencia->eliminar_relacion_experiencia($ids_relacionImgExp);     
+                
+                // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino            
+                $query = "START n=node(".$_POST['experiencia'].") MATCH n-[:Img]->i RETURN i;";
+                $ids_nodoImgExp = $modeloexperiencia->get_id_nodoImgExp($query);
+                $modeloexperiencia->eliminar_nodos_ImgExp($ids_nodoImgExp);
+            }
                         
-            // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino            
-            $query = "START n=node(".$_POST['experiencia'].") MATCH n-[:Img]->i RETURN i;";
-            $ids_nodoImgExp = $modeloexperiencia->get_id_nodoImgExp($query);
-            $modeloexperiencia->eliminar_nodos_ImgExp($ids_nodoImgExp);
-            
-            // obtengo el id de la relacion Autor-Experiencia (Comparte) y luego la elimino
+            // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
             $id_relacionUserExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Comparte");
-            $modeloexperiencia->eliminar_relacion_experiencia($id_relacionUserExp); 
-            
-            // elimino el nodo de la experiencia
-            ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia
+            if($id_relacionUserExp){
+                $modeloexperiencia->eliminar_relacion_experiencia($id_relacionUserExp); 
+
+                // elimino el nodo de la experiencia
+                ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                
+            }
            
             $band="true";
             
