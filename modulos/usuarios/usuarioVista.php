@@ -12,9 +12,12 @@
 
         public $segui;
         public $usuario;
+        public $editar;
         public $expe;
         public $gustaria;
         public $perfil;
+        public $comparte;
+        public $editExp;
         
         public $dic_general;
         public $dic_contenido;
@@ -25,15 +28,19 @@
         public function __construct() {
             
             $this->base = file_get_contents('../../plantillas/generales/base.html');
-            $this->head = file_get_contents('../../plantillas/generales/head.html');
+            $this->head = file_get_contents('../../plantillas/generales/headUsuario.html');
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
             
             
             $this->perfil = file_get_contents('../../plantillas/usuario/perfilUsuario.html');
             $this->segui = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->usuario = file_get_contents('../../plantillas/usuario/datos_usuario.html');
-            $this->editar = file_get_contents('../../plantillas/usuario/editar_perfil.html');
+            $this->editar = file_get_contents('../../plantillas/usuario/editarUsuario.html');
             $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
+            $this->comparte = file_get_contents('../../plantillas/usuario/compartirExperiencia.html');
+            $this->editExp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');
+            
+            
             
             $this->gustaria = $this->expe;
                      
@@ -65,8 +72,11 @@
                                         'seguidores' => $this->segui, 
                                         'le_gustaria_ir' => $this->gustaria,
                                         'modales'=> $this->modal,
-                                        'editar_perfil'=>$this->editar,
-                                        'experiencia'=>$this->expe);
+                                        'editarUsuario'=>$this->editar,
+                                        'experiencia'=>$this->expe,
+                                        'comparteExp'=>$this->comparte,
+                                        'editaExp'=>$this->editExp
+                                        );
         }
         
         
@@ -81,13 +91,17 @@
                                         'seguidores' => $this->segui, 
                                         'le_gustaria_ir' => $this->gustaria,
                                         'modales'=> $this->modal,
-                                        'editar_perfil'=> $this->editar,
-                                        'experiencia'=>$this->expe);           
+                                        'editarUsuario'=> $this->editar,
+                                        'experiencia'=>$this->expe,
+                                        'comparteExp'=>$this->comparte,
+                                        'editaExp'=>$this->editExp                    
+                                        );           
         }
         
         public function refactory_usuario($datos){
                 
-            $this->usuario = str_ireplace('{nombre}',$datos[0]->nick ,$this->usuario );
+            //$this->usuario = str_ireplace('{nombre}',$datos[0]->nick ,$this->usuario );
+            $this->usuario = str_ireplace('{nombre}',$datos[0]->nombre." ".$datos[0]->apellido,$this->usuario );
             $this->usuario = str_ireplace('{genero}',$datos[0]->genero ,$this->usuario );
             $this->usuario = str_ireplace('{imagen}',$datos[0]->imagen ,$this->usuario );
             $this->usuario = str_ireplace('{f_nacimiento}',$datos[0]->fecha_nacimiento ,$this->usuario );
@@ -103,8 +117,7 @@
         
         public function refactory_amigos($datos){
             
-            $complete = "";
-            
+            $complete = "";            
             
             foreach ($datos as $valor){
                 $global = new Global_var();
@@ -141,6 +154,7 @@
             
             foreach ($datos as $valor){
                 $aux = $this->expe;
+                $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
                 $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
                 $aux = str_ireplace('{comentario}', $valor->descripcion, $aux);

@@ -42,9 +42,92 @@ class ModelExperiencia{
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
 	}  
-        
-        
 
+        /*
+         * Funcion que edita una propiedad de una experiencia y si no existe la crea
+         */        
+	public static function editar_experiencia($idnodo, $propiedad, $detalle){
+		//Obtengo toda la informacion del nodo
+		$editar = Neo4Play::client()->getNode($idnodo);
+		//edita la propiedad y si no existe la crea
+		$editar->setProperty($propiedad,$detalle)
+		    	->save();
+	}              
+
+        /*
+         * Elimina el nodo de una experiencia
+         */
+	public static function eliminar_experiencia($idnodo){
+            $eliminar = Neo4Play::client()->getNode($idnodo);		
+            $eliminar->delete();			    	
+	}
+
+        /*
+         * Elimina las relaciones de una experiencia
+         */
+	public static function eliminar_relacion_experiencia($ids_relacionImgExp){
+            
+            foreach($ids_relacionImgExp as $value) {
+		$eliminar = Neo4Play::client()->getRelationship($value);
+		$eliminar->delete();                            
+            }            
+
+        }                
+                     
+        /*
+         * Elimina las imagenes de una experiencia
+         */
+	public static function eliminar_nodos_ImgExp($ids_nodoImgExp){
+            
+            foreach($ids_nodoImgExp as $value){
+                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
+                    $eliminar->delete();			    	                                                                            
+            }
+            
+	}
+        
+   
+        /*
+         *Obtengo el id de la imagenes de una relacion
+         */
+	public static function get_id_nodoImgExp($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();            
+            
+            $imagenes = array();
+            if($result){                
+            
+                foreach($result as $row) {   
+                    //echo $row['']->getId()."<br>";
+                    array_push($imagenes,$row['']->getId());
+                }
+                return $imagenes;
+            }   
+	}        
+
+        /*
+         * Obtine los ID de las relacines de un nodo dado segun su tipo
+         */        
+	public static function get_id_relaciones_nodo($idNodo,$tipoRelacion)
+	{
+		$miNodo = Neo4Play::client()->getNode($idNodo);
+		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
+                
+                $id_relaciones = array();
+                
+                if($relaciones){
+                    //echo "Se encontraron <b>".count($relaciones)."</b> relaciones";
+                    foreach ($relaciones as $valor){
+                        //echo "<h1>".$valor->getId()."</h1>";
+                        array_push($id_relaciones, $valor->getId());
+                    }
+                    return $id_relaciones;
+                }			
+		else return null;//echo "El nodo <b>NO</b> tiene relaciones";
+	}	
+        
+        
         public function get_exper_usuario($queryString){
             
             
@@ -58,7 +141,6 @@ class ModelExperiencia{
 //                    echo "<h1>".$experiencia->imagen."</h1>";                    
             
             if($result){
-                
             
                 foreach($result as $row) {
                     $experiencia = new Experiencia();
@@ -88,11 +170,10 @@ class ModelExperiencia{
 
         }        
 
-        
+
         
         
         public function get_experiencias($queryString){
-            
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();            
@@ -114,7 +195,8 @@ class ModelExperiencia{
                         $experiencia->imagen= $res[0]->offsetGet('');
                         //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
                     }else{
-                        $experiencia->imagen= "no hay";}
+                        $experiencia->imagen= "no hay";                        
+                        }
                     
                     $experiencia->nombre = $row['']->getProperty('nombre');
                     $experiencia->descripcion = $row['']->getProperty('descripcion');
@@ -130,8 +212,7 @@ class ModelExperiencia{
         
         
         public function get_imagenes_galeria($queryString){
-            
-           
+                       
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $imagen = $query->getResultSet();                                  
             
@@ -153,14 +234,20 @@ class ModelExperiencia{
 
 
                 array_push($img_galeria, $retorno);
-
-
             }    
-
-            return $img_galeria;
-            
-            
+            return $img_galeria;                      
         }
+
+        /*
+         * Consulta todas las relaciones segun un tipo especifico
+         * recibe el nodo de la experiencia y el tiipo de relacion
+         
+	public static function relacionesExperiencia($idNodo,$tipoRelacion){
+		$miNodo = Neo4Play::client()->getNode($idNodo);
+		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
+
+                echo $relaciones;
+	}        */
         
         
 }

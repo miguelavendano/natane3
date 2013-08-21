@@ -24,7 +24,7 @@
         public $img_slider_act;
         public $img_slider;
         public $descripcion;
-        
+        public $editar;
         
         public $dic_general;
         public $dic_contenido;
@@ -44,7 +44,7 @@
                   
         
             $this->base = file_get_contents('../../plantillas/generales/base.html');
-            $this->head = file_get_contents('../../plantillas/generales/head.html');
+            $this->head = file_get_contents('../../plantillas/generales/headEmpresa.html');
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
             
             $this->empresa= file_get_contents('../../plantillas/empresas/perfilEmpresa.html');   
@@ -55,6 +55,7 @@
             $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->gustaria= $this->seguidores;
             $this->ferrocarril= file_get_contents('../../plantillas/generales/ferrocarril.html');
+            $this->editar = file_get_contents('../../plantillas/empresas/editarEmpresa.html');
             $this->elemento_ferro= file_get_contents('../../plantillas/generales/elemento_ferro.html');
             $this->modales= file_get_contents('../../plantillas/generales/barraModal.html');
                      

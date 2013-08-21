@@ -10,66 +10,52 @@
         public $modelo;        
         
         
-        public function __construct($id) {
-            
+        public function __construct($id) {            
             $this->vista = new SitioVista($id);
             $this->modelo = new SitioModel($id);
-            
-            
         }       
         
         
         public function datos_contacto(){
-
-            $contacto = $this->modelo->get_contacto();
-            
+            $contacto = $this->modelo->get_contacto();            
             return $contacto;
-            
         }
         
         public function slider_sitio(){
-
-            $slider = $this->modelo->get_slider();
-            
+            $slider = $this->modelo->get_slider();            
             return $slider;
-            
         }        
 
         public function ferrocarril(){
-
-            $ferro = $this->modelo->get_ferrocarril();
-            
+            $ferro = $this->modelo->get_ferrocarril();           
             return $ferro;
-            
         }        
         
         
-        public function visitantes(){
-            
+        public function visitantes(){            
             return $this->modelo->get_visitantes();
-            
         }
         
         
-        public function desean(){
-            
-            return $this->modelo->get_gustaria();
-            
-            
+        public function desean(){            
+            return $this->modelo->get_gustaria();            
+        }
+        
+
+        public function coordenadas(){            
+            return $this->modelo->get_coordenadas_mapa();            
         }
         
         
-        
-        public function main(){
-            
-            $this->vista->refactory_slider( $this->slider_sitio());
-            $this->vista->refactory_contacto( $this->datos_contacto());
-            $this->vista->refactory_visitantes( $this->visitantes());
-            $this->vista->refactory_gustaria( $this->desean());
-            $this->vista->refactory_ferrocarril( $this->ferrocarril());            
-            $this->vista->refactory_contenido();
-            $this->vista->refactory_total();
-            
+        public function main(){            
+            $this->vista->refactory_slider( $this->slider_sitio() );
+            $this->vista->refactory_contacto( $this->datos_contacto() );
+            $this->vista->refactory_visitantes( $this->visitantes() );
+            $this->vista->refactory_gustaria( $this->desean() );
+            $this->vista->refactory_ferrocarril( $this->ferrocarril() );            
+            $this->vista->refactory_mapa( $this->coordenadas() );  
+            $this->vista->refactory_contenido();                                  
+            $this->vista->refactory_total();            
         }
     }
 

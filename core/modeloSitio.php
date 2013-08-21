@@ -41,8 +41,8 @@ class ModelSitios{
         /**
          * funcion para crear el nodo tipo Sitio
          * parametros: objeto tipo Sitio
-         */	
-	public function crearNodoSitio(Sitio $minodo)
+         */	        
+	public static function crearNodoSitio(Sitio $minodo)
 	{
 		if (!$minodo->node) {
 			$minodo->node = new Node(Neo4Play::client());
@@ -62,6 +62,7 @@ class ModelSitios{
                                 ->setProperty('facebook', $minodo->facebook)
                                 ->setProperty('twitter', $minodo->twitter)
                                 ->setProperty('youtube', $minodo->youtube)                        
+                                ->setProperty('contraseña', $minodo->contraseña)
                                 ->setProperty('type', $minodo->type)
 				->save();
 
@@ -70,6 +71,96 @@ class ModelSitios{
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
 	}      
+
+        
+        /*
+         * funcion que edita una propiedad de un sitio y si no existe la crea
+         */     
+	public static function editar_sitio($idnodo, $propiedad, $detalle){
+		//Obtengo toda la informacion del nodo
+		$editar = Neo4Play::client()->getNode($idnodo);
+		//edita la propiedad y si no existe la crea
+		$editar->setProperty($propiedad,$detalle)
+		    	->save();
+	}    
+        
+        
+        /*
+         * Retorna todos los valores del nodo tipo Sitio
+         */     
+        public function get_sitio($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){
+            
+                foreach($result as $row) {
+                    
+                    $sitio = new Sitio();
+                    $sitio->id = $row['']->getId();
+                    $sitio->nombre = $row['']->getProperty('nombre');
+                    $sitio->descripcion = $row['']->getProperty('descripcion');
+                    $sitio->imagen = $row['']->getProperty('imagen');
+                    $sitio->tipo_sitio = $row['']->getProperty('tipo_sitio');    
+                    $sitio->ciudad = $row['']->getProperty('ciudad');
+                    $sitio->direccion = $row['']->getProperty('direccion');                    
+                    $sitio->telefono = $row['']->getProperty('telefono');
+                    $sitio->latitud = $row['']->getProperty('latitud');
+                    $sitio->longitud = $row['']->getProperty('longitud');                    
+                    $sitio->correo = $row['']->getProperty('correo');
+                    $sitio->sitio_web = $row['']->getProperty('sitio_web');                    
+                    $sitio->facebook = $row['']->getProperty('facebook');
+                    $sitio->twitter = $row['']->getProperty('twitter');
+                    $sitio->youtube = $row['']->getProperty('youtube');
+                    $sitio->contraseña = $row['']->getProperty('contraseña');
+                    //$sitio->type = $row['']->getProperty('type');                                        
+                    array_push($array, $sitio);                    
+                }
+                return $array;
+            }                        
+        }
+        
+        /*
+         * Retorna el valor de la propiedad especificada 
+         * Parametros: consulta y propiedad del nodo
+         */              
+        public function get_property_sitio($queryString, $propiedad){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){
+                foreach($result as $row) {
+                    $sitio = new Sitio();
+                    $sitio->$propiedad = $row['']->getProperty($propiedad);
+                    array_push($array, $sitio);
+                }
+                return $array;
+           }
+        }
+                
+        public function get_property_mapa($queryString,$latitud,$longitud){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){
+                foreach($result as $row) {
+                    $sitio = new Sitio();
+                    $sitio->latitud = $row['']->getProperty($latitud);
+                    $sitio->longitud = $row['']->getProperty($longitud);                    
+                    array_push($array, $sitio);
+                }
+                return $array;
+           }                   
+        }
         
         public function get_sitio_aleatorio($queryString, $cant){
             
@@ -100,10 +191,8 @@ class ModelSitios{
                         $nodale.=",";
                     }                        
                 }
-
             }
 
-            
             
             $losconsulta = "START n=node(".$nodale.") RETURN n";
             $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
@@ -116,7 +205,7 @@ class ModelSitios{
                 $sitio->id = $row['']->getId();
                 $sitio->nombre = $row['']->getProperty('nombre');
                 $sitio->descripcion = $row['']->getProperty('descripcion');
-                $sitio->tipo = $row['']->getProperty('tipo');
+                $sitio->tipo_sitio = $row['']->getProperty('tipo_sitio');
                 $sitio->imagen = $row['']->getProperty('imagen');
                 array_push($arsitios, $sitio);
             }
@@ -155,7 +244,6 @@ class ModelSitios{
             
             if($result){
                 
-            
                 foreach($result as $row) {
                     $sitio = new Sitio();
                     $sitio->id = $row['']->getId();
@@ -168,14 +256,13 @@ class ModelSitios{
                     $sitio->twitter = $row['']->getProperty('twitter');
                     $sitio->youtube = $row['']->getProperty('youtube');  
                     $sitio->descripcion = $row['']->getProperty('descripcion');  
-                    array_push($array, $sitio);
-
-                    
+                    array_push($array, $sitio);                    
                 }
                 return $array;
            }
         }
-           
+        
+        
         public function es_un_sitio($id){
             
             $query = "START n=node(".$id.") RETURN n.type";            
@@ -226,10 +313,7 @@ class ModelSitios{
                         $nodale.=",";
                     }                        
                 }
-
-            }
-            
-
+            }            
             
             $losconsulta = "START n=node(".$nodale.") RETURN n";
             $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
@@ -248,7 +332,6 @@ class ModelSitios{
             }
             
             return $arsitios;  
-
         }
         
         

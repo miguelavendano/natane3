@@ -1,14 +1,13 @@
 
-    <section id="P_usuario">
+    <section id="P_usuario">        
         <div class="container-fluid perfil">
             <div class="row-fluid">
                 <div class="span12">
                     <div class="row-fluid">
                         <div class="span3">
-                            <a class="btn btn-primary" id="BeditarU"> 
-                                <i class="icon-wrench"></i>
-                                Editar Perfil
-                            </a>
+                            <!--<a class="btn btn-info" id="SeguirU"> 
+                                Seguir
+                            </a>-->
                 <!--        <div class="opciones">
                                 <div class="navbar">
                                     <div class="navbar-inner">          
@@ -29,21 +28,26 @@
                                     </div>
                                 </div>
                             </div>   -->  <!-- opciones -->
-                                                  
+                    
                             <div class="usuario" id="contenido"><!-- usuario -->
                                 {datos_usuario}  <!-- datos_usuario.html-->
                             </div>      
-                            <hr>
+                            
                             <div class="seguidores">                            
                                 <h3><a href="#seguidores">Seguidores</a></h3>
                                     {seguidores}   <!-- usa a "generales/seguidores.html" -->
                             </div> <!-- seguidores -->
-
-                            <div class="row-fluid"><hr /></div>
+                           
                         </div>   <!-- span3 -->
-
+                                                    
+                                                    
                         <div class="span9" id="contenidoU">
-                            {editar_perfil}
+                            
+                            {editarUsuario}
+                            {editaExp}
+                            {comparteExp}
+                            
+                            
                             
                             <div class="pestañas" >
                                 <div class="tabbable">
@@ -53,15 +57,18 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">      
-
-                                            {experiencia}  <!--usa usuaro/experiencia.html-->
-                                                                                                                     
+                                            {experiencia}  <!--usa usuaro/experiencia.html-->                                                                                                                     
                                         </div>  <!-- pestaña 1 -->
-                                    
+<!--
+    <div class="menu">
+        <ul>
+            <li><a><div class="circle"><span class="icon-wrench"></span></div></a></li>
+            <li><a><span class="icon-remove"></span></a></li>
+        </ul>
+    </div>                                   
+-->     
                                         <div class="tab-pane" id="2"> 
-
                                             {le_gustaria_ir} <!-- usando usuario/experiencia tambien>--->
-
                                         </div>   <!-- pestaña 2 -->
 
                                     </div>
@@ -76,9 +83,7 @@
     </section>    
 
 
-    
-    <!-- VENTANAS MODAL-->
-    
+    <!-- VENTANAS MODAL-->    
     {modales}
 
     <script src="{JS}/base-galeria.js"></script>

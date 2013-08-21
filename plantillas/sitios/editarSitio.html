@@ -1,0 +1,124 @@
+        <!-- editar perfil-->
+        <div id="editarSitio" style="display: none">
+            <legend>
+                <a class="close" id="cancel_edicion_usuario">&times;</a>            
+                <h3>Editar Perfil</h3>
+            </legend>        
+            
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="EnomS">Nombre: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EnomS" required> 
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EdescS">Descripcion: </label>
+                    <div class="controls">
+                        <textarea id="EdescS" style="min-width: 200px; max-width: 500px; max-height: 200px" required></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EcityS">Ciudad: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EcityS" required>
+                    </div>
+                </div>                       
+                <div class="control-group">
+                    <label class="control-label" for="EdirS">Direccion: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EdirS" required>
+                    </div>
+                </div>                
+                <div class="control-group">
+                    <label class="control-label" for="EtelS">Telefono: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EtelS" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EmailS">Email: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EmailS" required>
+                    </div>
+                </div>       
+                <div class="control-group">
+                    <label class="control-label" for="ElatS">Latitud: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="ElatS" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="ElongS">Longitud: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="ElongS" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Es_webS">Sitio Web </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="Es_webS">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EfaceS">Perfil de Facebook: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EfaceS">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EtwiS">Perfil de Twitter: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EtwiS" placeholder="@tu_perfil">
+                    </div>
+                </div>                
+                <div class="control-group">
+                    <label class="control-label" for="EyouS">Canal de Youtube </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EyouS">
+                    </div>
+                </div>                
+                <div class="control-group">
+                    <label class="control-label" for="EtipoS">Categoria del Sitio </label>
+                    <div class="controls">    
+                        <label class="radio"> 
+                            <input type="radio" name="EtipoS" value="icon-music" id="Et_disco"><i class="icon-music"></i> Discoteca
+                        </label>
+                        <label class="radio"> 
+                            <input type="radio" name="EtipoS" value="icon-glass" id="Et_bar"><i class="icon-glass"></i> Bar
+                        </label>                                                
+                        <label class="radio"> 
+                            <input type="radio" name="EtipoS" value="icon-food" id="Et_resta"><i class="icon-food"></i> Restaurante
+                        </label>
+                        <label class="radio"> 
+                            <input type="radio" name="EtipoS" value="icon-suitcase" id="Et_hotel"><i class="icon-suitcase"></i> Hospedaje
+                        </label>
+                        <label class="radio"> 
+                            <input type="radio" name="EtipoS" value="icon-dribbble" id="Et_recrea"><i class="icon-flag"></i> Recreacion
+                        </label>                        
+                        <label class="radio"> 
+                            <input type="radio" name="EtipoS" value="icon-road" id="Et_camina"><i class="icon-road"></i> Caminata
+                        </label>
+                    </div>
+                </div>                
+                <div class="control-group">
+                    <label class="control-label" for="Epass1S">Contraseña: </label>
+                    <div class="controls">
+                        <input type="password" class="input-medium" id="Epass1S" required>
+                        <span class="help-inline">minimo 6 caracteres entre letras y números</span>      
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Epass2S">Confirma tu Contraseña: </label>
+                    <div class="controls">
+                        <input type="password" class="input-medium" id="Epass2S" required>
+                    </div>
+                </div>
+                <div class="control-group">                  
+                  <div class="controls">
+                    <a class="btn btn-primary" id="guarda_edicion_sitio">Guardar Cambios</a>
+                    <a class="btn btn-red" id="cancelarEdicionSitio">Cancelar</a>
+                  </div>
+                </div>                
+            </form>   
+        </div>            

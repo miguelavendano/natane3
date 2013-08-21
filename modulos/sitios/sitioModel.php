@@ -26,8 +26,7 @@
             $query = "START n=node(".$this->id_sitio.") RETURN n";            
             $resultado = $this->modelsitios->get_contacto($query);
 
-            return $resultado;
-                        
+            return $resultado;                        
         }
         
         public function  get_slider(){
@@ -51,13 +50,10 @@
             $final = array_merge($resultado, $resultado2);
             
             return $final;            
-
-            
         }        
         
         
         public function get_visitantes(){   
-            
             
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Fan]-b RETURN b;";            
             $resultado = $this->modelusuario->get_visitantes($query);
@@ -68,17 +64,25 @@
         
         public function get_gustaria(){   
             
-            
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Desea]-b RETURN b;";            
             $resultado = $this->modelusuario->get_desean($query);
-
             return $resultado;
             
-        }                    
+        } 
         
-        
-        
-                  
-        
+        public function get_coordenadas_mapa(){
+            
+            $query = "START n=node(".$this->id_sitio.") RETURN n";
+            //$resultado = $this->modelsitios->get_property_mapa($query);
+            $resultado = $this->modelsitios->get_sitio($query);
+
+            return $resultado;                        
+        } 
+        /*
+        public function get_coordenadas_mapa(){            
+            $query = "START n=node(".$this->id_sitio.") RETURN n.latitud,n.longitud";
+            $resultado = $this->modelsitios->get_property_mapa($query,"latitud","longitud");
+            return $resultado;                        
+        }      */   
 
     }
