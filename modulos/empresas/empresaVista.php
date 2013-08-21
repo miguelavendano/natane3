@@ -276,10 +276,10 @@
                 $resultados .= '<div class="row-fluid">';                            
                 $i=0;
                 do{ 
-                    $empresa=array_shift($datos);
+                    $servicio=array_shift($datos);
                     $aux = $elemento;
-                    $aux = str_ireplace("{nombre}", $empresa->name, $aux);
-                    $aux = str_ireplace("{imagen}", $empresa->img, $aux);                
+                    $aux = str_ireplace("{nombre}", $servicio->type, $aux);
+                    $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);                
                     $resultados .= $aux;
                     $i++;
                 }while((count($datos)!=0)&& $i<3);

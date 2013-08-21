@@ -63,9 +63,8 @@ echo "busca 2";
         }
         
         public function inicializar(){
-            echo "busca 50";
-            $this->empresa = $this->consulta("Empresa");
-            echo "busca 51";
+            
+            $this->empresa = $this->consulta("Empresa");            
             $this->experiencia = $this->consulta("Experiencia");
             $this->img = $this->consulta("Imagen");
             $this->sitio = $this->consulta("Sitio");

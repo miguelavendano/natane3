@@ -75,7 +75,7 @@
         public function get_servicios(){   
             
             
-            $query = "start n=node(".$this->id_empresa.") match n-[:Servicio]->b return b";
+            $query = "start n=node(".$this->id_empresa.") match n-[:Ofrece]->b return b";
             $resultado = $this->modelempresas->get_servicios($query);
             
             return $resultado;
