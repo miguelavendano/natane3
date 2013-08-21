@@ -84,7 +84,7 @@ if(isset($_POST['opcion'])){
            $band = json_encode($band);
             
         break;    
-    
+  /*  
         case "guardar_edicionU":       
             
             $upload_folder ='../../estatico/imagenes/';
@@ -92,7 +92,7 @@ if(isset($_POST['opcion'])){
             $tmp_archivo = $_FILES['imagen']['tmp_name'];            
             //$tipo_archivo = $_FILES['imagen']['type'];
             //$tamano_archivo = $_FILES['imagen']['size'];
-            
+
             echo $nombre_archivo;
             $nomFofoPerfil = $_POST['usuario'].'_'.$nombre_archivo;
             echo $nomFofoPerfil;
@@ -117,7 +117,45 @@ if(isset($_POST['opcion'])){
             $band="true";
             
         break;        
+*/
+        case "guardar_edicionU":       
+            
+            $upload_folder ='../../estatico/imagenes/';
+            foreach($_FILES['foto_perfil']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    $nombre_archivo = $_FILES['foto_perfil']['name'][$key];
+                    $tmp_archivo = $_FILES['foto_perfil']['tmp_name'][$key];            
+                    //$tipo_archivo = $_FILES['foto_perfil']['type'][$key];
+                    //$tamano_archivo = $_FILES['foto_perfil']['size'][$key];
 
+                    //echo $nombre_archivo;
+                    $nomFotoPerfil = $_POST['usuario'].'_'.$nombre_archivo;
+                    echo $nomFotoPerfil;
+
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen
+                }
+            }            
+            
+                    
+            ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['EnomU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['EapeU']);            
+            ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", $nomFotoPerfil);         
+            ModelUsuarios::editar_usuario($_POST['usuario'], "nick", $_POST['EnickU']);            
+            ModelUsuarios::editar_usuario($_POST['usuario'], "genero",$_POST['EgeneroU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "fecha_nacimiento", $_POST['EnaciU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "ciudad_origen", $_POST['EcityU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "lugar_recidencia", $_POST['ErecideU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "correo", $_POST['EmailU']); 
+            ModelUsuarios::editar_usuario($_POST['usuario'], "sitio_web", $_POST['Es_webU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "facebook", $_POST['EfaceU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "twitter", $_POST['EtwiU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "youtube", $_POST['EyouU']);
+            ModelUsuarios::editar_usuario($_POST['usuario'], "contraseña", $_POST['Epass1U']);
+            
+            $band="true";
+            
+        break;        
+    
         case "experiencia":                       
 
             $nodo_experiencia = new Experiencia();
@@ -154,7 +192,6 @@ if(isset($_POST['opcion'])){
 
                     $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
                     ModeloRelaciones::crearRelacion($id_exp, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
-
                 }
             }
             
@@ -162,7 +199,6 @@ if(isset($_POST['opcion'])){
             
         break;
     
-
         case "editarExp":                       
             
             $modelexperiencia = new ModelExperiencia();

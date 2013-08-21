@@ -118,20 +118,12 @@ $(document).ready(function(){
 
     /*
      * Guardar edicion de los datos del usuario
-     */
+     *//*
     $("#guarda_edicion_usuario").click(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             var id_user=id_url[1].split("#");  //61#compartirExperiencia                    
-
-/*
-            var dataform=new FormData(document.getElementById('formEditarUsuario'));            
-            console.log(dataform);
-
-            var form = $('#formEditarUsuario').serializeArray();
-            console.log(form);*/
-                 
 
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
@@ -152,8 +144,7 @@ $(document).ready(function(){
                     twit: $("#EtwiU").val(),
                     youtube: $("#EyouU").val(),
                     imagen: $("#foto_perfil").val(),
-                    pass: $("#Epass1U").val()
-                    
+                    pass: $("#Epass1U").val()                    
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
@@ -168,6 +159,35 @@ $(document).ready(function(){
                 }
             });                        
     });    
+*/
+    /*
+     * Guardar edicion de los datos del usuario
+     */   
+    $("#guarda_edicion_usuario").click(function(){
+
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");       
+            
+            var dataform = new FormData(document.getElementById('formEditarUsuario'));            
+            dataform.append( "opcion", "guardar_edicionU");            
+            dataform.append( "usuario", id_url[1] );
+                    
+                $.ajax({
+                   url : '/natane3/estatico/php/opcionesUsuario.php',
+                   type : 'POST',
+                   data : dataform,
+                   processData : false, 
+                   contentType : false, 
+                   success: function(data,textStatus,jqXHR){                           
+
+                            if(/true/.test(data)) {                                
+                                alert("Datos cambiados ingresada :D");                                                                          
+                                //document.location.reload();                                     
+                            }
+                            else alert("No se ha podido ingresar su experiencia"); 
+                    }
+                });                
+    });
 
     /*
      * Cancelar edicion de los datos del usuario
@@ -226,11 +246,10 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
-            var id_user=id_url[1].split("#");  //61#compartirExperiencia
             
             var dataform = new FormData(document.getElementById('formExperiencia'));            
             dataform.append( "opcion", "experiencia");            
-            dataform.append( "autor", id_user[0] );
+            dataform.append( "autor", id_url[1] );
             
             $("#imagenes_experiencia").css({display: 'none'});                    
             /*
@@ -271,6 +290,7 @@ $(document).ready(function(){
 
             $("#editarExperiencia").css({display:'inline'});   
             $(".pestañas").css({display:'none'});
+            //var id_exp = $(".info_exp").parent().attr('id');
             var id_exp = $(".info_exp").parent().attr('id');
 
             $.ajax({
