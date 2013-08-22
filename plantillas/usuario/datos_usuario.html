@@ -3,10 +3,20 @@
         </div>
 
 
-	<div class="row-fluid foto_perfil">		    
-            <button class="btn icon-pencil edit_img_perfil"></button>
+	<div class="row-fluid foto_perfil">	
+            
+            <button class="btn icon-ok edit_img_perfil active" style="display: none"></button>
+            <!--<button class="btn icon-remove edit_img_perfil active" style="display: none"></button>-->
+            
+            <form method="post" enctype="multipart/form-data" id='formImgPerfil'>                              
+                <div class="caja_Bfile btn btn-green active"> 
+                    <i class="icon-folder-open-alt"> Cambiar Foto</i>
+                    <input class="Bfile Bimg_perfil" type="file" id="foto_perfil" name="foto_perfil[]" />                                  
+                </div>                
+            </form>      
+            
             <img class="img-polaroid" src="{IMG_NATANE}/{imagen}"/>                     
-
+            
 	</div>
 
 
@@ -18,12 +28,7 @@
                 <b>Pais:</b><a href="#/Colombia"> {pais_origen}</a><br>
                 <b>Web: </b><a href="#/Colombia"> {web_site}</a><br>
                 
-            <form method="post" enctype="multipart/form-data" id='formImgPerfil' >                              
-                <div class="caja_Bfile btn btn-green active"> 
-                    <i class="icon-camera"> Cargar Foto</i>
-                    <input class="Bfile" type="file" id="foto_perfil" name="foto_perfil[]" />                                  
-                </div>                
-            </form>
+
             <output id="previa_img_perfil"></output>                            
             </p>		
 	</div>

@@ -201,6 +201,8 @@ $(document).ready(function(){
      */   
     $(".edit_img_perfil").click(function(){
 
+            $(".edit_img_perfil").css({display:'none'});  //oculta el boton que guarda la foto 
+            
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
 
@@ -224,6 +226,11 @@ $(document).ready(function(){
                     }
                 });             
     });
+  
+  
+    $(".Bimg_perfil").click(function(){                     
+            $(".edit_img_perfil").css({display:'inline'});  //muestra el boton que guarda la foto                                     
+    });     
     
     /*
      * Cancelar edicion de los datos del usuario
@@ -314,8 +321,8 @@ $(document).ready(function(){
      * Cancelar creacino de una experiencia
      */
     $(".cancelarExperiencia").click(function(){        
-             $("#compartirExperiencia").css({display:'none'});   
-             $(".pestañas").css({display:'inline'});                                      
+            $("#compartirExperiencia").css({display:'none'});   
+            $(".pestañas").css({display:'inline'});                                      
     });        
   
     /*
