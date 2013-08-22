@@ -135,8 +135,7 @@ if(isset($_POST['opcion'])){
                     move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen
                 }
             }            
-            
-                    
+                                
             ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['EnomU']);
             ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['EapeU']);            
             ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", $nomFotoPerfil);         
@@ -154,13 +153,41 @@ if(isset($_POST['opcion'])){
             
             $band="true";
             
+        break;      
+
+        case "idiFotoPerfil":       
+            
+            $upload_folder ='../../estatico/imagenes/';
+            
+            foreach($_FILES['foto_perfil']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    $nombre_archivo = $_FILES['foto_perfil']['name'][$key];
+                    $tmp_archivo = $_FILES['foto_perfil']['tmp_name'][$key];            
+                    //$tipo_archivo = $_FILES['foto_perfil']['type'][$key];
+                    //$tamano_archivo = $_FILES['foto_perfil']['size'][$key];
+
+                    //echo $nombre_archivo;
+                    $nomFotoPerfil = $_POST['usuario'].'_'.$nombre_archivo;
+                    echo $nomFotoPerfil;
+
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen
+                }
+            }            
+            
+            ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", $nomFotoPerfil);         
+            
+            $band="true";
+            
         break;        
-    
+        
         case "experiencia":                       
 
+            echo $_POST['Exptitulo'];
+            echo $_POST['Expdesc'];
+            
             $nodo_experiencia = new Experiencia();
             $nodo_experiencia->nombre = $_POST['Exptitulo'];
-            $nodo_experiencia->descripcion = $_POST['Expdesc'];;
+            $nodo_experiencia->descripcion = $_POST['Expdesc'];
             $nodo_experiencia->type = 'Experiencia';            
             ModelExperiencia::crearNodoExperiencia($nodo_experiencia);  //crea el nodo de la experiencia
             

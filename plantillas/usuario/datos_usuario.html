@@ -1,9 +1,15 @@
 	<div class="row-fluid nombre">
             <h3>{nombre}</h3>
         </div>
-	<div class="row-fluid foto_perfil">		
-            <img class="img-polaroid" src="{IMG_NATANE}/{imagen}"/>
+
+
+	<div class="row-fluid foto_perfil">		    
+            <button class="btn icon-pencil edit_img_perfil"></button>
+            <img class="img-polaroid" src="{IMG_NATANE}/{imagen}"/>                     
+
 	</div>
+
+
 	<div class="row-fluid info">
             <p>
                 <b>Genero:</b> {genero}<br>
@@ -11,5 +17,16 @@
                 <b>Email:</b> {correo}<br>
                 <b>Pais:</b><a href="#/Colombia"> {pais_origen}</a><br>
                 <b>Web: </b><a href="#/Colombia"> {web_site}</a><br>
+                
+            <form method="post" enctype="multipart/form-data" id='formImgPerfil' >                              
+                <div class="caja_Bfile btn btn-green active"> 
+                    <i class="icon-camera"> Cargar Foto</i>
+                    <input class="Bfile" type="file" id="foto_perfil" name="foto_perfil[]" />                                  
+                </div>                
+            </form>
+            <output id="previa_img_perfil"></output>                            
             </p>		
 	</div>
+
+
+
