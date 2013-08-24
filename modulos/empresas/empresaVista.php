@@ -221,7 +221,7 @@
                 
                 $aux = $this->elemento_ferro;                  
                 $aux = str_ireplace("{id_sitio}", $valor->id, $aux);
-                $aux = str_ireplace("{icono}", $valor->tipo, $aux);                
+                $aux = str_ireplace("{icono}", $valor->tipo_sitio, $aux);                
                 $aux = str_ireplace("{nombre}", $valor->nombre, $aux);                
                 $aux = str_ireplace("{imagen}", $valor->imagen, $aux);                                              
                 
