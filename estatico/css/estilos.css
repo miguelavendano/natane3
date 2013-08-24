@@ -132,9 +132,11 @@ section{
 }
 
 .previa_fotoPerfil{
-    height: 100px;
+    /*height: 100px;
     border: 1px solid #000;
-    margin: 0 5px 10px 0;        
+    margin: 0 5px 10px 0;*/
+    position: inherit;
+    z-index: 1;    
 }
 
 /* **************************CIRCULOS MENU************************** */

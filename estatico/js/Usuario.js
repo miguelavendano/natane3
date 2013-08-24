@@ -197,11 +197,11 @@ $(document).ready(function(){
 
 
     /*
-     * Guardar edicion de los datos del usuario
+     * Guarda la imagen de perfil seleccionada
      */   
     $(".edit_img_perfil").click(function(){
 
-            $(".edit_img_perfil").css({display:'none'});  //oculta el boton que guarda la foto 
+            $(".eedit_img_perfildit_img_perfil").css({display:'none'});  //oculta el boton que guarda la foto 
             
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
@@ -227,9 +227,14 @@ $(document).ready(function(){
                 });             
     });
   
-  
+    /*
+     * Boton para la vista previa de la imagen
+     */  
     $(".Bimg_perfil").click(function(){                     
             $(".edit_img_perfil").css({display:'inline'});  //muestra el boton que guarda la foto                                     
+            $("#formImgPerfil").css({margin:'5px 20px 0 20px'});  //corre el boton de cargar la foto
+            $(".edit_img_perfil").css({margin:'10px 0 0 175px'});  //muestra el boton que guarda la foto                                                 
+            
     });     
     
     /*
