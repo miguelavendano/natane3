@@ -51,14 +51,13 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("="); 
-            var id_user=id_url[1].split("#");  //61#compartirExperiencia         
         
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'editarU',                            
-                    autor: id_user[0]                    
+                    autor: id_url[1]                    
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
@@ -101,7 +100,7 @@ $(document).ready(function(){
                         $("#EfaceU").val(data.face);
                         $("#EtwiU").val(data.twi);
                         $("#EyouU").val(data.you);
-                        $("#foto_perfil").val(data.imagen);
+                        //$("#foto_perfil").val(data.imagen);
                         
                         if(data.genero=="Masculino"){                            
                             $("#EgeneroM").attr("checked",true);                            
@@ -123,41 +122,44 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
-            var id_user=id_url[1].split("#");  //61#compartirExperiencia                    
+        
+            if($("#Epass1U").val()==$("#Epass2U").val()){  //valida contraseñas                                        
+                
+                $.ajax({
+                    url:'/natane3/estatico/php/opcionesUsuario.php'
+                    ,type:'POST'                    
+                    ,data: {
+                        opcion: 'guardar_edicionU',                   
+                        usuario: id_url[1],   
+                        nombre: $("#EnomU").val(),
+                        apellido: $("#EapeU").val(),
+                        mail: $("#EmailU").val(),                    
+                        f_nace: $("#EnaciU").val(),
+                        genero: $("input[name='EgeneroU']:checked").val(),                    
+                        nick: $("#EnickU").val(),                    
+                        city: $("#EcityU").val(),
+                        recide: $("#ErecideU").val(),
+                        s_web: $("#Es_webU").val(),
+                        face: $("#EfaceU").val(),
+                        twit: $("#EtwiU").val(),
+                        youtube: $("#EyouU").val(),
+                        imagen: $("#foto_perfil").val(),
+                        pass: $("#Epass1U").val()                    
+                    }
+                    ,dataType:'JSON'
+                    ,beforeSend:function(jqXHR, settings ){
+                        alert("Debe confirmar su identidad, para realizar los cambios.");                                        
+                    }
+                    ,success: function(data,textStatus,jqXHR){                           
 
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesUsuario.php'
-                ,type:'POST'                    
-                ,data: {
-                    opcion: 'guardar_edicionU',                   
-                    usuario: id_user[0],   
-                    nombre: $("#EnomU").val(),
-                    apellido: $("#EapeU").val(),
-                    mail: $("#EmailU").val(),                    
-                    f_nace: $("#EnaciU").val(),
-                    genero: $("input[name='EgeneroU']:checked").val(),                    
-                    nick: $("#EnickU").val(),                    
-                    city: $("#EcityU").val(),
-                    recide: $("#ErecideU").val(),
-                    s_web: $("#Es_webU").val(),
-                    face: $("#EfaceU").val(),
-                    twit: $("#EtwiU").val(),
-                    youtube: $("#EyouU").val(),
-                    imagen: $("#foto_perfil").val(),
-                    pass: $("#Epass1U").val()                    
-                }
-                ,dataType:'JSON'
-                ,beforeSend:function(jqXHR, settings ){
-                    alert("Debe confirmar su identidad, para realizar los cambios.");                                        
-                }
-                ,success: function(data,textStatus,jqXHR){                           
-
-                        if(/true/.test(data)) {                                                            
-                            //document.location.reload();                                     
-                        }
-                        else alert("No se han podido realizar los cambios");                                                     
-                }
-            });                        
+                            if(/true/.test(data)) {                                                            
+                                //document.location.reload();                                     
+                            }
+                            else alert("No se han podido realizar los cambios");                                                     
+                    }
+                });                        
+            }
+            else{ alert("Las contraseñas no coinciden"); }                    
     });    
 */
     /*
@@ -167,11 +169,47 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
+
+            if($("#Epass1U").val()==$("#Epass2U").val()){  //valida contraseñas                                        
+                
+                var dataform = new FormData(document.getElementById('formEditarUsuario'));            
+                dataform.append( "opcion", "guardar_edicionU");            
+                dataform.append( "usuario", id_url[1] );
+
+                    $.ajax({
+                       url : '/natane3/estatico/php/opcionesUsuario.php',
+                       type : 'POST',
+                       data : dataform,
+                       processData : false, 
+                       contentType : false, 
+                       success: function(data,textStatus,jqXHR){                           
+
+                                if(/true/.test(data)) {                                
+                                    //alert("Datos cambiados :D");                                                                          
+                                    document.location.reload();                                     
+                                }
+                                else alert("No se ha podido ingresar su experiencia"); 
+                        }
+                    });             
+            }
+            else{ alert("Las contraseñas no coinciden"); }                                
+    });
+
+
+    /*
+     * Guarda la imagen de perfil seleccionada
+     */   
+    $(".edit_img_perfil").click(function(){
+
+            $(".eedit_img_perfildit_img_perfil").css({display:'none'});  //oculta el boton que guarda la foto 
             
-            var dataform = new FormData(document.getElementById('formEditarUsuario'));            
-            dataform.append( "opcion", "guardar_edicionU");            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");       
+
+            var dataform = new FormData(document.getElementById('formImgPerfil'));            
+            dataform.append( "opcion", "idiFotoPerfil");            
             dataform.append( "usuario", id_url[1] );
-                    
+
                 $.ajax({
                    url : '/natane3/estatico/php/opcionesUsuario.php',
                    type : 'POST',
@@ -181,14 +219,24 @@ $(document).ready(function(){
                    success: function(data,textStatus,jqXHR){                           
 
                             if(/true/.test(data)) {                                
-                                alert("Datos cambiados ingresada :D");                                                                          
-                                //document.location.reload();                                     
+                                //alert("Datos cambiados :D");                                                                                                          
+                                document.location.reload();                                     
                             }
                             else alert("No se ha podido ingresar su experiencia"); 
                     }
-                });                
+                });             
     });
-
+  
+    /*
+     * Boton para la vista previa de la imagen
+     */  
+    $(".Bimg_perfil").click(function(){                     
+            $(".edit_img_perfil").css({display:'inline'});  //muestra el boton que guarda la foto                                     
+            $("#formImgPerfil").css({margin:'5px 20px 0 20px'});  //corre el boton de cargar la foto
+            $(".edit_img_perfil").css({margin:'10px 0 0 175px'});  //muestra el boton que guarda la foto                                                 
+            
+    });     
+    
     /*
      * Cancelar edicion de los datos del usuario
      */
@@ -203,8 +251,7 @@ $(document).ready(function(){
     $("#experiencia").click(function(){
        
             var mi_url=document.location.href;
-            var id_url=mi_url.split("=");            
-            var id_user=id_url[1].split("#");  //61#compartirExperiencia         
+            var id_url=mi_url.split("=");
             
                 $.ajax({
                     url:'/natane3/estatico/php/opcionesUsuario.php'
@@ -213,7 +260,7 @@ $(document).ready(function(){
                         opcion:'experiencia',                            
                         titulo: $("#Exptitulo").val(),
                         descripcion: $("#Expdesc").val(),
-                        autor: id_user[0]
+                        autor: id_url[1]
                     }
                     ,dataType:'html'
                     ,beforeSend:function(jqXHR, settings ){
@@ -247,11 +294,11 @@ $(document).ready(function(){
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
             
-            var dataform = new FormData(document.getElementById('formExperiencia'));            
-            dataform.append( "opcion", "experiencia");            
-            dataform.append( "autor", id_url[1] );
+            var datosform = new FormData(document.getElementById('formExperiencia'));            
+            datosform.append( "opcion", "experiencia");            
+            datosform.append( "autor", id_url[1] );
             
-            $("#imagenes_experiencia").css({display: 'none'});                    
+            //$("#imagenes_experiencia").css({display: 'none'});                    
             /*
             //document.getElementById('imagenes_experiencia').files.length;
             var imgs = document.getElementById('imagenes_experiencia').files;                
@@ -261,7 +308,7 @@ $(document).ready(function(){
                 $.ajax({
                    url : '/natane3/estatico/php/opcionesUsuario.php',
                    type : 'POST',
-                   data : dataform,
+                   data : datosform,
                    processData : false, 
                    contentType : false, 
                    success: function(data,textStatus,jqXHR){                           
@@ -279,13 +326,13 @@ $(document).ready(function(){
      * Cancelar creacino de una experiencia
      */
     $(".cancelarExperiencia").click(function(){        
-             $("#compartirExperiencia").css({display:'none'});   
-             $(".pestañas").css({display:'inline'});                                      
+            $("#compartirExperiencia").css({display:'none'});   
+            $(".pestañas").css({display:'inline'});                                      
     });        
   
     /*
      * Modifica la informacion de una experiencia
-     */
+     
     $(".modifica_exp").click(function(){
 
             $("#editarExperiencia").css({display:'inline'});   
@@ -335,6 +382,7 @@ $(document).ready(function(){
                 }
             });                            
     });
+*/
 
     /*
      * Cancelar creacino de una experiencia
@@ -361,9 +409,6 @@ $(document).ready(function(){
                     descripcion: $("#ediExpdesc").val()
                 }
                 ,dataType:'JSON'
-                ,beforeSend:function(jqXHR, settings ){
-                    alert("Debe confirmar su identidad, para realizar los cambios.");                                        
-                }
                 ,success: function(data,textStatus,jqXHR){                           
 
                         if(/true/.test(data)) {                                                            
@@ -377,7 +422,7 @@ $(document).ready(function(){
     
     /*
      * Eliminar una experiencia
-     */   
+        
     $(".elimina_exp").click(function(){
 
             var id_exp=$(".info_exp").parent().attr('id');
@@ -402,7 +447,7 @@ $(document).ready(function(){
                 }
             });                            
     });
-
+    */
 
     /*
      * Crea la relacion "Amigo" entre dos usuarios
@@ -411,7 +456,6 @@ $(document).ready(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
-            var id_user=id_url[1].split("#");  //61#compartirExperiencia
             
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
@@ -419,7 +463,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'relacion_amigo',                   
                     usuario: '2',
-                    amigo: id_user[0]
+                    amigo: id_url[1]
                     //imagen: $("#Epass1").val(data.imagen),
                 }
                 ,dataType:'html'
@@ -479,3 +523,76 @@ $(document).ready(function(){
 
 });
 
+
+    function editarExperiencia(id_experiencia) {
+    
+            $("#editarExperiencia").css({display:'inline'});   
+            $(".pestañas").css({display:'none'});
+
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'editarExp',                            
+                    experiencia: id_experiencia                    
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+
+                    $("#reload").css({visibility: 'visible',
+                                        opacity:'1',
+                                        position: 'fixed',
+                                        top: '200px',
+                                        right: '50px',
+                                        left: '50px',
+                                        width: 'auto',
+                                        margin: '0 auto'
+                                    });   
+                    
+                    $(".reload-backdrop").css({ position: 'fixed',
+                                                top: '0',
+                                                right: '0',
+                                                bottom: '0',
+                                                left: '0',
+                                                zIindex: '99999',
+                                                background: '#000000',
+                                                opacity:'0.4'
+                                            });                  
+                   
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                    $("#reload").css({visibility: 'hidden'});   
+                    $(".reload-backdrop").css({visibility: 'hidden'});                                     
+                   
+                    $("#ediExptitulo").val(data.nombre);
+                    $("#ediExpdesc").val(data.descripcion);
+                    //$("#Eimagen").val(data.imagen);                        
+                }
+            });                                
+    
+    }
+
+
+    function eliminarExperiencia(id_experiencia) {
+        
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'eliminarExp',                            
+                    experiencia: id_experiencia
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                            if(/true/.test(data)) {                                
+                                alert("Experiancia Eliminada :D");                                                                          
+                                document.location.reload();                                     
+                            }
+                            else alert("No se ha podido eliminar su experiencia"); 
+                }
+            });                            
+    }

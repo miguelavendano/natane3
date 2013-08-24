@@ -137,7 +137,7 @@
                 reader.onload = (function(theFile) {
                   return function(e) {
                     // Render thumbnail.
-                    output.push('<img class="previa_fotoPerfil" src="', e.target.result,
+                    output.push('<img class="img-polaroid previa_fotoPerfil" src="', e.target.result,
                                       '" title="', escape(theFile.name), '"/>');                                  
                     document.getElementById('previa_img_perfil').innerHTML =  output.join('');
                     
