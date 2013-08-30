@@ -1,0 +1,78 @@
+<section>
+    <div class="span6">
+
+        <hr>
+        <h2>Registrate </h2>
+        <hr>
+        <br>        
+        
+        <form class="form-horizontal" id="formregistroU" action="login.php" method="get">
+
+            <div class="control-group">
+                <label class="control-label" for="Rnom">Nombres: </label>
+                <div class="controls">
+                    <input type="text" class="input-medium" id="Rnom" required> 
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="Rape">Apellidos: </label>
+                <div class="controls">
+                    <input type="text" class="input-medium" id="Rape" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="Rmail">Email: </label>
+                <div class="controls">
+                    <input type="text" class="input-medium" id="Rmail" required>
+                </div>
+            </div>       
+            <div class="control-group">
+                <label class="control-label" for="Rgenero">Genero: </label>
+                <div class="controls">
+                    <label class="radio"> 
+                        <input type="radio" name="Rgenero" value="Masculino" id="RgeneroM">Masculino
+                    </label>
+                    <label class="radio"> 
+                        <input type="radio" name="Rgenero" value="Femenino" id="RgeneroF">Femenino
+                    </label>            
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="Rnaci">Fecha de Nacimiento: </label>
+                <div class="controls">
+                    <div class="input-append date" id="dp_reg" data-date="12/02/2013" data-date-format="dd-mm-yyyy">
+                        <input class="input-small" id="Rnaci" size="16" value="12/02/2013" readonly="readonly" type="text">
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="Rpass1">Contraseña: </label>
+                <div class="controls">
+                    <input type="password" class="input-medium" id="Rpass1" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="Rpass2">Confirma tu Contraseña: </label>
+                <div class="controls">
+                    <input type="password" class="input-medium" id="Rpass2" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="button" value="Registrarme" class="btn btn-blue" name="registrar" id="registrarU">
+                </div>
+            </div>               
+        </form>       
+    </div>
+    
+    <div class="span1"></div>
+    <div class="span4">
+
+        <div id="publi_regitro" style="width: 100%;">
+            <img src="{IMG_SYS}/movil.png" style="height: 100%; float: center">
+        </div>
+
+    </div>
+    
+</section>    

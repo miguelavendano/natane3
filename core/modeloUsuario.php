@@ -61,6 +61,54 @@ class ModelUsuarios{
 		$editar->setProperty($propiedad,$detalle)
 		    	->save();
 	}            
+        
+        
+        public function get_id($valor, $opcion){
+            
+            
+            switch ($opcion){
+                
+                case "correo":
+                    
+                    $queryString = "start n=node(*) where n.type='Usuario' and n.correo='".$valor."' return id(n) as id;";                    
+                    
+                    $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+                    $result = $query->getResultSet();   
+                    
+                    if(count($result)>0){
+                        $id_user = $result[0]['id'];                        
+                        
+                        return $id_user;                                                
+                        
+                    }else{
+                        
+                        return 0;
+                    }
+                    
+
+                      
+
+                    
+            }
+            
+            
+        }
+        
+        
+        public function get_pass($id_user){
+            
+            $queryString = "start n=node(".$id_user.") return n";
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();  
+            
+            echo $result[0]['']->getProperty('contraseña');
+            return $result[0]['']->getProperty('contraseña');
+            
+            
+        }
+        
+        
                     
         public function get_usuario($queryString){
             
