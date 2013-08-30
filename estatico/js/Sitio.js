@@ -7,7 +7,6 @@ $(document).ready(function(){
         $("#registrarSitio").css({display:'inline'});   
     }); 
 
-
     /*
      * Guardar la creacion de un Sitio nuevo
      */
@@ -41,11 +40,10 @@ $(document).ready(function(){
                         ,success: function(data,textStatus,jqXHR){                           
 
                             var n=data.split(" ");                           
-                            
+
                             if(/true/.test(data)) {                                
-                                alert("Registro Exitoso  :D");                                                                          
-                                document.location.href="http://localhost/natane3/modulos/sitios/sitio.php?id="+n[0];
-                                
+                                alert("Registro Exitoso  :D"+n[0]);
+                                document.location.href="http://localhost/natane3/modulos/sitios/sitio.php?id="+n[0];                                
                             }
                             else alert("No se ha podido realizar su registro"); 
 
@@ -198,14 +196,18 @@ $(document).ready(function(){
 
 
     /*
-     * Cancelar edicion de los datos del usuario
+     * Cancelar edicion de los datos del sitio
      */
     $("#cancelarEdicionSitio").click(function(){        
              $("#editarSitio").css({display:'none'});                
-    });    
-
-    $("#cancelarRegistroSitio").click(function(){        
+    }); 
+    
+    /*
+     * Cancelar creacion de un sitio
+     */   
+    $(".cancelarRegistroSitio").click(function(){        
              $("#registrarSitio").css({display:'none'});   
+             $(".pestañas").css({display:'inline'});    //en perfi de usuario muestra las experiencias
     });    
     
 

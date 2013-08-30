@@ -5,7 +5,8 @@
     {links}    <!--Incluidas en cada vista -->
 
     <link href="{IMG_SYS}/favicon.ico" rel="shortcut icon" />
-    <link rel="icon" type="image/png" href="{IMG_SYS}/favicon.png">    
+    <link rel="icon" type="image/png" href="{IMG_SYS}/favicon.png" />        
+
 </head>
 <body onload="initialize()">
     {head} <!-- en "generales" -->
@@ -49,7 +50,13 @@
       });
     </script>    
 
-        
+    <script>
+      $(function(){
+        $('.tooltip1').tooltip();
+        $('.tooltip2').tooltip();
+      });
+    </script> 
+    
     <!--Boton cargar imagen
     <script src="{JS}/cargarImagenes.js"></script>-->
     
@@ -95,7 +102,7 @@
     <script type="text/javascript" language="javascript">    
         $(function(){
             $('.carousel').carousel();
-        });
+        });     
     </script>
 
     <!-- ....Elementos para el ferrocaril de imagenes.... -->   
@@ -111,21 +118,25 @@
                 //  Responsive layout, resizing the items
                 $('#foo').carouFredSel({
                     responsive: true,
+                    circular: true,
+                    infinite: true,
                     prev: '#prev',
-                    next: '#next',                  
-                    //width: '100%',                    
+                    next: '#next',                                                         
                     pagination: "#paginas",
                     mousewheel: true,
-                    swipe: {
+                    swipe:{
                         onMouse: true,
                         onTouch: true
                     },                    
-                    items: {
+                    items:{
                         width: 300,
-                        visible: {
-                            min: 1,
-                            max: 4                            
+                        visible:{
+                                min: 1,
+                                max: 4                            
                         }
+                    },
+                    auto:{
+                        duration: 1000
                     }
                 });
             });

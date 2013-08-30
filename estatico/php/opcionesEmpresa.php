@@ -17,9 +17,6 @@ if(isset($_POST['opcion'])){
         case "registrarE":                       
                       
             $img='elcielo.jpg';            
-            $face='http://www.facebook.com/AnDaLaTo';    
-            $twit='https://twitter.com/JulianDVarelaP';
-            $you='http://www.youtube.com/user/GisoftCo';
 
             $nodo_empresa = new Empresa();
             $nodo_empresa->nombre = $_POST['nombre'];            
@@ -38,11 +35,11 @@ if(isset($_POST['opcion'])){
             $nodo_empresa->youtube = $_POST['you'];
             $nodo_empresa->contraseña = $_POST['contra1'];
             $nodo_empresa->type = 'Empresa';
-            ModelUsuarios::crearNodoUsuario($nodo_empresa); //crea el nodo del Usuario 
-            
+            ModelEmpresa::crearNodoEmpresa($nodo_empresa); //crea el nodo del Usuario 
+                        
             $band=$nodo_empresa->id;  //obtengo el id del nodo creado
             $band=$band." true";
-            
+
         break;
 
         case "editarE":

@@ -3,10 +3,10 @@ $(document).ready(function(){
     /*
      * Registro de un nuevo Sitio
      */
-    $("#registrarE").click(function(){
+    $("#guarda_empresa").click(function(){
         if($("#Rpass1E").val()==$("#Rpass2E").val()){  //valida contraseñas         
                     $.ajax({
-                        url:'/natane3/estatico/php/opcionesSitio.php'
+                        url:'/natane3/estatico/php/opcionesEmpresa.php'
                         ,type:'POST'                    
                         ,data:{
                             opcion:'registrarE',
@@ -34,8 +34,8 @@ $(document).ready(function(){
                             var n=data.split(" ");                           
                             
                             if(/true/.test(data)) {                                
-                                alert("Registro Exitoso  :D");                                                                          
-                                document.location.href="http://localhost/natane3/modulos/empresa/empresa.php?id="+n[0];
+                                alert("Registro Exitoso  :D"+n[0]);
+                                document.location.href="http://localhost/natane3/modulos/empresas/empresa.php?id="+n[0];
                             }
                             else alert("No se ha podido realizar su registro"); 
 
@@ -162,17 +162,20 @@ $(document).ready(function(){
     });    
 
     /*
-     * Cancelar edicion de los datos del usuario
+     * Cancelar edicion de los datos de la empresa
      */
-
-    $("#cancel_edicion_empresa").click(function(){
-        
-             $("#editarEmpresa").css({display:'none'});   
-             //$(".pestañas").css({display:'inline'});                         
-             
+    $("#cancelarEdicionEmpresa").click(function(){        
+             $("#editarEmpresa").css({display:'none'});                
+    }); 
+    
+    /*
+     * Cancelar creacion de una empresa
+     */   
+    $(".cancelarRegistroEmpresa").click(function(){        
+             $("#registrarEmpresa").css({display:'none'});   
+             $(".pestañas").css({display:'inline'});    //en perfi de usuario muestra las experiencias
     });    
     
-
     /*
      * Crea la relacion "Amigo" entre dos usuarios
      */   
@@ -209,8 +212,17 @@ $(document).ready(function(){
             });                           
 
     });
+/*
+    $("#Bconfio").click(function(){
+            $("#Bconfio").css({display:'none'});                
+            var boton_confia='<button id="Byanoconfio" class="btn btn-red-wine active btn-block"><i class="icon-thumbs-up"></i> Confio en esta empresa</button>';
+            document.getElementById('confio').innerHTML = boton_confia;
+    });   
     
-
-
+    $("#Byanoconfio").click(function(){
+            var boton_ya_no='<button id="Bconfio" class="btn btn-red-wine btn-block">Confio en esta empresa</button>';
+            document.getElementById('confio').innerHTML = boton_ya_no;            
+    });   
+*/
 });
 

@@ -18,6 +18,8 @@
         public $perfil;
         public $comparte;
         public $editExp;
+        public $creaSitio;
+        public $creaEmpre;
         
         public $dic_general;
         public $dic_contenido;
@@ -39,7 +41,8 @@
             $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
             $this->comparte = file_get_contents('../../plantillas/usuario/compartirExperiencia.html');
             $this->editExp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');
-            
+            $this->creaSitio = file_get_contents('../../plantillas/sitios/registrarSitio.html');
+            $this->creaEmpre = file_get_contents('../../plantillas/empresas/registrarEmpresa.html');
             
             
             $this->gustaria = $this->expe;
@@ -75,7 +78,9 @@
                                         'editarUsuario'=>$this->editar,
                                         'experiencia'=>$this->expe,
                                         'comparteExp'=>$this->comparte,
-                                        'editaExp'=>$this->editExp
+                                        'editaExp'=>$this->editExp,
+                                        'registrarSitio'=>$this->creaSitio,
+                                        'registrarrEmpresa'=>$this->creaEmpre                    
                                         );
         }
         
@@ -94,7 +99,9 @@
                                         'editarUsuario'=> $this->editar,
                                         'experiencia'=>$this->expe,
                                         'comparteExp'=>$this->comparte,
-                                        'editaExp'=>$this->editExp                    
+                                        'editaExp'=>$this->editExp,                    
+                                        'registrarSitio'=>$this->creaSitio,
+                                        'registrarEmpresa'=>$this->creaEmpre                    
                                         );           
         }
         
