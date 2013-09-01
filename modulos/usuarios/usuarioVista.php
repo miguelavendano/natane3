@@ -61,7 +61,7 @@
 
                             <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
                             <link href="{CSS}/datepicker.css" rel="stylesheet" />
-                            <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    
+                            <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />                               
                             <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />';            
             
             

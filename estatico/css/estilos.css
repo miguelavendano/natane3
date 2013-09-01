@@ -318,12 +318,6 @@ section{
 	color: #FFFFFF;
 	background-color: #0B29BD;
 }
-.btn-blue.slider{
-  width: 100px;
-  height: 25px;
-  font-size: 15px;
-  padding-top: 10px;
-}
 
 .btn-cyan {
 	color: #FFFFFF;
@@ -372,6 +366,21 @@ section{
 	color: #FFFFFF;
 	background-color: #00991A;
 }
+
+.btn-slider{
+    width: 100px;
+    height: 25px;
+    font-size: 15px;
+    padding-top: 10px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+.btn-slider:hover{
+    opacity: 1;
+    filter: alpha(opacity=100);    
+}
+
+
 @media screen and (max-width:1006px){
   section{
     padding-top: 20px;

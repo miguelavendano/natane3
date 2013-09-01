@@ -300,7 +300,7 @@ $(document).ready(function(){
             $(".pestañas").css({display:'none'});
             $("#registrarSitio").css({display:'none'});     //oculta el registro de Sitio si esta visible
             $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
-            $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible            
+            $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible            
     });
 
     /*

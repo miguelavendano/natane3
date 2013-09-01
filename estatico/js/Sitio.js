@@ -198,7 +198,7 @@ $(document).ready(function(){
     /*
      * Cancelar edicion de los datos del sitio
      */
-    $("#cancelarEdicionSitio").click(function(){        
+    $(".cancelar_edicion_sitio").click(function(){        
              $("#editarSitio").css({display:'none'});                
     }); 
     

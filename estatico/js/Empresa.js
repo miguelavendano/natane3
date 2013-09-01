@@ -61,7 +61,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");            
 
             $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'editarE',                            
@@ -110,7 +110,6 @@ $(document).ready(function(){
                         $("#EtwiE").val(data.twi);
                         $("#EyouE").val(data.you);
                         $("#Epass1E").val(data.pass);
-                        //$("#Eimagen").val(data.imagen);                        
                       
                 }
             });            
@@ -126,30 +125,27 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");  
             
             $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'guardar_edicionE',
-                    sitio: id_url[1],
+                    empresa: id_url[1],
                     nombre: $("#EnomE").val(),
                     descri: $("#EdescE").val(),
+                    nit: $("#EnitE").val(),
                     city: $("#EcityE").val(),                    
                     direc: $("#EdirE").val(),
                     tele: $("#EtelE").val(),                    
                     mail: $("#EmailE").val(),                    
                     lat: $("#ElatE").val(),                    
-                    lon: $("#ElongE").val(),
+                    lon: $("#ElongE").val(),                    
                     s_web: $("#Es_webE").val(),
                     face: $("#EfaceE").val(),
                     twit: $("#EtwiE").val(),
-                    youtube: $("#EyouE").val(),                    
+                    youtube: $("#EyouE").val(),
                     pass: $("#Epass1E").val()
-                    //imagen: $("#Epass1").val(data.imagen),
                 }
                 ,dataType:'JSON'
-                ,beforeSend:function(jqXHR, settings ){
-                    alert("Debe confirmar su identidad, para realizar los cambios.");                                        
-                }
                 ,success: function(data,textStatus,jqXHR){                           
 
                         if(/true/.test(data)) {                                
@@ -164,7 +160,7 @@ $(document).ready(function(){
     /*
      * Cancelar edicion de los datos de la empresa
      */
-    $("#cancelarEdicionEmpresa").click(function(){        
+    $(".cancelar_edicion_empresa").click(function(){        
              $("#editarEmpresa").css({display:'none'});                
     }); 
     

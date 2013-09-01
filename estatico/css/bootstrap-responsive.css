@@ -1008,11 +1008,14 @@
   }
   .navbar-inverse .nav-collapse .nav > li > a,
   .navbar-inverse .nav-collapse .dropdown-menu a {
-    color: #999999;
+    /*color: #999999;*/
+    color: rgb(206, 203, 203);
   }
   .navbar-inverse .nav-collapse .nav > li > a:hover,
   .navbar-inverse .nav-collapse .dropdown-menu a:hover {
-    background-color: #111111;
+    color: rgb(42, 207, 11);
+    /*background-color: #111111;*/
+    background-color: #2C2C2C;
   }
   .nav-collapse.in .btn-group {
     padding: 0;
@@ -1053,9 +1056,9 @@
   .nav-collapse .navbar-form,
   .nav-collapse .navbar-search {
     float: none;
-    padding: 10px 15px;
-    margin: 10px 0;
-    border-top: 1px solid #f2f2f2;
+    /*padding: 10px 15px;
+    margin: 10px 0;*/
+    border-top: 1px solid red;
     border-bottom: 1px solid #f2f2f2;
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);

@@ -13,29 +13,24 @@
         public $modelusuario;
         
         
-        public function __construct($id) {
-            
+        public function __construct($id) {            
             $this->modelsitios = new ModelSitios();
             $this->modelusuario = new ModelUsuarios();
-            $this->id_sitio = $id;
-            
+            $this->id_sitio = $id;            
         }       
         
         public function get_contacto(){
-            
             $query = "START n=node(".$this->id_sitio.") RETURN n";            
             $resultado = $this->modelsitios->get_contacto($query);
-
             return $resultado;                        
         }
         
         public function  get_slider(){
-
             $eslaider = array("panoramica1.jpg","panoramica4.jpg","panoramica3.jpg");
-            return $eslaider;                   
-            
+            return $eslaider;         
         }        
 
+        
         public function get_ferrocarril(){
 
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Semejantes]->b RETURN b;";
@@ -54,28 +49,23 @@
         
         
         public function get_visitantes(){   
-            
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Fan]-b RETURN b;";            
             $resultado = $this->modelusuario->get_visitantes($query);
-
             return $resultado;
-            
         }          
         
-        public function get_gustaria(){   
-            
+        
+        public function get_gustaria(){               
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Desea]-b RETURN b;";            
             $resultado = $this->modelusuario->get_desean($query);
-            return $resultado;
-            
+            return $resultado;            
         } 
         
+        
         public function get_coordenadas_mapa(){
-            
             $query = "START n=node(".$this->id_sitio.") RETURN n";
             //$resultado = $this->modelsitios->get_property_mapa($query);
             $resultado = $this->modelsitios->get_sitio($query);
-
             return $resultado;                        
         } 
         /*

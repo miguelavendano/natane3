@@ -58,12 +58,11 @@ if(isset($_POST['opcion'])){
                 "lat"=> $resultado[0]->latitud,
                 "lon"=> $resultado[0]->longitud,
                 "mail"=> $resultado[0]->correo,
-                "s_web"=> $resultado[0]->empresa_web,
+                "s_web"=> $resultado[0]->sitio_web,
                 "face"=> $resultado[0]->facebook,
                 "twi"=> $resultado[0]->twitter,
                 "you"=> $resultado[0]->youtube,
                 "pass"=> $resultado[0]->contraseña,
-                "tipo"=> $resultado[0]->tipo_empresa,
                 "imagen"=> $resultado[0]->imagen,
             );
                         
@@ -82,7 +81,7 @@ if(isset($_POST['opcion'])){
             ModelEmpresa::editar_empresa($_POST['empresa'], "correo", $_POST['mail']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "latitud", $_POST['lat']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "longitud", $_POST['lon']);             
-            ModelEmpresa::editar_empresa($_POST['empresa'], "empresa_web", $_POST['s_web']);
+            ModelEmpresa::editar_empresa($_POST['empresa'], "sitio_web", $_POST['s_web']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "facebook", $_POST['face']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "twitter", $_POST['twit']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "youtube", $_POST['youtube']);
