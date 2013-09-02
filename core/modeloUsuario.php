@@ -112,15 +112,12 @@ class ModelUsuarios{
         
         public function get_amigos($queryString){
             
-            
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
-            
             $result = $query->getResultSet();
             
             $array = array();
             
             if($result){
-                
             
                 foreach($result as $row) {
                     
@@ -132,19 +129,14 @@ class ModelUsuarios{
                     $usuario->imagen = $row['']->getProperty('imagen');
                     array_push($array, $usuario);
                     
-                    
                 }
                 return $array;
             }
-
         }        
-        
-        
+                
         public function get_visitantes($queryString){
             
-            
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);
-            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();
             
             $array = array();
@@ -163,7 +155,6 @@ class ModelUsuarios{
                 }
                 return $array;
             }
-
         }
         
         public function get_desean($queryString){

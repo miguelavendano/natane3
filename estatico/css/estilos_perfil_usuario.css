@@ -1,10 +1,4 @@
 /************************ PERFIL DE USUARIO ************************/
-.perfil{
-	margin-top: 0px;	
-}
-#P_usuario{
-	padding-top: 40px;
-}
 
 #P_usuario .opciones .navbar-inner{
 	min-height: 40px;

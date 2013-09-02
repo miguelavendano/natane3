@@ -18,13 +18,18 @@
 
                         <div class="span4 busqueda">
                             <form class="navbar-form" method="post" enctype="multipart/form-data">                                        
+                                <!--                                
                                 <input type="text" id="LoBusca" name="busca" placeholder="A donde quieres ir ?">
                                 <button type="submit" class="btn btn-blue active" id="Busqueda">
-                                    <!--<i class="icon-search"></i>-->
+                                   
                                 Buscar
                                 </button> <!-- este es el boton de mostrar -->
-                                <input name="opcion" type="hidden" value="Busqueda" > <!-- este entra en la funcion -->
-                            </form>                      
+                                <div class="input-append">
+                                  <input id="LoBusca" name="LoBusca" placeholder="A donde quieres ir?" type="text">
+                                  <span class="btn btn-blue active"><i class="icon-search"></i></span>
+                                </div>                                
+                            </form>   
+                            
                         </div>
                         
                         <div class="nav-collapse collapse" id="nav-collapse">
@@ -39,6 +44,12 @@
                                             Explorar
                                         </a>
                                     </li>
+                                    <!--<li>
+                                        <a class="cursor_link">
+                                            Noticias
+                                            <span class="badge badge-success">2</span>                                            
+                                        </a>
+                                    </li>   -->                                 
                                     <li class="dropdown">
                                         <a class="cursor_link dropdown-toggle" data-toggle="dropdown">                                            
                                             <!--<i class="icon-cogs"></i>-->
@@ -60,12 +71,12 @@
                                               </li>
                                               <li> 
                                                   <a class="cursor_link" id="BUcreaE">
-                                                      <i class="icon-truck"></i>
+                                                      <i class="icon-building"></i>
                                                       Registrar Empresa
                                                   </a>
                                               </li>                                                                       
                                               <li> 
-                                                  <a class="cursor_link" id="BUcreaE">
+                                                  <a class="cursor_link" id="BExit">
                                                       <i class="icon-signout"></i>
                                                       Salir
                                                   </a>

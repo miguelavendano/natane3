@@ -1717,10 +1717,13 @@ select:focus:invalid:focus {
           border-radius: 0;
 }
 
+.input-append .btn{
+    border-color: #FFFFFF;
+}
 .input-append .active,
 .input-prepend .active {
-  background-color: #a9dba9;
-  border-color: #46a546;
+  background-color: #0D85D6;
+  border-color: #0B29BD;
 }
 
 .input-prepend .add-on,

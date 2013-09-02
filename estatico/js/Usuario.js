@@ -155,7 +155,7 @@ $(document).ready(function(){
                     ,success: function(data,textStatus,jqXHR){                           
 
                             if(/true/.test(data)) {                                                            
-                                //document.location.reload();                                     
+                                document.location.reload();                                     
                             }
                             else alert("No se han podido realizar los cambios");                                                     
                     }
@@ -406,8 +406,8 @@ $(document).ready(function(){
                 ,success: function(data,textStatus,jqXHR){                           
 
                         if(/true/.test(data)) {                    
-                            html="<i class='icon-leaf'></i> Seguiendo";
-                            $("#SeguirU").html(html);                        
+                            html="<i class='icon-cyan'></i> Seguiendo";
+                            $("#BSeguir").html(html);                        
                             
                             //html2="<div {empresa}><p><a href='{url}?id={id}'><img src='{IMG_NATANE}/{imagen}'/>{nombre}</a></p></div>";
                             //$('.seguidores').html($('.seguidores').html()+html2);                           
@@ -454,6 +454,13 @@ $(document).ready(function(){
         }
     });
 
+
+    /*
+     * Cerrar sesion de Usuario
+     */
+    $("#BExit").click(function(){        
+        document.location.href="http://localhost/natane3/Index/";
+    });
 
     /*
      * Registro de un nuevo Sitio

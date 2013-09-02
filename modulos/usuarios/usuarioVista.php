@@ -132,7 +132,7 @@
                 $nombre = '';
                 $url = '';
                 $aux = $this->segui;
-                echo $valor->type;
+                //echo $valor->type;
                 if($valor->type == "Empresa"){                                    	         
                     $empresa = 'style="background-color: #CBFEC1"';
                     $nombre = $valor->nombre;

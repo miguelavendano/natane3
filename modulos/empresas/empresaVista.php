@@ -195,7 +195,7 @@
                 $nombre = '';
                 $url = '';
                 $aux = $this->gustaria;
-                echo $valor->type;
+                //echo $valor->type;
                 if($valor->type == "Empresa"){                                    	         
                     $empresa = 'style="background-color: #CBFEC1"';
                     $nombre = $valor->nombre;

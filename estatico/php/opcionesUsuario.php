@@ -269,8 +269,7 @@ if(isset($_POST['opcion'])){
     
         case "relacion_amigo":                       
             
-            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['amigo'], "Amigo");   //crea la relacion de amistad
-            
+            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['amigo'], "Amigo");   //crea la relacion de amistad            
             $band = 'true';
             
         break;    

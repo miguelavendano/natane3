@@ -3,7 +3,7 @@
 	margin-left: 0;
 }
 .list_carousel{
-	background-color: #F3F3F3;
+	/*background-color: #F3F3F3;*/
 	/*background-color: #ccc;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -25,7 +25,7 @@
  	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;  
-	box-shadow: 0px 7px 5px #888888;
+	box-shadow: 0px 8px 5px #888888;
 	position: relative;
 	z-index: 1;
 }

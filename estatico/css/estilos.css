@@ -7,8 +7,8 @@ header .botones{
 }
 
 body{
-    background-color: #F3F3F3;
-    /*background-image: url("../img/fondo3.jpg");*/
+    /*background-color: #F3F3F3;*/
+    background-image: url("../img/body1.png");
 }
 
 .cursor_link{
@@ -16,22 +16,23 @@ body{
 }
 section{
     float: inherit;
-  max-width: 1100px;
-  margin: 0px auto;
-  padding-top: 70px;
+    max-width: 1100px;
+    margin: 0px auto;
+    padding-top: 70px;
   /*border: 1px solid;*/
 }
 
 .contenido{	
-    background-color: white;
-    /*border-radius: 4px;*/
+    /*background-color: white;*/
+    background-image: url("../img/body2.png");        
     border: 1px solid #ccc;
-/*  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;  */
-  margin-top: 15px;
-  margin-bottom:15px;
-  box-shadow: 10px 10px 20px #ccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;  
+    margin-top: 15px;
+    margin-bottom:15px;
+    box-shadow: 10px 10px 20px #ccc;
 }
 
 #contenido-black{
@@ -88,14 +89,15 @@ section{
 
 /************************ PESTAÑA DE EXPERIENCIAS ************************/
 .experiencia{ 
-  margin-bottom: 15px;
-  padding: 8px;
-  width: auto;  
-  background: white;
-  border: solid 1px #ccc;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
+    background-image: url("../img/body2.png");        
+    /*background: white;*/    
+    margin-bottom: 15px;
+    padding: 8px;
+    width: auto;  
+    border: solid 1px #ccc;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
 .experiencia .im_exp{
   padding-left: 10px;
