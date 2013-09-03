@@ -420,6 +420,43 @@ $(document).ready(function(){
 
     });
     
+    /*
+     * Registro de un nuevo Sitio
+     */
+    $("#BUcreaS").click(function(){
+        $("#registrarSitio").css({display:'inline'});   
+        $(".pestañas").css({display:'none'});     //oculta las experiencias si esta visible
+        $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
+        $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible
+        $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia        
+    });     
+    
+    /*
+     * Registro de una nuevo Empresa
+     */
+    $("#BUcreaE").click(function(){
+        $("#registrarEmpresa").css({display:'inline'});   
+        $(".pestañas").css({display:'none'});     //oculta las experiencias si esta visible
+        $("#registrarSitio").css({display:'none'});   //oculta el registro de Sitio si esta visible
+        $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible
+        $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia        
+    });
+    
+    /*
+     * Cerrar sesion de Usuario
+     */
+    $("#BExit").click(function(){        
+        document.location.href="http://localhost/natane3/Index/";
+    });    
+
+
+    /*
+     * Cerrar sesion de Usuario
+     */
+    $("#BBuscar").click(function(){        
+        alert($("#loBusca").val());
+        document.location.href="http://localhost/natane3/modulos/consultas/consulta.php";
+    });  
 
     /*
      * Valida el ingreso de un usuarios
@@ -453,35 +490,7 @@ $(document).ready(function(){
             alert("no se pudo iniciar sesion, intente ingresando con su cuenta de facebook")
         }
     });
-
-
-    /*
-     * Cerrar sesion de Usuario
-     */
-    $("#BExit").click(function(){        
-        document.location.href="http://localhost/natane3/Index/";
-    });
-
-    /*
-     * Registro de un nuevo Sitio
-     */
-    $("#BUcreaS").click(function(){
-        $("#registrarSitio").css({display:'inline'});   
-        $(".pestañas").css({display:'none'});     //oculta las experiencias si esta visible
-        $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
-        $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible
-        $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia        
-    });     
-    /*
-     * Registro de una nuevo Empresa
-     */
-    $("#BUcreaE").click(function(){
-        $("#registrarEmpresa").css({display:'inline'});   
-        $(".pestañas").css({display:'none'});     //oculta las experiencias si esta visible
-        $("#registrarSitio").css({display:'none'});   //oculta el registro de Sitio si esta visible
-        $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible
-        $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia        
-    });      
+    
 });
 
 

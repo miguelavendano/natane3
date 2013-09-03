@@ -16,20 +16,13 @@
                             <a class="brand" href="{URL_INICIO}"><img alt="logo" src="{IMG_SYS}/logonatane1.png"></a>                            
                         </div>       
 
-                        <div class="span4 busqueda">
+                        <div class="span4 formBusqueda">
                             <form class="navbar-form" method="post" enctype="multipart/form-data">                                        
-                                <!--                                
-                                <input type="text" id="LoBusca" name="busca" placeholder="A donde quieres ir ?">
-                                <button type="submit" class="btn btn-blue active" id="Busqueda">
-                                   
-                                Buscar
-                                </button> <!-- este es el boton de mostrar -->
-                                <div class="input-append">
-                                  <input id="LoBusca" name="LoBusca" placeholder="A donde quieres ir?" type="text">
-                                  <span class="btn btn-blue active"><i class="icon-search"></i></span>
+                                <div class="input-append">                                    
+                                    <input type="text" class="autocomplete-ajax" id="loBusca" name="loBusca"/>
+                                    <span id="BBuscar" class="btn btn-blue active"><i class="icon-search"></i></span>
                                 </div>                                
-                            </form>   
-                            
+                            </form>  
                         </div>
                         
                         <div class="nav-collapse collapse" id="nav-collapse">
