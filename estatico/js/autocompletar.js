@@ -1,8 +1,13 @@
-$(function () {
+$(document).ready(function(){
     
     // Load countries then initialize plugin:
     $.ajax({
-        url: '/natane3/estatico/content/countries.txt',
+        url:'/natane3/estatico/php/opcionesConsulta.php'
+        ,type:'POST'                    
+        ,data:{
+            opcion:'busqueda',                            
+            consulta: $("#loBusca").val()                        
+        },
         dataType: 'json'
     }).done(function (respuesta) {
 

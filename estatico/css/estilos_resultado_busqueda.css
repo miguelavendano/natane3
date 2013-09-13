@@ -1,41 +1,40 @@
 #R_busqueda .navbar-inner{
   min-height: 40px;
-} 
-
-#resultado{
-  background-color: white;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
+/*
+#R_busqueda .navbar-inner li:hover{
+    -moz-box-shadow:inset 0 0 50px #000000;
+    -webkit-box-shadow:inset 0 0 50px #000000;
+    box-shadow:inset 0 0 50px #000000;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}*/
 
 .resultado{
-  /*border: 1px solid;*/
-  height: 180px;
+  /*border: 1px solid;*/  
+  height: auto;
+  padding-bottom: 15px;
 }
 
 .imagen-resultado{
-
-  /*border: 1px solid;*/
-  width: 150px;
+  width: 80%;
   height: 150px;
-  margin: 0px auto;
+  margin: 0 auto;  
 }
 
 .resultado img{
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-#titulo-result h5{
-  float: left;
-  /*border: 1px solid;  */
-  font-size: 16px;  
-  color: green;
-  text-align: center;
-  margin: 10px;
+.titulo-result{
+    text-align: center;  
 }
-
-#titulo{
-  /*background-color: black;*/
+.titulo-result a{
+    color: green;  
+}
+.titulo-result a:hover{
+    text-decoration: none;
+    color: rgb(42, 207, 11);
 }

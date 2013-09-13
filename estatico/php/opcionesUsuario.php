@@ -13,24 +13,7 @@ if(isset($_POST['opcion'])){
     $opcion=$_POST['opcion'];
             
     switch ($opcion){
-        
-        // BUSQUEDA
-        case "busca":                       
-            
-            //header('Location: http://localhost/natane3/modulos/consultas/consulta.php');
-            //header("Location: http://www.google.com");
-            /*
-            if($_POST['busca']){
-                $band= true;
-                 echo "esta buscando".$_POST['busca'];
-                }
-            else {
-                $band= false;
-                echo"no ingreso datos a la busqueda";
-            }*/
-            
-        break;
-
+       
         // Registro de un Usuario
         case "registrarU":                       
 
@@ -295,8 +278,7 @@ if(isset($_POST['opcion'])){
             }
             else {
                 $band="false";
-            }
-            
+            }            
             
         break;    
     

@@ -162,6 +162,42 @@ class ModelSitios{
            }                   
         }
         
+        
+        public function get_sitio_aleatorio($queryString){
+            
+                        
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);
+            $result = $query->getResultSet();
+            $nodos = "";
+                        
+            foreach ($result as $row){            
+                //array_push($aux, $row['']->getId());                
+                $nodos.=",".$row['']->getId();
+            }                
+    
+            $cadnodos = substr($nodos,1);
+            
+            
+            $losconsulta = "START n=node(".$cadnodos.") RETURN n";
+            $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
+            $respuesta = $consul->getResultSet();       
+            
+            $arsitios = array();
+
+            foreach ($respuesta as $row){
+                $sitio = new Sitio();
+                $sitio->id = $row['']->getId();
+                $sitio->nombre = $row['']->getProperty('nombre');
+                $sitio->descripcion = $row['']->getProperty('descripcion');
+                $sitio->tipo_sitio = $row['']->getProperty('tipo_sitio');
+                $sitio->imagen = $row['']->getProperty('imagen');
+                array_push($arsitios, $sitio);
+            }
+
+            return $arsitios;  
+
+        }
+        /*
         public function get_sitio_aleatorio($queryString, $cant){
             
                         
@@ -213,7 +249,9 @@ class ModelSitios{
             return $arsitios;  
 
         }
-            
+           
+         * 
+         */  
         public function get_semejantes($queryString){
             
             $consul = new Cypher\Query(Neo4Play::client(), $queryString);
@@ -332,11 +370,6 @@ class ModelSitios{
             }
             
             return $arsitios;  
-        }
-        
-        
-        
-      
-        
+        }               
 }
 

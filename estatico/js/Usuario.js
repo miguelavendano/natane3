@@ -449,15 +449,6 @@ $(document).ready(function(){
         document.location.href="http://localhost/natane3/Index/";
     });    
 
-
-    /*
-     * Cerrar sesion de Usuario
-     */
-    $("#BBuscar").click(function(){        
-        alert($("#loBusca").val());
-        document.location.href="http://localhost/natane3/modulos/consultas/consulta.php";
-    });  
-
     /*
      * Valida el ingreso de un usuarios
      */   
