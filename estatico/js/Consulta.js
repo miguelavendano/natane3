@@ -30,7 +30,7 @@ $(document).ready(function(){
      * Consulta Usuarios
      */
     $(".BuscaTodo").click(function(){        
-        if($("#loBusca").val().length>1){        
+        if($("#loBusca").val().length >= 1){        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
@@ -54,7 +54,7 @@ $(document).ready(function(){
      * Consulta Usuarios
      */
     $("#BuscaAventurero").click(function(){        
-        if($("#loBusca").val().length>1){
+        if($("#loBusca").val().length >= 1){
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
@@ -78,19 +78,19 @@ $(document).ready(function(){
      * Consulta Sitios
      */
     $("#BuscaSitio").click(function(){        
-        if($("#loBusca").val().length>1){
+        if($("#loBusca").val().length >= 1){
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_sitio', 
-                    consulta: $("#loBusca").val()
+                    consulta: $("#loBusca").val(),
+                    filtro: ""
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
                             
                             $("#contenido_respuesta").html(data);    
-
                 }
             });                                   
         }else{
@@ -98,4 +98,174 @@ $(document).ready(function(){
         }            
     });      
     
+
+    /*
+     * Consulta Empresas
+     */
+    $("#BuscaEmpresa").click(function(){        
+        if($("#loBusca").val().length >= 1){
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesConsulta.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'busca_empresa', 
+                    consulta: $("#loBusca").val()
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            
+                            $("#contenido_respuesta").html(data);    
+                }
+            });                                   
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }            
+    });      
+            
+    
+    /*
+     * Consulta Filtro Hoteles
+     */
+    $("#BuscaHoteles").click(function(){        
+        if($("#loBusca").val().length >= 1){
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesConsulta.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'busca_sitio', 
+                    consulta: $("#loBusca").val(),
+                    filtro: "icon-suitcase"                    
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            
+                            $("#contenido_respuesta").html(data);    
+                }
+            });                                   
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }            
+    });      
+    
+    /*
+     * Consulta Filtro Hoteles
+     */
+    $("#BuscaRestaurante").click(function(){        
+        if($("#loBusca").val().length >= 1){
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesConsulta.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'busca_sitio', 
+                    consulta: $("#loBusca").val(),
+                    filtro: "icon-food"                    
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            
+                            $("#contenido_respuesta").html(data);    
+                }
+            });                                   
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }            
+    });      
+
+    /*
+     * Consulta Filtro Hoteles
+     */
+    $("#BuscaRecreacion").click(function(){        
+        if($("#loBusca").val().length >= 1){
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesConsulta.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'busca_sitio', 
+                    consulta: $("#loBusca").val(),
+                    filtro: "icon-flag"                    
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            
+                            $("#contenido_respuesta").html(data);    
+                }
+            });                                   
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }            
+    });      
+    
+    /*
+     * Consulta Filtro Hoteles
+     */
+    $("#BuscaCaminata").click(function(){        
+        if($("#loBusca").val().length >= 1){
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesConsulta.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'busca_sitio', 
+                    consulta: $("#loBusca").val(),
+                    filtro: "icon-road"                    
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            
+                            $("#contenido_respuesta").html(data);    
+                }
+            });                                   
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }            
+    });      
+   
+   
+    /*
+     * Consulta Filtro Hoteles
+     */
+    $("#BuscaDisco").click(function(){        
+        if($("#loBusca").val().length >= 1){
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesConsulta.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'busca_sitio', 
+                    consulta: $("#loBusca").val(),
+                    filtro: "icon-music"                    
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            
+                            $("#contenido_respuesta").html(data);    
+                }
+            });                                   
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }            
+    }); 
+    
+    /*
+     * Consulta Filtro Hoteles
+     */
+    $("#BuscaBar").click(function(){        
+        if($("#loBusca").val().length >= 1){
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesConsulta.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'busca_sitio', 
+                    consulta: $("#loBusca").val(),
+                    filtro: "icon-glass"                    
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            
+                            $("#contenido_respuesta").html(data);    
+                }
+            });                                   
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }            
+    }); 
+
 });
