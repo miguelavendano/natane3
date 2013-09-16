@@ -9,6 +9,7 @@
         public $modal;
         public $links;
         public $metas;
+        public $script;
 
         public $segui;
         public $usuario;
@@ -62,8 +63,12 @@
                             <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />';            
             
             
+            $this->script = "";
+            
+            
             $this->dic_general = array( 'metas' => $this->metas,
                                         'links' => $this->links ,
+                                        'script' => $this->script,
                                         'head' => $this->head ,
                                         'contenido' => $this->perfil
                                         );
@@ -84,8 +89,10 @@
             
             $this->dic_general = array( 'metas' => $this->metas,
                                         'links' => $this->links ,
+                                        'script' => $this->script,
                                         'head' => $this->head ,
-                                        'contenido' => $this->perfil);
+                                        'contenido' => $this->perfil
+                                        );
             
             $this->dic_contenido = array('datos_usuario' => $this->usuario, 
                                         'seguidores' => $this->segui, 

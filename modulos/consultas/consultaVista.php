@@ -13,6 +13,7 @@
         private $metas;
         private $dic_consulta;
         private $dic_base;
+        public $script;
         
         
         public function __construct() {
@@ -37,10 +38,13 @@
                             <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    
                             <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />';            
             
+            $this->script = "";
+            
             $this->dic_consulta = array('resultado'=>$this->elem_result, 'modales'=>$this->modal);
             
             $this->dic_base = array('metas'=>$this->metas,
                                 'links'=>$this->links,
+                                'script' => $this->script,
                                 'head'=>$this->head,
                                 'contenido'=>$this->resul);            
             
@@ -53,8 +57,9 @@
             
             $this->dic_base = array('metas'=>$this->metas,
                                 'links'=>$this->links,
+                                'script' => $this->script,
                                 'head'=>$this->head,
-                                'contenido'=>$this->resul);
+                                'contenido'=>$this->resul);        
             
             
         }

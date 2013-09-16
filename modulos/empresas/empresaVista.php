@@ -26,6 +26,8 @@
         public $descripcion;
         public $editar;
         
+        public $script;        
+        
         public $dic_general;
         public $dic_contenido;
 
@@ -77,12 +79,17 @@
                             <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    ';
 
             
+
+            $this->script = "";            
+            
             
             
             $this->dic_general = array('metas' => $this->metas,
                                     'links' => $this->links ,
+                                    'script' => $this->script,
                                     'head' => $this->head ,
                                     'contenido' => $this->empresa);
+            
             
             $this->dic_contenido = array('slider_empresa' => $this->slider_empresa, 
                                         'descripcion' => $this->descripcion, 
@@ -103,6 +110,7 @@
             
             $this->dic_general = array('metas' => $this->metas,
                                     'links' => $this->links ,
+                                    'script' => $this->script,
                                     'head' => $this->head ,
                                     'contenido' => $this->empresa);
             

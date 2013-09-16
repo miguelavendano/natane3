@@ -9,6 +9,7 @@
         public $modal;
         public $links;
         public $metas;
+        private $dic_base;
 
         public $id_sitio;
         public $nombre;
@@ -77,8 +78,12 @@
                             <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />';
     
             
+            $this->script = "";
+            
+            
             $this->dic_general = array('metas' => $this->metas,
                                     'links' => $this->links ,
+                                    'script' => $this->script,
                                     'head' => $this->head ,
                                     'contenido' => $this->sitio);
 
@@ -103,6 +108,7 @@
             
             $this->dic_general = array('metas' => $this->metas,
                                     'links' => $this->links ,
+                                    'script' => $this->script,
                                     'head' => $this->head ,
                                     'contenido' => $this->sitio);
             

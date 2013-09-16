@@ -9,6 +9,7 @@
         public $modal;
         public $links;
         public $metas;
+        public $script;
         
         public $galeria;
         public $fotos;   
@@ -47,10 +48,29 @@
 
 ';            
             
+            
+            $this->script ='    
+                        <script src="{JS}/jquery-1.8.2.min.js"></script>
+                        <script src="{JS}/plugins.js"></script>
+                        <script src="{JS}/scripts.js"></script>
+                        <script>
+                          $(document).ready(function(){
+                           $('.'"#gallery-container").sGallery({
+                              fullScreenEnabled: true
+                            });
+                          });
+                        </script> ';
+            
+            
+            
+            
+            
             $this->dic_base = array('metas'=>$this->metas,
                                 'links'=>$this->links,
+                                'script' => $this->script,
                                 'head'=>$this->head,
-                                'contenido'=>$this->galeria);                                    
+                                'contenido'=>$this->galeria);     
+            
             $this->dic_galeria = array('fotos'=>  $this->albun,
                                     'modales'=>  $this->modal);              
             
@@ -63,6 +83,7 @@
             
             $this->dic_base = array('metas'=>$this->metas,
                                 'links'=>$this->links,
+                                'script'=> $this->script,
                                 'head'=>$this->head,
                                 'contenido'=>$this->galeria);
             

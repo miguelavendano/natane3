@@ -12,7 +12,7 @@
         public $links;
         public $form_registro;
         public $dic;
-        
+        public $script;
         
         public function __construct() {
             
@@ -37,11 +37,14 @@
                             <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
                             <link href="{CSS}/datepicker.css" rel="stylesheet" />
                             <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    
-                            <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />';                        
+                            <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />';      
+            
+            $this->script = "";
             
             
             $this->dic = array('metas'=>$this->metas,
                                 'links'=>$this->links,
+                                'script' => $this->script,
                                 'head'=>$this->head,
                                 'contenido'=>$this->form_registro);             
             
