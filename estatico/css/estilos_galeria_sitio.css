@@ -9,20 +9,17 @@
 }*/
 
 #galeria_sitio{
-  	background-color: white;  	
+  	background-color: black;  	
   	margin-top: 10px;
   	margin-bottom: 10px;
   	border: 1px solid #ccc;
-  	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
 }
 
 .foto_galeria{
-	width: 200px;
-	height: 150px;	
+/*	width: 200px;
+	height: 150px;	*/
 	margin: 0 auto;
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 }
 
 .foto_galeria img{
@@ -31,27 +28,68 @@
 }
 
 .foto_galeria img:hover{
-	border: 1px solid #00FF00;
+	/*border: 1px solid #00FF00;*/
 }
 
-.autor{
-	margin: 0 auto;
-	padding: 10px;
-}
-.autor .autor_galeria{
-	width: 30px;
-	height: 30px;	
+.autor-big{
+	margin: 0 auto;	
+	width: 100%;
+	height: 40px;       
 	position: relative;
-	float: left;
-	}
-
-.autor .autor_galeria img{
-   	width: 100%;
-	height: 100%;
+	float: left;        
 }
-.autor h6{
+
+
+.autor-big img{
+   	width: 30px;
+	height: 30px;
+        float: left;
+        margin: 5px;
+}
+.autor-big h6{
 	width: 175px;
-	height: 20px;	
- 	margin-left: 40px;
-	overflow: hidden;			
+	height: 20px;	 	
+	overflow: hidden;
+        float: left;
+        text-align: left;
+}
+
+
+.autor-small{
+	margin: 0 auto;	
+	width: 100%;
+	height: 30px;       
+	position: relative;
+	float: left;            
+    
+    
+}
+.autor-small p{
+	width: 70%;
+	height: 10px;	 		
+        float: left;
+        text-align: left;
+        font-size: 12px;
+}
+
+
+.autor-small .imgautor{
+   	width: 20px;
+	height: 20px;
+        float: left;
+        margin: 2px;
+}
+
+.autor-big .imgautor{
+   	width: 20px;
+	height: 20px;
+        float: left;
+        margin: 2px;
+}
+.autor-small h6{
+	width: 70%;
+	height: 10px;	 		
+        float: left;
+        text-align: left;
+        font-size: 12px;
 }

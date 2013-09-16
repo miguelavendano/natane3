@@ -224,12 +224,23 @@ class ModelExperiencia{
                 $queryRes = new Cypher\Query(Neo4Play::client(), $query);                          
                 $usuario = $queryRes->getResultSet();                    
                 
+                    $img_nombre = $img['']->getProperty('nombre');
+                    $img_id = $img['']->getId();
+                    $suario_id=$usuario[0]['']->getId();
+                    $suario_img=$usuario[0]['']->getProperty('imagen'); 
+                    
+                    if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
+                        $suario_nick=$usuario[0]['']->getProperty('nombre');                
+                    }else{
+                        $suario_nick=$usuario[0]['']->getProperty('nick');                
+                    }
+                    
                 $retorno = array(
-                    'img_nombre'=>$img['']->getProperty('nombre'), 
-                    'img_id'=>$img['']->getId(), 
-                    'usuario_id'=>$usuario[0]['']->getId(),
-                    'usuario_img'=>$usuario[0]['']->getProperty('imagen'), 
-                    'usuario_nick'=>$usuario[0]['']->getProperty('nick')
+                    'img_nombre'=>$img_nombre,
+                    'img_id'=>$img_id,
+                    'usuario_id'=>$suario_id,
+                    'usuario_img'=>$suario_img,
+                    'usuario_nick'=>$suario_nick
                     );
 
 

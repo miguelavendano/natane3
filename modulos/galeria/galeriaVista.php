@@ -11,7 +11,8 @@
         public $metas;
         
         public $galeria;
-        public $fotos;     
+        public $fotos;   
+        public $albun;
         
         public $dic_galeria;
         public $dic_base;
@@ -24,6 +25,7 @@
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');            
             $this->galeria = file_get_contents('../../plantillas/galeria/galeria.html');
             $this->fotos = file_get_contents('../../plantillas/galeria/fotosGaleria.html');
+            $this->albun = file_get_contents('../../plantillas/galeria/albun.html');
 
             
             $this->metas = '<meta charset="utf-8">
@@ -40,13 +42,16 @@
                         <link href="{CSS}/estilos_modal.css" rel="stylesheet" />    
                         <link href="{CSS}/datepicker.css" rel="stylesheet" />
                         <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    
-                        <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />            ';            
+                        <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />                                    
+                        <link rel="stylesheet" href="{CSS}/styles.css" />                        
+
+';            
             
             $this->dic_base = array('metas'=>$this->metas,
                                 'links'=>$this->links,
                                 'head'=>$this->head,
                                 'contenido'=>$this->galeria);                                    
-            $this->dic_galeria = array('fotos'=>  $this->fotos,
+            $this->dic_galeria = array('fotos'=>  $this->albun,
                                     'modales'=>  $this->modal);              
             
             
@@ -61,8 +66,10 @@
                                 'head'=>$this->head,
                                 'contenido'=>$this->galeria);
             
-            $this->dic_galeria = array('fotos'=>  $this->fotos,
-                                    'modales'=>  $this->modal);            
+            $this->dic_galeria = array('fotos'=>  $this->albun,
+                                    'modales'=>  $this->modal);
+            
+            
             
             
         }
@@ -77,7 +84,7 @@
             for($c=0; count($datos); $c++){                
                 
                 
-                $resultados .= '<div class="row-fluid">';                            
+                //$resultados .= '<div class="row-fluid">';                            
                 $i=0;
                 do{ 
                     $sitio=array_shift($datos);
@@ -91,7 +98,7 @@
                     $i++;
                 }while((count($datos)!=0)&& $i<4);
 
-                $resultados .= '</div>';
+                //$resultados .= '</div>';
             }
             
             
@@ -104,6 +111,27 @@
 //                    'usuario_img'=>$usuario[0]->getProperty('imagen'), 
 //                    'usuario_nick'=>$usuario[0]->getProperty('nick'), 
 //                    'usuario_id'=>$usuario[0]->getId());            
+            
+        }
+        
+        
+        public function refactory_albun(){
+
+            $fotos_small = str_ireplace("{tamano}", "small", $this->fotos);
+            $fotos_small = str_ireplace("{tam_foto_big}", "", $fotos_small );
+            
+            $fotos_big = str_ireplace("{tamano}", "big", $this->fotos);
+            $fotos_big = str_ireplace("{tam_foto_big}", "--big", $fotos_big );            
+            
+            
+            $this->albun = str_ireplace("{foto_small}", $fotos_small , $this->albun);
+            $this->albun = str_ireplace("{foto_big}", $fotos_big , $this->albun);
+            
+
+            
+                       
+            
+            $this->actualizar_diccionarios();
             
         }
         

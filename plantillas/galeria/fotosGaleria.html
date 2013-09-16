@@ -1,19 +1,15 @@
-
-            <div class="span3" id="galeria_sitio">
-                <div class="row-fluid">
-                    <a href="#">
-                        <div class="foto_galeria">
-                            <img src="{IMG_NATANE}/{imagen}" />
-                        </div>                         
-                    </a>   
-                </div>
-                <div class="row-fluid autor">
-                    <a href="{url_usuario}?id={id_usuario}">
-                        <div class="autor_galeria">
-                            <img src="{IMG_NATANE}/{img_usuario}"/>
-                        </div>
-                        <h6>{nombre_usuario}</h6>                          
-                    </a>
-                </div>                     
-            </div>
+    <li class="item{tam_foto_big}">         
         
+      <a href="#"><img src="{IMG_NATANE}/{imagen}" alt="" /></a>
+      
+      <div class="autor-{tamano}">
+
+        <a href="#">
+            
+            <img class="imgautor" src="{IMG_NATANE}/{img_usuario}"/>
+            
+            <p>{nombre_usuario}</p>                          
+        </a>
+           
+      </div>                           
+    </li>

@@ -45,6 +45,7 @@
         public function main($id){
             
             $this->vista->refactory_fotos($this->fotos($id));
+            $this->vista->refactory_albun();
             $this->vista->refactory_resultados_total();
             
         }
