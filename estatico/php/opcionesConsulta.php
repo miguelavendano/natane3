@@ -78,7 +78,7 @@ if(isset($_POST['opcion'])){
                     <div class="row-fluid imagen-resultado">
                         <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
                         <div class="row-fluid titulo-result">
-                            <a href="/natane3/modulos/sitios/sitio.php?id='.$resultado[$i]->id.'"><h6><i class="'.$resultado[$i]->tipo_sitio.'"></i>'.$resultado[$i]->nombre.'</h6></a>
+                            <a href="/natane3/modulos/sitios/sitio.php?id='.$resultado[$i]->id.'"><h6><i class="'.$resultado[$i]->tipo_sitio.'"></i> '.$resultado[$i]->nombre.'</h6></a>
                         </div>        
                     </div>    
                 </div>';            
@@ -112,7 +112,7 @@ if(isset($_POST['opcion'])){
                     <div class="row-fluid imagen-resultado">
                         <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
                         <div class="row-fluid titulo-result">
-                            <a href="/natane3/modulos/sitios/sitio.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre.'</h6></a>
+                            <a href="/natane3/modulos/empresas/empresa.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre.'</h6></a>
                         </div>        
                     </div>    
                 </div>';                
@@ -284,7 +284,7 @@ if(isset($_POST['opcion'])){
                     <div class="row-fluid imagen-resultado">
                         <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
                         <div class="row-fluid titulo-result">
-                            <a href="/natane3/modulos/sitios/sitio.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre.'</h6></a>
+                            <a href="/natane3/modulos/empresas/empresa.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre.'</h6></a>
                         </div>        
                     </div>    
                 </div>';                

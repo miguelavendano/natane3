@@ -1,12 +1,10 @@
 $(document).ready(function(){
       
     /*
-     * Cerrar sesion de Usuario
-     */
+     * Realiza la busqueda
+    
     $("#BBuscar").click(function(){        
-        //alert($("#loBusca").val());
-        //document.location.href="http://localhost/natane3/modulos/consultas/consulta.php";
-        
+        if($("#loBusca").val().length >= 1){                
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
@@ -23,11 +21,14 @@ $(document).ready(function(){
                         else alert("Consulta no hecha");                                                     
                 }
             });                                   
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }            
     });  
-
+        */
 
     /*
-     * Consulta Usuarios
+     * Consulta Todos los elementos
      */
     $(".BuscaTodo").click(function(){        
         if($("#loBusca").val().length >= 1){        
@@ -46,7 +47,7 @@ $(document).ready(function(){
             });      
         }else{
             alert("No hay datos para relizar una busqueda")
-        }                        
+        }
     });      
 
 
