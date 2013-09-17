@@ -1717,10 +1717,13 @@ select:focus:invalid:focus {
           border-radius: 0;
 }
 
+.input-append .btn{
+    border-color: #FFFFFF;
+}
 .input-append .active,
 .input-prepend .active {
-  background-color: #a9dba9;
-  border-color: #46a546;
+  background-color: #0D85D6;
+  border-color: #0B29BD;
 }
 
 .input-prepend .add-on,
@@ -4552,7 +4555,7 @@ input[type="submit"].btn.btn-mini {
   text-decoration: none;
   background-color: transparent;
 }
-
+/*
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
 .navbar .nav > .active > a:focus {
@@ -4562,7 +4565,7 @@ input[type="submit"].btn.btn-mini {
   -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
      -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
           box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-}
+}*/
 
 .navbar .btn-navbar {
   display: none;
@@ -4726,7 +4729,8 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-inverse .brand,
 .navbar-inverse .nav > li > a {
-  color: #999999;
+  /*color: #999999;*/
+  color: rgb(206, 203, 203);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -4736,7 +4740,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-inverse .brand {
-  color: #999999;
+  color: #999999;    
 }
 
 .navbar-inverse .navbar-text {
@@ -4745,23 +4749,33 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-inverse .nav > li > a:focus,
 .navbar-inverse .nav > li > a:hover {
-  color: #ffffff;
-  background-color: transparent;
+    color: #FFFFFF;
+    background-color: green;
+    /*color: rgb(42, 207, 1);
+    background-color: transparent; */
+    -moz-box-shadow:inset 0 0 20px #000000;
+    -webkit-box-shadow:inset 0 0 20px #000000;
+    box-shadow:inset 0 0 20px #000000;  
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;    
 }
 
 .navbar-inverse .nav .active > a,
 .navbar-inverse .nav .active > a:hover,
 .navbar-inverse .nav .active > a:focus {
   color: #ffffff;
-  background-color: green;
+  background-color: rgb(22, 155, 27) 
 }
 
 .navbar-inverse .navbar-link {
   color: #999999;
+  
 }
 
 .navbar-inverse .navbar-link:hover {
   color: #ffffff;
+  
 }
 
 .navbar-inverse .divider-vertical {

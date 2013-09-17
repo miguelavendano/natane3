@@ -3,10 +3,10 @@ $(document).ready(function(){
     /*
      * Registro de un nuevo Sitio
      */
-    $("#registrarE").click(function(){
+    $("#guarda_empresa").click(function(){
         if($("#Rpass1E").val()==$("#Rpass2E").val()){  //valida contraseñas         
                     $.ajax({
-                        url:'/natane3/estatico/php/opcionesSitio.php'
+                        url:'/natane3/estatico/php/opcionesEmpresa.php'
                         ,type:'POST'                    
                         ,data:{
                             opcion:'registrarE',
@@ -34,8 +34,8 @@ $(document).ready(function(){
                             var n=data.split(" ");                           
                             
                             if(/true/.test(data)) {                                
-                                alert("Registro Exitoso  :D");                                                                          
-                                document.location.href="http://localhost/natane3/modulos/empresa/empresa.php?id="+n[0];
+                                alert("Registro Exitoso  :D"+n[0]);
+                                document.location.href="http://localhost/natane3/modulos/empresas/empresa.php?id="+n[0];
                             }
                             else alert("No se ha podido realizar su registro"); 
 
@@ -61,7 +61,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");            
 
             $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'editarE',                            
@@ -110,7 +110,6 @@ $(document).ready(function(){
                         $("#EtwiE").val(data.twi);
                         $("#EyouE").val(data.you);
                         $("#Epass1E").val(data.pass);
-                        //$("#Eimagen").val(data.imagen);                        
                       
                 }
             });            
@@ -126,30 +125,27 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");  
             
             $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'guardar_edicionE',
-                    sitio: id_url[1],
+                    empresa: id_url[1],
                     nombre: $("#EnomE").val(),
                     descri: $("#EdescE").val(),
+                    nit: $("#EnitE").val(),
                     city: $("#EcityE").val(),                    
                     direc: $("#EdirE").val(),
                     tele: $("#EtelE").val(),                    
                     mail: $("#EmailE").val(),                    
                     lat: $("#ElatE").val(),                    
-                    lon: $("#ElongE").val(),
+                    lon: $("#ElongE").val(),                    
                     s_web: $("#Es_webE").val(),
                     face: $("#EfaceE").val(),
                     twit: $("#EtwiE").val(),
-                    youtube: $("#EyouE").val(),                    
+                    youtube: $("#EyouE").val(),
                     pass: $("#Epass1E").val()
-                    //imagen: $("#Epass1").val(data.imagen),
                 }
                 ,dataType:'JSON'
-                ,beforeSend:function(jqXHR, settings ){
-                    alert("Debe confirmar su identidad, para realizar los cambios.");                                        
-                }
                 ,success: function(data,textStatus,jqXHR){                           
 
                         if(/true/.test(data)) {                                
@@ -162,17 +158,20 @@ $(document).ready(function(){
     });    
 
     /*
-     * Cancelar edicion de los datos del usuario
+     * Cancelar edicion de los datos de la empresa
      */
-
-    $("#cancel_edicion_empresa").click(function(){
-        
-             $("#editarEmpresa").css({display:'none'});   
-             //$(".pestañas").css({display:'inline'});                         
-             
+    $(".cancelar_edicion_empresa").click(function(){        
+             $("#editarEmpresa").css({display:'none'});                
+    }); 
+    
+    /*
+     * Cancelar creacion de una empresa
+     */   
+    $(".cancelarRegistroEmpresa").click(function(){        
+             $("#registrarEmpresa").css({display:'none'});   
+             $(".pestañas").css({display:'inline'});    //en perfi de usuario muestra las experiencias
     });    
     
-
     /*
      * Crea la relacion "Amigo" entre dos usuarios
      */   
@@ -209,8 +208,17 @@ $(document).ready(function(){
             });                           
 
     });
+/*
+    $("#Bconfio").click(function(){
+            $("#Bconfio").css({display:'none'});                
+            var boton_confia='<button id="Byanoconfio" class="btn btn-red-wine active btn-block"><i class="icon-thumbs-up"></i> Confio en esta empresa</button>';
+            document.getElementById('confio').innerHTML = boton_confia;
+    });   
     
-
-
+    $("#Byanoconfio").click(function(){
+            var boton_ya_no='<button id="Bconfio" class="btn btn-red-wine btn-block">Confio en esta empresa</button>';
+            document.getElementById('confio').innerHTML = boton_ya_no;            
+    });   
+*/
 });
 

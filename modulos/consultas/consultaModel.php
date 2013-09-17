@@ -10,25 +10,24 @@
         public $consulta;
         
         
-        public function __construct($busqueda) {
-            
+        public function __construct($busqueda) {            
             $this->modelsitios = new ModelSitios();
             $this->consulta = $busqueda;
-            
-            
         }       
         
         
         public function get_resultados(){   
             
             
-            $query = "START n=node(*) WHERE n.type='Sitio' RETURN n;";       
-            $ale = rand(1, 20);
+            //$query = "START n=node(*) WHERE n.type='Sitio' RETURN n;"; 
+            $query = "START n=node(*) WHERE n.nombre =~ '".$this->consulta.".*' RETURN n";
+            //$ale = rand(1, 20);
             
-            $resultado = $this->modelsitios->get_sitio_aleatorio($query, $ale);
+            //$resultado = $this->modelsitios->get_sitio_aleatorio($query, $ale);
             
-            return $resultado;
-            
+            $resultado = $this->modelsitios->get_sitio_aleatorio($query);
+                        
+            return $resultado;            
         }  
     }
         

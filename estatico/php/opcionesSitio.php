@@ -15,7 +15,7 @@ if(isset($_POST['opcion'])){
 
         // Registro de un Usuario
         case "registrarS":                       
-            echo $band;
+
             $img='humadea.jpg;';
             $web=$_POST['nombre']."_".substr($_POST['nombre'],0,1).".com";
             $face='http://www.facebook.com/AnDaLaTo';    
@@ -45,7 +45,6 @@ if(isset($_POST['opcion'])){
             $nodo_sitio->type = 'Sitio';
             ModelSitios::crearNodoSitio($nodo_sitio); //crea el nodo del Sitio
             
-            $band="";
             $band=$nodo_sitio->id;  //obtengo el id del nodo creado
             $band=$band." true";
             

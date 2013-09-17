@@ -80,11 +80,11 @@
                     $aux = $elemento;
                     $aux = str_ireplace("{id_sitio}", $sitio->id, $aux);
                     $aux = str_ireplace("{nombre}", $sitio->nombre, $aux);
-                    $aux = str_ireplace("{imagen}", $sitio->imagen, $aux);                
+                    $aux = str_ireplace("{imagen}", $sitio->imagen, $aux);
+                    $aux = str_ireplace("{icono}", $sitio->tipo_sitio, $aux);
                     $resultados .= $aux;
                     $i++;
                 }while((count($datos)!=0)&& $i<4);
-                
                 
                 $resultados .= '</div>';
             }
@@ -130,12 +130,7 @@
             
             
             echo $this->base;
-            
-            
-            
         }
-        
-
     }
         
 ?>

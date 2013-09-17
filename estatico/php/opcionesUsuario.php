@@ -13,24 +13,7 @@ if(isset($_POST['opcion'])){
     $opcion=$_POST['opcion'];
             
     switch ($opcion){
-        
-        // BUSQUEDA
-        case "busca":                       
-            
-            //header('Location: http://localhost/natane3/modulos/consultas/consulta.php');
-            //header("Location: http://www.google.com");
-            /*
-            if($_POST['busca']){
-                $band= true;
-                 echo "esta buscando".$_POST['busca'];
-                }
-            else {
-                $band= false;
-                echo"no ingreso datos a la busqueda";
-            }*/
-            
-        break;
-
+       
         // Registro de un Usuario
         case "registrarU":                       
 
@@ -84,24 +67,11 @@ if(isset($_POST['opcion'])){
            $band = json_encode($band);
             
         break;    
-  /*  
+  
         case "guardar_edicionU":       
-            
-            $upload_folder ='../../estatico/imagenes/';
-            $nombre_archivo = $_FILES['imagen']['name'];
-            $tmp_archivo = $_FILES['imagen']['tmp_name'];            
-            //$tipo_archivo = $_FILES['imagen']['type'];
-            //$tamano_archivo = $_FILES['imagen']['size'];
-
-            echo $nombre_archivo;
-            $nomFofoPerfil = $_POST['usuario'].'_'.$nombre_archivo;
-            echo $nomFofoPerfil;
-
-            move_uploaded_file($tmp_archivo, $upload_folder.$nomFofoPerfil);   //guarda la imagen
-                    
+                   
             ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['nombre']);
             ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['apellido']);            
-            //ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", $nomFofoPerfil);         
             ModelUsuarios::editar_usuario($_POST['usuario'], "nick", $_POST['nick']);            
             ModelUsuarios::editar_usuario($_POST['usuario'], "genero",$_POST['genero']);
             ModelUsuarios::editar_usuario($_POST['usuario'], "fecha_nacimiento", $_POST['f_nace']);
@@ -117,7 +87,7 @@ if(isset($_POST['opcion'])){
             $band="true";
             
         break;        
-*/
+/*
         case "guardar_edicionU":       
             
             $upload_folder ='../../estatico/imagenes/';
@@ -154,8 +124,8 @@ if(isset($_POST['opcion'])){
             $band="true";
             
         break;      
-
-        case "idiFotoPerfil":       
+*/
+        case "ediFotoPerfil":       
             
             $upload_folder ='../../estatico/imagenes/';
             
@@ -282,8 +252,7 @@ if(isset($_POST['opcion'])){
     
         case "relacion_amigo":                       
             
-            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['amigo'], "Amigo");   //crea la relacion de amistad
-            
+            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['amigo'], "Amigo");   //crea la relacion de amistad            
             $band = 'true';
             
         break;    
@@ -309,8 +278,7 @@ if(isset($_POST['opcion'])){
             }
             else {
                 $band="false";
-            }
-            
+            }            
             
         break;    
     

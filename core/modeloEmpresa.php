@@ -78,7 +78,7 @@ class ModelEmpresa{
             
                 foreach($result as $row) {
                     
-                    $empresa = new Sitio();
+                    $empresa = new Empresa();
                     $empresa->id = $row['']->getId();
                     $empresa->nombre = $row['']->getProperty('nombre');
                     $empresa->nit = $row['']->getProperty('nit');

@@ -65,10 +65,8 @@
 
     if($validar->validar_id($idsitio, "Sitio")){
         $usuairo = new Sitios($idsitio);
-        $usuairo->main();
-        
-    }else{
-        
+        $usuairo->main();        
+    }else{        
         header('Location: /natane3/Index/');
     }
 

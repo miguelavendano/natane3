@@ -1,6 +1,9 @@
-        <!-- editar perfil-->
+        <!-- editar empresa-->
         <div id="editarEmpresa" style="display: none">
-            <legend><h3>Editar Perfil</h3></legend>        
+            <legend>
+                <a class="close cancelar_edicion_empresa">&times;</a>            
+                <h3>Editar Perfil</h3>
+            </legend>       
             <form class="form-horizontal">
                 <div class="control-group">
                     <label class="control-label" for="EnomE">Nombre: </label>
@@ -17,7 +20,7 @@
                 <div class="control-group">
                     <label class="control-label" for="EdescE">Descripcion: </label>
                     <div class="controls">
-                        <textarea id="EdescS" required></textarea>
+                        <textarea id="EdescE" style="min-width: 200px; max-width: 500px; max-height: 200px" required></textarea>
                     </div>
                 </div>
                 <div class="control-group">
@@ -81,22 +84,22 @@
                     </div>
                 </div>                
                 <div class="control-group">
-                    <label class="control-label" for="Epass1">Contraseña: </label>
+                    <label class="control-label" for="Epass1E">Contraseña: </label>
                     <div class="controls">
-                        <input type="password" class="input-medium" id="Epass1S" required>
+                        <input type="password" class="input-medium" id="Epass1E" required>
                         <span class="help-inline">minimo 6 caracteres entre letras y números</span>      
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="Epass2">Confirma tu Contraseña: </label>
+                    <label class="control-label" for="Epass2E">Confirma tu Contraseña: </label>
                     <div class="controls">
-                        <input type="password" class="input-medium" id="Epass2S" required>
+                        <input type="password" class="input-medium" id="Epass2E" required>
                     </div>
                 </div>
-                <div class="control-group">                  
+                <div class="control-group">
                   <div class="controls">
                     <a class="btn btn-primary" id="guarda_edicion_empresa">Guardar Cambios</a>
-                    <a class="btn btn-red" id="cancel_edicion_empresa">Cancelar</a>
+                    <a class="btn btn-red cancelar_edicion_empresa">Cancelar</a>
                   </div>
                 </div>                
             </form>   

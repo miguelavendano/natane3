@@ -25,6 +25,8 @@
         public $img_slider;
         public $descripcion;
         public $editar;
+        public $latitud;
+        public $longitud;        
         
         public $script;        
         
@@ -100,8 +102,10 @@
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
                                         'experiencias'=> $this->expe,
-                                        'nombre_empresa'=>$this->nombre);
-            
+                                        'nombre_empresa'=>$this->nombre,
+                                        'editarEmpresa' => $this->editar,
+                                        'latitud'=>$this->latitud,                
+                                        'longitud'=>$this->longitud);
             
         }
         
@@ -123,7 +127,10 @@
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
                                         'experiencias'=> $this->expe,
-                                        'nombre_empresa'=>$this->nombre);
+                                        'nombre_empresa'=>$this->nombre,
+                                        'editarEmpresa' => $this->editar,
+                                        'latitud'=>$this->latitud,                
+                                        'longitud'=>$this->longitud);
             
             
         }
@@ -196,7 +203,7 @@
                 $nombre = '';
                 $url = '';
                 $aux = $this->gustaria;
-                echo $valor->type;
+                //echo $valor->type;
                 if($valor->type == "Empresa"){                                    	         
                     $empresa = 'style="background-color: #CBFEC1"';
                     $nombre = $valor->nombre;
@@ -316,26 +323,27 @@
                 $experiencias .= $aux;
             }
             
-            $this->expe = $experiencias;
-            
+            $this->expe = $experiencias;            
             $this->actualizar_diccionarios();
-            
-            
+                        
         }        
             
-        
+
+        public function refactory_mapa( $coordenadas ){            
+            $this->latitud = $coordenadas[0]->latitud;
+            $this->longitud = $coordenadas[0]->longitud;                      
+            $this->actualizar_diccionarios();
+        }        
+                
              
         
         public function refactory_contenido(){            
             
-            foreach($this->dic_contenido as $clave=>$valor){
-               
-                $this->empresa = str_ireplace('{'.$clave.'}', $valor, $this->empresa);
-                
+            foreach($this->dic_contenido as $clave=>$valor){               
+                $this->empresa = str_ireplace('{'.$clave.'}', $valor, $this->empresa);                
             }           
             $this->actualizar_diccionarios();
-            
-            
+                        
         }        
         
         public function refactory_total(){
