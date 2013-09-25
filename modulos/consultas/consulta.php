@@ -29,7 +29,7 @@
         }
     }
 
-    $busqueda = $_GET['busqueda'];
+    $busqueda = $_GET['b'];
     
     $consulta = new consulta($busqueda);
     $consulta->main();

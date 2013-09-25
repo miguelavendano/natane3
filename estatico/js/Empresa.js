@@ -26,9 +26,6 @@ $(document).ready(function(){
                             contra1: $("#Rpass1E").val()
                         }
                         ,dataType:'html'
-                        ,beforeSend:function(jqXHR, settings ){
-                            //alert("Se esta creando su perfil");
-                        }
                         ,success: function(data,textStatus,jqXHR){                           
 
                             var n=data.split(" ");                           
@@ -208,17 +205,59 @@ $(document).ready(function(){
             });                           
 
     });
-/*
-    $("#Bconfio").click(function(){
-            $("#Bconfio").css({display:'none'});                
-            var boton_confia='<button id="Byanoconfio" class="btn btn-red-wine active btn-block"><i class="icon-thumbs-up"></i> Confio en esta empresa</button>';
-            document.getElementById('confio').innerHTML = boton_confia;
-    });   
     
-    $("#Byanoconfio").click(function(){
-            var boton_ya_no='<button id="Bconfio" class="btn btn-red-wine btn-block">Confio en esta empresa</button>';
-            document.getElementById('confio').innerHTML = boton_ya_no;            
-    });   
-*/
+    /*
+     * Le da un punto de confianza a la empresa
+     */        
+    
+    $("#Bconfio").toggle(
+      function() {      //le da un punto de confianza
+          
+            $(this).addClass("active");
+            $("#Bconfio i").addClass("icon-ok");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'puntos_confianza',                   
+                    empresa: id_url[1]
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+
+                        $("#puntos_confianza").html(data);    
+                }
+            });                                   
+        
+      }, function() {       //le quita el punto de confianza
+          
+            $(this).removeClass("active");            
+            $("#Bconfio i").removeClass("icon-ok");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'quita_puntos_confianza',                   
+                    empresa: id_url[1]
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                        
+                        $("#puntos_confianza").html(data);    
+
+                }
+            });                           
+        
+      }
+    );
+
 });
 

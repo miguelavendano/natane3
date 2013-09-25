@@ -16,7 +16,8 @@ class Empresa
 	public $direccion = '';
 	public $latitud	= '';
 	public $longitud = '';
-	public $correo = '';	
+        public $confianza = '';
+        public $correo = '';	
 	public $sitio_web = '';	
 	public $facebook = '';
 	public $twitter = '';

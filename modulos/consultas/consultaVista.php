@@ -76,15 +76,15 @@
                 $resultados .= '<div class="row-fluid">';                            
                 $i=0;
                 do{ 
-                    $sitio=array_shift($datos);
+                    $resultado=array_shift($datos);
                     $aux = $elemento;
-                    $aux = str_ireplace("{id_sitio}", $sitio->id, $aux);
-                    $aux = str_ireplace("{nombre}", $sitio->nombre, $aux);
-                    $aux = str_ireplace("{imagen}", $sitio->imagen, $aux);
-                    $aux = str_ireplace("{icono}", $sitio->tipo_sitio, $aux);
+                    $aux = str_ireplace("{id_sitio}", $resultado->id, $aux);
+                    $aux = str_ireplace("{nombre}", $resultado->nombre, $aux);
+                    $aux = str_ireplace("{imagen}", $resultado->imagen, $aux);
+                    $aux = str_ireplace("{icono}", $resultado->tipo_sitio, $aux);
                     $resultados .= $aux;
                     $i++;
-                }while((count($datos)!=0)&& $i<4);
+                }while((count($datos)!=0) && $i<4 && $resultado->type="Empresa" || $resultado->type="Sitio" || $resultado->type="Usuario");
                 
                 $resultados .= '</div>';
             }
@@ -109,19 +109,15 @@
             $this->actualizar_diccionarios();
             $globales = new Global_var();
             
-            $result_consulta = "";            
             
             foreach($this->dic_consulta as $clave=>$valor){
-               
-                $this->resul = str_ireplace('{'.$clave.'}', $valor, $this->resul);
-                
+                $this->resul = str_ireplace('{'.$clave.'}', $valor, $this->resul);                
             }           
+            
             $this->actualizar_diccionarios();
             
-            foreach ($this->dic_base as $clave=>$valor){
-                    
-                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
-                
+            foreach ($this->dic_base as $clave=>$valor){                    
+                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);                
             }
             
             foreach ($globales->global_var as $clave => $valor){

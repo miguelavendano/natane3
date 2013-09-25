@@ -163,8 +163,7 @@ class ModelSitios{
         }
         
         
-        public function get_sitio_aleatorio($queryString){
-            
+        public function get_todo($queryString){
                         
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
             $result = $query->getResultSet();
@@ -197,7 +196,7 @@ class ModelSitios{
             return $arsitios;  
 
         }
-        /*
+
         public function get_sitio_aleatorio($queryString, $cant){
             
                         
@@ -250,8 +249,7 @@ class ModelSitios{
 
         }
            
-         * 
-         */  
+        
         public function get_semejantes($queryString){
             
             $consul = new Cypher\Query(Neo4Play::client(), $queryString);
@@ -371,5 +369,7 @@ class ModelSitios{
             
             return $arsitios;  
         }               
+        
+        
 }
 

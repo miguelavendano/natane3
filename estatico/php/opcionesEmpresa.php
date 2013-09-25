@@ -91,6 +91,50 @@ if(isset($_POST['opcion'])){
             
         break;    
     
+        case "puntos_confianza":  
+  
+            $modelempresa = new ModelEmpresa();            
+            $query = "START n=node(".$_POST['empresa'].") RETURN n";                        
+            $resultado = $modelempresa->get_empresa($query);
+            
+            $masconfianza = $resultado[0]->confianza;
+            
+            $puntos = (int)$masconfianza;
+            $puntos++;
+                                                
+            ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);            
+            
+            $html = "<a class='btn btn-cyan active btn-block'>
+                        <h4>$puntos Puntos de Confianza</h4>
+                    </a>";
+            
+            $band="";
+            $band=$html;
+            
+        break;    
+    
+        case "quita_puntos_confianza":  
+  
+            $modelempresa = new ModelEmpresa();            
+            $query = "START n=node(".$_POST['empresa'].") RETURN n";                        
+            $resultado = $modelempresa->get_empresa($query);
+                        
+            $masconfianza = $resultado[0]->confianza;
+            
+            $puntos = (int)$masconfianza;
+            $puntos--;            
+                                  
+            ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);            
+            
+            $html = "<a class='btn btn-cyan active btn-block'>
+                        <h4>$puntos Puntos de Confianza</h4>
+                    </a>";
+            
+            $band="";
+            $band=$html;
+            
+        break;    
+    
         default : break; 
     }    
     

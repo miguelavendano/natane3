@@ -1474,6 +1474,7 @@ input[type="checkbox"][readonly] {
   color: #c09853;
   background-color: #fcf8e3;
   border-color: #c09853;
+  
 }
 
 .control-group.error .control-label,
@@ -4764,8 +4765,8 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .nav .active > a,
 .navbar-inverse .nav .active > a:hover,
 .navbar-inverse .nav .active > a:focus {
-  color: #ffffff;
-  background-color: rgb(22, 155, 27) 
+    color: #ffffff;
+    background-color: rgb(22, 155, 27);
 }
 
 .navbar-inverse .navbar-link {

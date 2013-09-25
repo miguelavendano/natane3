@@ -30,38 +30,73 @@ $(document).ready(function(){
     /*
      * Consulta Todos los elementos
      */
-    $(".BuscaTodo").click(function(){        
-        if($("#loBusca").val().length >= 1){        
+    $(".BarraBuscaTodo").click(function(){        
+        
+        if($("#loBusca").val().length >= 1){             
+
+            document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?b="+$("#loBusca").val();            
+            
+        }else{
+            alert("No hay datos para relizar una busqueda")
+        }
+    });      
+
+    /*
+     * Consulta Todos los elementos
+     */
+    $("#BuscaTodo").click(function(){      
+        
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+
+        if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_todo', 
-                    consulta: $("#loBusca").val()                    
+                    consulta: query                    
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){                                                      
                             $("#contenido_respuesta").html(data);                                
                 }
-            });      
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }
+            });  
+            
     });      
 
 
     /*
      * Consulta Usuarios
      */
-    $("#BuscaAventurero").click(function(){        
+    $("#BuscaAventurero").click(function(){   
+        
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_usuario', 
-                    consulta: $("#loBusca").val()                    
+                    consulta: query
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -69,9 +104,7 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);                                
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }                        
+        
     });      
 
 
@@ -79,13 +112,25 @@ $(document).ready(function(){
      * Consulta Sitios
      */
     $("#BuscaSitio").click(function(){        
+
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_sitio', 
-                    consulta: $("#loBusca").val(),
+                    consulta: query,
                     filtro: ""
                 }
                 ,dataType:'html'
@@ -94,9 +139,7 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);    
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
+            
     });      
     
 
@@ -104,13 +147,25 @@ $(document).ready(function(){
      * Consulta Empresas
      */
     $("#BuscaEmpresa").click(function(){        
+
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_empresa', 
-                    consulta: $("#loBusca").val()
+                    consulta: query
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -118,9 +173,7 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);    
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
+
     });      
             
     
@@ -128,13 +181,25 @@ $(document).ready(function(){
      * Consulta Filtro Hoteles
      */
     $("#BuscaHoteles").click(function(){        
+
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_sitio', 
-                    consulta: $("#loBusca").val(),
+                    consulta: query,
                     filtro: "icon-suitcase"                    
                 }
                 ,dataType:'html'
@@ -143,22 +208,32 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);    
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
+
     });      
     
     /*
      * Consulta Filtro Hoteles
      */
     $("#BuscaRestaurante").click(function(){        
+
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_sitio', 
-                    consulta: $("#loBusca").val(),
+                    consulta: query,
                     filtro: "icon-food"                    
                 }
                 ,dataType:'html'
@@ -167,22 +242,32 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);    
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
+
     });      
 
     /*
      * Consulta Filtro Hoteles
      */
     $("#BuscaRecreacion").click(function(){        
+
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_sitio', 
-                    consulta: $("#loBusca").val(),
+                    consulta: query,
                     filtro: "icon-flag"                    
                 }
                 ,dataType:'html'
@@ -191,22 +276,32 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);    
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
+
     });      
     
     /*
      * Consulta Filtro Hoteles
      */
     $("#BuscaCaminata").click(function(){        
+
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_sitio', 
-                    consulta: $("#loBusca").val(),
+                    consulta: query,
                     filtro: "icon-road"                    
                 }
                 ,dataType:'html'
@@ -215,9 +310,7 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);    
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
+
     });      
    
    
@@ -225,13 +318,25 @@ $(document).ready(function(){
      * Consulta Filtro Hoteles
      */
     $("#BuscaDisco").click(function(){        
+
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_sitio', 
-                    consulta: $("#loBusca").val(),
+                    consulta: query,
                     filtro: "icon-music"                    
                 }
                 ,dataType:'html'
@@ -240,22 +345,32 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);    
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
+      
     }); 
     
     /*
      * Consulta Filtro Hoteles
      */
     $("#BuscaBar").click(function(){        
+        
+        var mi_url=document.location.href;
+        var busqueda=mi_url.split("=");         
+        var query="";
+        
         if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        } else if(busqueda[1]){
+            query = busqueda[1];
+        } else{
+            alert("No hay datos para relizar una busqueda")                        
+        }
+        
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'busca_sitio', 
-                    consulta: $("#loBusca").val(),
+                    consulta: query,
                     filtro: "icon-glass"                    
                 }
                 ,dataType:'html'
@@ -264,9 +379,7 @@ $(document).ready(function(){
                             $("#contenido_respuesta").html(data);    
                 }
             });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
+
     }); 
 
 });

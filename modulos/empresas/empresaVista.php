@@ -26,8 +26,10 @@
         public $descripcion;
         public $editar;
         public $latitud;
-        public $longitud;        
-        
+        public $longitud;   
+        public $confianza;
+
+
         public $script;        
         
         public $dic_general;
@@ -105,7 +107,8 @@
                                         'nombre_empresa'=>$this->nombre,
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
-                                        'longitud'=>$this->longitud);
+                                        'longitud'=>$this->longitud,
+                                        'confianza'=>$this->confianza);
             
         }
         
@@ -130,7 +133,8 @@
                                         'nombre_empresa'=>$this->nombre,
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
-                                        'longitud'=>$this->longitud);
+                                        'longitud'=>$this->longitud,
+                                        'confianza'=>$this->confianza);
             
             
         }
@@ -154,6 +158,9 @@
         public function refactory_contacto($datos){                
 
             $this->nombre = $datos[0]->nombre;
+            
+            $this->descripcion = $datos[0]->descripcion;
+            
             $this->contacto = str_ireplace('{tel}',$datos[0]->telefono ,$this->contacto );
             $this->contacto = str_ireplace('{dir}',$datos[0]->direccion ,$this->contacto );
             $this->contacto = str_ireplace('{correo}',$datos[0]->correo ,$this->contacto );
@@ -161,7 +168,7 @@
             $this->contacto = str_ireplace('{twitter}',$datos[0]->twitter ,$this->contacto );
             $this->contacto = str_ireplace('{google}',$datos[0]->youtube ,$this->contacto );         
             
-            $this->descripcion = "un empresa excelente para  todo !! ";
+            $this->confianza = $datos[0]->confianza;           
 
             $this->actualizar_diccionarios();
             

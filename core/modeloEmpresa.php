@@ -42,6 +42,7 @@ class ModelEmpresa{
                                 ->setProperty('direccion', $minodo->direccion)
                                 ->setProperty('latitud', $minodo->latitud)
                                 ->setProperty('longitud', $minodo->longitud)
+                                ->setProperty('longitud', $minodo->confianza)                                
                                 ->setProperty('correo', $minodo->correo)
                                 ->setProperty('sitio_web', $minodo->sitio_web)
                                 ->setProperty('facebook', $minodo->facebook)
@@ -88,7 +89,8 @@ class ModelEmpresa{
                     $empresa->direccion = $row['']->getProperty('direccion');                    
                     $empresa->telefono = $row['']->getProperty('telefono');
                     $empresa->latitud = $row['']->getProperty('latitud');
-                    $empresa->longitud = $row['']->getProperty('longitud');                    
+                    $empresa->longitud = $row['']->getProperty('longitud');
+                    $empresa->confianza = $row['']->getProperty('confianza');
                     $empresa->correo = $row['']->getProperty('correo');
                     $empresa->sitio_web = $row['']->getProperty('sitio_web');                    
                     $empresa->facebook = $row['']->getProperty('facebook');
@@ -124,6 +126,8 @@ class ModelEmpresa{
                     $empresa->correo = $row['']->getProperty('correo');
                     $empresa->sitio_web = $row['']->getProperty('sitio_web');                    
                     $empresa->descripcion = $row['']->getProperty('descripcion');  
+                    
+                    $empresa->confianza = $row['']->getProperty('confianza');
                     
                     $empresa->facebook = $row['']->getProperty('facebook');
                     $empresa->twitter = $row['']->getProperty('twitter');
