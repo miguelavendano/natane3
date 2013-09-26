@@ -91,7 +91,7 @@ if(isset($_POST['opcion'])){
             
         break;    
     
-        case "puntos_confianza":  
+        case "da_confianza":  
   
             $modelempresa = new ModelEmpresa();            
             $query = "START n=node(".$_POST['empresa'].") RETURN n";                        
@@ -102,7 +102,9 @@ if(isset($_POST['opcion'])){
             $puntos = (int)$masconfianza;
             $puntos++;
                                                 
-            ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);            
+            ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);   //aumenta los puntos de confianza
+                     
+            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['empresa'], "Cliente");   //crea la relacion entre el usuario y la empresa
             
             $html = "<a class='btn btn-cyan active btn-block'>
                         <h4>$puntos Puntos de Confianza</h4>
@@ -113,7 +115,7 @@ if(isset($_POST['opcion'])){
             
         break;    
     
-        case "quita_puntos_confianza":  
+        case "quita_confianza":  
   
             $modelempresa = new ModelEmpresa();            
             $query = "START n=node(".$_POST['empresa'].") RETURN n";                        
@@ -124,7 +126,11 @@ if(isset($_POST['opcion'])){
             $puntos = (int)$masconfianza;
             $puntos--;            
                                   
-            ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);            
+            ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);     //disminuye los puntos de confianza
+
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['empresa'], "Cliente");  //consulto el ID de la relacion
+            
+            ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa
             
             $html = "<a class='btn btn-cyan active btn-block'>
                         <h4>$puntos Puntos de Confianza</h4>

@@ -207,9 +207,8 @@ $(document).ready(function(){
     });
     
     /*
-     * Le da un punto de confianza a la empresa
-     */        
-    
+     * Le da o le quita un punto de confianza a la empresa, crear su relacion con esa empresa
+     */            
     $("#Bconfio").toggle(
       function() {      //le da un punto de confianza
           
@@ -223,8 +222,9 @@ $(document).ready(function(){
                 url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion: 'puntos_confianza',                   
-                    empresa: id_url[1]
+                    opcion: 'da_confianza',                   
+                    empresa: id_url[1],
+                    usuario: '279'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -245,8 +245,9 @@ $(document).ready(function(){
                 url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion: 'quita_puntos_confianza',                   
-                    empresa: id_url[1]
+                    opcion: 'quita_confianza',                   
+                    empresa: id_url[1],
+                    usuario: '279'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           

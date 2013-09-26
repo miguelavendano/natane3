@@ -1,15 +1,22 @@
 <?php
-use Everyman\Neo4j\Relationship;
+
+require_once('coneccion.php');
+
+use Everyman\Neo4j\Node,
+    Everyman\Neo4j\Relationship,        
+    Everyman\Neo4j\Query\ResultSet,
+    Everyman\Neo4j\Cypher,
+    Everyman\Neo4j\Cypher\Query;
 
 /**
  * Clase con las funciones para ejecutar sobre cualquier tipo de relacion
- * (crear, eliminar, contar relaciones ...) 
+ * (crear, eliminar, contar, consultar ...) 
  */	
 class ModeloRelaciones
 {
 
-	public static function crearRelacion($idNodoStart,$idNodoEnd,$nameRelacion)
-	{
+	public static function crearRelacion($idNodoStart,$idNodoEnd,$nameRelacion){
+	
 
 		$nodoStart = Neo4Play::client()->getNode($idNodoStart);
 		$nodoEnd = Neo4Play::client()->getNode($idNodoEnd);
@@ -23,15 +30,15 @@ class ModeloRelaciones
                             ->save();			
 	}
 
-	public static function eliminarRelacion($idRelacion)
-	{
+	public static function eliminarRelacion($idRelacion){
+	
 		$eliminar = Neo4Play::client()->getRelationship($idRelacion);
 		$eliminar->delete();
 	}
 
 
-	public static function consultarTodaRelacion($idNodo)
-	{
+	public static function consultarTodaRelacion($idNodo){
+	
 		$miNodo = Neo4Play::client()->getNode($idNodo);
 
 		$relaciones = $miNodo->getRelationships();
@@ -47,8 +54,8 @@ class ModeloRelaciones
 
 	}	
 
-	public static function consultarRelacionSaliente($idNodo)
-	{
+	public static function consultarRelacionSaliente($idNodo){
+	
 		$miNodo = Neo4Play::client()->getNode($idNodo);
 		$relaciones= $miNodo->getRelationships(array(), Relationship::DirectionOut);
 
@@ -59,8 +66,8 @@ class ModeloRelaciones
 
 	}	
 
-	public static function consultarRelacionEntrante($idNodo)
-	{
+	public static function consultarRelacionEntrante($idNodo){
+	
 		$miNodo = Neo4Play::client()->getNode($idNodo);
 		$relaciones= $miNodo->getRelationships(array(), Relationship::DirectionIn);
 
@@ -70,8 +77,8 @@ class ModeloRelaciones
 
 	}			
 
-	public static function consultarTodaRelacionSegunTipo($idNodo,$tipoRelacion)
-	{
+	public static function consultarTodaRelacionSegunTipo($idNodo,$tipoRelacion){
+	
 		$miNodo = Neo4Play::client()->getNode($idNodo);
 		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
 
@@ -80,8 +87,8 @@ class ModeloRelaciones
 		else echo "El nodo <b>NO</b> tiene relaciones con ".$tipoRelacion;
 	}
 
-	public static function consultarRelacionSalienteSegunTipo($idNodo,$tipoRelacion)
-	{
+	public static function consultarRelacionSalienteSegunTipo($idNodo,$tipoRelacion){
+	
 		$miNodo = Neo4Play::client()->getNode($idNodo);
 		$relaciones= $miNodo->getRelationships(array($tipoRelacion), Relationship::DirectionOut);
 
@@ -90,8 +97,8 @@ class ModeloRelaciones
 		else echo "El nodo <b>NO</b> tiene relaciones con ".$tipoRelacion;
 	}			
 
-	public static function consultarRelacionEntranteSegunTipo($idNodo,$tipoRelacion)
-	{
+	public static function consultarRelacionEntranteSegunTipo($idNodo,$tipoRelacion){
+
 		$miNodo = Neo4Play::client()->getNode($idNodo);
 		$relaciones= $miNodo->getRelationships(array($tipoRelacion), Relationship::DirectionIn);
 
@@ -100,6 +107,22 @@ class ModeloRelaciones
 		else echo "El nodo <b>NO</b> tiene relaciones con ".$tipoRelacion;
 
 	}					
+
+	public static function consultarIDRelacion($idStart,$idEnd,$tipoRelacion){
+
+                $queryString = "START i=node(".$idStart."), f=node(".$idEnd.") MATCH i-[r:".$tipoRelacion."]->f RETURN r";                
+
+                $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+                $resultado = $query->getResultSet();
+
+
+                //echo "Se encontraron ".count($resultado)." amigos.\n";
+                foreach($resultado as $row) {
+                        //echo " ".$row['']->getId()."\n";                        
+                   return $row['']->getId();                        
+                }
+                
+	}					        
 /*
 
 	public static function consulta($idNodoStart)

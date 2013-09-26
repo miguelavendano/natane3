@@ -208,14 +208,12 @@ class ModelUsuarios{
         public function get_desean($queryString){
             
             
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);
-            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();
             
             $array = array();
             
-            if($result){
-                
+            if($result){               
             
                 foreach($result as $row) {
                     $usuario = new Usuario();
@@ -223,8 +221,7 @@ class ModelUsuarios{
                     $usuario->nick = $row['']->getProperty('nick');
                     $usuario->imagen = $row['']->getProperty('imagen');
                     array_push($array, $usuario);
-                    
-                    
+                                        
                 }
                 return $array;
             }
