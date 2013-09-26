@@ -59,48 +59,43 @@
                                 'links'=>$this->links,
                                 'script' => $this->script,
                                 'head'=>$this->head,
-                                'contenido'=>$this->resul);        
-            
-            
+                                'contenido'=>$this->resul);      
         }
         
         
         public function refactory_elementos($datos){            
-            
-            $resultados="";
-            $elemento = $this->elem_result;           
-            
-            
-            for($c=0; count($datos); $c++){                
-                
-                $resultados .= '<div class="row-fluid">';                            
-                $i=0;
-                do{ 
-                    $resultado=array_shift($datos);
-                    $aux = $elemento;
-                    $aux = str_ireplace("{id_sitio}", $resultado->id, $aux);
-                    $aux = str_ireplace("{nombre}", $resultado->nombre, $aux);
-                    $aux = str_ireplace("{imagen}", $resultado->imagen, $aux);
-                    $aux = str_ireplace("{icono}", $resultado->tipo_sitio, $aux);
-                    $resultados .= $aux;
-                    $i++;
-                }while((count($datos)!=0) && $i<4 && $resultado->type="Empresa" || $resultado->type="Sitio" || $resultado->type="Usuario");
-                
-                $resultados .= '</div>';
-            }
-            
-            
-            
-            $this->elem_result = $resultados;
-//            
-//                $sitio = new Sitio();
-//                $sitio->id = $row['']->getId();
-//                $sitio->nombre = $row['']->getProperty('nombre');
-//                $sitio->descripcion = $row['']->getProperty('descripcion');
-//                $sitio->tipo = $row['']->getProperty('tipo');
-//                $sitio->imagen = $row['']->getProperty('imagen');            
-            
-            
+
+                $resultados="";
+                $elemento = $this->elem_result;           
+
+
+                for($c=0; count($datos); $c++){                
+
+                    $resultados .= '<div class="row-fluid">';                            
+                    $i=0;
+                    do{ 
+                        $resultado=array_shift($datos);
+                        $aux = $elemento;
+                        $aux = str_ireplace("{id_sitio}", $resultado->id, $aux);
+                        $aux = str_ireplace("{nombre}", $resultado->nombre, $aux);
+                        $aux = str_ireplace("{imagen}", $resultado->imagen, $aux);
+                        $aux = str_ireplace("{icono}", $resultado->tipo_sitio, $aux);
+                        $resultados .= $aux;
+                        $i++;
+                    }while((count($datos)!=0) && $i<4 && $resultado->type="Empresa" || $resultado->type="Sitio" || $resultado->type="Usuario");
+
+                    $resultados .= '</div>';
+                }
+
+                $this->elem_result = $resultados;
+    //            
+    //                $sitio = new Sitio();
+    //                $sitio->id = $row['']->getId();
+    //                $sitio->nombre = $row['']->getProperty('nombre');
+    //                $sitio->descripcion = $row['']->getProperty('descripcion');
+    //                $sitio->tipo = $row['']->getProperty('tipo');
+    //                $sitio->imagen = $row['']->getProperty('imagen');            
+
         }
         
         

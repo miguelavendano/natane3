@@ -38,7 +38,7 @@ $(document).ready(function(){
             
         }else{
             alert("No hay datos para relizar una busqueda")
-        }
+        }        
     });      
 
     /*
@@ -66,7 +66,7 @@ $(document).ready(function(){
                     consulta: query                    
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                                                      
+                ,success: function(data,textStatus,jqXHR){                                                                                  
                             $("#contenido_respuesta").html(data);                                
                 }
             });  

@@ -168,7 +168,7 @@ class ModelSitios{
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
             $result = $query->getResultSet();
             $nodos = "";
-                        
+            
             foreach ($result as $row){            
                 //array_push($aux, $row['']->getId());                
                 $nodos.=",".$row['']->getId();
@@ -179,8 +179,9 @@ class ModelSitios{
             
             $losconsulta = "START n=node(".$cadnodos.") RETURN n";
             $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
-            $respuesta = $consul->getResultSet();       
             
+            $respuesta = $consul->getResultSet();       
+
             $arsitios = array();
 
             foreach ($respuesta as $row){
@@ -191,10 +192,10 @@ class ModelSitios{
                 $sitio->tipo_sitio = $row['']->getProperty('tipo_sitio');
                 $sitio->imagen = $row['']->getProperty('imagen');
                 array_push($arsitios, $sitio);
-            }
+            }                
 
             return $arsitios;  
-
+           
         }
 
         public function get_sitio_aleatorio($queryString, $cant){
