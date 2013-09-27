@@ -28,6 +28,7 @@
         public $registrar;
         public $latitud;
         public $longitud;
+        public $losvotos;
         
         public $dic_general;
         public $dic_contenido;
@@ -75,7 +76,8 @@
                             <link href="{CSS}/estilos_perfil_sitio.css" rel="stylesheet">    
                             <link href="{CSS}/estilos_ferrocarril.css" rel="stylesheet">
                             <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
-                            <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />';
+                            <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />
+                            <link href="{CSS}/calificacion.css" rel="stylesheet" />';
     
             
             $this->script = "";
@@ -99,6 +101,7 @@
                                         'registrarSitio'=>$this->registrar,
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,                                
+                                        'votos' => $this->losvotos, 
                                         'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);
         }
@@ -123,6 +126,7 @@
                                         'registrarSitio'=>$this->registrar,                
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,                
+                                        'votos' => $this->losvotos, 
                                         'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);            
             
@@ -153,6 +157,8 @@
             $this->contacto = str_ireplace('{facebook}', $datos[0]->facebook, $this->contacto );
             $this->contacto = str_ireplace('{twitter}', $datos[0]->twitter, $this->contacto );
             $this->contacto = str_ireplace('{google}', $datos[0]->youtube, $this->contacto );        
+            
+            $this->losvotos = $datos[0]->votos;
             $this->descripcion = $datos[0]->descripcion;
 
             $this->actualizar_diccionarios();

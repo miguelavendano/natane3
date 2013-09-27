@@ -229,8 +229,6 @@ $(document).ready(function(){
                     //imagen: $("#Epass1").val(data.imagen),
                 }
                 ,dataType:'html'
-                ,beforeSend:function(jqXHR, settings ){
-                }
                 ,success: function(data,textStatus,jqXHR){                           
 
                         if(/true/.test(data)) {                    
@@ -248,6 +246,45 @@ $(document).ready(function(){
 
     });
     
+
+
+    /*
+     * Crea la relacion "Amigo" entre dos usuarios
+     */   
+    $("a.voto_sitio").click(function(){
+        
+        //deja activa la estrella del voto
+        var band="";
+        for(var i=1;i<=5;i++){
+            band="#voto"+i;
+            if( i <= $(this).data("value") ){                
+                $(band).addClass("ya_voto");                
+            }
+            else{
+                $(band).removeClass("ya_voto");                                
+            }
+        }             
+
+        var mi_url=document.location.href;
+        var id_url=mi_url.split("=");  
+
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'voto_sitio',
+                    sitio: id_url[1],
+                    voto: $(this).data("value")
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            $(".total_votos").html(data);
+                }                   
+            });                                           
+
+            
+
+    });
 
 
 });

@@ -63,6 +63,7 @@ class ModelSitios{
                                 ->setProperty('twitter', $minodo->twitter)
                                 ->setProperty('youtube', $minodo->youtube)                        
                                 ->setProperty('contraseña', $minodo->contraseña)
+                                ->setProperty('votos', $minodo->contraseña)
                                 ->setProperty('type', $minodo->type)
 				->save();
 
@@ -116,6 +117,7 @@ class ModelSitios{
                     $sitio->twitter = $row['']->getProperty('twitter');
                     $sitio->youtube = $row['']->getProperty('youtube');
                     $sitio->contraseña = $row['']->getProperty('contraseña');
+                    $sitio->votos = $row['']->getProperty('votos');
                     //$sitio->type = $row['']->getProperty('type');                                        
                     array_push($array, $sitio);                    
                 }
@@ -293,6 +295,7 @@ class ModelSitios{
                     $sitio->twitter = $row['']->getProperty('twitter');
                     $sitio->youtube = $row['']->getProperty('youtube');  
                     $sitio->descripcion = $row['']->getProperty('descripcion');  
+                    $sitio->votos = $row['']->getProperty('votos');  
                     array_push($array, $sitio);                    
                 }
                 return $array;

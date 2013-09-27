@@ -22,6 +22,7 @@ class Sitio
 	public $twitter = '';
 	public $youtube = '';
         public $contraseña = '';
+        public $votos = '';
         public $type = '';
         
 	public $node = null;

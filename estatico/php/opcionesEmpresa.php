@@ -97,9 +97,9 @@ if(isset($_POST['opcion'])){
             $query = "START n=node(".$_POST['empresa'].") RETURN n";                        
             $resultado = $modelempresa->get_empresa($query);
             
-            $masconfianza = $resultado[0]->confianza;
+            $confianza = $resultado[0]->confianza;
             
-            $puntos = (int)$masconfianza;
+            $puntos = (int)$confianza;
             $puntos++;
                                                 
             ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);   //aumenta los puntos de confianza
@@ -121,9 +121,9 @@ if(isset($_POST['opcion'])){
             $query = "START n=node(".$_POST['empresa'].") RETURN n";                        
             $resultado = $modelempresa->get_empresa($query);
                         
-            $masconfianza = $resultado[0]->confianza;
+            $confianza = $resultado[0]->confianza;
             
-            $puntos = (int)$masconfianza;
+            $puntos = (int)$confianza;
             $puntos--;            
                                   
             ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);     //disminuye los puntos de confianza

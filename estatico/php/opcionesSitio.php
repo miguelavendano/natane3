@@ -99,6 +99,23 @@ if(isset($_POST['opcion'])){
             
         break;    
     
+        case "voto_sitio":
+            
+            $modelsitio = new ModelSitios();            
+            $query = "START n=node(".$_POST['sitio'].") RETURN n";                        
+            $resultado = $modelsitio->get_sitio($query);
+            
+            $susvotos = $resultado[0]->votos;
+            
+            $voto = (int)$susvotos;
+            $voto++;
+
+            ModelSitios::editar_sitio($_POST['sitio'], "votos", $voto);  //aumenta los votos del sitio
+            
+            $band = "El sitio tiene $voto votos";
+            
+        break;
+    
         default : break; 
     }    
     
