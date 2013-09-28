@@ -286,11 +286,104 @@ $(document).ready(function(){
                             $(".total_votos").html(data);
                 }                   
             });                                           
-
-            
-
     });
 
+
+    /*
+     * Crea o elimina la relacion de visita en el sitio
+     */            
+    $("#ha-estado").toggle(
+      function() {      
+                      
+            $(this).addClass("active");
+            $("#quiere-ir").addClass("disabled");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'visito',                   
+                    sitio: id_url[1],
+                    usuario: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                                                   
+                }
+            });                                   
+        
+      }, function() {   
+          
+            $(this).removeClass("active");            
+            $("#quiere-ir").removeClass("disabled");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'elimina-visita',
+                    sitio: id_url[1],
+                    usuario: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                }
+            });                                   
+      }
+    );
+
+    /*
+     * Crea o elimina la relacion de querer visitar el sitio
+     */            
+    $("#quiere-ir").toggle(
+      function() {      
+                      
+            $(this).addClass("active");
+            $("#ha-estado").addClass("disabled");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'quiere-visitar',
+                    sitio: id_url[1],
+                    usuario: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                                                   
+                }
+            });                                   
+        
+      }, function() {   
+          
+            $(this).removeClass("active");            
+            $("#ha-estado").addClass("disabled");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'elimina-intencion-visitar',
+                    sitio: id_url[1],
+                    usuario: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                }
+            });                                   
+      }
+    );
 
 });
 

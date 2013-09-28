@@ -116,6 +116,37 @@ if(isset($_POST['opcion'])){
             $band = "El sitio tiene $voto votos de confianza";
             
         break;
+  
+    
+        case "visito":  
+  
+            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['sitio'], "Visitante");   //crea la relacion entre el usuario y la empresa que ha visitado           
+            $band="true";
+            
+        break;    
+    
+        case "elimina-visita":  
+  
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['sitio'], "Visitante");  //consulto el ID de la relacion           
+            ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y el sitio visitado
+            $band="true";
+            
+        break;    
+
+        case "quiere-visitar":  
+   
+            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['sitio'], "Turista");   //crea la relacion entre el usuario y la empresa que ha visitado           
+            $band="true";
+            
+        break;    
+    
+        case "elimina-intencion-visitar":  
+  
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['sitio'], "Turista");  //consulto el ID de la relacion           
+            ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y el sitio visitado
+            $band="true";
+            
+        break;    
     
         default : break; 
     }    
