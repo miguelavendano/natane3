@@ -26,8 +26,14 @@
             //$resultado = $this->modelsitios->get_sitio_aleatorio($query, $ale);
             
             $resultado = $this->modelsitios->get_todo($query);
-                        
-            return $resultado;            
+            
+            if($resultado){
+                return $resultado;
+            }
+            else{ return; }
+            
+                
+            
         }  
     }
         

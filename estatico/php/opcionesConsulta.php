@@ -23,7 +23,8 @@ if(isset($_POST['opcion'])){
         case "busca_todo":     
             
             /*BUSCA LOS SITIOS*/            
-            $query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Sitio' RETURN n";
+            $query = "START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' RETURN n";            
+            //$query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Sitio' RETURN n";
             //expreciones regulares utiles
             //  n.nombre =~ 'ju.*'          -->  busca los nodos que empiezan exactamente con "ju"
             //  n.nombre =~ '(?i)JULI:*'    -->  busca los nodos que empiezan con "ju" sin importar mayusculas o minusculas
@@ -40,93 +41,44 @@ if(isset($_POST['opcion'])){
             if($resultado){            
                 
                 for($i=0;$i<count($resultado);$i++){   
-
-                     $contenido=
-                    '<div class="span3 contenido">
-                        <div class="row-fluid imagen-resultado">
-                            <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
-                            <div class="row-fluid titulo-result">
-                                <a href="/natane3/modulos/sitios/sitio.php?id='.$resultado[$i]->id.'"><h6><i class="'.$resultado[$i]->tipo_sitio.'"></i> '.$resultado[$i]->nombre.'</h6></a>
-                            </div>        
-                        </div>    
-                    </div>';            
-
-                    if($cont==0){
-                        $html='<div class="container-fluid">'.$contenido;
-                        $cont++;
-                    }
-                    elseif($cont==3){
-                        $html=$contenido.'</div>';
-                        $cont=0;
-                    }
-                    else{
-                        $html=$contenido;
-                        $cont++;
-                    }
-
-                    $band.=$html;
-                }
-            }else{ $no_hay++; }
-
-                
-            /*BUSCA LAS EMPRESAS*/            
-            $query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Empresa' RETURN n";
-
-            $modelempresa = new ModelEmpresa();            
-            $resultado = $modelempresa->get_empresa($query);         
-
-            if($resultado){            
-            
-                for($i=0;$i<count($resultado);$i++){   
-
-                    $contenido=
-                    '<div class="span3 contenido">
-                        <div class="row-fluid imagen-resultado">
-                            <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
-                            <div class="row-fluid titulo-result">
-                                <a href="/natane3/modulos/empresas/empresa.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre.'</h6></a>
-                            </div>        
-                        </div>    
-                    </div>';                
-
-                    if($cont==0){
-                        $html='<div class="container-fluid">'.$contenido;
-                        $cont++;
-                    }
-                    elseif($cont==3){
-                        $html=$contenido.'</div>';
-                        $cont=0;
-                    }
-                    else{
-                        $html=$contenido;
-                        $cont++;
-                    }
-
-                    $band.=$html;
-                }
-            }else{ $no_hay++; }                
-            
-            /*BUSCA LOS USUARIOS*/
-            $query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Usuario' RETURN n";
-
-            $modelusuarios = new ModelUsuarios();            
-            $resultado = $modelusuarios->get_usuario($query);         
-            
-
-            if($resultado){            
-            
-                for($i=0;$i<count($resultado);$i++){   
-
-                    $contenido=
-                    '<div class="span3 contenido">
-                        <div class="row-fluid imagen-resultado">
-                            <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
-                            <div class="row-fluid titulo-result">
-                                <a href="/natane3/modulos/usuarios/usuario.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre." ".$resultado[$i]->apellido.'</h6></a>
-                            </div>        
-                        </div>    
-                    </div>';
                     
+                    if($resultado[$i]->type=="Sitio"){  /*BUSCA LOS SITIOS*/
+                        $contenido=
+                       '<div class="span3 contenido">
+                           <div class="row-fluid imagen-resultado">
+                               <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
+                               <div class="row-fluid titulo-result">
+                                   <a href="/natane3/modulos/sitios/sitio.php?id='.$resultado[$i]->id.'"><h6><i class="'.$resultado[$i]->tipo_sitio.'"></i> '.$resultado[$i]->nombre.'</h6></a>
+                               </div>        
+                           </div>    
+                       </div>';
+                        
+                    }
+                    if($resultado[$i]->type=="Empresa"){  /*BUSCA LAS EMPRESAS*/            
+                        $contenido=
+                        '<div class="span3 contenido">
+                            <div class="row-fluid imagen-resultado">
+                                <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
+                                <div class="row-fluid titulo-result">
+                                    <a href="/natane3/modulos/empresas/empresa.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre.'</h6></a>
+                                </div>        
+                            </div>    
+                        </div>';
+                        
+                    }
+                    if($resultado[$i]->type=="Usuario"){    /*BUSCA LOS USUARIOS*/
+                        $contenido=
+                        '<div class="span3 contenido">
+                            <div class="row-fluid imagen-resultado">
+                                <img src="/natane3/estatico/imagenes/'.$resultado[$i]->imagen.'">
+                                <div class="row-fluid titulo-result">
+                                    <a href="/natane3/modulos/usuarios/usuario.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre." ".$resultado[$i]->apellido.'</h6></a>
+                                </div>        
+                            </div>    
+                        </div>';                        
+                    }
+
+                    //organiza los resultados en los containers
                     if($cont==0){
                         $html='<div class="container-fluid">'.$contenido;
                         $cont++;
@@ -141,12 +93,9 @@ if(isset($_POST['opcion'])){
                     }
 
                     $band.=$html;
-                }             
-            }else{ $no_hay++; }                
-            
-            if($no_hay==3){
-                $band = "<h2>NO se han encontrado coincidencias.</h2>";
+                }
             }
+            else{ $band = "<h2>NO se han encontrado coincidencias.</h2>"; }
             
         break;            
     

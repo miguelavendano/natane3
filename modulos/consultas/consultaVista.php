@@ -65,6 +65,7 @@
         
         public function refactory_elementos($datos){            
 
+            if($datos){
                 $resultados="";
                 $elemento = $this->elem_result;           
 
@@ -95,6 +96,10 @@
     //                $sitio->descripcion = $row['']->getProperty('descripcion');
     //                $sitio->tipo = $row['']->getProperty('tipo');
     //                $sitio->imagen = $row['']->getProperty('imagen');            
+                
+            }
+            else { $this->elem_result = "<h2>NO se han encontrado coincidencias.</h2>"; }
+            
 
         }
         

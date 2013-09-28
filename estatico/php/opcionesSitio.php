@@ -107,12 +107,13 @@ if(isset($_POST['opcion'])){
             
             $susvotos = $resultado[0]->votos;
             
-            $voto = (int)$susvotos;
-            $voto++;
+            //$voto = (int)$susvotos;
+            //$voto++;
+            $voto = $_POST['voto'] + (int)$susvotos;
 
             ModelSitios::editar_sitio($_POST['sitio'], "votos", $voto);  //aumenta los votos del sitio
             
-            $band = "El sitio tiene $voto votos";
+            $band = "El sitio tiene $voto votos de confianza";
             
         break;
     

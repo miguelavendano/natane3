@@ -23,9 +23,9 @@
         }
         
         
-        public function main(){            
-            $this->vista->refactory_elementos($this->resultado());
-            $this->vista->refactory_resultados_total();            
+        public function main(){  
+            $this->vista->refactory_elementos($this->resultado());                            
+            $this->vista->refactory_resultados_total();                                        
         }
     }
 

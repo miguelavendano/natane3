@@ -1,7 +1,9 @@
+.titulo-votos {    
+    text-align: center;    
+}
+
 .campo-votos {    
     font-size: 0;
-    padding-top: 10px;
-    /*padding: 15px 0 15px 0;
     /* display: inline-block; */
     text-align: center;    
 }
@@ -19,8 +21,8 @@
 
 .campo-votos:hover a {
     /*color: #00991A;
-    color: rgb(39, 130, 228);*/
-    color: #FF0000;
+    color: #FF0000;  */
+    color: rgb(39, 130, 228);
     text-shadow: .1em .1em .2em rgba(0,0,0,.3);        
 }
 /*
@@ -28,7 +30,7 @@
  */
 .campo-votos > a:hover ~ a {
       color: #888;
-      text-shadow: none;        
+      text-shadow: none;    
 }
 
 .campo-votos a.ya_voto{
@@ -40,10 +42,42 @@
     font-size: 32px;
     font-size: 2.5rem;    
     
-    color: #FF0000;    
+    color: rgb(39, 130, 228);
     text-shadow: .1em .1em .2em rgba(0,0,0,.3);        
 }
 
 .total_votos{
     margin-left: 10px;
+}
+
+
+/*  diseño con caritas de colores rojo, amarillo y verde
+
+.campo-votos #voto1:hover{
+    color: #FF0000;
+}
+.campo-votos #voto2:hover{
+    color: #FFB300;
+}
+.campo-votos #voto3:hover{
+    color: #00991A;
+}
+
+
+.campo-votos a.ya_voto#voto1{
+    color: #FF0000;
+}
+.campo-votos a.ya_voto#voto2{
+    color: #FFB300;
+}
+.campo-votos a.ya_voto#voto3{
+    color: #00991A;
+}
+*/    
+
+#voto-down{
+    color: #FF0000;
+}
+#voto-up{
+    color: #00991A;
 }

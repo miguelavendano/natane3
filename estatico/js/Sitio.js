@@ -257,11 +257,16 @@ $(document).ready(function(){
         var band="";
         for(var i=1;i<=5;i++){
             band="#voto"+i;
+            
             if( i <= $(this).data("value") ){                
                 $(band).addClass("ya_voto");                
+                //$(band+" i").removeClass("icon-star-empty");
+                //$(band+" i").addClass("icon-star");                
             }
             else{
                 $(band).removeClass("ya_voto");                                
+                //$(band+" i").removeClass("icon-star");
+                //$(band+" i").addClass("icon-star-empty");
             }
         }             
 
