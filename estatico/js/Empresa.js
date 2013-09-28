@@ -255,8 +255,7 @@ $(document).ready(function(){
                         $("#puntos_confianza").html(data);    
 
                 }
-            });                           
-        
+            });                                   
       }
     );
 

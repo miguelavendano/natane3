@@ -137,7 +137,7 @@ section{
 
 
 
-/************************ Contacto ************************/
+/************************ Contacto *************************/
 .contacto{
     text-align: center;    
 }
@@ -147,15 +147,18 @@ section{
     filter: alpha(opacity=50);
 }
 .redes.face{
-    color:#3B5998
-}
-.redes.google{
-    color:#B32C1E        
+    color: #3B5998;
 }
 .redes.twit{
-    color:#00B9F4
+    color: #00B9F4;
 }
-
+.redes.google{
+    color: #B32C1E;       
+}
+.redes.youtube{
+    color: #E12B26;
+    
+}
 /************************ Modal de notificaciones ************************/
 .notificacion{ 
   margin-bottom: 15px;

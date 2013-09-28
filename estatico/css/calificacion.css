@@ -1,3 +1,4 @@
+/*********************DISEÑO PARA CALIFICACION*************************************/
 .titulo-votos {    
     text-align: center;    
 }
@@ -51,33 +52,38 @@
 }
 
 
-/*  diseño con caritas de colores rojo, amarillo y verde
+/*********************DISEÑO PARA VOTOS*************************************/
+.box-votos {    
+    text-align: center;    
+}
+.box-votos a {
+    cursor: pointer;
+    text-decoration: none; 
+    display: inline-block; 
+}
 
-.campo-votos #voto1:hover{
+.box-votos a:hover{
+    /*color: #00991A;
+    color: #FF0000;  */
+    color: rgb(39, 130, 228);
+    text-shadow: .2em .2em .2em rgba(0,0,0,.3);        
+}
+
+
+.box-votos a.voto-down{
     color: #FF0000;
 }
-.campo-votos #voto2:hover{
-    color: #FFB300;
-}
-.campo-votos #voto3:hover{
+.box-votos a.voto-up{
     color: #00991A;
+}
+.box-votos a.disabled{
+    color: #888;
+    cursor: default;
+    text-shadow: 0em 0em 0em;        
 }
 
 
-.campo-votos a.ya_voto#voto1{
-    color: #FF0000;
-}
-.campo-votos a.ya_voto#voto2{
-    color: #FFB300;
-}
-.campo-votos a.ya_voto#voto3{
-    color: #00991A;
-}
-*/    
 
-#voto-down{
-    color: #FF0000;
-}
-#voto-up{
-    color: #00991A;
+.visitar_sitio{
+    margin: 0 auto;
 }
