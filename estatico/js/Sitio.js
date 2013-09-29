@@ -394,12 +394,12 @@ $(document).ready(function(){
     /*
      * Crea o elimina la relacion de visita en el sitio
      */            
-    $("a.voto-up").toggle(
+    $(".voto-up").toggle(
       function() {      
                       
-            $("a.voto-down").addClass("disabled");
-            $("a.voto-down").attr('disabled', true);
-          /*  
+            //$(".voto-down").addClass("disabled");
+            $(".voto-down").css('display', 'none');
+          
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             
@@ -407,20 +407,21 @@ $(document).ready(function(){
                 url:'/natane3/estatico/php/opcionesSitio.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion: 'visito',                   
+                    opcion: 'mas-votos',                   
                     sitio: id_url[1],
                     usuario: '279'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                   
+                            $(".total_votos").html(data);
                 }
-            });                                   
-        */
+            });
+        
       }, function() {   
           
-            $("a.voto-down").removeClass("disabled");
-            $("a.voto-down").attr('disabled', false);
-            /*
+            //$(".voto-down").removeClass("disabled");
+            $(".voto-down").css('display', 'inline');
+            
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             
@@ -428,27 +429,27 @@ $(document).ready(function(){
                 url:'/natane3/estatico/php/opcionesSitio.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion: 'elimina-visita',
+                    opcion: 'menos-votos',
                     sitio: id_url[1],
                     usuario: '279'
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
+                ,success: function(data,textStatus,jqXHR){                                                   
+                            $(".total_votos").html(data);
                 }
-            });                                   
-            */
+            });
       }
     );
 
     /*
      * Crea o elimina la relacion de querer visitar el sitio
      */            
-    $("a.voto-down").toggle(
+    $(".voto-down").toggle(
       function() {      
                                   
-            $("a.voto-up").addClass("disabled");
-            $("a.voto-up").attr('disabled', true);
-          /*  
+            //$(".voto-up").addClass("disabled");
+            $(".voto-up").css('display', 'none');;
+          
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             
@@ -456,36 +457,37 @@ $(document).ready(function(){
                 url:'/natane3/estatico/php/opcionesSitio.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion: 'quiere-visitar',
+                    opcion: 'menos-votos',
                     sitio: id_url[1],
                     usuario: '279'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                   
+                            $(".total_votos").html(data);
                 }
             });                                   
-        */
+        
       }, function() {   
           
-            $("a.voto-up").removeClass("disabled");
-            $("a.voto-up").attr('disabled', false);
-          /*    
+            //$(".voto-up").removeClass("disabled");
+            $(".voto-up").css('display', 'inline');
+            
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
-          
+            
             $.ajax({
                 url:'/natane3/estatico/php/opcionesSitio.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion: 'elimina-intencion-visitar',
+                    opcion: 'mas-votos',                   
                     sitio: id_url[1],
                     usuario: '279'
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
+                ,success: function(data,textStatus,jqXHR){                                                   
+                            $(".total_votos").html(data);
                 }
-            });                                   
-            */
+            });
       }
     );
         

@@ -116,8 +116,7 @@ if(isset($_POST['opcion'])){
             $band = "El sitio tiene $voto votos de confianza";
             
         break;
-  
-    
+      
         case "visito":  
                                                                                 //Visitante  
             ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['sitio'], "Fan");   //crea la relacion entre el usuario y la empresa que ha visitado           
@@ -145,6 +144,41 @@ if(isset($_POST['opcion'])){
             $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['sitio'], "Desea");  //consulto el ID de la relacion           
             ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y el sitio visitado
             $band="true";
+            
+        break;    
+    
+    
+        case "mas-votos":
+            
+            $modelsitio = new ModelSitios();            
+            $query = "START n=node(".$_POST['sitio'].") RETURN n";                        
+            $resultado = $modelsitio->get_sitio($query);
+            
+            $susvotos = $resultado[0]->votos;
+            
+            $voto = (int)$susvotos;
+            $voto++;            
+
+            ModelSitios::editar_sitio($_POST['sitio'], "votos", $voto);  //aumenta los votos del sitio
+            
+            $band = "<h5>$voto Personas confían en este sitio</h5>";
+            
+        break;
+
+        case "menos-votos":
+            
+            $modelsitio = new ModelSitios();            
+            $query = "START n=node(".$_POST['sitio'].") RETURN n";                        
+            $resultado = $modelsitio->get_sitio($query);
+            
+            $susvotos = $resultado[0]->votos;
+            
+            $voto = (int)$susvotos;
+            $voto--;
+
+            ModelSitios::editar_sitio($_POST['sitio'], "votos", $voto);  //aumenta los votos del sitio
+            
+            $band = "<h5>$voto Personas confían en este sitio</h5>";
             
         break;    
     
