@@ -208,89 +208,12 @@ $(document).ready(function(){
     $(".cancelarRegistroSitio").click(function(){        
              $("#registrarSitio").css({display:'none'});   
              $(".pestañas").css({display:'inline'});    //en perfi de usuario muestra las experiencias
-    });    
-    
-
-    /*
-     * Crea la relacion "Amigo" entre dos usuarios
-     */   
-    $("#SeguirS").click(function(){
-
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
-            
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'relacion_amigo',                   
-                    usuario: '2',
-                    amigo: id_url[1]
-                    //imagen: $("#Epass1").val(data.imagen),
-                }
-                ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-
-                        if(/true/.test(data)) {                    
-                            html="<i class='icon-leaf'></i> Seguiendo";
-                            $("#SeguirU").html(html);                        
-                            
-                            //html2="<div {empresa}><p><a href='{url}?id={id}'><img src='{IMG_NATANE}/{imagen}'/>{nombre}</a></p></div>";
-                            //$('.seguidores').html($('.seguidores').html()+html2);                           
-                            
-                            document.location.reload(); 
-                        }
-                        else alert("No se han podido realizar los cambios");                                                     
-                }
-            });                           
-
-    });
+    });       
     
 
 
     /*
-     * Crea la relacion "Amigo" entre dos usuarios
-     */   
-    $("a.voto_sitio").click(function(){
-        
-        //deja activa la estrella del voto
-        var band="";
-        for(var i=1;i<=5;i++){
-            band="#voto"+i;
-            
-            if( i <= $(this).data("value") ){                
-                $(band).addClass("ya_voto");                
-                //$(band+" i").removeClass("icon-star-empty");
-                //$(band+" i").addClass("icon-star");                
-            }
-            else{
-                $(band).removeClass("ya_voto");                                
-                //$(band+" i").removeClass("icon-star");
-                //$(band+" i").addClass("icon-star-empty");
-            }
-        }             
-
-        var mi_url=document.location.href;
-        var id_url=mi_url.split("=");  
-
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'voto_sitio',
-                    sitio: id_url[1],
-                    voto: $(this).data("value")
-                }
-                ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            $(".total_votos").html(data);
-                }                   
-            });                                           
-    });
-
-
-    /*
-     * Crea o elimina la relacion de visita en el sitio
+     * Crea la relacion haber visitado el sitio "Fan"
      */            
     $("#ha-estado").toggle(
       function() {      
@@ -338,7 +261,7 @@ $(document).ready(function(){
     );
 
     /*
-     * Crea o elimina la relacion de querer visitar el sitio
+     * Crea la relacion de querer ir al sitio "Desea"
      */            
     $("#quiere-ir").toggle(
       function() {      
@@ -384,16 +307,11 @@ $(document).ready(function(){
             });                                   
       }
     );
-        
-        
-        
-        
-        
-        
+
 
     /*
-     * Crea o elimina la relacion de visita en el sitio
-     */            
+     * Da voto de confianza al sitio
+     */
     $(".voto-up").toggle(
       function() {      
                       
@@ -442,8 +360,8 @@ $(document).ready(function(){
     );
 
     /*
-     * Crea o elimina la relacion de querer visitar el sitio
-     */            
+     * Quita voto de confianza al sitio
+     */
     $(".voto-down").toggle(
       function() {      
                                   
@@ -490,7 +408,47 @@ $(document).ready(function(){
             });
       }
     );
+
+
+    /*
+     * Votos en el sitio
+     */   
+    $("a.voto_sitio").click(function(){
         
+        //deja activa la estrella del voto
+        var band="";
+        for(var i=1;i<=5;i++){
+            band="#voto"+i;
+            
+            if( i <= $(this).data("value") ){                
+                $(band).addClass("ya_voto");                
+                //$(band+" i").removeClass("icon-star-empty");
+                //$(band+" i").addClass("icon-star");                
+            }
+            else{
+                $(band).removeClass("ya_voto");                                
+                //$(band+" i").removeClass("icon-star");
+                //$(band+" i").addClass("icon-star-empty");
+            }
+        }             
+
+        var mi_url=document.location.href;
+        var id_url=mi_url.split("=");  
+
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'voto_sitio',
+                    sitio: id_url[1],
+                    voto: $(this).data("value")
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                            $(".total_votos").html(data);
+                }                   
+            });                                           
+    });
+
 
 });
-
