@@ -196,6 +196,7 @@ class ModelSitios{
                     $sitio->descripcion = $row['']->getProperty('descripcion');
                     $sitio->tipo_sitio = $row['']->getProperty('tipo_sitio');
                     $sitio->imagen = $row['']->getProperty('imagen');
+                    $sitio->type = $row['']->getProperty('type');
                     array_push($arsitios, $sitio);
                 }                
                 return $arsitios;                

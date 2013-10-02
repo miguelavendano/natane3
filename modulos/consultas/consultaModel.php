@@ -20,7 +20,7 @@
             
             
             //$query = "START n=node(*) WHERE n.type='Sitio' RETURN n;"; 
-            $query = "START n=node(*) WHERE n.nombre =~ '(?i)".$this->consulta.".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' RETURN n";
+            $query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$this->consulta.".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' RETURN n";
             //$ale = rand(1, 20);
             
             //$resultado = $this->modelsitios->get_sitio_aleatorio($query, $ale);

@@ -23,7 +23,7 @@ if(isset($_POST['opcion'])){
         case "busca_todo":     
             
             /*BUSCA LOS SITIOS*/            
-            $query = "START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' RETURN n";            
+            $query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' RETURN n";            
             //$query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Sitio' RETURN n";
             //expreciones regulares utiles
             //  n.nombre =~ 'ju.*'          -->  busca los nodos que empiezan exactamente con "ju"
@@ -31,17 +31,18 @@ if(isset($_POST['opcion'])){
             //  n.nombre =~ '(?i).*JULI.*'  -->  busca los nodos que contengan la cadena "ju" sin importar mayusculas o minusculas
             
             $modelsitios = new ModelSitios();            
-            $resultado = $modelsitios->get_sitio($query);            
+            $resultado = $modelsitios->get_todo($query);
 
             $no_hay=0;
 
-            $band = "";
-            $cont=0;            
+            $band="";
+            $cont=0;                        
+            $html="";
             
             if($resultado){            
                 
                 for($i=0;$i<count($resultado);$i++){   
-                    
+
                     if($resultado[$i]->type=="Sitio"){  /*BUSCA LOS SITIOS*/
                         $contenido=
                        '<div class="span3 contenido">
@@ -51,10 +52,9 @@ if(isset($_POST['opcion'])){
                                    <a href="/natane3/modulos/sitios/sitio.php?id='.$resultado[$i]->id.'"><h6><i class="'.$resultado[$i]->tipo_sitio.'"></i> '.$resultado[$i]->nombre.'</h6></a>
                                </div>        
                            </div>    
-                       </div>';
-                        
+                       </div>';                                                                        
                     }
-                    if($resultado[$i]->type=="Empresa"){  /*BUSCA LAS EMPRESAS*/            
+                    elseif($resultado[$i]->type=="Empresa"){  /*BUSCA LAS EMPRESAS*/            
                         $contenido=
                         '<div class="span3 contenido">
                             <div class="row-fluid imagen-resultado">
@@ -63,10 +63,9 @@ if(isset($_POST['opcion'])){
                                     <a href="/natane3/modulos/empresas/empresa.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre.'</h6></a>
                                 </div>        
                             </div>    
-                        </div>';
-                        
+                        </div>';                        
                     }
-                    if($resultado[$i]->type=="Usuario"){    /*BUSCA LOS USUARIOS*/
+                    elseif($resultado[$i]->type=="Usuario"){    /*BUSCA LOS USUARIOS*/
                         $contenido=
                         '<div class="span3 contenido">
                             <div class="row-fluid imagen-resultado">
@@ -75,9 +74,10 @@ if(isset($_POST['opcion'])){
                                     <a href="/natane3/modulos/usuarios/usuario.php?id='.$resultado[$i]->id.'"><h6>'.$resultado[$i]->nombre." ".$resultado[$i]->apellido.'</h6></a>
                                 </div>        
                             </div>    
-                        </div>';                        
+                        </div>';
                     }
 
+                    
                     //organiza los resultados en los containers
                     if($cont==0){
                         $html='<div class="container-fluid">'.$contenido;
@@ -105,7 +105,7 @@ if(isset($_POST['opcion'])){
          */        
         case "busca_usuario":     
             
-            $query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Usuario' RETURN n";
+            $query="START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type='Usuario' RETURN n";
 
             $modelusuarios = new ModelUsuarios();            
             $resultado = $modelusuarios->get_usuario($query);         
@@ -157,9 +157,9 @@ if(isset($_POST['opcion'])){
             $filtro = $_POST['filtro'];
 
             if( strlen($filtro) > 0 ){
-                $query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Sitio' AND n.tipo_sitio='".$filtro."' RETURN n";
+                $query="START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type='Sitio' AND n.tipo_sitio='".$filtro."' RETURN n";
             }else{
-                $query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Sitio' RETURN n";
+                $query="START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type='Sitio' RETURN n";
             }
 
             $modelsitios = new ModelSitios();            
@@ -209,7 +209,7 @@ if(isset($_POST['opcion'])){
          */                
         case "busca_empresa":     
             
-            $query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Empresa' RETURN n";
+            $query="START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type='Empresa' RETURN n";
 
             $modelempresa = new ModelEmpresa();            
             $resultado = $modelempresa->get_empresa($query);         
