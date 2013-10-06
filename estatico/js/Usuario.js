@@ -384,43 +384,6 @@ $(document).ready(function(){
    
 
     /*
-     * Crea la relacion "Amigo" entre dos usuarios
-     */   
-    $("#SeguirU").click(function(){
-
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
-            
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesUsuario.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'relacion_amigo',                   
-                    usuario: '2',
-                    amigo: id_url[1]
-                    //imagen: $("#Epass1").val(data.imagen),
-                }
-                ,dataType:'html'
-                ,beforeSend:function(jqXHR, settings ){
-                }
-                ,success: function(data,textStatus,jqXHR){                           
-
-                        if(/true/.test(data)) {                    
-                            html="<i class='icon-cyan'></i> Seguiendo";
-                            $("#BSeguir").html(html);                        
-                            
-                            //html2="<div {empresa}><p><a href='{url}?id={id}'><img src='{IMG_NATANE}/{imagen}'/>{nombre}</a></p></div>";
-                            //$('.seguidores').html($('.seguidores').html()+html2);                           
-                            
-                            document.location.reload(); 
-                        }
-                        else alert("No se han podido realizar los cambios");                                                     
-                }
-            });                           
-
-    });
-    
-    /*
      * Registro de un nuevo Sitio
      */
     $("#BUcreaS").click(function(){
@@ -481,6 +444,73 @@ $(document).ready(function(){
             alert("no se pudo iniciar sesion, intente ingresando con su cuenta de facebook")
         }
     });
+    
+    
+    /*
+     * Le da o le quita un punto de confianza a la empresa, crear su relacion con esa empresa
+     */            
+    $("#SeguirU").toggle(
+      function() {      //le da un punto de confianza
+          
+            $(this).addClass("active");
+            $("#SeguirU i").addClass("icon-ok");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'seguir',                   
+                    a_seguir: id_url[1],
+                    seguidor: '61'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+
+                        if(/true/.test(data)) {                                                
+                            
+                            var html="<i class='icon-ok'></i> Siguiendo";
+                            $("#SeguirU").html(html);  
+                        }
+                        else alert("Se presento un error");                                                     
+                        //$("#puntos_confianza").html(data);    
+                }
+            });                                   
+        
+      }, function() {       //le quita el punto de confianza
+          
+            $(this).removeClass("active");            
+            //$("#SeguirU i").removeClass("icon-ok");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'no_seguir',                   
+                    a_seguir: id_url[1],
+                    seguidor: '61'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+     
+                        if(/true/.test(data)) {           
+                            
+                            $("#SeguirU").html("Seguir");                        
+                            
+                        }
+                        else alert("Se presento un error");                                                     
+     
+                        //$("#puntos_confianza").html(data);    
+
+                }
+            });                                   
+      }
+    );    
     
 });
 

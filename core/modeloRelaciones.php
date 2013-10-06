@@ -16,7 +16,6 @@ class ModeloRelaciones
 {
 
 	public static function crearRelacion($idNodoStart,$idNodoEnd,$nameRelacion){
-	
 
 		$nodoStart = Neo4Play::client()->getNode($idNodoStart);
 		$nodoEnd = Neo4Play::client()->getNode($idNodoEnd);

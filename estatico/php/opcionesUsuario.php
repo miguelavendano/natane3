@@ -252,13 +252,27 @@ if(isset($_POST['opcion'])){
     
         case "relacion_amigo":                       
             
-            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['amigo'], "Amigo");   //crea la relacion de amistad            
-            $band = 'true';
             
         break;    
 
     
+    
+        case "seguir":  
+  
+            ModeloRelaciones::crearRelacion($_POST['seguidor'], $_POST['a_seguir'], "Amigo");   //crea la relacion de amistad            
+            $band = 'true';
+                        
+        break;    
+    
+        case "no_seguir":  
 
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['seguidor'], $_POST['a_seguir'], "Amigo");  //consulto el ID de la relacion
+           
+            ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa
+            $band = 'true';
+            
+        break;    
+    
     
         case "login":                                                                      
 

@@ -2,6 +2,7 @@
 
 require_once('coneccion.php');
 require_once('Experiencia.php');
+require_once('Imagen.php');
 //require_once('Usuario.php');
 
 
@@ -129,41 +130,60 @@ class ModelExperiencia{
         
         
         public function get_exper_usuario($queryString){
-            
-            
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);
-            
+                        
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();
             
             $array = array();
-//                    $experiencia->imagen= $res[0]->offsetGet('');
-//                    
+//                    $experiencia->imagen= $res[0]->offsetGet('');//                    
 //                    echo "<h1>".$experiencia->imagen."</h1>";                    
             
             if($result){
             
+                $imagenes="";
                 foreach($result as $row) {
                     $experiencia = new Experiencia();
                     $experiencia->id = $row['']->getId();
                     
-                    
                     $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
-                    
                     $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
                     
                     if($queryRes){
-                        $res = $queryRes->getResultSet();                                        
-                        $experiencia->imagen= $res[0]->offsetGet('');
+                        
+                        $res = $queryRes->getResultSet();
+                        
+                        if(count($res)>0){
+                            $img_ran = rand (0, count($res)-1);   //elemento aleatorio de las imagenes de la experiencia
+
+                            foreach($res as $img){                            
+                                $imagenes[]=$img[''];                            
+                            }
+
+                            $experiencia->imagen = $imagenes[$img_ran];  //almacena la imagen aleatorio para mostrarla en la vista
+                            $imagenes="";        
+                        }
+                        else {
+                            $experiencia->imagen= "experiencia_sin_foto.jpg";  //si la experienci no tiene imagen muestra esta por defecto
+                        }
+                        
+                        
+                        /*
+                        if($res[0]->offsetGet('')){
+                            $experiencia->imagen = $res[0]->offsetGet('');    
+                        } 
+                        else {
+                            $experiencia->imagen= "experiencia_sin_foto.jpg";
+                        }
+                        */ 
                         //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
-                    }else{
-                        $experiencia->imagen= "no hay";}
+                        
+                    }
+                    
                     
                     $experiencia->nombre = $row['']->getProperty('nombre');
                     $experiencia->descripcion = $row['']->getProperty('descripcion');
                     array_push($array, $experiencia);
                     $res=null;
-                    
-                    
                 }
                 return $array;
             }
@@ -187,16 +207,16 @@ class ModelExperiencia{
                     
                     
                     $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
-                    
                     $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
                     
                     if($queryRes){
                         $res = $queryRes->getResultSet();                                        
                         $experiencia->imagen= $res[0]->offsetGet('');
                         //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
+                        
                     }else{
-                        $experiencia->imagen= "no hay";                        
-                        }
+                        $experiencia->imagen= "no hay";   //no hay                        
+                    }
                     
                     $experiencia->nombre = $row['']->getProperty('nombre');
                     $experiencia->descripcion = $row['']->getProperty('descripcion');
