@@ -248,14 +248,18 @@ class ModelExperiencia{
                     $img_id = $img['']->getId();
                     $suario_id=$usuario[0]['']->getId();
                     $suario_img=$usuario[0]['']->getProperty('imagen'); 
+                    $type = "";
                     
                     if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
                         $suario_nick=$usuario[0]['']->getProperty('nombre');                
+                        $type="Empresa";
                     }else{
                         $suario_nick=$usuario[0]['']->getProperty('nick');                
+                        $type="Usuario";
                     }
                     
                 $retorno = array(
+                    'type'=>$type,
                     'img_nombre'=>$img_nombre,
                     'img_id'=>$img_id,
                     'usuario_id'=>$suario_id,

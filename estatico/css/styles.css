@@ -87,30 +87,32 @@
 .icono-fullscreen-exit,
 .icono-fullscreen {
   display:inline-block;
-  width: 20px;
-  height: 20px;
-  background-image: url(/natane3/estatico/img2/controls-dark.png);
-  background-repeat: no-repeat
+  width: 50px;
+  height: 30px;
+  
+  background-image: url(/natane3/estatico/img2/controls-light.png);
+  background-repeat: no-repeat;
+  
 }
 
 .icono-grilla {
-  background-position: 0 0
+  background-position: 0 0;
 }
 
 .icono-arrow-left {
-  background-position: -40px 0
+  background-position: -40px 0;
 }
 
 .icono-arrow-right {
-  background-position: -80px 0
+  background-position: -80px 0;
 }
 
 .icono-fullscreen-exit {
-  background-position: -120px 0
+  background-position: -120px 0;
 }
 
 .icono-fullscreen {
-  background-position: -160px 0
+  background-position: -180px 0;
 }
 .fs-toggle {
   display: none;

@@ -34,13 +34,17 @@
         
         public $dic_general;
         public $dic_contenido;
+        
+        public $id_empresa;
 
 
         
 
         
-        public function __construct() {
-
+        public function __construct($id) {
+            
+            
+            $this->id_empresa = $id;
             $this->img_slider_act = '<div class="item active">
                                         <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
                                     </div>';
@@ -108,8 +112,8 @@
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,
-                                        'confianza'=>$this->confianza);
-            
+                                        'confianza'=>$this->confianza,
+                                        'id_empresa'=>$this->id_empresa);                                        
         }
         
         
@@ -134,9 +138,8 @@
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,
-                                        'confianza'=>$this->confianza);
-            
-            
+                                        'confianza'=>$this->confianza,
+                                        'id_empresa'=>$this->id_empresa);
         }
         
         public function refactory_slider($datos){   // contruye el slider
@@ -248,20 +251,12 @@
                 $aux = str_ireplace("{imagen}", $valor->imagen, $aux);                                              
                 
                 $elementos = $elementos.$aux;  
-                
-                
-                
             }
             
             // termina de ensamblar los elementos del ferrocarril con la estructura general del mismo            
             $this->ferrocarril = str_ireplace("{contenido_ferro}", $elementos, $this->ferrocarril);
             
             $this->actualizar_diccionarios();// actualiza los valores del diccionarios de datos            
-            
-            
-            
-            
-            
             
             
 //            $elementos="";     // variable que construirá los elementos de ferrocarril

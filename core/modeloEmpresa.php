@@ -68,6 +68,27 @@ class ModelEmpresa{
 	}    
 
         
+        
+        public function es_una_empresa($id){
+            
+            $query = "START n=node(".$id.") RETURN n.type";            
+            $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
+                    
+            if($queryRes){
+                $res = $queryRes->getResultSet();                                        
+                $tonto= $res[0]->offsetGet('');                
+                if($tonto == "Empresa"){                                        
+                    return 1;
+                }  else {
+                    return 0;
+                }
+                    
+            }
+                //$experiencia->imagen= "no hay";}            
+            
+            
+        }        
+        
         public function get_empresa($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            

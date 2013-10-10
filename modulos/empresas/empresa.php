@@ -12,7 +12,7 @@
         
         
         public function __construct($id) {            
-            $this->vista = new EmpresaVista();
+            $this->vista = new EmpresaVista($id);
             $this->modelo = new EmpresaModel($id);            
         }       
         
