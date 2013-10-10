@@ -32,13 +32,17 @@
         
         public $dic_general;
         public $dic_contenido;
+        
+        public $id_empresa;
 
 
         
 
         
-        public function __construct() {
-
+        public function __construct($id) {
+            
+            
+            $this->id_empresa = $id;
             $this->img_slider_act = '<div class="item active">
                                         <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
                                     </div>';
@@ -105,7 +109,8 @@
                                         'nombre_empresa'=>$this->nombre,
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
-                                        'longitud'=>$this->longitud);
+                                        'longitud'=>$this->longitud,
+                                        'id_empresa'=>$this->id_empresa);
             
         }
         
@@ -130,7 +135,8 @@
                                         'nombre_empresa'=>$this->nombre,
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
-                                        'longitud'=>$this->longitud);
+                                        'longitud'=>$this->longitud,
+                                        'id_empresa'=>$this->id_empresa);
             
             
         }

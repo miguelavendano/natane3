@@ -265,29 +265,3 @@
     }
         
 ?>
-
-
-
-<?php
-
-    $file = '../plantillas/perfilSitio.html';
-    $head = file_get_contents('../plantillas/componentes/head.html');
-    $slider = file_get_contents('../plantillas/componentes/slider.html');    
-    $sigue = file_get_contents('../plantillas/componentes/seguidores.html');
-    $modal = file_get_contents('../plantillas/componentes/barraModal.html');    
-    
-    $diccionario = array('head'=>$head,
-                        'slider'=>$slider,  
-                        'seguidores'=>$sigue,        
-                        'modales'=>$modal);    
-    
-    $template = file_get_contents($file);
-    
-    foreach ($diccionario as $clave=>$valor){
-        $template = str_ireplace('{'.$clave.'}', $valor, $template);
-    }
-    
-    
-    print $template;
-
-?>

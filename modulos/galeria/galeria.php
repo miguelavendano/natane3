@@ -20,9 +20,13 @@
         }       
         
         
-        public function fotos($id){
+        public function fotos($id, $galeria){
 
-            $resutlados = $this->modelo->get_img_todas($id);
+            if($galeria == 0)
+                $resutlados = $this->modelo->get_img_todas($id);
+            else
+                $resutlados = $this->modelo->get_img_empresas($id);
+            
             
             
             return $resutlados;
@@ -30,36 +34,75 @@
             
         }
         
-        public function validar_sitio($id){
+        
+        /* Esta funcion valida el tipo de eleento que 
+         * esta solicitando su galeria.
+         *  
+         * retorna 0 si el id no pertenece a un sitio o empresa
+         * 
+         * ret 1, si es un sitio o 2 si es una empresa
+         */
+
+        public function validar($id){
             
-            $boleano = $this->modelo->validar($id);
-            
-            if($boleano){
+            if($this->modelo->validar_sitio($id))                
                 return 1;
-            }
+            elseif ($this->modelo->validar_empresa($id))                
+                return 2;            
+            
+                        
+            return 0;
+        }
+    
+        
+        public function nombre_padre($id){
+            
+            $nombre = $this->modelo->traer_nombre($id);
+            
+            return $nombre;
             
         }
         
         
         
-        public function main($id){
+        public function main($id, $url_padre, $galeria){
             
-            $this->vista->refactory_fotos($this->fotos($id));
+            
+            $this->vista->refactory_fotos($this->fotos($id, $galeria));            
+            $this->vista->refactory_galeria($id, $url_padre,$this->nombre_padre($id));
             $this->vista->refactory_albun();
             $this->vista->refactory_resultados_total();
             
         }
     }
 
+    
+    
+    
+    
 
     $id = $_GET['id'];
     $galeria = new galerias();
     
-    if($galeria->validar_sitio($id)==1){        
+    $validar = $galeria->validar($id);
+    
+    if($validar){
         
-        $galeria->main($id);
+        if($validar==1){
+             $galeria->main($id, "{url_sitio}", 0);
+            
+        }else{
+            
+            $galeria->main($id, "{url_empresa}", 1);
+        }
+        
+    }else{
+        
+        
         
     }
+    
+ 
     
 
 

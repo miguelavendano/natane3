@@ -72,7 +72,8 @@
                                 'contenido'=>$this->galeria);     
             
             $this->dic_galeria = array('fotos'=>  $this->albun,
-                                    'modales'=>  $this->modal);              
+                                    'modales'=>  $this->modal,
+                );              
             
             
         }
@@ -96,13 +97,27 @@
         }
         
         
+        public function refactory_galeria($id, $url_padre, $nombre_galeria){
+            
+            
+            $this->galeria = str_ireplace("{url_padre}", $url_padre, $this->galeria);
+            $this->galeria = str_ireplace("{id}", $id, $this->galeria);
+            $this->galeria = str_ireplace("{nombre_galeria}", $nombre_galeria, $this->galeria);
+            
+ 
+            
+        }
+        
+        
         public function refactory_fotos($datos){            
             
             
             $resultados="";
             $fotos = $this->fotos;           
+            
+            
 
-            for($c=0; count($datos); $c++){                
+            for($c=0; count($datos); $c++){
                 
                 
                 //$resultados .= '<div class="row-fluid">';                            
@@ -110,10 +125,16 @@
                 do{ 
                     $sitio=array_shift($datos);
                     $aux = $fotos;
+                    if($sitio['type']=="Usuario")
+                        $aux = str_ireplace("{url_autor}", "{url_usuario}", $aux);
+                    else
+                        $aux = str_ireplace("{url_autor}", "{url_empresa}", $aux);
+                    
                     $aux = str_ireplace("{id_usuario}", $sitio['usuario_id'], $aux);
                     $aux = str_ireplace("{nombre_usuario}", $sitio['usuario_nick'], $aux);
                     $aux = str_ireplace("{img_usuario}", $sitio['usuario_img'], $aux);  
                     $aux = str_ireplace("{imagen}", $sitio['img_nombre'], $aux);  
+                    
                     
                     $resultados .= $aux;
                     $i++;
