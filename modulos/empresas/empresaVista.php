@@ -14,6 +14,7 @@
         public $empresa; 
         public $servicios;
         public $expe;
+        public $edi_exp;
         public $slider_empresa;        
         public $contacto;
         public $seguidores;
@@ -60,7 +61,8 @@
             $this->empresa= file_get_contents('../../plantillas/empresas/perfilEmpresa.html');   
             $this->slider_empresa= file_get_contents('../../plantillas/empresas/slider_empresas.html');      
             $this->servicios = file_get_contents('../../plantillas/empresas/servicios.html');      
-            $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');      
+            $this->expe = file_get_contents('../../plantillas/empresas/experiencia_empresa.html');      
+            $this->edi_exp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');                  
             $this->contacto = file_get_contents('../../plantillas/sitios/contacto.html'); 
             $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->gustaria= $this->seguidores;
@@ -108,6 +110,7 @@
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
                                         'experiencias'=> $this->expe,
+                                        'edita_experiencia'=> $this->edi_exp,
                                         'nombre_empresa'=>$this->nombre,
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
@@ -134,6 +137,7 @@
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
                                         'experiencias'=> $this->expe,
+                                        'edita_experiencia'=> $this->edi_exp,
                                         'nombre_empresa'=>$this->nombre,
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
@@ -311,13 +315,16 @@
             $this->actualizar_diccionarios();
             
             
-        }               
+        }   
+        
+        
         public function refactory_experiencias($datos){            
             
             $experiencias = "";
             
             foreach ($datos as $valor){
                 $aux = $this->expe;
+                $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
                 $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
                 $aux = str_ireplace('{comentario}',$valor->descripcion , $aux);
@@ -349,25 +356,18 @@
         }        
         
         public function refactory_total(){
-            
-            
+                        
             $globales = new Global_var();         
             
-            foreach ($this->dic_general as $clave=>$valor){
-                    
-                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
-                
+            foreach ($this->dic_general as $clave=>$valor){                    
+                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);                
             }
             
             foreach ($globales->global_var as $clave => $valor){
                 $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
             }            
-            
-            
+                        
             echo $this->base;
-            
-            
-            
         }
         
 

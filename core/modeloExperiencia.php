@@ -205,7 +205,6 @@ class ModelExperiencia{
                     $experiencia = new Experiencia();
                     $experiencia->id = $row['']->getId();
                     
-                    
                     $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
                     $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
                     

@@ -392,5 +392,15 @@ section{
 }
 
 
+/***FOTOS GALERIA***/
+.img-galeria img{
+    height: 20%;
+}
+.img-galeria--big img{
+    height: auto;
+}
 
-/* Css para registro de usuarios  */
+.items--big img{
+  width: 400px;
+  height: 600px;
+}

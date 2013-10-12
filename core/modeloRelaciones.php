@@ -119,32 +119,24 @@ class ModeloRelaciones
                 foreach($resultado as $row) {
                         //echo " ".$row['']->getId()."\n";                        
                    return $row['']->getId();                        
-                }
+                }                
+	}	
+
+	public static function consultaNodosEtiquetadosEnRelacion($idExperiencia){
+                                       
+                $queryString = "START n=node(".$idExperiencia.") MATCH n-[:Etiqueta]->i RETURN i";
+
+                $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+                $resultado = $query->getResultSet();
                 
-	}					        
-/*
-
-	public static function consulta($idNodoStart)
-	{
-
-		if ($idNodoStart){			
-			
-			$nodoStart = Neo4Play::client()->getNode($idNodoStart);
-		
-			$queryString = "START d = node:sitios(name='".$nodoStart->getProperty('name')."') MATCH d-[:Socios]->friend-[:Socios]->friend_of_friend RETURN friend_of_friend";			
-
-			$query = new Cypher\Query(Neo4Play::client(), $queryString);						  
-			$result = $query->getResultSet();	
-
-			if($result){							
-				echo "Se encontraron ".count($result)." amigos.\n";
-				foreach($result as $row) {
-					echo "  ".$row['']->getProperty('name')."\n";
-				}
-			}
-		}
-	}
-*/
+                $etiquetados = array();
+                //echo "Se encontraron ".count($resultado)." etiquetados.\n";
+                foreach($resultado as $row){
+                    array_push($etiquetados,$row['']->getId());
+                }        
+                
+                return $etiquetados;
+	}	
 
 
 }
