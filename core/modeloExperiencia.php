@@ -163,7 +163,7 @@ class ModelExperiencia{
                             $imagenes="";        
                         }
                         else {
-                            $experiencia->imagen= "experiencia_sin_foto.jpg";  //si la experienci no tiene imagen muestra esta por defecto
+                            $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
                         }
                         
                         
@@ -172,7 +172,7 @@ class ModelExperiencia{
                             $experiencia->imagen = $res[0]->offsetGet('');    
                         } 
                         else {
-                            $experiencia->imagen= "experiencia_sin_foto.jpg";
+                            $experiencia->imagen= "experiencia_sin_foto.png";
                         }
                         */ 
                         //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";

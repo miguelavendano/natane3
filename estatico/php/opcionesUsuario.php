@@ -220,30 +220,49 @@ if(isset($_POST['opcion'])){
         break;        
 
         case "eliminarExp":   
-            
-            //elimino la relacion entre la experiencia y las imagenes
-            $modeloexperiencia = new ModelExperiencia();            
-            
-            // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino
-            $ids_relacionImgExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Img");
-            
-            if($ids_relacionImgExp){
-                $modeloexperiencia->eliminar_relacion_experiencia($ids_relacionImgExp);     
-                
-                // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino            
-                $query = "START n=node(".$_POST['experiencia'].") MATCH n-[:Img]->i RETURN i;";
-                $ids_nodoImgExp = $modeloexperiencia->get_id_nodoImgExp($query);
-                $modeloexperiencia->eliminar_nodos_ImgExp($ids_nodoImgExp);
-            }
-                        
-            // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
-            $id_relacionUserExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Comparte");
-            if($id_relacionUserExp){
-                $modeloexperiencia->eliminar_relacion_experiencia($id_relacionUserExp); 
 
-                // elimino el nodo de la experiencia
-                ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                
+            $etiquetado=ModeloRelaciones::consultaNodosEtiquetadosEnRelacion($_POST['experiencia']); 
+            $tipo_relacion="";
+            
+            //reviza si entre los etiquetados esta el usuario
+            foreach($etiquetado as $row){
+
+                    if($row==$_POST['usuario']){
+                        $tipo_relacion="etiqueta";
+                    }
+                }
+
+        
+            if($tipo_relacion==""){
+
+                //elimino la relacion entre la experiencia y las imagenes
+                $modeloexperiencia = new ModelExperiencia();            
+
+                // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino
+                $ids_relacionImgExp = ModelExperiencia::get_id_relaciones_nodo($_POST['experiencia'],"Img");
+
+                if($ids_relacionImgExp){
+                    ModelExperiencia::eliminar_relacion_experiencia($ids_relacionImgExp);     
+
+                    // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino            
+                    $query = "START n=node(".$_POST['experiencia'].") MATCH n-[:Img]->i RETURN i;";
+                    $ids_nodoImgExp = $modeloexperiencia->get_id_nodoImgExp($query);
+                    ModelExperiencia::eliminar_nodos_ImgExp($ids_nodoImgExp);
+                }
+
+                // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
+                $id_relacionUserExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Comparte");
+                if($id_relacionUserExp){
+                    ModelExperiencia::eliminar_relacion_experiencia($id_relacionUserExp); 
+
+                    // elimino el nodo de la experiencia
+                    ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                
+                }
             }
+            elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
+                $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['usuario'], "Etiqueta");  //consulto el ID de la relacion
+                ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa
+            }    
            
             $band="true";
             

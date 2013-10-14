@@ -4,7 +4,8 @@
 
 
 .detalle_sitio{
-    height: 320px;
+    height: auto;    
+    margin: 15px;
 }
 
 .actividades{

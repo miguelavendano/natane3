@@ -114,7 +114,7 @@
         
         public function refactory_usuario($datos){
                 
-            //$this->usuario = str_ireplace('{nombre}',$datos[0]->nick ,$this->usuario );
+            $this->usuario = str_ireplace('{nick}',$datos[0]->nick ,$this->usuario );
             $this->usuario = str_ireplace('{nombre}',$datos[0]->nombre." ".$datos[0]->apellido,$this->usuario );
             $this->usuario = str_ireplace('{genero}',$datos[0]->genero ,$this->usuario );
             $this->usuario = str_ireplace('{imagen}',$datos[0]->imagen ,$this->usuario );

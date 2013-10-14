@@ -16,7 +16,7 @@ if(isset($_POST['opcion'])){
         // Registro de un Usuario
         case "registrarS":                       
 
-            $img='humadea.jpg;';
+            $img='humadea.jpg';
             $web=$_POST['nombre']."_".substr($_POST['nombre'],0,1).".com";
             $face='http://www.facebook.com/AnDaLaTo';    
             $twit='https://twitter.com/JulianDVarelaP';

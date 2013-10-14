@@ -26,7 +26,7 @@
         }
         
         public function  get_slider(){
-            $eslaider = array("panoramica1.jpg","panoramica4.jpg","panoramica3.jpg");
+            $eslaider = array("panoramica1.jpg","panoramica4.jpg","panoramica3.jpg","panoramica6.jpeg","panoramica7.jpeg");
             return $eslaider;         
         }        
 

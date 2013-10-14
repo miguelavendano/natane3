@@ -51,8 +51,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d000000', e
 }
 .titulo-result a:hover{
     text-decoration: none;
-    /*color: rgb(42, 207, 11);*/
-    
+    color: rgb(42, 207, 11);    
 }
 
 /*

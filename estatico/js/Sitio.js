@@ -230,7 +230,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'visito',                   
                     sitio: id_url[1],
-                    usuario: '279'
+                    usuario: '62'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                   
@@ -251,7 +251,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'elimina-visita',
                     sitio: id_url[1],
-                    usuario: '279'
+                    usuario: '62'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -278,7 +278,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'quiere-visitar',
                     sitio: id_url[1],
-                    usuario: '279'
+                    usuario: '62'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                   
@@ -299,7 +299,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'elimina-intencion-visitar',
                     sitio: id_url[1],
-                    usuario: '279'
+                    usuario: '62'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           

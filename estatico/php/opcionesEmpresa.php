@@ -165,19 +165,18 @@ if(isset($_POST['opcion'])){
         break;        
 
         case "eliminaExpEmp":
-
             
             $etiquetado=ModeloRelaciones::consultaNodosEtiquetadosEnRelacion($_POST['experiencia']); 
+            $tipo_relacion="";
             
             foreach($etiquetado as $row){
                     if($row==$_POST['empresa']){
                         $tipo_relacion="etiqueta";
-                    }else{
-                        $tipo_relacion="comparte";
                     }
                 }
-            //si existe un ID entre las partes de tipo Comparte, entonces es una experiencia publicada por la empresa            
-            if($tipo_relacion=="comparte"){
+                
+                
+            if($tipo_relacion==""){
                 
                 // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino
                 $ids_relacionImgExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Img");
@@ -202,8 +201,7 @@ if(isset($_POST['opcion'])){
                 }                
                 //$band="experiencia";
             }
-            //si existe un ID entre las partes de tipo Etiqueta, entonces es una experiencia en la que se etiqueto                        
-            elseif($tipo_relacion=="etiqueta"){  //si no es Experienca, pregunta si es una Etiqueta
+            elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
                 
                 $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['empresa'], "Etiqueta");  //consulto el ID de la relacion
                 ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa                               

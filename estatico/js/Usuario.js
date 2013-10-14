@@ -567,12 +567,16 @@ $(document).ready(function(){
 
     function eliminarExperiencia(id_experiencia) {
         
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'eliminarExp',                            
-                    experiencia: id_experiencia
+                    experiencia: id_experiencia,
+                    usuario: id_url[1]
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
