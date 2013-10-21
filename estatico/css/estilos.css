@@ -33,11 +33,11 @@ section{
     margin-bottom:15px;
     box-shadow: 10px 10px 20px #ccc;
 }
-
-#contenido-black{
-	background-color: black;
-	border-radius: 4px;
-	border: 1px solid #ccc;
+/*contenedor para slider de sitio y empresa*/
+.contenido-black{
+    background-color: black;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
 /* -------------------- MAPA DE GOOGLE -------------------- */
@@ -73,7 +73,8 @@ section{
 }
 .seguidores h3{	
 	margin: 0px;
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
+        color: #0088cc;
 }
 .seguidores p{	
 	padding-left: 15px;	
@@ -370,7 +371,35 @@ section{
 	color: #FFFFFF;
 	background-color: #00991A;
 }
-
+.btn-purple {
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #960C96;
+	background-image: -moz-linear-gradient(top, #F208CB, #960C96);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F208CB), to(#960C96));
+	background-image: -webkit-linear-gradient(top, #F208CB, #960C96);
+	background-image: -o-linear-gradient(top, #F208CB, #960C96);
+	background-image: linear-gradient(to bottom, #F208CB, #960C96);
+	background-repeat: repeat-x;
+	border-color: #960C96;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F208CB', endColorstr='#960C96', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn-purple:hover,
+.btn-purple:active,
+.btn-purple.active,
+.btn-purple.disabled,
+.btn-purple[disabled] {
+	color: #FFFFFF;
+	background-color: #960C96;
+}
+/*ESTILOS PARA EL BOTON QUE ESTA SOBRE EL SLIDER DE SITIO O EMPRESA*/
+.btn-galeria{
+    position: absolute;
+    z-index: 100;
+    margin: 300px 0 0 10px;
+}
 .btn-slider{
     width: 100px;
     height: 25px;
@@ -380,6 +409,17 @@ section{
     filter: alpha(opacity=50);
 }
 .btn-slider:hover{
+    opacity: 1;
+    filter: alpha(opacity=100);    
+}
+.btn-edit-slider{
+    position: absolute;
+    z-index: 100;
+    margin: 2% 0 0 48%;
+    opacity: 0.5;
+    filter: alpha(opacity=50);    
+}
+.btn-edit-slider:hover{
     opacity: 1;
     filter: alpha(opacity=100);    
 }

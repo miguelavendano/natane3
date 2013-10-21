@@ -15,6 +15,7 @@
         public $nombre;
         public $sitio;        
         public $slider_sitio;        
+        public $edita_slider;
         public $contacto;
         public $seguidores;
         public $gustaria;
@@ -29,7 +30,7 @@
         public $latitud;
         public $longitud;
         public $losvotos;
-        
+                
         public $dic_general;
         public $dic_contenido;
 
@@ -54,6 +55,7 @@
             
             $this->sitio = file_get_contents('../../plantillas/sitios/perfilSitio.html');   
             $this->slider_sitio = file_get_contents('../../plantillas/sitios/slider_sitio.html');      
+            $this->edita_slider = file_get_contents('../../plantillas/generales/editar_slider.html');      
             $this->contacto = file_get_contents('../../plantillas/sitios/contacto.html'); 
             $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->gustaria = $this->seguidores;
@@ -91,6 +93,7 @@
 
             
             $this->dic_contenido = array('slider_sitio' => $this->slider_sitio, 
+                                        'editar_slider' => $this->edita_slider,                
                                         'nombre'=>$this->nombre,
                                         'descripcion' => $this->descripcion, 
                                         'contacto' => $this->contacto, 
@@ -116,6 +119,7 @@
                                     'contenido' => $this->sitio);
             
             $this->dic_contenido = array('slider_sitio' => $this->slider_sitio, 
+                                        'editar_slider' => $this->edita_slider,
                                         'nombre'=>$this->nombre,
                                         'descripcion' => $this->descripcion, 
                                         'contacto' => $this->contacto, 

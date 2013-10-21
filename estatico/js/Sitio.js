@@ -451,4 +451,63 @@ $(document).ready(function(){
     });
 
 
+    /*
+     * Editar Imagenes del Slider
+     */
+    $("#edit_slider_sitio").click(function(){
+
+            $("#EditarSlider").css({display:'inline'});   
+            $("#slider_sitio").css({display:'none'});   
+            //$(".pestañas").css({display:'none'});
+            //$("#Enom").val("julian");
+
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");            
+
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'editarS',                            
+                    sitio: id_url[1]                    
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+                /*
+                    $("#reload").css({visibility: 'visible',
+                                        opacity:'1',
+                                        position: 'fixed',
+                                        top: '200px',
+                                        right: '50px',
+                                        left: '50px',
+                                        width: 'auto',
+                                        margin: '0 auto'                                        
+                                    });   
+                    
+                    $(".reload-backdrop").css({ position: 'fixed',
+                                                top: '0',
+                                                right: '0',
+                                                bottom: '0',
+                                                left: '0',
+                                                zIindex: '99999',
+                                                background: '#000000',
+                                                opacity:'0.4'
+                                             });                  
+                   */
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                    
+                }
+            });            
+    });
+    
+
+    /*
+     * Cancelar edicion del slider
+     */
+    $(".cancelaEdicionSlider").click(function(){        
+             $("#slider_sitio").css({display:'inline'});
+    });     
+
 });

@@ -464,7 +464,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'seguir',                   
                     a_seguir: id_url[1],
-                    seguidor: '61'
+                    seguidor: '279'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           

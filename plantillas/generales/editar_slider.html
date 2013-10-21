@@ -1,0 +1,24 @@
+        <!-- Compartir Experiencia-->
+        <div id="EditarSlider" style="display: none">
+            <legend></legend>
+                <a class="close cancelaEdicionSlider">&times;</a>            
+                <h3 id="edita_crea_Exp">Imagenes del Slider</h3>                
+                                         
+            <form class="form-horizontal" id="formImgSlider" method=post enctype=multipart/form-data>              
+                <div class="span6">                                
+                    <div class="caja_Bfile btn btn-green active"> 
+                        <i class="icon-camera"> Cargar Imagenes</i>
+                        <input class="Bfile" type="file" id="imagenes_slider" name="imagenes_slider[]" multiple />
+                    </div>
+                </div>
+                <div class="row-fluid">      
+                    <output id="list_img_slider"></output>                                           
+                </div>                                  
+                <div id="botones_exp" class="control-group">                  
+                    <button class="btn btn-blue" id="editaSlideSitio">Compartir</button>
+                    <button class="btn btn-red cancelaEdicionSlider"> Cerrar</button>                                                
+                </div>                
+            </form>        
+        </div>
+        
+
