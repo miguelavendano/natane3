@@ -3,6 +3,7 @@ session_start();
 require_once('../../core/coneccion.php');
 require_once('../../core/modeloSitio.php');
 require_once('../../core/modeloExperiencia.php');
+require_once('../../core/modeloImagen.php');
 require_once('../../core/modeloRelaciones.php');
 
 
@@ -180,6 +181,40 @@ if(isset($_POST['opcion'])){
             
             $band = "<h5>$voto Personas confían en este sitio</h5>";
             
+        break;    
+    
+        case "guarda_slider_sitio":                                   
+            
+            $upload_folder ='../../estatico/imagenes/';
+            
+            foreach($_FILES['imagenes_slider']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    $nombre_archivo = $_FILES['imagenes_slider']['name'][$key];
+                    $tmp_archivo = $_FILES['imagenes_slider']['tmp_name'][$key];            
+                    //$tipo_archivo = $_FILES['imagenes_slider']['type'][$key];
+                    //$tamano_archivo = $_FILES['imagenes_slider']['size'][$key];
+
+                    //echo $nombre_archivo;
+                    $nomImgSliderSitio = $_POST['sitio'].'_'.$nombre_archivo;
+                    echo $nomImgSliderSitio;
+
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgSliderSitio);   //guarda la imagen
+            
+                    //crea el nodo de cada una de las imagenes
+                    $nodo_imagen = new Imagen();
+                    $nodo_imagen->nombre = $nomImgSliderSitio;
+                    $nodo_imagen->descripcion = "";
+                    //$nodo_imagen->comentario1 = "";
+                    $nodo_imagen->type = 'Imagen';  
+                    ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
+
+                    $id_img_slider = $nodo_imagen->id;  //obtengo el id del nodo creado                   
+                    ModeloRelaciones::crearRelacion($id_img_slider, $_POST['sitio'], "ImgSlider");   //crea la relacion entre la experiencia y la imagen
+                }
+            }
+            
+            $band="true";            
+                     
         break;    
     
         default : break; 

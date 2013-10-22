@@ -26,8 +26,14 @@
         }
         
         public function  get_slider(){
+            
+            $query = "START n=node(".$this->id_sitio.") MATCH n<-[:ImgSlider]-i RETURN i.nombre";
+            $imagenes = $this->modelsitios->get_img_slider($query);
+            return $imagenes; 
+            
+            /*
             $eslaider = array("panoramica1.jpg","panoramica4.jpg","panoramica3.jpg","panoramica6.jpeg","panoramica7.jpeg");
-            return $eslaider;         
+            return $eslaider;         */
         }        
 
         

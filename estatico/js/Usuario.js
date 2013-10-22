@@ -234,7 +234,7 @@ $(document).ready(function(){
      */   
     $(".edit_img_perfil").click(function(){
 
-            $(".eedit_img_perfildit_img_perfil").css({display:'none'});  //oculta el boton que guarda la foto 
+            $(".edit_img_perfil").css({display:'none'});  //oculta el boton que guarda la foto 
             
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
@@ -262,7 +262,7 @@ $(document).ready(function(){
 
     /*
      * Registro de una experiencia nueva
-     */        
+         
     $("#experiencia").click(function(){
        
             var mi_url=document.location.href;
@@ -291,7 +291,7 @@ $(document).ready(function(){
                     }
                 });          
         });
-
+*/
     /*
      * Muestra la interfaz de compartir experiencia
      */
@@ -312,7 +312,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");       
             
             var datosform = new FormData(document.getElementById('formExperiencia'));            
-            datosform.append( "opcion", "experiencia");            
+            datosform.append( "opcion", "crea_experiencia");            
             datosform.append( "autor", id_url[1] );
             
             //$("#imagenes_experiencia").css({display: 'none'});                    

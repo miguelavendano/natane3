@@ -458,56 +458,51 @@ $(document).ready(function(){
 
             $("#EditarSlider").css({display:'inline'});   
             $("#slider_sitio").css({display:'none'});   
-            //$(".pestañas").css({display:'none'});
-            //$("#Enom").val("julian");
 
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");            
-
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion:'editarS',                            
-                    sitio: id_url[1]                    
-                }
-                ,dataType:'JSON'
-                ,beforeSend:function(jqXHR, settings ){
-                /*
-                    $("#reload").css({visibility: 'visible',
-                                        opacity:'1',
-                                        position: 'fixed',
-                                        top: '200px',
-                                        right: '50px',
-                                        left: '50px',
-                                        width: 'auto',
-                                        margin: '0 auto'                                        
-                                    });   
-                    
-                    $(".reload-backdrop").css({ position: 'fixed',
-                                                top: '0',
-                                                right: '0',
-                                                bottom: '0',
-                                                left: '0',
-                                                zIindex: '99999',
-                                                background: '#000000',
-                                                opacity:'0.4'
-                                             });                  
-                   */
-                }
-                ,success: function(data,textStatus,jqXHR){                           
-                    
-                    
-                }
-            });            
     });
     
 
     /*
+     * Crea la experiencia del usuario
+     */   
+    $("#guardaSliderSitio").click(function(){            
+            //alert("entro=???");
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");       
+            
+            var datosform = new FormData(document.getElementById('formImgSlider'));            
+            datosform.append( "opcion", "guarda_slider_sitio");            
+            datosform.append( "sitio", id_url[1] );
+
+            $.ajax({
+               url : '/natane3/estatico/php/opcionesSitio.php',
+               type : 'POST',
+               data:{
+                    opcion: 'guarda_slider_sitio',
+                    sitio: id_url[1],
+                    voto: $(this).data("value")
+               },
+               processData : false, 
+               contentType : false, 
+               success: function(data,textStatus,jqXHR){                           
+
+                        if(/true/.test(data)) {                                
+                            alert("Slider Modificado... :D");
+                            $("#slider_sitio").css({display:'inline'});                            
+                        }
+                        else alert("No se han podido relizar los cambios"); 
+                }
+            });
+
+    });
+    
+    
+    /*
      * Cancelar edicion del slider
      */
     $(".cancelaEdicionSlider").click(function(){        
-             $("#slider_sitio").css({display:'inline'});
+            $("#EditarSlider").css({display:'none'});   
+            $("#slider_sitio").css({display:'inline'});             
     });     
 
 });

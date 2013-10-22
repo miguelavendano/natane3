@@ -2,6 +2,7 @@
 
 require_once('coneccion.php');
 require_once('Sitio.php');
+require_once('Imagen.php');
 
 use Everyman\Neo4j\Node,
     Everyman\Neo4j\Index,
@@ -397,6 +398,25 @@ class ModelSitios{
             
             return $arsitios;  
         }               
+
+        
+        public function get_img_slider($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $imagenes = array();
+            
+            if($result){                
+                foreach($result as $row) {
+                    $img= $row[''];
+                    array_push($imagenes, $img);                    
+                }
+                return $imagenes;
+           }
+               
+        }
+        
         
         
 }
