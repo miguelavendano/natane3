@@ -8,7 +8,8 @@
     <link rel="icon" type="image/png" href="{IMG_SYS}/favicon.png" />        
 
 </head>
-<body onload="initialize()">
+<!--<body onload="initialize()">-->
+<body>
     {head} <!-- en "generales" -->
    
     <img id="reload" src="{IMG_SYS}/preload_hojas.gif" style="position: fixed; z-index: 999; visibility: hidden;">    
@@ -53,8 +54,8 @@
     <script src="{JS}/bootstrap-datepicker.js"></script>            
     <script>
       $(function(){
-        $('#dp_reg').datepicker();               
-        $('#dp_edi').datepicker();             
+        $('.dp_reg').datepicker();               
+        $('.dp_edi').datepicker();             
       });
     </script>    
 
@@ -187,6 +188,7 @@
     <script src="{JS}/Sitio.js"></script>
     <script src="{JS}/Empresa.js"></script>
     <script src="{JS}/Consulta.js"></script>
+    <script src="{JS}/Mapa.js"></script>
 
 {script}    
   

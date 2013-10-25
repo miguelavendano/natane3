@@ -178,7 +178,7 @@ if(isset($_POST['opcion'])){
             $voto--;
 
             ModelSitios::editar_sitio($_POST['sitio'], "votos", $voto);  //aumenta los votos del sitio
-            
+
             $band = "<h5>$voto Personas confían en este sitio</h5>";
             
         break;    
@@ -206,6 +206,8 @@ if(isset($_POST['opcion'])){
                     $nodo_imagen->descripcion = "";
                     //$nodo_imagen->comentario1 = "";
                     $nodo_imagen->type = 'Imagen';  
+                   
+                    
                     ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
 
                     $id_img_slider = $nodo_imagen->id;  //obtengo el id del nodo creado                   
@@ -215,6 +217,16 @@ if(isset($_POST['opcion'])){
             
             $band="true";            
                      
+        break;    
+
+        case "guardaCoodenadasS":  
+            echo $_POST['lat_lon[0]'];
+            echo $_POST['lat_lon[1]'];
+            /*
+            ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat']);
+            ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lon']);             */
+            $band="true";
+            
         break;    
     
         default : break; 

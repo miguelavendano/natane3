@@ -41,7 +41,12 @@ section{
 }
 
 /* -------------------- MAPA DE GOOGLE -------------------- */
-#map_canvas { height: 100% }
+.mapa-natane { height: 100% }
+
+.mapa-natane img,
+.google-maps img {
+  max-width: none;
+}
 
 /* -------------------- Carrusel -------------------- */
 .carousel .item {
