@@ -19,7 +19,7 @@ $(document).ready(function(){
                 mapOptions = {
                     zoom: mizoom,
                     center: ubicacion,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    mapTypeId: google.maps.MapTypeId.ROADMAP                    
                 };                   
                    
                 if(document.getElementsByClassName('mapa-natane').length==0){ 
@@ -28,12 +28,11 @@ $(document).ready(function(){
                 }
 
                 map = new google.maps.Map(document.getElementsByClassName('mapa-natane')[0],mapOptions);
-                //map = new google.maps.Map(document.getElementById("mapa_natane"),mapOptions);;
 
                 makerOptions={
                     position: map.getCenter(),
                     map: map,
-                    title: 'Click to zoom',
+                    title: 'Selecciona, arrastra y posiciona tu sitio',
                     icon:icono,
                     draggable: true,
                     animation: google.maps.Animation.DROP,
@@ -43,13 +42,10 @@ $(document).ready(function(){
                 marker = new google.maps.Marker(makerOptions);
 
 
-
-                  //eventos
-
+                //eventos
                 google.maps.event.addListener(marker, 'dragend', function() {
                        mostrarDetalles();                       
-                 });    
-
+                });    
 
 
                 /**************al dar click en el mapa******************/
@@ -74,6 +70,12 @@ $(document).ready(function(){
                 inicializa();
             }
 
+            //muestre el mapa con la ubicacion que pasa por parametro
+            function muestraPosicionActual(latitud,longitud){
+                alert("entro a la fucion");
+                ubicacion=new google.maps.LatLng(latitud,longitud);
+                inicializa();
+            }
 
 
             //muestra la direccion
@@ -90,8 +92,6 @@ $(document).ready(function(){
                         url:'http://maps.googleapis.com/maps/api/geocode/json?latlng='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&sensor=true'
                         ,type:'GET'
                         ,dataType:'json'
-                        ,beforeSend:function(  jqXHR, settings ){
-                        }
                         ,success: function(data,textStatus,jqXHR){
     
                                 var contenido="";
@@ -166,8 +166,29 @@ $(document).ready(function(){
     var mapa;
 
     google.maps.event.addDomListener(window, 'load', function(){
-        mapa=new mapa_natane();
-        //alert(mapa.getPosicion());        
+
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'obtieneCoordenadasS',                   
+                    sitio: id_url[1]
+                }
+                ,dataType:'JSON'
+                ,success: function(data,textStatus,jqXHR){                           
+                            //alert(data.latitud+"____"+data.longitud)
+                            mapa=new mapa_natane();
+                            
+                            mapa.muestraPosicionActual(data.latitud,data.longitud);
+                            
+                            
+                            
+
+                }
+            });                                
     });
 
 

@@ -220,14 +220,27 @@ if(isset($_POST['opcion'])){
         break;    
 
         case "guardaCoodenadasS":  
-            echo $_POST['lat_lon[0]'];
-            echo $_POST['lat_lon[1]'];
-            /*
-            ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat']);
-            ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lon']);             */
+            
+            ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat_lon']['latitud']);
+            ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lat_lon']['longitud']);
             $band="true";
             
         break;    
+    
+        case "obtieneCoordenadasS":                       
+            
+            $modelsitio = new ModelSitios();            
+            $query = "START n=node(".$_POST['sitio'].") RETURN n";                        
+            $resultado = $modelsitio->get_sitio($query);
+            
+            $band = array(
+                "latitud"=> $resultado[0]->latitud,
+                "longitud"=> $resultado[0]->longitud
+            );
+                        
+           $band = json_encode($band);
+            
+        break;        
     
         default : break; 
     }    

@@ -51,7 +51,7 @@ $(document).ready(function(){
     $("#BeditarE").click(function(){
 
             $("#editarEmpresa").css({display:'inline'});   
-            //$(".pestañas").css({display:'none'});
+            $("#slider_empresa").css({display:'none'});
             //$("#Enom").val("julian");
 
             var mi_url=document.location.href;
@@ -159,6 +159,7 @@ $(document).ready(function(){
      */
     $(".cancelar_edicion_empresa").click(function(){        
              $("#editarEmpresa").css({display:'none'});                
+             $("#slider_empresa").css({display:'inline'});
     }); 
     
     /*

@@ -62,7 +62,7 @@ $(document).ready(function(){
     $("#BeditarS").click(function(){
 
             $("#editarSitio").css({display:'inline'});   
-            //$(".pestañas").css({display:'none'});
+            $("#slider_sitio").css({display:'none'});
             //$("#Enom").val("julian");
 
             var mi_url=document.location.href;
@@ -200,6 +200,7 @@ $(document).ready(function(){
      */
     $(".cancelar_edicion_sitio").click(function(){        
              $("#editarSitio").css({display:'none'});                
+             $("#slider_sitio").css({display:'inline'});
     }); 
     
     /*
