@@ -296,7 +296,54 @@ $(document).ready(function(){
              $(".pestañas").css({display:'inline'});                                      
     });  
    
-        
+   
+    /*
+     * Muestra el formulario para crear un servicio
+     */
+    $("#BcrearServi").click(function(){        
+             $("#crearServicio").css({display:'inline'});                
+             $("#slider_empresa").css({display:'none'});
+    });      
+
+
+    /*
+     * Guarda el servicio creado
+     */
+    $("#guardarServicio").click(function(){
+
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+
+            var datosform = new FormData(document.getElementById('formCrearServicio'));            
+            datosform.append( "opcion", "crearServicio");            
+            datosform.append( "empresa", id_url[1] );
+                        
+                $.ajax({
+                   url:'/natane3/estatico/php/opcionesEmpresa.php',
+                   type : 'POST',
+                   data : datosform,
+                   processData : false, 
+                   contentType : false, 
+                   success: function(data,textStatus,jqXHR){                           
+
+                            if(/true/.test(data)) {                                
+                                alert("Servicio creado :D");                                                                          
+                                document.location.reload();                                     
+                            }
+                            else alert("No se ha podido ingresar su servicio"); 
+                    }
+                });                
+    });    
+     
+
+    /*
+     * Cancelar creacion de un servicio
+     */
+    $(".cancelarServicio").click(function(){        
+             $("#crearServicio").css({display:'none'});                
+             $("#slider_empresa").css({display:'inline'});
+    }); 
+
 
 });
 

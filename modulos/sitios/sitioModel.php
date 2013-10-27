@@ -1,7 +1,8 @@
 <?php
     
     require_once('../../core/modeloSitio.php');   
-    require_once('../../core/modeloUsuario.php');   
+    require_once('../../core/modeloUsuario.php'); 
+    require_once('../../core/modeloExperiencia.php');    
     require_once('../../librerias/neo4jphp.phar');
     require_once('../../librerias/Neo4Play.php');    
     
@@ -9,13 +10,16 @@
     class SitioModel{
         
         public $modelsitios;
-        public $id_sitio;
         public $modelusuario;
+        public $modelexpe;
+        public $id_sitio;
+        
         
         
         public function __construct($id) {            
             $this->modelsitios = new ModelSitios();
             $this->modelusuario = new ModelUsuarios();
+            $this->modelexpe = new ModelExperiencia();
             $this->id_sitio = $id;            
         }       
         
@@ -82,6 +86,17 @@
             $resultado = $this->modelsitios->get_sitio($query);
             return $resultado;                        
         } 
+        
+        
+        public function get_experiencias_visitantes(){   
+                        
+            $query = "start n=node(".$this->id_sitio.") match n<-[:Comparte|Etiqueta]->b return b;";            
+            //$resultado = $this->modelexpe->get_exper_usuario($query);
+            $resultado = $this->modelexpe->get_experiencias($query);
+            
+
+            return $resultado;            
+        }                  
         /*
         public function get_coordenadas_mapa(){            
             $query = "START n=node(".$this->id_sitio.") RETURN n.latitud,n.longitud";

@@ -74,7 +74,7 @@ $(document).ready(function(){
                                         width: 'auto',
                                         margin: '0 auto'
                                     });   
-                    
+                    /*
                     $(".reload-backdrop").css({ position: 'fixed',
                                                 top: '0',
                                                 right: '0',
@@ -84,12 +84,12 @@ $(document).ready(function(){
                                                 background: '#000000',
                                                 opacity:'0.4'
                                             });                  
-                   
+                   */
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
                     $("#reload").css({visibility: 'hidden'});   
-                    $(".reload-backdrop").css({visibility: 'hidden'});                    
+                    //$(".reload-backdrop").css({visibility: 'hidden'});                    
                     
                         $("#EnomU").val(data.nombre);
                         $("#EapeU").val(data.apellido);
@@ -311,7 +311,7 @@ $(document).ready(function(){
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
             
-            var datosform = new FormData(document.getElementById('formExperiencia'));            
+            var datosform = new FormData(document.getElementById('formComparteExperiencia'));            
             datosform.append( "opcion", "crea_experiencia");            
             datosform.append( "autor", id_url[1] );
             
@@ -332,7 +332,7 @@ $(document).ready(function(){
 
                             if(/true/.test(data)) {                                
                                 alert("Experiancia ingresada :D");                                                                          
-                                document.location.reload();                                     
+                                //document.location.reload();                                     
                             }
                             else alert("No se ha podido ingresar su experiencia"); 
                     }
@@ -539,7 +539,7 @@ $(document).ready(function(){
                                         width: 'auto',
                                         margin: '0 auto'
                                     });   
-                    
+                    /*
                     $(".reload-backdrop").css({ position: 'fixed',
                                                 top: '0',
                                                 right: '0',
@@ -549,12 +549,12 @@ $(document).ready(function(){
                                                 background: '#000000',
                                                 opacity:'0.4'
                                             });                  
-                   
+                   */
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
                     $("#reload").css({visibility: 'hidden'});   
-                    $(".reload-backdrop").css({visibility: 'hidden'});                                     
+                    //$(".reload-backdrop").css({visibility: 'hidden'});                                     
                    
                     $("#ediExptitulo").val(data.nombre);
                     $("#ediExpdesc").val(data.descripcion);

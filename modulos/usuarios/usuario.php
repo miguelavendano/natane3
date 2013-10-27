@@ -11,38 +11,27 @@
         public $modelo;
         
         
-        
-        public function __construct($id) {
-            
+        public function __construct($id) {            
             $this->vista = new UsuarioVista();
             $this->modelo = new UsuarioModel($id);
-            
-            
         }       
         
         
         public function datos_usuario(){
-
-            $usuario = $this->modelo->get_resultados();
-            
-            return $usuario;
-            
+            $usuario = $this->modelo->get_resultados();            
+            return $usuario;            
         }
         
-        public function experiencias(){
-            
-            return $this->modelo->get_experiencias();
-            
+        public function experiencias(){            
+            return $this->modelo->get_experiencias();            
         }
 
-        public function gustaria(){
-            
+        public function gustaria(){            
             return $this->modelo->get_gustaria();            
         }        
         
         
-        public function amigos(){
-            
+        public function amigos(){            
             return $this->modelo->get_amigos();            
         }
         

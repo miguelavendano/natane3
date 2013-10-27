@@ -29,7 +29,7 @@
         public $latitud;
         public $longitud;   
         public $confianza;
-
+        public $crea_servicio;
 
         public $script;        
         
@@ -68,6 +68,7 @@
             $this->gustaria= $this->seguidores;
             $this->ferrocarril= file_get_contents('../../plantillas/generales/ferrocarril.html');
             $this->editar = file_get_contents('../../plantillas/empresas/editarEmpresa.html');
+            $this->crea_servicio = file_get_contents('../../plantillas/empresas/crearServicio.html');
             $this->elemento_ferro= file_get_contents('../../plantillas/generales/elemento_ferro.html');
             $this->modales= file_get_contents('../../plantillas/generales/barraModal.html');
                      
@@ -116,7 +117,8 @@
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,
                                         'confianza'=>$this->confianza,
-                                        'id_empresa'=>$this->id_empresa);                                        
+                                        'id_empresa'=>$this->id_empresa,
+                                        'crearServicio'=>$this->crea_servicio);
         }
         
         
@@ -143,7 +145,8 @@
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,
                                         'confianza'=>$this->confianza,
-                                        'id_empresa'=>$this->id_empresa);
+                                        'id_empresa'=>$this->id_empresa,
+                                        'crearServicio'=>$this->crea_servicio);
         }
         
         public function refactory_slider($datos){   // contruye el slider

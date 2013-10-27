@@ -123,7 +123,6 @@ if(isset($_POST['opcion'])){
             $id_exp = $nodo_experiencia->id;  //obtengo el id del nodo creado                                    
             ModeloRelaciones::crearRelacion($_POST['autor'], $id_exp, "Comparte");   //crea la relacion entre el autor y la experiencia
             
-            
             $upload_folder ='../../estatico/imagenes/';
             foreach($_FILES['imagenes_experiencia']['error'] as $key => $error){                
                 if($error == UPLOAD_ERR_OK){                    
@@ -142,7 +141,6 @@ if(isset($_POST['opcion'])){
                     $nodo_imagen = new Imagen();
                     $nodo_imagen->nombre = $nomImgExpUser;
                     $nodo_imagen->descripcion = "";
-                    $nodo_imagen->comentario1 = "";
                     $nodo_imagen->type = 'Imagen';  
                     ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
 

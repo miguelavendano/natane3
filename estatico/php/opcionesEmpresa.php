@@ -211,6 +211,14 @@ if(isset($_POST['opcion'])){
             $band.="true";
             
         break;        
+        
+        case "crearServicio":
+            echo $_POST['nomSer'];
+            echo $_POST['descSer'];
+            echo $_POST['precioSer'];
+            
+            
+        break;        
     
         default : break; 
     }    

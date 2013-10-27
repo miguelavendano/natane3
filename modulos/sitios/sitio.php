@@ -41,6 +41,10 @@
             return $this->modelo->get_gustaria();            
         }
         
+        public function experiencias_visitantes(){            
+            return $this->modelo->get_experiencias_visitantes();            
+            
+        }        
 
         public function coordenadas(){            
             return $this->modelo->get_coordenadas_mapa();            
@@ -53,6 +57,7 @@
             $this->vista->refactory_visitantes( $this->visitantes() );
             $this->vista->refactory_gustaria( $this->desean() );
             $this->vista->refactory_ferrocarril( $this->ferrocarril() );            
+            $this->vista->refactory_experiencias($this->experiencias_visitantes());
             $this->vista->refactory_mapa( $this->coordenadas() );  
             $this->vista->refactory_contenido();                                  
             $this->vista->refactory_total();            

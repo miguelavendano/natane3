@@ -2,12 +2,9 @@
 	height:300px;
 }
 
-.detalle_sitio{
-	height: 320px;
-}
-
-.actividades{
-	height: 200px;
+.detalle_empresa{
+    height: auto;    
+    margin: 15px;
 }
 
 /************************ PESTAÑA DE IMAGENES ************************/

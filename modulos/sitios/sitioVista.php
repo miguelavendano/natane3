@@ -30,6 +30,7 @@
         public $latitud;
         public $longitud;
         public $losvotos;
+        public $experiencias;        
                 
         public $dic_general;
         public $dic_contenido;
@@ -63,7 +64,9 @@
             $this->elemento_ferro = file_get_contents('../../plantillas/generales/elemento_ferro.html');
             $this->editar = file_get_contents('../../plantillas/sitios/editarSitio.html');
             $this->registrar = file_get_contents('../../plantillas/sitios/registrarSitio.html');
+            $this->experiencias = file_get_contents('../../plantillas/sitios/experienciaSitio.html');     
             $this->modales = file_get_contents('../../plantillas/generales/barraModal.html');
+            
                      
             $this->metas = '<meta charset="utf-8">
                             <title>{TITULO}</title>
@@ -105,6 +108,7 @@
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,                                
                                         'votos' => $this->losvotos, 
+                                        'experienciaSitio' => $this->experiencias,
                                         'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);
         }
@@ -131,6 +135,7 @@
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,                
                                         'votos' => $this->losvotos, 
+                                        'experienciaSitio' => $this->experiencias,
                                         'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);            
             
@@ -241,6 +246,26 @@
         }            
      
 
+        public function refactory_experiencias($datos){            
+            
+            $experiencias_sitio = "";
+            
+            foreach ($datos as $valor){
+                $aux = $this->expe;
+                $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                $aux = str_ireplace('{titulo}', $valor->nombre, $aux);
+                $aux = str_ireplace('{descripcion}',$valor->descripcion , $aux);
+                
+                $experiencias_sitio .= $aux;
+            }
+            
+            $this->experiencias = $experiencias_sitio;            
+            $this->actualizar_diccionarios();
+                        
+        }        
+
+        
         public function refactory_mapa( $coordenadas ){            
             $this->latitud = $coordenadas[0]->latitud;
             $this->longitud = $coordenadas[0]->longitud;                      

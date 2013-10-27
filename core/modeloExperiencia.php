@@ -190,8 +190,7 @@ class ModelExperiencia{
 
         }        
 
-
-        
+       
         
         public function get_experiencias($queryString){
             
@@ -209,12 +208,23 @@ class ModelExperiencia{
                     $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
                     
                     if($queryRes){
-                        $res = $queryRes->getResultSet();                                        
-                        $experiencia->imagen= $res[0]->offsetGet('');
-                        //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
                         
-                    }else{
-                        $experiencia->imagen= "no hay";   //no hay                        
+                        $res = $queryRes->getResultSet();                                                                
+                        //$experiencia->imagen= $res[0]->offsetGet('');                        
+                        
+                        if(count($res)>0){
+                            $img_ran = rand (0, count($res)-1);   //elemento aleatorio de las imagenes de la experiencia
+
+                            foreach($res as $img){                            
+                                $imagenes[]=$img[''];                            
+                            }
+
+                            $experiencia->imagen = $imagenes[$img_ran];  //almacena la imagen aleatorio para mostrarla en la vista
+                            $imagenes="";        
+                        }
+                        else {
+                            $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
+                        }                        
                     }
                     
                     $experiencia->nombre = $row['']->getProperty('nombre');

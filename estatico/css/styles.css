@@ -5,21 +5,13 @@
 *
 */
 
-* {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box
-}
-
-#gallery-container {
-  
+#gallery-container {  
   margin: 0 auto;
   position: relative;
   max-width: 100%;
   text-align: center;
   overflow: hidden;
+  border: solid blueviolet 1px;
 /*  padding-top: 1em;*/
 }
 
@@ -54,7 +46,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  right: 0
+  right: 0;
 }
 
 .control,
