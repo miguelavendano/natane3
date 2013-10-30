@@ -3,43 +3,43 @@ $(document).ready(function(){
     /*
      * Registro de un nuevo Usuario
      */
-    $("#registrarU").click(function(){
-        
-        if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas                            
-                    $.ajax({
-                        url:'/natane3/estatico/php/opcionesUsuario.php'
-                        ,type:'POST'                    
-                        ,data:{
-                            opcion:'registrarU',                            
-                            nombre: $("#Rnom").val(),
-                            apellido: $("#Rape").val(),
-                            mail: $("#Rmail").val(),
-                            genero: $("input[name='Rgenero']:checked").val(),
-                            nacimiento: $("#Rnaci").val(),
-                            contra1: $("#Rpass1").val(),
-                            contra2: $("#Rpass2").val()
-                        }
-                        ,dataType:'html'
-                        ,beforeSend:function(jqXHR, settings ){
-                            //alert("Se esta creando su perfil");
-                        }
-                        ,success: function(data,textStatus,jqXHR){                           
-
-                            var n=data.split(" ");                           
-                            
-                            if(/true/.test(data)) {                                
-                                alert("Registro Exitoso  :D");                                                                          
-                                document.location.href="http://localhost/natane3/modulos/usuarios/usuario.php?id="+n[0];
-                            }
-                            else alert("No se ha podido realizar su registro"); 
-
-                        }
-                    });          
-            }//cierre if
-            else{
-                alert("Las contraseñas no coinciden");
-                }
-        });
+//    $("#registrarU").click(function(){
+//        
+//        if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas                            
+//                    $.ajax({
+//                        url:'/natane3/estatico/php/opcionesUsuario.php'
+//                        ,type:'POST'                    
+//                        ,data:{
+//                            opcion:'registrarU',                            
+//                            nombre: $("#Rnom").val(),
+//                            apellido: $("#Rape").val(),
+//                            mail: $("#Rmail").val(),
+//                            genero: $("input[name='Rgenero']:checked").val(),
+//                            nacimiento: $("#Rnaci").val(),
+//                            contra1: $("#Rpass1").val(),
+//                            contra2: $("#Rpass2").val()
+//                        }
+//                        ,dataType:'html'
+//                        ,beforeSend:function(jqXHR, settings ){
+//                            //alert("Se esta creando su perfil");
+//                        }
+//                        ,success: function(data,textStatus,jqXHR){                           
+//
+//                            var n=data.split(" ");                           
+//                            
+//                            //if(/true/.test(data)) {                                
+//                                alert("Registro Exitoso  :D");                                                                          
+//                                document.location.href="http://localhost/natane3/modulos/usuarios/usuario.php?id="+n[0];
+//                            //}
+//                            //else alert("No se ha podido realizar su registro"); 
+//
+//                        }
+//                    });          
+//            }//cierre if
+//            else{
+//                alert("Las contraseñas no coinciden");
+//                }
+//        });
 
     /*
      * Editar datos del Usuarios
@@ -415,36 +415,36 @@ $(document).ready(function(){
     /*
      * Valida el ingreso de un usuarios
      */   
-    $("#loginU").click(function(){
-        
-        if($("#nickU").val().length > 1  || $("#claveU").val().length > 1){
-                
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesUsuario.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'login',
-                    usuario: $("#nickU").val(),
-                    clave: $("#claveU").val()
-                }
-                ,dataType:'html'
-                ,beforeSend:function(jqXHR, settings ){
-                }
-                ,success: function(data,textStatus,jqXHR){                           
-
-                        if(/true/.test(data)) {                                                
-                            alert("OK... usuario registrado... ")
-                            //document.location.href="http://localhost/natane3/modulos/usuarios/usuario.php?id="+n[0];
-                        }
-                        else alert("Usuario no registrado");                                                     
-                }
-            });                           
-        }//cierre if
-        else{
-            alert("no se pudo iniciar sesion, intente ingresando con su cuenta de facebook")
-        }
-    });
-    
+//    $("#loginU").click(function(){
+//        
+//        if($("#nickU").val().length > 1  || $("#claveU").val().length > 1){
+//                
+//            $.ajax({
+//                url:'/natane3/estatico/php/opcionesUsuario.php'
+//                ,type:'POST'                    
+//                ,data:{
+//                    opcion: 'login',
+//                    usuario: $("#nickU").val(),
+//                    clave: $("#claveU").val()
+//                }
+//                ,dataType:'html'
+//                ,beforeSend:function(jqXHR, settings ){
+//                }
+//                ,success: function(data,textStatus,jqXHR){                           
+//                        var n=data.split(" ");  
+//                        if(/true/.test(data)) {                                                
+//                            alert("OK... usuario registrado... ");
+//                            document.location.href="http://localhost/natane3/modulos/usuarios/usuario.php?id="+n[0];
+//                        }
+//                        else alert("Usuario no registrado");                                                     
+//                }
+//            });                           
+//        }//cierre if
+//        else{
+//            alert("no se pudo iniciar sesion, intente ingresando con su cuenta de facebook")
+//        }
+//    });
+//    
     
     /*
      * Le da o le quita un punto de confianza a la empresa, crear su relacion con esa empresa

@@ -16,7 +16,30 @@
         }              
         
 
-        public function registrar_usuario(){
+        public function registrar_usuario(){            
+            
+            /*Captura los datos pasados por POST*/
+            
+            $nombre = $_GET['Rnom'];
+            $apellido = $_GET['Rape'];            
+            $genero = $_GET['Rgenero'];
+            $fecha_nacimiento = $_GET['Rnaci'];
+            $correo = $_GET['Rmail'];
+            $imagen = "gravatar.jpg";       
+            $contraseña = $_GET['Rpass1'];
+            $type = 'Usuario';                          
+            
+            /*Envia los datos al modelo para realizar la consulta*/
+            $registrado = $this->modelo->registrar_usuario($nombre,$apellido,$genero,$fecha_nacimiento,$correo,$imagen,$contraseña, $type);
+            
+            if($registrado)            
+                $this->login($correo, $contraseña);
+            else 
+                echo "<h1>Lo sentimos ocurrio un error intenelo mas tarde</h1>";
+            
+            
+            
+            
             
             
         }
@@ -32,27 +55,17 @@
         
         public function login($user, $pass){
             
-            $id_user = $this->modelo->exite_usuario($user);  //si existe el usuario, retorna en id, sino retorna null
+            $usuario = $this->modelo->existe_usuario($user);  //si existe el usuario, retorna en id, sino retorna null
             
-            if($id_user){                
-                
-                //$contra ="";
-                $contra = $this->modelo->get_pass($id_user);
-                
-                echo gettype($contra);
-                
-                //echo $contra."--".$pass;
-                
-                if($contra == $pass){
+            if($usuario){
+                if($usuario[0]['password'] == $pass){
                     
-                    $_SESSION['id'] = $id_user;
-                    $_SESSION['tipo'] = "usuario";                    
-                    header('Location: /natane3/modulos/usuarios/usuario.php?id='.$id_user);
+                    $_SESSION['id'] = $usuario[0]['idneo4j'];
+                    //$_SESSION['tipo'] = "usuario";   hay que verificar el login de los diferentes tipos de usuarios que existen
+                    header('Location: /natane3/modulos/usuarios/usuario.php?id='.$_SESSION['id']);
+                    
                 }
-                
             }
-            
-            
         }
         
         public function main(){            
@@ -70,22 +83,25 @@
     
     
 
-    $opcion = $_GET['opcion'];    
+    $opcion = $_GET['enviar'];    
 
     
-    if($opcion == 1){    // para registrar
+    if($opcion == "Registrarme"){    // para registrar
         
         $registrar = new Login();
-        $registrar->mostrar_interface_registro();
+        //$registrar->mostrar_interface_registro();
+        
+        $registrar->registrar_usuario();
         
         
         
         
-    }else{  // para login
+        
+    }else{  // para login        
         
         $login = new Login();       
 
-        $login->login($_GET['usuario'], $_GET['pass']);        
+        $login->login($_GET['nickU'], $_GET['claveU']);        
         
     }
 

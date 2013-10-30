@@ -23,7 +23,7 @@ if(isset($_POST['opcion'])){
             $nodo_usuario->genero = $_POST['genero'];
             $nodo_usuario->fecha_nacimiento = $_POST['nacimiento'];
             $nodo_usuario->correo = $_POST['mail'];
-            $nodo_usuario->imagen = $img;            
+            $nodo_usuario->imagen = $img;           
             /*
             $nodo_usuario->nick = $nik;
             $nodo_usuario->ciudad_origen = $orig;
@@ -38,6 +38,28 @@ if(isset($_POST['opcion'])){
             
             $band=$nodo_usuario->id;  //obtengo el id del nodo creado
             $band=$band." true";
+//            $mysql = new Conexion();
+//            
+//            
+//            $sql = "INSERT INTO usuario (
+//                        email,
+//                        idfacebook,
+//                        idneo4j,
+//                        password
+//                    )VALUES(
+//                        '".$_POST['mail']."',
+//                        '12345678',
+//                        '".$band."',
+//                        '".$_POST['contra1']."'
+//                    );";
+//            
+//            $mysql->ejecutar_query($sql);
+//            
+//            
+//            $band=$band." true";
+            
+            
+            
             
         break;
     
@@ -277,21 +299,25 @@ if(isset($_POST['opcion'])){
         case "login":                                                                      
 
             $modelusuarios = new ModelUsuarios();            
-            $query = "START n=node:Usuario(nombre='".$_POST['usuario']."') RETURN n";
-            $resultado = $modelusuarios->get_usuario($query);
+            $query = "SELECT idneo4j, email, password FROM natane.usuario WHERE email = '".$_POST['usuario']."';";                     
+            $mysql = new Conexion();            
+            $resultado = $mysql->get_resultados_query($query);
             
-            echo $resultado[0]->id."  --  ";            
-            echo $resultado[0]->correo."  --  ";
-            echo $resultado[0]->contraseña."  --  ";
+//            echo $resultado[0]->id."  --  ";            
+//            echo $resultado[0]->correo."  --  ";
+//            echo $resultado[0]->contraseña."  --  ";
                   
             
-            $_SESSION["id"] = $resultado[0]->id;
+            $_SESSION["id"] = $resultado[0]['idneo4j'];
+            echo $resultado[0]['idneo4j'];
             
-            if($_POST['usuario'] == $resultado[0]->correo && $_POST['clave'] == $resultado[0]->contraseña){
-                $band="true";   
+            if($_POST['usuario'] == $resultado[0]['email'] && $_POST['clave'] == $resultado[0]['password']){
+                
+               // $band=$_SESSION["id"];
+                $band = $band." true";
             }
             else {
-                $band="false";
+                ///$band=" false";
             }            
             
         break;    
