@@ -34,7 +34,7 @@ $(document).ready(function(){
         
         if($("#loBusca").val().length >= 1){             
 
-            document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?b="+$("#loBusca").val();            
+            document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?busqueda="+$("#loBusca").val();            
             
         }else{
             alert("No hay datos para relizar una busqueda")

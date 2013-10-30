@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    
+    /*
     $("#Busqueda").click(function(){
                     $.ajax({
                         url:'/natane3/estatico/php/Insertadatos.php'
@@ -21,7 +21,7 @@ $(document).ready(function(){
                         }
                     });          
            });    
-        
+       */ 
 
 });
 

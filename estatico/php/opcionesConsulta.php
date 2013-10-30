@@ -23,7 +23,7 @@ if(isset($_POST['opcion'])){
         case "busca_todo":     
             
             /*BUSCA LOS SITIOS*/            
-            $query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' RETURN n";
+            $query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' AND n.type<>'Servicio' RETURN n";
             //$query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Sitio' RETURN n";
             //expreciones regulares utiles
             //  n.nombre =~ 'ju.*'          -->  busca los nodos que empiezan exactamente con "ju"
