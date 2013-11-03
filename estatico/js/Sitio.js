@@ -63,7 +63,9 @@ $(document).ready(function(){
 
             $("#editarSitio").css({display:'inline'});   
             $("#slider_sitio").css({display:'none'});
-            //$("#Enom").val("julian");
+            //$("#mapaSItio").css({display:'none'});
+            //$("#EmapaSitio").html("<div class='mapa-natane'></div>");
+           
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");            
