@@ -126,6 +126,30 @@ section{
     margin-left: 5px;
 } 
 
+/************************ EDICION IMAGENES DE EXPERIENCIAS ************************/
+
+.opc_img{
+    border: solid red 1px;
+}
+
+.opc_img button{
+    padding: 5px;
+}
+
+#imgs_experiencia .im_exp_edit{
+    padding-left: 10px;
+    width: 200px;  
+    height: 125px;  
+    margin: 8px 0 5px 0;
+}
+#imgs_experiencia .im_exp_edit img{
+    border: solid black 1px;
+    height: 100%;
+}
+
+.botones_si_no{
+    margin-top: 15px;
+}
 
 /************************ Contacto *************************/
 .contacto{

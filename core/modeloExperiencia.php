@@ -15,6 +15,7 @@ use Everyman\Neo4j\Node,
     Everyman\Neo4j\Command,
     Everyman\Neo4j\Query\Row;
 
+
 class ModelExperiencia{
     
         public function __construct() {
@@ -128,8 +129,10 @@ class ModelExperiencia{
 		else return null;//echo "El nodo <b>NO</b> tiene relaciones";
 	}	
         
-        
-        public function get_exper_usuario($queryString){
+        /*
+         * Obtine las experiencias de un usuario
+         */                
+        public static function get_exper_usuario($queryString){
                         
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();
@@ -187,12 +190,13 @@ class ModelExperiencia{
                 }
                 return $array;
             }
-
         }        
 
        
-        
-        public function get_experiencias($queryString){
+        /*
+         * Obtine las experiencias de una empresa o sitio
+         */                
+        public static function get_experiencias($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();            
@@ -236,11 +240,39 @@ class ModelExperiencia{
                 }
                 return $array;
             }
-
         }        
         
         
-        public function get_imagenes_galeria($queryString){
+        /*
+         * Obtine todas las imagenes de una experiencia
+         */                
+        public static function get_imagenes_experiencia($id_experiencia){                    
+            
+                    $queryString = "START n=node(".$id_experiencia.") MATCH n-[:Img]->i RETURN i";                    
+                    $queryRes = new Cypher\Query(Neo4Play::client(), $queryString);      
+                    $imagenes = $queryRes->getResultSet();                   
+                    $lis_imagenes = array();
+                    
+                    if(count($imagenes)){
+                        foreach($imagenes as $img) {                                                                    
+                            $img_nombre = $img['']->getProperty('nombre');
+                            $img_id = $img['']->getId();                        
+
+                            //almaceno las imagenes
+                            $retorno = array(                            
+                                'img_nombre'=>$img_nombre,
+                                'img_id'=>$img_id,                            
+                                );
+
+                            array_push($lis_imagenes, $retorno);                                                    
+                        }
+                    }
+                    
+            return $lis_imagenes;
+        }
+
+        
+        public static function get_imagenes_galeria($queryString){
                        
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $imagen = $query->getResultSet();                                  
@@ -282,6 +314,7 @@ class ModelExperiencia{
             return $img_galeria;                      
         }
 
+        
         /*
          * Consulta todas las relaciones segun un tipo especifico
          * recibe el nodo de la experiencia y el tiipo de relacion

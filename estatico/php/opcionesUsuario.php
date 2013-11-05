@@ -153,18 +153,27 @@ if(isset($_POST['opcion'])){
             
         break;
     
-        case "editarExp":                       
+        case "editarExp":                                   
             
             $modelexperiencia = new ModelExperiencia();
             $query = "START n=node(".$_POST['experiencia'].") RETURN n";                        
-            $resultado = $modelexperiencia->get_experiencias($query);
+            $resultado = $modelexperiencia->get_experiencias($query);            
             
             $band = array(
                 "nombre"=> $resultado[0]->nombre,
                 "descripcion"=> $resultado[0]->descripcion
             );
-                        
-           $band = json_encode($band);
+                                    
+            $lista_imgs = $modelexperiencia->get_imagenes_experiencia($_POST['experiencia']);            
+            //inserto el array de imagenes al array de las propiedades de la  experiencia
+            array_push($band, $lista_imgs);                                                    
+            
+            //cambio el nombre que asigna la insertar el array de imagenes
+            $band["imagenes"] = $band["0"];
+            unset($band["0"]);
+            
+            //combierto el array en un json
+            $band = json_encode($band);
             
         break;    
 

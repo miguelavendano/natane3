@@ -558,7 +558,28 @@ $(document).ready(function(){
                    
                     $("#ediExptitulo").val(data.nombre);
                     $("#ediExpdesc").val(data.descripcion);
-                    //$("#Eimagen").val(data.imagen);                        
+                    //$("#Eimagen").val(data.imagen);              
+                    
+                    var marco="";
+                    var edicion="";                    
+                    var img="";
+                    var todo="";
+                    var lis_img="";
+
+                    for(var i=0; i<data.imagenes.length; i++){
+                        marco="<div id="+data.imagenes[i].img_id+" class='span3 im_exp_edit'>";
+                        edicion="<div class='btn-block opc_img'>\n\
+                                    <button class='btn icon-trash tooltip1' rel='tooltip' title='Eliminar'></button>\n\
+                                    <button class='btn icon-pencil tooltip2' rel='tooltip' title='Editar'></button>\n\
+                                </div>";
+                        img="<img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+                        
+                        todo=marco+edicion+img;
+                        lis_img=lis_img+todo;
+                        //lis_img=lis_img+"<div id="+data.imagenes[i].img_id+" class='span3 im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+                    }
+                    
+                    $("#imgs_experiencia").html(lis_img);
                 }
             });                                
     
