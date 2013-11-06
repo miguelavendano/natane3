@@ -89,7 +89,12 @@
                                         );
         }
         
-        
+
+        /**
+         * Funcion encargada de actualizar los datos de los diccionarios
+         * a medida que se van refactorizando y cambiando constantemente.
+         * 
+         */                                           
         public function actualizar_diccionarios(){
             
             $this->dic_general = array( 'metas' => $this->metas,
@@ -112,6 +117,12 @@
                                         );           
         }
         
+        
+        /**
+         * Refactoriza los datos del usuario, nombre, apellidos, telefono y demas
+         * 
+         * @param array $datos trae los datos del usuario.
+         */                              
         public function refactory_usuario($datos){
                 
             //$this->usuario = str_ireplace('{nombre}',$datos[0]->nick ,$this->usuario );
@@ -123,12 +134,15 @@
             $this->usuario = str_ireplace('{pais_origen}',$datos[0]->lugar_recidencia ,$this->usuario );
             $this->usuario = str_ireplace('{web_site}',$datos[0]->sitio_web ,$this->usuario );
 
-            $this->actualizar_diccionarios();
-            
-
+            $this->actualizar_diccionarios();          
 
         }
         
+        /**
+         * Refactoriza los enlaces de amistad que posee el usuario.
+         * 
+         * @param array $datos trae los datos de los usuarios amigos del usuario actual.
+         */                                      
         public function refactory_amigos($datos){
             
             $complete = "";            
@@ -161,7 +175,11 @@
         }
         
         
-        
+        /**
+         * Refactoriza los datos de las experiencias que ha publicado el usuario.
+         * 
+         * @param array $datos trae los datos de las experiencias del usuario
+         */                                      
         public function refactory_experiencias($datos){            
             
             $experiencias = "";
@@ -183,7 +201,12 @@
             
         }
         
-
+        
+        /**
+         * Refactoriza datos basicos sobre sitios que al usuario le gustaria ir
+         * 
+         * @param array $datos trae los datos de los sitios con enlace gustaria.
+         */                              
         public function refactory_gustaria($datos){            
             
             $quiere = "";
@@ -204,7 +227,12 @@
             
         }        
              
-        
+        /**
+         * Convierte todas las secciones refactorizadas individualemtne en una sola cadena de texto 
+         * para finalmente ser empotrada en la plantilla base.
+         * 
+         * @param array $datos trae los datos del usuario.
+         */                                      
         public function refactory_contenido(){            
             
             foreach($this->dic_contenido as $clave=>$valor){
@@ -218,6 +246,13 @@
         }        
         
         
+        
+        /**
+         * Refactoriza la pagina total, inserta: metas, liks y contenido para final mente retornar 
+         * toda la pagina y ser mostrado usuario final.
+         * 
+         * @return cadena_caracteres html final de la pagina para mostrar.
+         */                                      
         public function refactory_total(){
             
             

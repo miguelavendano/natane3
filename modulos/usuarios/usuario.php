@@ -58,20 +58,33 @@
         }
     }
 
+    session_start();
+       
+//    if(isset($_SESSION['id'])){        
+//        if($_SESSION['id']==$_GET['id']){
+//            
+//            
+//        }else{
+//            
+//            
+//        }
+//        
+//    }
+    
 
-    $id = $_GET['id'];
-    
-    $validar = new Validar();
-    
-    if($validar->validar_id($id, "Usuario")){     
-        
-        $usuairo = new Usuarios($id);
-        $usuairo->main();
-        
-    }else{
-        
-        header('Location: /natane3/Index/');
-    }        
+        $id = $_GET['id'];
+
+        $validar = new Validar();
+
+        if($validar->validar_id($id, "Usuario")){     
+
+            $usuairo = new Usuarios($id);
+            $usuairo->main();
+
+        }else{
+
+            header('Location: /natane3/Index/');
+        }        
     
 
 ?>

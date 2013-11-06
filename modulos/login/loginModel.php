@@ -102,18 +102,31 @@
             
         }
         
+        /**
+         * Trae datos de session importantes para el funcionamiento optimo de natane
+         * @param string $id_usuario El id de usuario neo4j
+         * @return array con los datos necesarios para iniciar variables de
+         * session como tipo, cant empresas creadas, cant de sitios creados, nick
+         */       
+        
+        public function get_inicio_session($id_usaurio){
+            
+            $query = "start a=node(128) return a.type as tipoUser, a.nick as nick;";
+            
+            return $this->modelusuario->get_datos_session($query, $id_usaurio);
+                        
+        }
+        
+        
         
         /*
          * Traer contraseña de un usuario
-         */
-        
-        public function get_pass($id_user){           
-            
+         */        
+        public function get_pass($id_user){         
             
             return $this->modelusuario->get_pass($id_user);
             
 
-            
         }        
         
         

@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
-    /*
+    /**
+     * @
      * Registro de un nuevo Sitio
      */
     $("#guarda_empresa").click(function(){

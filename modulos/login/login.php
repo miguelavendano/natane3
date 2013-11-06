@@ -3,6 +3,7 @@
     require_once 'loginModel.php';
     require_once '../../core/Validar.php';
 
+    session_start();
 
     class Login{
 
@@ -16,6 +17,20 @@
         }              
         
 
+    /*
+     *  En esta sección se realiza validaciones del loguin
+     * Verficamos si esta logueado, si el perfil pertenese a la personal logueada
+     * y si no esta loqueado restingimos la informaciòn a mostrar por seguiridad de
+     * la misma
+     */               
+        public static function acceso_Pusuario(){
+            
+            
+            
+            
+        } 
+        
+        
         public function registrar_usuario(){            
             
             /*Captura los datos pasados por POST*/
@@ -52,16 +67,60 @@
             $this->vista->refactory_total(); // refactoriza todo el formulario
             
         }
+
+        
+        /**
+         * Desde esta funcion se inicializan todas la variables
+         *de sesion que se necesitan para controlar a la gestion de
+         * usuarios
+         */                
+        public function variables_session($id_usuario){
+            
+            
+            
+            $_SESSION['tipo'] = $usuario['tipo'];
+            $_SESSION['nick'] = $usuario['nick'];
+            
+            if($usuario['empresas'])
+                $_SESSION['empresas'] = $usuario['empresas'];
+                
+                $_SESSION['sitios'] = $usuario['sitios'];
+            
+            
+        }
+
+
+
+        /**
+         * Gestiona el inicio de session del usuario
+         * 
+         * @param string $user es el email del usuario
+         * @param string $pass Contraseña del usuario
+         */
         
         public function login($user, $pass){
             
             $usuario = $this->modelo->existe_usuario($user);  //si existe el usuario, retorna en id, sino retorna null
             
+            
+            
             if($usuario){
-                if($usuario[0]['password'] == $pass){
-                    
+                
+                if($usuario[0]['password'] == $pass){                   
+                                       
                     $_SESSION['id'] = $usuario[0]['idneo4j'];
-                    //$_SESSION['tipo'] = "usuario";   hay que verificar el login de los diferentes tipos de usuarios que existen
+                    $retorno = $this->modelo->get_inicio_session($_SESSION['id']);   // trae las demas variables de sesion que necesitamos.                    
+                                        
+                    $_SESSION['tipo'] = $retorno['tipo'];
+                    $_SESSION['nick'] = $retorno['nick'];
+                    $_SESSION['empresas'] = $retorno['empresas'];
+                    $_SESSION['sitios'] = $retorno['sitios'];
+                    
+                    echo $_SESSION['tipo']."<br>";
+                    echo $_SESSION['nick']."<br>";
+                    echo $_SESSION['empresas']."<br>";
+                    echo $_SESSION['sitios']."<br>";
+                                        
                     header('Location: /natane3/modulos/usuarios/usuario.php?id='.$_SESSION['id']);
                     
                 }
@@ -93,9 +152,7 @@
         
         $registrar->registrar_usuario();
         
-        
-        
-        
+
         
     }else{  // para login        
         

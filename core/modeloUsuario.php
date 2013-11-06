@@ -89,10 +89,79 @@ class ModelUsuarios{
                       
 
                     
-            }
-            
+            }           
             
         }
+        
+        
+        
+        /**
+         * Retonar un valor boleano true si este usuario ha creado alguna 
+         * empresa y false de lo contrario
+         * 
+         * @return bool true si ha creado empresas false sino.
+         * 
+         */
+        public function get_empresas_creadas($id_user){
+            
+            $queryString = "START n=node(".$id_user.") MATCH n-[:Crea]->e RETURN count(e) as Nempresas;";
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);
+            $result = $query->getResultSet();
+            return $result[0]['Nempresas'];
+            
+        }
+        
+        /**
+         * Retonar un valor boleano true si este usuario ha publicado algun
+         * sitio y false de lo contrario.
+         * 
+         * @return bool true si ha creado empresas false sino.
+         * 
+         */        
+        public function get_sitios_publicados($id_user){
+
+            $queryString = "START n=node(".$id_user.") MATCH n-[:Publica]->s RETURN count(s) as Nsitios;";
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);
+            $result = $query->getResultSet();
+            return $result[0]['Nsitios'];            
+            
+        }
+        
+
+        /**
+         * Retorna el nick del usuario pasado por parametro.
+         * 
+         * @return string el nick del usuario.
+         */
+        public function get_nick($id_user){
+            
+            $queryString = "start n=node(".$id_user.") return n.nick as nick";
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();              
+            
+            return $result[0]['nick'];
+            
+        }
+        
+
+        /**
+         * Retorna el tipo del usuario pasado por parametro.
+         * 
+         * @return string el tipo del usuario.
+         */
+        public function get_tipo($id_user){
+            
+            $queryString = "start n=node(".$id_user.") return n.type as tipo";
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();              
+            
+            return $result[0]['tipo'];
+            
+        }        
+        
+        
         
         
         public function get_pass($id_user){
@@ -100,9 +169,8 @@ class ModelUsuarios{
             $queryString = "start n=node(".$id_user.") return n";
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $result = $query->getResultSet();  
+            $result = $query->getResultSet();              
             
-            echo $result[0]['']->getProperty('contraseña');
             return $result[0]['']->getProperty('contraseña');
             
             
@@ -226,7 +294,36 @@ class ModelUsuarios{
                 return $array;
             }
 
-        }        
+        }      
+        
+        
+        /**
+         * La idea de esta funcion es que ejecute consultas que tengan que 
+         * ver con usuarios.
+         * @return array con los datos que se necesitan para inicializar variable se session
+         */
+        
+        public function get_datos_session($query, $id_usuario) {
+                        
+            //echo $this->get_empresas_creadas($id_usuario);                      
+            
+            $query = new Cypher\Query(Neo4Play::client(), $query);            
+            $result = $query->getResultSet();                        
+            
+            //echo $result[0]['tipoUser'];
+
+            $user = array(
+                "tipo"=>$result[0]['tipoUser'],
+                "nick"=>$result[0]['nick'],
+                "empresas"=>$this->get_empresas_creadas($id_usuario),
+                "sitios"=>$this->get_sitios_publicados($id_usuario)
+            );
+            
+            return $user;
+
+        }
+            
+        
         
         
 }
