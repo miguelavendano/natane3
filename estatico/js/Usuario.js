@@ -351,10 +351,33 @@ $(document).ready(function(){
     /*
      * Guardar edicion de la experiencia
      */
-    $("#guarda_edicionExp").click(function(){
+    $("#guarda_edicionExpUsuario").click(function(){
 
-            var id_exp=$(".info_exp").parent().attr('id');
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");       
+            var id_exp=$(".info_exp").parent().attr('id'); //obtengo el id de la experiencia
 
+            var datosform = new FormData(document.getElementById('formEditarExperienciaUsuario'));            
+            datosform.append( "opcion", "guardar_edicionExp");            
+            datosform.append( "experiencia", id_exp );
+            datosform.append( "autor", id_url[1] );            
+            
+                $.ajax({
+                   url : '/natane3/estatico/php/opcionesUsuario.php',
+                   type : 'POST',
+                   data : datosform,
+                   processData : false, 
+                   contentType : false, 
+                   success: function(data,textStatus,jqXHR){                           
+
+                            if(/true/.test(data)) {                                
+                                alert("Experiancia ingresada :D");                                                                          
+                                //document.location.reload();                                     
+                            }
+                            else alert("No se ha podido ingresar su experiencia"); 
+                    }
+                });                
+                /*
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
@@ -372,7 +395,7 @@ $(document).ready(function(){
                         }
                         else alert("No se han podido realizar los cambios");                                                     
                 }
-            });                        
+            }); */                       
     });    
     
     /*
@@ -637,7 +660,7 @@ $(document).ready(function(){
                             if(/true/.test(data)) {                                
                                 alert("Imagen Eliminada :D");
                             }
-                            else alert("No se ha podido eliminar la imagen"); 
+                            else alert("No se puede eliminar la imagen, la experiencia debe contener almenos una imagen"); 
                 }
             });                            
     }
