@@ -301,6 +301,7 @@ $(document).ready(function(){
             $("#registrarSitio").css({display:'none'});     //oculta el registro de Sitio si esta visible
             $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
             $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible            
+            $(".editarExperiencia").css({display:'none'});            
     });
 
     /*
@@ -344,7 +345,7 @@ $(document).ready(function(){
      */
     $(".cancelarExperiencia").click(function(){        
             $("#compartirExperiencia").css({display:'none'});   
-            $(".pestañas").css({display:'inline'});                                      
+            $(".pestañas").css({display:'inline'});                                         
     });        
       
     /*
@@ -378,7 +379,7 @@ $(document).ready(function(){
      * Cancelar edicion de una experiencia
      */
     $(".cancelEdiExp").click(function(){        
-             $("#editarExperiencia").css({display:'none'});   
+             $(".editarExperiencia").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
     });  
    
@@ -516,9 +517,11 @@ $(document).ready(function(){
 
 
     function editarExperiencia(id_experiencia) {
-    
-            $("#editarExperiencia").css({display:'inline'});   
+        
             $(".pestañas").css({display:'none'});
+            $(".editarExperiencia").css({display:'inline'});            
+            /*$('.editarExperiencia').attr('id', id_experiencia);
+            $('.opc_img.tooltip1').attr('id', id_experiencia);*/
 
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
@@ -567,26 +570,25 @@ $(document).ready(function(){
                     var lis_img="";
 
                     for(var i=0; i<data.imagenes.length; i++){
-                        marco="<div id="+data.imagenes[i].img_id+" class='span3 im_exp_edit'>";
+                        marco="<div id="+data.imagenes[i].img_id+"_"+id_experiencia+" class='span3 marco_img_exp'>";
                         edicion="<div class='btn-block opc_img'>\n\
-                                    <button class='btn icon-trash tooltip1' rel='tooltip' title='Eliminar'></button>\n\
-                                    <button class='btn icon-pencil tooltip2' rel='tooltip' title='Editar'></button>\n\
+                                    <button class='btn icon-trash tooltip1' rel='tooltip' title='Eliminar' onclick='eliminarImgExperiencia("+id_experiencia+","+data.imagenes[i].img_id+")'></button>\n\
                                 </div>";
-                        img="<img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
                         
-                        todo=marco+edicion+img;
+                        img="<div class='im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+                        
+                        todo=marco+edicion+img+"</div>";
                         lis_img=lis_img+todo;
                         //lis_img=lis_img+"<div id="+data.imagenes[i].img_id+" class='span3 im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
                     }
                     
                     $("#imgs_experiencia").html(lis_img);
                 }
-            });                                
-    
+            });                                    
     }
 
 
-    function eliminarExperiencia(id_experiencia) {
+    function eliminarExperiencia(id_experiencia){
         
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
@@ -609,6 +611,33 @@ $(document).ready(function(){
                                 document.location.reload();                                     
                             }
                             else alert("No se ha podido eliminar su experiencia"); 
+                }
+            });                            
+    }
+    
+    
+    function eliminarImgExperiencia(id_experiencia,id_img){
+        
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'eliminarImgExp',                            
+                    experiencia: id_experiencia,
+                    imagen: id_img
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                            if(/true/.test(data)) {                                
+                                alert("Imagen Eliminada :D");
+                            }
+                            else alert("No se ha podido eliminar la imagen"); 
                 }
             });                            
     }

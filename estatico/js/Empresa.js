@@ -292,7 +292,7 @@ $(document).ready(function(){
      * Cancelar edicion de una experiencia
      */
     $(".cancelEdiExp").click(function(){        
-             $("#editarExperiencia").css({display:'none'});   
+             $(".editarExperiencia").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
     });  
    
@@ -352,7 +352,7 @@ $(document).ready(function(){
 
     function editaExperienciaEmpresa(id_experiencia) {
     
-            $("#editarExperiencia").css({display:'inline'});   
+            $(".editarExperiencia").css({display:'inline'});   
             //$(".pestañas").css({display:'none'});
             $("#experiencias_empresa").css({display:'none'});
 

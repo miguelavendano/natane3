@@ -127,24 +127,35 @@ section{
 } 
 
 /************************ EDICION IMAGENES DE EXPERIENCIAS ************************/
-
+#imgs_experiencia{
+    display: table;
+}
+.marco_img_exp{
+    display: table-cell;
+}
 .opc_img{
-    border: solid red 1px;
+    position: relative;
+    z-index:2;
+    padding-right: 5px;
 }
-
-.opc_img button{
+.opc_img button{    
+    float: right;    
     padding: 5px;
+    margin: 5px 0 0 5px;    
 }
 
-#imgs_experiencia .im_exp_edit{
-    padding-left: 10px;
-    width: 200px;  
-    height: 125px;  
-    margin: 8px 0 5px 0;
+.im_exp_edit{  
+    width: 200px;
+    height: 125px;    
+    margin-bottom: 8px;
+    /*margin: 8px 0 5px 0;*/
 }
-#imgs_experiencia .im_exp_edit img{
+.im_exp_edit img{
     border: solid black 1px;
-    height: 100%;
+    height: 125px;        
+    position: absolute;
+    z-index: 1;
+    width: 182px;
 }
 
 .botones_si_no{

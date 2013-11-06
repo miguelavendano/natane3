@@ -111,8 +111,8 @@ class ModelExperiencia{
         /*
          * Obtine los ID de las relacines de un nodo dado segun su tipo
          */        
-	public static function get_id_relaciones_nodo($idNodo,$tipoRelacion)
-	{
+	public static function get_id_relaciones_nodo($idNodo,$tipoRelacion){
+	
 		$miNodo = Neo4Play::client()->getNode($idNodo);
 		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
                 

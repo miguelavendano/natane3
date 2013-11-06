@@ -226,8 +226,10 @@ if(isset($_POST['opcion'])){
                 }
             }
             elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
-                $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['usuario'], "Etiqueta");  //consulto el ID de la relacion
-                ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa
+                //consulto el ID de la relacion                
+                $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['usuario'], "Etiqueta");  
+                //elimina la relacion entre el usuario y la empresa                
+                ModeloRelaciones::eliminarRelacion($idRelacion);   
             }    
            
             $band="true";
@@ -258,6 +260,20 @@ if(isset($_POST['opcion'])){
             
         break;    
     
+
+        case "eliminarImgExp":   
+
+            //consulto el ID de la relacion                
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['imagen'], "Img");  
+            //elimina la relacion entre el usuario y la empresa                
+            ModeloRelaciones::eliminarRelacion($idRelacion);   
+                       
+            //elimina la imagen
+            ModelExperiencia::eliminar_nodos_ImgExp($_POST['imagen']);
+
+            $band="true";
+            
+        break;    
     
         case "login":                                                                      
 
