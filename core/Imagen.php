@@ -4,8 +4,8 @@
  * Clase con las propiedades de una Imagen
  * (nombre, descripcion y comentarios) 
  */
-class Imagen
-{
+class Imagen{
+
 	public $id = null;
 	public $nombre = '';
 	public $descripcion = '';

@@ -40,6 +40,11 @@ section{
     border: 1px solid #ccc;
 }
 
+.pestañas .tab-pane{
+    height: 830px;
+    overflow: auto;
+}
+
 /* -------------------- MAPA DE GOOGLE -------------------- */
 .mapa-natane { height: 100% }
 

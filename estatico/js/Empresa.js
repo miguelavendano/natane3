@@ -315,7 +315,7 @@ $(document).ready(function(){
             var id_url=mi_url.split("=");  
 
             var datosform = new FormData(document.getElementById('formCrearServicio'));            
-            datosform.append( "opcion", "crearServicio");            
+            datosform.append( "opcion", "creaServicio");            
             datosform.append( "empresa", id_url[1] );
                         
                 $.ajax({

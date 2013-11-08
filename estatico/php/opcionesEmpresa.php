@@ -4,6 +4,7 @@ require_once('../../core/coneccion.php');
 require_once('../../core/modeloEmpresa.php');
 require_once('../../core/modeloExperiencia.php');
 require_once('../../core/modeloRelaciones.php');
+require_once('../../core/modeloServicio.php');
 
 
 if(isset($_POST['opcion'])){
@@ -212,11 +213,19 @@ if(isset($_POST['opcion'])){
             
         break;        
         
-        case "crearServicio":
-            echo $_POST['nomSer'];
-            echo $_POST['descSer'];
-            echo $_POST['precioSer'];
+        case "creaServicio":
             
+            //echo $_POST['precioSer'];
+            $nodo_servicio = new Servicio();
+            $nodo_servicio->nombre = $_POST['nomSer'];
+            $nodo_servicio->descripcion = $_POST['descSer'];
+            $nodo_servicio->type = 'Servicio';            
+            ModelServicio::crearNodoServicio($nodo_servicio);
+            
+            $id_servicio = $nodo_servicio->id;  //obtengo el id del nodo creado                                    
+            ModeloRelaciones::crearRelacion($_POST['empresa'], $id_servicio, "Ofrece");   //crea la relacion entre la empresa y el servicio
+
+            $band.="true";
             
         break;        
     

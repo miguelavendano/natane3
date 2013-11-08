@@ -279,27 +279,21 @@ class ModelEmpresa{
         
         public function get_servicios($queryString){
             
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);
-            
-            $result = $query->getResultSet();
-            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();            
             $array = array();
             
             if($result){
-                
-            
                 foreach($result as $row) {
-                    
                     $servicio = new Servicio();  
                     $servicio->id = $row['']->getId();
-                    $servicio->type = $row['']->getProperty('type');
+                    $servicio->nombre = $row['']->getProperty('nombre');
+                    $servicio->descripcion = $row['']->getProperty('descripcion');
+                    //$servicio->type = $row['']->getProperty('type');
                     array_push($array, $servicio);
-                    
-                    
                 }
                 return $array;
-            }                        
-            
+            }           
         }
         
 }

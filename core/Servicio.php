@@ -1,19 +1,21 @@
 <?php
 
 /**
- * Clase con las propiedades de un Sitio 
- * (nombre,imagen,tipo,...etc...) 
+ * Clase con las propiedades de un Servicio
+ * (nombre,descripcion,tipo,...etc...) 
  */	
-class Servicio
-{
+class Servicio{
+    
 	public $id = null;
-        public $type = '';
-        
+	public $nombre = '';
+	public $descripcion = '';        
+        public $type = '';        
 	public $node = null;
         
         public function __construct() {
             
         }
-       
 }
+
+
 ?>

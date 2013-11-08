@@ -1,23 +1,23 @@
 <?php
 
 require_once('coneccion.php');
-require_once('Imagen.php');
+require_once('Servicio.php');
 
 
 use Everyman\Neo4j\Node,
     Everyman\Neo4j\Index;
 
-class ModelImagen{
+class ModelServicio{
     
         public function __construct() {
             
         }
         
         /**
-         * funcion para crear el nodo tipo Imagen
-         * parametros: objeto tipo Imagen
+         * funcion para crear el nodo tipo Servicio
+         * parametros: objeto tipo Servicio
          */	
-	public static function crearNodoImagen(Imagen $minodo)
+	public static function crearNodoServicio(Servicio $minodo)
 	{
 		if (!$minodo->node) {
 			$minodo->node = new Node(Neo4Play::client());
@@ -25,12 +25,11 @@ class ModelImagen{
 
 		$minodo->node->setProperty('nombre', $minodo->nombre)                        
 				->setProperty('descripcion', $minodo->descripcion)
-				->setProperty('comentario1', $minodo->comentario1)
                                 ->setProperty('type', $minodo->type)
 				->save();
 
 		$minodo->id = $minodo->node->getId();                
-		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Imagen');
+		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Servicio');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
 	}      

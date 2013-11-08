@@ -176,11 +176,8 @@
                 $experiencias .= $aux;
             }
             
-            $this->expe = $experiencias;
-            
+            $this->expe = $experiencias;            
             $this->actualizar_diccionarios();
-            
-            
         }
         
 

@@ -4,8 +4,8 @@
  * Clase con las propiedades de una Empresa 
  * (nombre,imagen,nit,...etc...) 
  */	
-class Empresa
-{
+class Empresa{
+    
 	public $id = null;
 	public $nombre = '';
 	public $imagen = '';
@@ -28,8 +28,7 @@ class Empresa
         
         public function __construct() {
             
-        }
-                
+        }                
 }
 
 

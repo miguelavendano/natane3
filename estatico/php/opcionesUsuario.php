@@ -134,7 +134,7 @@ if(isset($_POST['opcion'])){
                     //$tamano_archivo = $_FILES["imagenes_experiencia"]['size'][$key];
 
                     //creo el nombre unico para la imagen
-                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$id_img.'_'.$nombre_archivo;
+                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$nombre_archivo;
                     
                     //crea el nodo de cada una de las imagenes
                     $nodo_imagen = new Imagen();
@@ -198,9 +198,9 @@ if(isset($_POST['opcion'])){
                     $tmp_archivo = $_FILES["imgs_edit_experiencia"]['tmp_name'][$key];            
 
                     //creo el nombre unico para la imagen
-                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$id_img.'_'.$nombre_archivo;                    
+                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$nombre_archivo;                    
                     
-                    //crea el nodo de cada una de las imagenes
+                    //crea el nodo de cada una de las imagenes                    
                     $nodo_newImgExp = new Imagen();
                     $nodo_newImgExp->nombre = $nomImgExpUser;
                     $nodo_newImgExp->descripcion = "";

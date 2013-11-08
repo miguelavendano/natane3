@@ -4,8 +4,8 @@
  * Clase con las propiedades de un Departamento
  * (nombre,imagen,latitud,longitud) 
  */
-class Departamento
-{
+class Departamento{
+    
 	public $id = null;
 	public $nombre = '';
 	public $imagen = '';
@@ -16,8 +16,7 @@ class Departamento
         
         public function __construct() {
             
-        }
-                
+        }                
 }
 
 

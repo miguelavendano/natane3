@@ -4,8 +4,8 @@
  * Clase con las propiedades de un Sitio 
  * (nombre,imagen,tipo,...etc...) 
  */	
-class Sitio
-{
+class Sitio{
+    
 	public $id = null;
 	public $nombre = '';
 	public $imagen = '';
@@ -30,8 +30,5 @@ class Sitio
         public function __construct() {
             
         }
-       
-        
-          
 }
 ?>

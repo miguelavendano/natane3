@@ -303,22 +303,54 @@
                 do{ 
                     $servicio=array_shift($datos);
                     $aux = $elemento;
-                    $aux = str_ireplace("{nombre}", $servicio->type, $aux);
-                    $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);                
+                    $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);
+                    $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);
+                    $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);
                     $resultados .= $aux;
                     $i++;
-                }while((count($datos)!=0)&& $i<3);
-                
+                }while((count($datos)!=0)&& $i<3);                
                 
                 $resultados .= '</div>';
             }
             
-            
             $this->servicios = $resultados;
             $this->actualizar_diccionarios();
-            
-            
         }   
+        
+/*
+        public function refactory_servicios($datos){            
+            
+            $elservicio="";
+            $losservicios="";
+            $i=1;
+            
+            foreach($datos as $valor){
+                
+                    $aux = $this->servicios;
+                    $aux = str_ireplace("{nombre}", $valor->nombre, $aux);
+                    $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);
+                    $aux = str_ireplace("{descripcion}", $valor->descripcion, $aux);
+                    $elservicio .= $aux;
+                    
+                if( $i==1 ){
+                    $losservicios .= '<div class="row-fluid">'.$elservicio;
+                    $i++;
+                }
+                elseif( $i<3 ) {
+                    $losservicios .= $elservicio;
+                    $i++;                
+                }
+                else{
+                    $losservicios .= $elservicio.'</div>';    
+                    $i=1;
+                }
+                
+            }
+            
+            $this->servicios = $losservicios;
+            $this->actualizar_diccionarios();
+        }           */
+        
         
         
         public function refactory_experiencias($datos){            
