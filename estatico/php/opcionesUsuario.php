@@ -178,11 +178,16 @@ if(isset($_POST['opcion'])){
         break;    
 
         case "guardar_edicionExp":                                                                      
-
-            ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['ediExptitulo']);
-            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['ediExpdesc']);            
             
-            //guarda las imagenes de la experiencia
+            /*
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['titulo']);
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['descripcion']);            
+            */
+            
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['ediExpUsTitulo']);
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['ediExpUsDesc']);            
+            
+            //guarda las imagenes de la experiencia            
             $upload_folder ='../../estatico/imagenes/';
             foreach($_FILES['imgs_edit_experiencia']['error'] as $key => $error){                
                 if($error == UPLOAD_ERR_OK){                    

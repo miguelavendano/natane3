@@ -51,7 +51,8 @@ $(document).ready(function(){
             $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
             $("#registrarSitio").css({display:'none'});   //oculta el registro de Sitio si esta visible
             $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia
-
+            $(".editarExperiencia").css({display:'none'});
+            
             var mi_url=document.location.href;
             var id_url=mi_url.split("="); 
         
@@ -149,9 +150,9 @@ $(document).ready(function(){
                         pass: $("#Epass1U").val()
                     }
                     ,dataType:'JSON'
-                    ,beforeSend:function(jqXHR, settings ){
+                    /*,beforeSend:function(jqXHR, settings ){
                         alert("Debe confirmar su identidad, para realizar los cambios.");                                        
-                    }
+                    }*/
                     ,success: function(data,textStatus,jqXHR){                           
 
                             if(/true/.test(data)) {                                                            
@@ -301,7 +302,7 @@ $(document).ready(function(){
             $("#registrarSitio").css({display:'none'});     //oculta el registro de Sitio si esta visible
             $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
             $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible            
-            $(".editarExperiencia").css({display:'none'});            
+            $(".editarExperiencia").css({display:'none'});  //oculta la edicion de una experiencia
     });
 
     /*
@@ -324,18 +325,18 @@ $(document).ready(function(){
             */
             
                 $.ajax({
-                   url : '/natane3/estatico/php/opcionesUsuario.php',
-                   type : 'POST',
-                   data : datosform,
-                   processData : false, 
-                   contentType : false, 
-                   success: function(data,textStatus,jqXHR){                           
-
-                            if(/true/.test(data)) {                                
-                                alert("Experiancia ingresada :D");                                                                          
-                                //document.location.reload();                                     
-                            }
-                            else alert("No se ha podido ingresar su experiencia"); 
+                    url : '/natane3/estatico/php/opcionesUsuario.php',
+                    type : 'POST',
+                    data : datosform,
+                    processData : false, 
+                    contentType : false, 
+                    dataType:'html',
+                    success: function(data,textStatus,jqXHR){                           
+                                if(/true/.test(data)) {                                
+                                    alert("Experiancia ingresada :D");                                                                          
+                                    //document.location.reload();                                     
+                                }
+                                else alert("No se ha podido ingresar su experiencia"); 
                     }
                 });                
     });
@@ -353,49 +354,54 @@ $(document).ready(function(){
      */
     $("#guarda_edicionExpUsuario").click(function(){
 
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");       
-            var id_exp=$(".info_exp").parent().attr('id'); //obtengo el id de la experiencia
-
-            var datosform = new FormData(document.getElementById('formEditarExperienciaUsuario'));            
-            datosform.append( "opcion", "guardar_edicionExp");            
-            datosform.append( "experiencia", id_exp );
-            datosform.append( "autor", id_url[1] );            
-            
-                $.ajax({
-                   url : '/natane3/estatico/php/opcionesUsuario.php',
-                   type : 'POST',
-                   data : datosform,
-                   processData : false, 
-                   contentType : false, 
-                   success: function(data,textStatus,jqXHR){                           
-
-                            if(/true/.test(data)) {                                
-                                alert("Experiancia ingresada :D");                                                                          
-                                //document.location.reload();                                     
-                            }
-                            else alert("No se ha podido ingresar su experiencia"); 
-                    }
-                });                
-                /*
+            //var id_exp=$(".info_exp").parent().attr('id'); //obtengo el id de la experiencia
+            var id_exp=$("#formEditarExperienciaUsuario").parent().attr('id'); //obtengo el id de la experiencia
+ 
+ /*           
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data: {
                     opcion: 'guardar_edicionExp',                   
                     experiencia: id_exp,   
-                    titulo: $("#ediExptitulo").val(),
-                    descripcion: $("#ediExpdesc").val()
+                    titulo: $("#ediExpUsTitulo").val(),
+                    descripcion: $("#ediExpUsDesc").val()
                 }
                 ,dataType:'JSON'
                 ,success: function(data,textStatus,jqXHR){                           
 
                         if(/true/.test(data)) {                                                            
-                            //document.location.reload();                                     
+                            document.location.reload();                                     
                         }
                         else alert("No se han podido realizar los cambios");                                                     
                 }
-            }); */                       
+            });
+*/
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");       
+        
+            var datosform = new FormData(document.getElementById('formEditarExperienciaUsuario'));            
+            datosform.append( "opcion", "guardar_edicionExp");            
+            datosform.append( "experiencia", id_exp );
+            datosform.append( "autor", id_url[1] );            
+            
+                $.ajax({
+                    url : '/natane3/estatico/php/opcionesUsuario.php',
+                    type : 'POST',
+                    data : datosform,
+                    processData : false, 
+                    contentType : false, 
+                    dataType:'html',
+                    success: function(data,textStatus,jqXHR){                           
+                                
+                                if(/true/.test(data)){                                
+                                    alert("Experiancia ingresada :D");                                                                          
+                                //document.location.reload();                                     
+                                }
+                                else alert("No se ha podido ingresar su experiencia"); 
+                    }
+                });      
+
     });    
     
     /*
@@ -416,6 +422,7 @@ $(document).ready(function(){
         $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
         $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible
         $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia        
+        $(".editarExperiencia").css({display:'none'});  //oculta la edicion de una experiencia
     });     
     
     /*
@@ -427,6 +434,7 @@ $(document).ready(function(){
         $("#registrarSitio").css({display:'none'});   //oculta el registro de Sitio si esta visible
         $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible
         $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia        
+        $(".editarExperiencia").css({display:'none'});  //oculta la edicion de una experiencia
     });
     
     /*
@@ -543,6 +551,7 @@ $(document).ready(function(){
         
             $(".pestañas").css({display:'none'});
             $(".editarExperiencia").css({display:'inline'});            
+            $(".editarExperiencia").attr('id', id_experiencia);
             /*$('.editarExperiencia').attr('id', id_experiencia);
             $('.opc_img.tooltip1').attr('id', id_experiencia);*/
 
@@ -582,9 +591,8 @@ $(document).ready(function(){
                     $("#reload").css({visibility: 'hidden'});   
                     //$(".reload-backdrop").css({visibility: 'hidden'});                                     
                    
-                    $("#ediExptitulo").val(data.nombre);
-                    $("#ediExpdesc").val(data.descripcion);
-                    //$("#Eimagen").val(data.imagen);              
+                    $("#ediExpUsTitulo").val(data.nombre);
+                    $("#ediExpUsDesc").val(data.descripcion);
                     
                     var marco="";
                     var edicion="";                    
@@ -624,7 +632,7 @@ $(document).ready(function(){
                     experiencia: id_experiencia,
                     usuario: id_url[1]
                 }
-                ,dataType:'JSON'
+                ,dataType:'html'
                 ,beforeSend:function(jqXHR, settings ){
                 }
                 ,success: function(data,textStatus,jqXHR){                           
@@ -652,7 +660,7 @@ $(document).ready(function(){
                     experiencia: id_experiencia,
                     imagen: id_img
                 }
-                ,dataType:'JSON'
+                ,dataType:'html'
                 ,beforeSend:function(jqXHR, settings ){
                 }
                 ,success: function(data,textStatus,jqXHR){                           
