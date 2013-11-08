@@ -133,6 +133,9 @@ if(isset($_POST['opcion'])){
                     //$tipo_archivo = $_FILES["imagenes_experiencia"]['type'][$key];
                     //$tamano_archivo = $_FILES["imagenes_experiencia"]['size'][$key];
 
+                    //creo el nombre unico para la imagen
+                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$id_img.'_'.$nombre_archivo;
+                    
                     //crea el nodo de cada una de las imagenes
                     $nodo_imagen = new Imagen();
                     $nodo_imagen->nombre = $nomImgExpUser;
@@ -143,8 +146,7 @@ if(isset($_POST['opcion'])){
                     $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
                     ModeloRelaciones::crearRelacion($id_exp, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
                     
-                    //almaceno la imagen en la carpeta del servidor                    
-                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$id_img.'_'.$nombre_archivo;                    
+                    //almaceno la imagen en la carpeta del servidor                                        
                     move_uploaded_file($tmp_archivo, $upload_folder.$nomImgExpUser);   //guarda la imagen                    
                 }
             }
@@ -184,8 +186,8 @@ if(isset($_POST['opcion'])){
             ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['descripcion']);            
             */
             
-            ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['ediExpUsTitulo']);
-            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['ediExpUsDesc']);            
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['ediExpTitulo']);
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['ediExpDesc']);            
             
             //guarda las imagenes de la experiencia            
             $upload_folder ='../../estatico/imagenes/';
@@ -195,6 +197,9 @@ if(isset($_POST['opcion'])){
                     $nombre_archivo = $_FILES["imgs_edit_experiencia"]['name'][$key];
                     $tmp_archivo = $_FILES["imgs_edit_experiencia"]['tmp_name'][$key];            
 
+                    //creo el nombre unico para la imagen
+                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$id_img.'_'.$nombre_archivo;                    
+                    
                     //crea el nodo de cada una de las imagenes
                     $nodo_newImgExp = new Imagen();
                     $nodo_newImgExp->nombre = $nomImgExpUser;
@@ -205,8 +210,7 @@ if(isset($_POST['opcion'])){
                     $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
                     ModeloRelaciones::crearRelacion($id_exp, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
 
-                    //almaceno la imagen en la carpeta del servidor                    
-                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$id_img.'_'.$nombre_archivo;                    
+                    //almaceno la imagen en la carpeta del servidor                                        
                     move_uploaded_file($tmp_archivo, $upload_folder.$nomImgExpUser);   //guarda la imagen                    
                 }
             }

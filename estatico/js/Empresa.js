@@ -263,7 +263,7 @@ $(document).ready(function(){
         
     /*
      * Guardar edicion de la experiencia
-     */
+     
     $("#guarda_edicionExp").click(function(){
 
             var id_exp=$(".info_exp").parent().attr('id');
@@ -290,12 +290,12 @@ $(document).ready(function(){
     
     /*
      * Cancelar edicion de una experiencia
-     */
+     
     $(".cancelEdiExp").click(function(){        
              $(".editarExperiencia").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
     });  
-   
+   */
    
     /*
      * Muestra el formulario para crear un servicio
@@ -392,8 +392,8 @@ $(document).ready(function(){
                     $("#reload").css({visibility: 'hidden'});   
                     $(".reload-backdrop").css({visibility: 'hidden'});                                     
                    
-                    $("#ediExptitulo").val(data.nombre);
-                    $("#ediExpdesc").val(data.descripcion);
+                    $("#ediExpTitulo").val(data.nombre);
+                    $("#ediExpDesc").val(data.descripcion);
                     //$("#Eimagen").val(data.imagen);                        
                 }
             });                                

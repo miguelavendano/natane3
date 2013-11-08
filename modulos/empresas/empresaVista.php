@@ -62,7 +62,7 @@
             $this->slider_empresa= file_get_contents('../../plantillas/empresas/slider_empresas.html');      
             $this->servicios = file_get_contents('../../plantillas/empresas/servicios.html');      
             $this->expe = file_get_contents('../../plantillas/empresas/experiencia_empresa.html');      
-            $this->edi_exp = file_get_contents('../../plantillas/usuario/editarExperienciaEmpresa.html');                  
+            $this->edi_exp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');
             $this->contacto = file_get_contents('../../plantillas/sitios/contacto.html'); 
             $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->gustaria= $this->seguidores;

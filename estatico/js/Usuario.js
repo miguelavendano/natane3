@@ -334,7 +334,7 @@ $(document).ready(function(){
                     success: function(data,textStatus,jqXHR){                           
                                 if(/true/.test(data)) {                                
                                     alert("Experiancia ingresada :D");                                                                          
-                                    //document.location.reload();                                     
+                                    document.location.reload();                                     
                                 }
                                 else alert("No se ha podido ingresar su experiencia"); 
                     }
@@ -352,10 +352,10 @@ $(document).ready(function(){
     /*
      * Guardar edicion de la experiencia
      */
-    $("#guarda_edicionExpUsuario").click(function(){
+    $("#guardaEdicionExp").click(function(){
 
             //var id_exp=$(".info_exp").parent().attr('id'); //obtengo el id de la experiencia
-            var id_exp=$("#formEditarExperienciaUsuario").parent().attr('id'); //obtengo el id de la experiencia
+            var id_exp=$("#formEditarExperiencia").parent().attr('id'); //obtengo el id de la experiencia
  
  /*           
             $.ajax({
@@ -380,7 +380,7 @@ $(document).ready(function(){
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
         
-            var datosform = new FormData(document.getElementById('formEditarExperienciaUsuario'));            
+            var datosform = new FormData(document.getElementById('formEditarExperiencia'));            
             datosform.append( "opcion", "guardar_edicionExp");            
             datosform.append( "experiencia", id_exp );
             datosform.append( "autor", id_url[1] );            
@@ -591,8 +591,8 @@ $(document).ready(function(){
                     $("#reload").css({visibility: 'hidden'});   
                     //$(".reload-backdrop").css({visibility: 'hidden'});                                     
                    
-                    $("#ediExpUsTitulo").val(data.nombre);
-                    $("#ediExpUsDesc").val(data.descripcion);
+                    $("#ediExpTitulo").val(data.nombre);
+                    $("#ediExpDesc").val(data.descripcion);
                     
                     var marco="";
                     var edicion="";                    
