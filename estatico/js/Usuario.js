@@ -639,7 +639,7 @@ $(document).ready(function(){
                     
                             if(/true/.test(data)) {                                
                                 alert("Experiancia Eliminada :D");                                                                          
-                                document.location.reload();                                     
+                                //document.location.reload();                                     
                             }
                             else alert("No se ha podido eliminar su experiencia"); 
                 }
