@@ -352,8 +352,9 @@ $(document).ready(function(){
 
     function editaExperienciaEmpresa(id_experiencia) {
     
-            $(".editarExperiencia").css({display:'inline'});   
             //$(".pestañas").css({display:'none'});
+            $(".editarExperiencia").css({display:'inline'});            
+            $(".editarExperiencia").attr('id', id_experiencia);            
             $("#experiencias_empresa").css({display:'none'});
 
             $.ajax({
@@ -375,30 +376,38 @@ $(document).ready(function(){
                                         width: 'auto',
                                         margin: '0 auto'
                                     });   
-                    
-                    $(".reload-backdrop").css({ position: 'fixed',
-                                                top: '0',
-                                                right: '0',
-                                                bottom: '0',
-                                                left: '0',
-                                                zIindex: '99999',
-                                                background: '#000000',
-                                                opacity:'0.4'
-                                            });                  
-                   
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
-                    $("#reload").css({visibility: 'hidden'});   
-                    $(".reload-backdrop").css({visibility: 'hidden'});                                     
-                   
+                    $("#reload").css({visibility: 'hidden'});                       
                     $("#ediExpTitulo").val(data.nombre);
                     $("#ediExpDesc").val(data.descripcion);
-                    //$("#Eimagen").val(data.imagen);                        
+                    
+                    var marco="";
+                    var edicion="";                    
+                    var img="";
+                    var todo="";
+                    var lis_img="";
+
+                    for(var i=0; i<data.imagenes.length; i++){
+                        marco="<div id="+data.imagenes[i].img_id+"_"+id_experiencia+" class='span3 marco_img_exp'>";
+                        edicion="<div class='btn-block opc_img'>\n\
+                                    <button class='btn icon-trash tooltip1' rel='tooltip' title='Eliminar' onclick='eliminarImgExperiencia("+id_experiencia+","+data.imagenes[i].img_id+")'></button>\n\
+                                </div>";
+                        
+                        img="<div class='im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+                        
+                        todo=marco+edicion+img+"</div>";
+                        lis_img=lis_img+todo;
+                        //lis_img=lis_img+"<div id="+data.imagenes[i].img_id+" class='span3 im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+                    }
+                    
+                    $("#imgs_experiencia").html(lis_img);                    
                 }
-            });                                
-    
+            });                                    
     }
+    
+    
 
 
     function eliminaExperienciaEmpresa(id_experiencia) {
@@ -420,6 +429,8 @@ $(document).ready(function(){
                 ,success: function(data,textStatus,jqXHR){                           
                     
                             if(/true/.test(data)) {                                
+                                alert("Experiancia Eliminada :D");                                                                          
+                                document.location.reload();                                                                     
                                /* if(/experiencia/.test(data)) {
                                     alert("Experiancia Eliminada :D");                                                                          
                                     document.location.reload();                                     
@@ -427,8 +438,7 @@ $(document).ready(function(){
                                 else if(/etiqueta/.test(data)) {
                                     alert("Etiqueta Eliminada :D");
                                     document.location.reload();                                     
-                                }*/
-                                alert("Experiancia Eliminada :D");                                                                                                  
+                                }*/                                                                                                
                             }
                             else alert("No se ha podido eliminar su experiencia"); 
                 }

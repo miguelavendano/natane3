@@ -293,7 +293,7 @@
         public function refactory_servicios($datos){            
             
             $resultados="";
-            $elemento = $this->servicios;
+            //$elemento = $this->servicios;
             
             
             for($c=0; count($datos); $c++){                
@@ -302,7 +302,8 @@
                 $i=0;
                 do{ 
                     $servicio=array_shift($datos);
-                    $aux = $elemento;
+                    //$aux = $elemento;
+                    $aux = $this->servicios;
                     $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);
                     $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);
                     $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);

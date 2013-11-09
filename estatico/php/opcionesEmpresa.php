@@ -146,14 +146,24 @@ if(isset($_POST['opcion'])){
             
             $modelexperiencia = new ModelExperiencia();
             $query = "START n=node(".$_POST['experiencia'].") RETURN n";                        
-            $resultado = $modelexperiencia->get_experiencias($query);
+            $resultado = $modelexperiencia->get_experiencias($query);            
             
             $band = array(
                 "nombre"=> $resultado[0]->nombre,
                 "descripcion"=> $resultado[0]->descripcion
             );
-                        
-           $band = json_encode($band);
+                                    
+            $lista_imgs = $modelexperiencia->get_imagenes_experiencia($_POST['experiencia']);            
+            //inserto el array de imagenes al array de las propiedades de la  experiencia
+            array_push($band, $lista_imgs);                                                    
+            
+            //cambio el nombre que asigna la insertar el array de imagenes
+            $band["imagenes"] = $band["0"];
+            unset($band["0"]);
+            
+            //combierto el array en un json
+            $band = json_encode($band);
+           
             
         break;    
 
@@ -180,7 +190,8 @@ if(isset($_POST['opcion'])){
             if($tipo_relacion==""){
                 
                 // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino
-                $ids_relacionImgExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Img");
+                
+                $ids_relacionImgExp = ModelExperiencia::get_id_relaciones_nodo($_POST['experiencia'],"Img");
 
                 if($ids_relacionImgExp){
                 //elimino la relacion entre la experiencia y las imagenes                    
@@ -193,9 +204,9 @@ if(isset($_POST['opcion'])){
                 }
 
                 // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
-                $id_relacionUserExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Comparte");
+                $id_relacionUserExp = ModelExperiencia::get_id_relaciones_nodo($_POST['experiencia'],"Comparte");
                 if($id_relacionUserExp){
-                    $modeloexperiencia->eliminar_relacion_experiencia($id_relacionUserExp); 
+                    ModelExperiencia::eliminar_relacion_experiencia($id_relacionUserExp);
 
                     // elimino el nodo de la experiencia
                     ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                
@@ -209,7 +220,7 @@ if(isset($_POST['opcion'])){
                 //$band="etiqueta";
             }    
            
-            $band.="true";
+            $band="true";
             
         break;        
         
@@ -225,7 +236,7 @@ if(isset($_POST['opcion'])){
             $id_servicio = $nodo_servicio->id;  //obtengo el id del nodo creado                                    
             ModeloRelaciones::crearRelacion($_POST['empresa'], $id_servicio, "Ofrece");   //crea la relacion entre la empresa y el servicio
 
-            $band.="true";
+            $band="true";
             
         break;        
     
