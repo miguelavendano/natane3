@@ -55,6 +55,16 @@
 .servicio{
     margin-bottom: 15px;
 }
+.opc_serv{
+    position: relative;
+    z-index:2;
+    padding-right: 5px;
+}
+.opc_serv button{
+    float: right;    
+    padding: 5px;
+    margin: 5px 0 0 5px;        
+}
 .titulo-servicio{
     text-align: center;  
     -webkit-border-top-left-radius: 4px;

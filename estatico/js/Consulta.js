@@ -1,43 +1,15 @@
 $(document).ready(function(){
       
-    /*
-     * Realiza la busqueda
-    
-    $("#BBuscar").click(function(){        
-        if($("#loBusca").val().length >= 1){                
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesConsulta.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion:'busqueda', 
-                    consulta: $("#loBusca").val()                    
-                }
-                ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                        if(/true/.test(data)) {                                               
-                            
-                            //document.location.href="http://localhost/natane3/modulos/usuarios/usuario.php?id="+n[0];
-                        }
-                        else alert("Consulta no hecha");                                                     
-                }
-            });                                   
-        }else{
-            alert("No hay datos para relizar una busqueda")
-        }            
-    });  
-        */
 
     /*
      * Consulta Todos los elementos
      */
     $(".BarraBuscaTodo").click(function(){        
         
-        if($("#loBusca").val().length >= 1){             
-
-            document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?busqueda="+$("#loBusca").val();            
-            
-        }else{
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
             alert("No hay datos para relizar una busqueda")
+        }else{
+            document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?busqueda="+$("#loBusca").val();            
         }        
     });      
 
@@ -68,6 +40,7 @@ $(document).ready(function(){
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                                                  
                             $("#contenido_respuesta").html(data);                                
+                            $("#loBusca").val(busqueda[1]);                            
                 }
             });  
             
@@ -82,13 +55,13 @@ $(document).ready(function(){
         var mi_url=document.location.href;
         var busqueda=mi_url.split("=");         
         var query="";
-        
-        if($("#loBusca").val().length >= 1){
+
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -99,9 +72,9 @@ $(document).ready(function(){
                     consulta: query
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){                                                       
                             $("#contenido_respuesta").html(data);                                
+                            $("#loBusca").val(busqueda[1]);
                 }
             });                                   
         
@@ -117,12 +90,12 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if($("#loBusca").val().length >= 1){
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -134,9 +107,9 @@ $(document).ready(function(){
                     filtro: ""
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){                                                       
                             $("#contenido_respuesta").html(data);    
+                            $("#loBusca").val(busqueda[1]);                            
                 }
             });                                   
             
@@ -152,12 +125,12 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if($("#loBusca").val().length >= 1){
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -168,9 +141,9 @@ $(document).ready(function(){
                     consulta: query
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){                                                       
                             $("#contenido_respuesta").html(data);    
+                            $("#loBusca").val(busqueda[1]);                            
                 }
             });                                   
 
@@ -186,12 +159,12 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if($("#loBusca").val().length >= 1){
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -203,9 +176,9 @@ $(document).ready(function(){
                     filtro: "icon-suitcase"                    
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){                            
                             $("#contenido_respuesta").html(data);    
+                            $("#loBusca").val(busqueda[1]);                              
                 }
             });                                   
 
@@ -220,12 +193,12 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if($("#loBusca").val().length >= 1){
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -237,9 +210,9 @@ $(document).ready(function(){
                     filtro: "icon-food"                    
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){                                                       
                             $("#contenido_respuesta").html(data);    
+                            $("#loBusca").val(busqueda[1]);                              
                 }
             });                                   
 
@@ -254,12 +227,12 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if($("#loBusca").val().length >= 1){
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -271,9 +244,9 @@ $(document).ready(function(){
                     filtro: "icon-flag"                    
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){   
                             $("#contenido_respuesta").html(data);    
+                            $("#loBusca").val(busqueda[1]);                              
                 }
             });                                   
 
@@ -288,12 +261,12 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if($("#loBusca").val().length >= 1){
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -305,9 +278,9 @@ $(document).ready(function(){
                     filtro: "icon-road"                    
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){   
                             $("#contenido_respuesta").html(data);    
+                            $("#loBusca").val(busqueda[1]);                              
                 }
             });                                   
 
@@ -323,12 +296,12 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if($("#loBusca").val().length >= 1){
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -340,9 +313,9 @@ $(document).ready(function(){
                     filtro: "icon-music"                    
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){                                                       
                             $("#contenido_respuesta").html(data);    
+                            $("#loBusca").val(busqueda[1]);                              
                 }
             });                                   
       
@@ -357,12 +330,12 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if($("#loBusca").val().length >= 1){
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+        }else if($("#loBusca").val().length >= 1){
             query = $("#loBusca").val();
         } else if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
         }
         
             $.ajax({
@@ -374,9 +347,9 @@ $(document).ready(function(){
                     filtro: "icon-glass"                    
                 }
                 ,dataType:'html'
-                ,success: function(data,textStatus,jqXHR){                           
-                            
+                ,success: function(data,textStatus,jqXHR){   
                             $("#contenido_respuesta").html(data);    
+                            $("#loBusca").val(busqueda[1]);                              
                 }
             });                                   
 

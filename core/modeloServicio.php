@@ -17,8 +17,7 @@ class ModelServicio{
          * funcion para crear el nodo tipo Servicio
          * parametros: objeto tipo Servicio
          */	
-	public static function crearNodoServicio(Servicio $minodo)
-	{
+	public static function crearNodoServicio(Servicio $minodo){
 		if (!$minodo->node) {
 			$minodo->node = new Node(Neo4Play::client());
 		}
@@ -32,7 +31,66 @@ class ModelServicio{
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Servicio');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
-	}      
+	}    
         
+        
+        /*
+         * Obtiene las propiedades de un servicio
+         */        
+        public function get_servicio($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){
+                
+                foreach($result as $row) {
+                    $servicio = new Servicio();
+                    $servicio->id = $row['']->getId();
+                    $servicio->nombre = $row['']->getProperty('nombre');
+                    $servicio->descripcion = $row['']->getProperty('descripcion');                    
+                    array_push($array, $usuario);
+                }
+                return $array;
+            }                        
+        }
+
+        
+        /*
+         * Funcion que edita una propiedad de una experiencia y si no existe la crea
+         */        
+	public static function editar_servicio($idnodo, $propiedad, $detalle){
+		//Obtengo toda la informacion del nodo
+		$editar = Neo4Play::client()->getNode($idnodo);
+		//edita la propiedad y si no existe la crea
+		$editar->setProperty($propiedad,$detalle)
+		    	->save();
+	}              
+
+        /*
+         * Elimina las imagenes de una experiencia
+         */
+	public static function eliminarServicio($id_servicio){
+            
+            foreach($id_servicio as $value){
+                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
+                    $eliminar->delete();			    	                                                                            
+            }
+            
+	}                
+        
+        /*
+         * Elimina las imagenes de una experiencia
+         */
+	public static function eliminar_nodos_ImgServicio($ids_nodoImgExp){
+            
+            foreach($ids_nodoImgExp as $value){
+                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
+                    $eliminar->delete();			    	                                                                            
+            }
+            
+	}        
         
 }

@@ -30,6 +30,7 @@
         public $longitud;   
         public $confianza;
         public $crea_servicio;
+        public $editservicio;
 
         public $script;        
         
@@ -61,8 +62,9 @@
             $this->empresa= file_get_contents('../../plantillas/empresas/perfilEmpresa.html');   
             $this->slider_empresa= file_get_contents('../../plantillas/empresas/slider_empresas.html');      
             $this->servicios = file_get_contents('../../plantillas/empresas/servicios.html');      
+            $this->editservicio = file_get_contents('../../plantillas/empresas/editarServicio.html');
             $this->expe = file_get_contents('../../plantillas/empresas/experiencia_empresa.html');      
-            $this->edi_exp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');
+            $this->edi_exp = file_get_contents('../../plantillas/empresas/editarExperienciaEmpresa.html');
             $this->contacto = file_get_contents('../../plantillas/sitios/contacto.html'); 
             $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->gustaria= $this->seguidores;
@@ -110,6 +112,7 @@
                                         'ferrocarril' => $this->ferrocarril,
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
+                                        'editarservicio' => $this->editservicio,
                                         'experiencias'=> $this->expe,
                                         'edita_experiencia'=> $this->edi_exp,
                                         'nombre_empresa'=>$this->nombre,
@@ -138,6 +141,7 @@
                                         'ferrocarril' => $this->ferrocarril,
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
+                                        'editarservicio' => $this->editservicio,                
                                         'experiencias'=> $this->expe,
                                         'edita_experiencia'=> $this->edi_exp,
                                         'nombre_empresa'=>$this->nombre,
@@ -304,6 +308,7 @@
                     $servicio=array_shift($datos);
                     //$aux = $elemento;
                     $aux = $this->servicios;
+                    $aux = str_ireplace("{id_servicio}", $servicio->id, $aux);
                     $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);
                     $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);
                     $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);
@@ -317,41 +322,6 @@
             $this->servicios = $resultados;
             $this->actualizar_diccionarios();
         }   
-        
-/*
-        public function refactory_servicios($datos){            
-            
-            $elservicio="";
-            $losservicios="";
-            $i=1;
-            
-            foreach($datos as $valor){
-                
-                    $aux = $this->servicios;
-                    $aux = str_ireplace("{nombre}", $valor->nombre, $aux);
-                    $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);
-                    $aux = str_ireplace("{descripcion}", $valor->descripcion, $aux);
-                    $elservicio .= $aux;
-                    
-                if( $i==1 ){
-                    $losservicios .= '<div class="row-fluid">'.$elservicio;
-                    $i++;
-                }
-                elseif( $i<3 ) {
-                    $losservicios .= $elservicio;
-                    $i++;                
-                }
-                else{
-                    $losservicios .= $elservicio.'</div>';    
-                    $i=1;
-                }
-                
-            }
-            
-            $this->servicios = $losservicios;
-            $this->actualizar_diccionarios();
-        }           */
-        
         
         
         public function refactory_experiencias($datos){            

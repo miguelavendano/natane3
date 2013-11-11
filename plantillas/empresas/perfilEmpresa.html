@@ -25,7 +25,6 @@
                         <p>{descripcion}</p>
                     </div>
                 </div>
-
                 <div class="row-fluid">
                     <div class="span8 contenido contacto">
                         {contacto}
@@ -52,7 +51,7 @@
             
         </div>
 
-        <div class="row-fluid"><hr/></div>
+        <hr/>
         
         <div class="container-fluid">  
             <div class="row-fluid ">
@@ -68,9 +67,13 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">           
-
-                                            {servicios}
-
+                                            
+                                            <div id="servicios_empresa">
+                                                {servicios}
+                                            </div>
+                                            
+                                            {edita_experiencia}                                             
+                                            
                                         </div>  <!-- pestaña 1 -->
                                     
                                         <div class="tab-pane" id="2"> 
@@ -80,6 +83,7 @@
                                             </div>
                                             
                                             {edita_experiencia}
+                                            
                                         </div>   <!-- pestaña 2 -->
 
                                     </div>
@@ -111,7 +115,7 @@
             </div>
         </div>        
         
-        <div class="row-fluid"><hr/></div>
+        <hr/>
         <!--<br />-->
         {ferrocarril}
 

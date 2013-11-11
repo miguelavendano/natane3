@@ -138,6 +138,73 @@ class ModeloRelaciones
                 return $etiquetados;
 	}	
 
+        
+        /*
+         * Obtine los ID de las relacines de un nodo dado segun su tipo
+         */        
+	public static function get_id_relaciones($idNodo,$tipoRelacion){
+	
+		$miNodo = Neo4Play::client()->getNode($idNodo);
+		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
+                
+                $id_relaciones = array();
+                
+                if($relaciones){
+                    //echo "Se encontraron <b>".count($relaciones)."</b> relaciones";
+                    foreach ($relaciones as $valor){
+                        //echo "<h1>".$valor->getId()."</h1>";
+                        array_push($id_relaciones, $valor->getId());
+                    }
+                    return $id_relaciones;
+                }			
+		else return null;//echo "El nodo <b>NO</b> tiene relaciones";
+	}	
+
+        
+        /*
+         *Obtengo el id de las imagenes de una relacion
+         */
+	public static function get_ids_imagenes_relacion($TipoRelacion){
+            
+            $queryString = "START n=node(".$TipoRelacion.") MATCH n-[:Img]->i RETURN i;";            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();            
+            
+            $imagenes = array();
+            if($result){                
+            
+                foreach($result as $row) {   
+                    //echo $row['']->getId()."<br>";
+                    array_push($imagenes,$row['']->getId());
+                }
+                return $imagenes;
+            }   
+	}               
+
+        
+        /*
+         * Elimina Varias Relaciones
+         */
+	public static function eliminar_relaciones($ids_relaciones){
+            
+            foreach($ids_relaciones as $value) {
+		$eliminar = Neo4Play::client()->getRelationship($value);
+		$eliminar->delete();                            
+            }            
+        }                
+                     
+        
+        /*
+         * Elimina Varios NOdos
+         */
+	public static function eliminar_nodos($ids_nodos){
+            
+            foreach($ids_nodos as $value){
+                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
+                    $eliminar->delete();			    	                                                                            
+            }
+            
+	}        
 
 }
 

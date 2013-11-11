@@ -64,71 +64,7 @@ class ModelExperiencia{
             $eliminar->delete();			    	
 	}
 
-        /*
-         * Elimina las relaciones de una experiencia
-         */
-	public static function eliminar_relacion_experiencia($ids_relacionImgExp){
-            
-            foreach($ids_relacionImgExp as $value) {
-		$eliminar = Neo4Play::client()->getRelationship($value);
-		$eliminar->delete();                            
-            }            
-
-        }                
-                     
-        /*
-         * Elimina las imagenes de una experiencia
-         */
-	public static function eliminar_nodos_ImgExp($ids_nodoImgExp){
-            
-            foreach($ids_nodoImgExp as $value){
-                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
-                    $eliminar->delete();			    	                                                                            
-            }
-            
-	}
-        
-   
-        /*
-         *Obtengo el id de la imagenes de una relacion
-         */
-	public static function get_id_nodoImgExp($queryString){
-            
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $result = $query->getResultSet();            
-            
-            $imagenes = array();
-            if($result){                
-            
-                foreach($result as $row) {   
-                    //echo $row['']->getId()."<br>";
-                    array_push($imagenes,$row['']->getId());
-                }
-                return $imagenes;
-            }   
-	}        
-
-        /*
-         * Obtine los ID de las relacines de un nodo dado segun su tipo
-         */        
-	public static function get_id_relaciones_nodo($idNodo,$tipoRelacion){
-	
-		$miNodo = Neo4Play::client()->getNode($idNodo);
-		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
-                
-                $id_relaciones = array();
-                
-                if($relaciones){
-                    //echo "Se encontraron <b>".count($relaciones)."</b> relaciones";
-                    foreach ($relaciones as $valor){
-                        //echo "<h1>".$valor->getId()."</h1>";
-                        array_push($id_relaciones, $valor->getId());
-                    }
-                    return $id_relaciones;
-                }			
-		else return null;//echo "El nodo <b>NO</b> tiene relaciones";
-	}	
-        
+       
         /*
          * Obtine las experiencias de un usuario
          */                

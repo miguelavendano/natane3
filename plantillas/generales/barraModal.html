@@ -238,8 +238,8 @@
     <div id="modalexpe" class="modal hide fade">
 
         <div class="modal-header">            
-            <a class="close cancelarExperiencia" data-dismiss="modal">&times;</a>            
-            <h3 id="edita_crea_Exp">Comparte tu Experiencia</h3>                
+            <a class="close" data-dismiss="modal">&times;</a>            
+            <h3>Comparte tu Experiencia</h3>                
         </div>
 
         <div id="compartirExperiencia" class="modal-body">          
@@ -272,10 +272,96 @@
             </form>        
         </div>
         <div class="modal-footer">
-            <div id="botones_exp" class="control-group botones_si_no">                  
-                <button class="btn btn-blue" id="creaExperiencia">Compartir</button>
-                <button class="btn btn-red cancelarExperiencia"> Cancelar</button>                                                
-            </div>        
+            <button class="btn btn-blue" id="creaExperiencia">Compartir</button>
+            <button class="btn btn-red" data-dismiss="modal"> Cancelar</button>
         </div>            
     </div>          
          
+            
+            <!-- crear servicio -->
+    <div id="modalCreaServicio" class="modal hide fade">
+
+        <div class="modal-header">            
+            <a class="close" data-dismiss="modal">&times;</a>            
+            <h3>Crear Servicio</h3>
+        </div>
+
+        <div class="modal-body">          
+            <form class="form-horizontal" id="formCrearServicio" method=post enctype=multipart/form-data>              
+                <div class="control-group">
+                    <label class="control-label" for="nomSer">Nombre del servicio: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="nomSer" name="nomSer" required> 
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="descSer">Descripcion: </label>
+                    <div class="controls">
+                        <textarea id="descSer" name="descSer" style="min-width: 200px; max-width: 500px; max-height: 200px" required></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="precioSer">Precio: </label>
+                    <div class="controls">
+                        <input type="number" class="input-large" id="precioSer" name="precioSer">
+                    </div>
+                </div>
+                <!--<div class="caja_Bfile btn btn-green active"> 
+                    <i class="icon-camera"> Cargar Imagenes</i>
+                    <input class="Bfile" type="file" id="imagenes_experiencia" name="imagenes_experiencia[]" />                                  
+                </div>                
+                <div class="row-fluid">      
+                    <output id="list_img_exp"></output>                                           
+                </div>-->
+            </form>        
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" id="guardarServicio">Crear Servicio</button>
+            <button class="btn btn-red" data-dismiss="modal">Cancelar</button>
+        </div>            
+    </div>          
+          
+            
+            
+            <!-- editar servicio -->
+<!--    <div class="modalEditaServicio modal hide fade">
+
+        <div class="modal-header">            
+            <a class="close" data-dismiss="modal">&times;</a>            
+            <h3>Editar Servicio</h3>
+        </div>
+
+        <div class="modal-body">          
+            <form class="form-horizontal" id="formEditarServicio" method=post enctype=multipart/form-data>              
+                <div class="control-group">
+                    <label class="control-label" for="EditNomSer">Nombre del servicio: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EditNomSer" name="EditNomSer" required> 
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EditDescSer">Descripcion: </label>
+                    <div class="controls">
+                        <textarea id="EditDescSer" name="EditDescSer" style="min-width: 200px; max-width: 500px; max-height: 200px" required></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EditprecioSer">Precio: </label>
+                    <div class="controls">
+                        <input type="number" class="input-large" id="EditprecioSer" name="EditprecioSer">
+                    </div>
+                </div>
+                <div class="caja_Bfile btn btn-green active"> 
+                    <i class="icon-camera"> Cargar Imagenes</i>
+                    <input class="Bfile" type="file" id="imagenes_experiencia" name="imagenes_experiencia[]" />                                  
+                </div>                
+                <div class="row-fluid">      
+                    <output id="list_img_exp"></output>                                           
+                </div> 
+            </form>        
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" id="guardaEdicionServicio">Crear Servicio</button>
+            <button class="btn btn-red" data-dismiss="modal">Cancelar</button>
+        </div>            
+    </div>            -->

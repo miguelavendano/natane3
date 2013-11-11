@@ -119,7 +119,7 @@ class ModelSitios{
                     $sitio->youtube = $row['']->getProperty('youtube');
                     $sitio->contraseña = $row['']->getProperty('contraseña');
                     $sitio->votos = $row['']->getProperty('votos');
-                    //$sitio->type = $row['']->getProperty('type');                                        
+                    $sitio->type = $row['']->getProperty('type');                                        
                     array_push($array, $sitio);                    
                 }
                 return $array;

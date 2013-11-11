@@ -147,7 +147,7 @@ class ModelUsuarios{
                         $usuario->twitter = $row['']->getProperty('twitter');
                         $usuario->youtube = $row['']->getProperty('youtube');
                         $usuario->contraseña = $row['']->getProperty('contraseña');
-                        //$usuario->type = $row['']->getProperty('type');                    
+                        $usuario->type = $row['']->getProperty('type');                    
                     
                     array_push($array, $usuario);
                     

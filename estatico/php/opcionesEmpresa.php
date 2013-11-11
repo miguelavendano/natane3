@@ -148,21 +148,21 @@ if(isset($_POST['opcion'])){
             $query = "START n=node(".$_POST['experiencia'].") RETURN n";                        
             $resultado = $modelexperiencia->get_experiencias($query);            
             
-            $band = array(
+            $info = array(
                 "nombre"=> $resultado[0]->nombre,
                 "descripcion"=> $resultado[0]->descripcion
             );
                                     
             $lista_imgs = $modelexperiencia->get_imagenes_experiencia($_POST['experiencia']);            
             //inserto el array de imagenes al array de las propiedades de la  experiencia
-            array_push($band, $lista_imgs);                                                    
+            array_push($info, $lista_imgs);                                                    
             
             //cambio el nombre que asigna la insertar el array de imagenes
-            $band["imagenes"] = $band["0"];
-            unset($band["0"]);
+            $info["imagenes"] = $info["0"];
+            unset($info["0"]);
             
             //combierto el array en un json
-            $band = json_encode($band);
+            $band = json_encode($info);
            
             
         break;    
@@ -188,30 +188,27 @@ if(isset($_POST['opcion'])){
                 
                 
             if($tipo_relacion==""){
-                
-                // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino
-                
-                $ids_relacionImgExp = ModelExperiencia::get_id_relaciones_nodo($_POST['experiencia'],"Img");
+
+                // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino                
+                $ids_relacionImgExp = ModeloRelaciones::get_id_relaciones($_POST['experiencia'],"Img");
 
                 if($ids_relacionImgExp){
-                //elimino la relacion entre la experiencia y las imagenes                    
-                    ModelExperiencia::eliminar_relacion_experiencia($ids_relacionImgExp);
+                    //elimino la relacion entre la experiencia y las imagenes                    
+                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgExp);
 
-                    // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino            
-                    $query = "START n=node(".$_POST['experiencia'].") MATCH n-[:Img]->i RETURN i;";
-                    $ids_nodoImgExp = ModelExperiencia::get_id_nodoImgExp($query);
-                    ModelExperiencia::eliminar_nodos_ImgExp($ids_nodoImgExp);
+                    // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino                                
+                    $ids_nodoImgExp = ModeloRelaciones::get_ids_imagenes_relacion('experiencia');
+                    ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
                 }
 
                 // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
-                $id_relacionUserExp = ModelExperiencia::get_id_relaciones_nodo($_POST['experiencia'],"Comparte");
+                $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['experiencia'], 'Comparte');
+                
                 if($id_relacionUserExp){
-                    ModelExperiencia::eliminar_relacion_experiencia($id_relacionUserExp);
-
-                    // elimino el nodo de la experiencia
-                    ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                
+                    ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
+                    ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                                                       
                 }                
-                //$band="experiencia";
+                                
             }
             elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
                 
@@ -239,6 +236,66 @@ if(isset($_POST['opcion'])){
             $band="true";
             
         break;        
+    
+        case "editarServicio":                       
+            
+            $modelservicio = new ModelServicio();
+            $query = "START n=node(".$_POST['servicio'].") RETURN n";                        
+            $resultado = $modelservicio->get_servicio($query);            
+            
+            $band = array(
+                "nombre"=> $resultado[0]->nombre,
+                "descripcion"=> $resultado[0]->descripcion
+            );
+            /*                        
+            $lista_imgs = $modelexperiencia->get_imagenes_experiencia($_POST['experiencia']);            
+            //inserto el array de imagenes al array de las propiedades de la  experiencia
+            array_push($band, $lista_imgs);                                                    
+            
+            //cambio el nombre que asigna la insertar el array de imagenes
+            $band["imagenes"] = $band["0"];
+            unset($band["0"]);
+            */
+            //combierto el array en un json
+            $band = json_encode($band);
+           
+            
+        break;    
+
+        case "guardaEdiServ":                                                                      
+
+            ModelServicio::editar_servicio($_POST['servicio'], "nombre", $_POST['titulo']);
+            ModelServicio::editar_servicio($_POST['servicio'], "descripcion", $_POST['descripcion']);            
+            $band="true";
+            
+        break;      
+    
+        case "eliminarServicio":
+                            
+                // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino                
+                $ids_relacionImgExp = ModeloRelaciones::get_id_relaciones($_POST['servicio'],"Img");
+
+                if($ids_relacionImgExp){
+                    //elimino la relacion entre la experiencia y las imagenes                    
+                    ModelExperiencia::eliminar_relaciones($ids_relacionImgExp);
+
+                    // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino                                
+                    $ids_nodoImgExp = ModeloRelaciones::get_ids_imagenes_relacion('servicio');
+                    ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
+                }
+
+                // obtengo el id de la relacion Empresa-Servicio (Ofrece), si existe la elimino
+                $id_relacionEmpSer = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['servicio'], 'Ofrece');
+                
+                if($id_relacionEmpSer){
+                    
+                    ModeloRelaciones::eliminarRelacion($id_relacionEmpSer);
+                    ModelServicio::eliminarServicio($_POST['servicio']);
+                }                
+            
+            $band="true";
+            
+        break;                           
     
         default : break; 
     }    

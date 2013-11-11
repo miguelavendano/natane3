@@ -118,6 +118,7 @@ class ModelEmpresa{
                     $empresa->twitter = $row['']->getProperty('twitter');
                     $empresa->youtube = $row['']->getProperty('youtube');
                     $empresa->contraseña = $row['']->getProperty('contraseña');
+                    $empresa->type = $row['']->getProperty('type');
                     //$empresa->type = $row['']->getProperty('type');                                        
                     array_push($array, $empresa);                    
                 }

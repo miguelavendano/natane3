@@ -70,7 +70,7 @@
     <script src="{JS}/cargarImagenes.js"></script>-->
     
     <!--Funcion para subir las imagenes de la experiencia-->
-    <script type="text/javascript" language="javascript">   
+    <script>   
         
         /*FUNCION PARA LA VISTA PREVIA EN LA EXPERIENCIA*/
         function vistaPreviaImagenes(evt) {
@@ -102,38 +102,6 @@
 
         document.getElementById('imagenes_experiencia').addEventListener('change', vistaPreviaImagenes, false);
         
-
-        /*FUNCION PARA LA VISTA PREVIA EN LA EDCION DE LA EXPERIENCIA*/
-        function vistaPreviaImgExpEdit(evt) {
-          var files = evt.target.files; // FileList object
-          // Loop through the FileList and render image files as thumbnails.
-          for (var i = 0, f; f = files[i]; i++) {
-
-            // Solo procesa archivos de tipo imagen
-            if (!!f.type.match('image.*')) {
-            
-                var reader = new FileReader();
-
-                // Closure to capture the file information.
-                reader.onload = (function(theFile) {
-                  return function(e) {
-                    // Render thumbnail.
-                    var span = document.createElement('span');
-                    span.innerHTML = ['<img class="vista_imgExp" src="', e.target.result,
-                                      '" title="', escape(theFile.name), '"/>'].join('');
-                    document.getElementById('list_edit_img_exp').insertBefore(span, null);
-                  };
-                })(f);
-
-                // Read in the image file as a data URL.
-                reader.readAsDataURL(f);
-            }//cierre if
-          }//cierra for
-        }//cierra funcion
-
-        document.getElementById('imgs_edit_experiencia').addEventListener('change', vistaPreviaImgExpEdit, false);
-
-
         /*FUNCION PARA LA VISTA PREVIA EN LA IMAGEN DE PERFIL*/
         function vistaPreviaImgPerfil(evt) {
           var files = evt.target.files; // FileList object
@@ -164,6 +132,38 @@
         }//cierra funcion
 
         document.getElementById('foto_perfil').addEventListener('change', vistaPreviaImgPerfil, false);
+        
+        
+        /*FUNCION PARA LA VISTA PREVIA EN LA EDCION DE LA EXPERIENCIA*/
+        function vistaPreviaImgExpEdit(evt) {
+          var files = evt.target.files; // FileList object
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+            
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                    // Render thumbnail.
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="vista_imgExp" src="', e.target.result,
+                                      '" title="', escape(theFile.name), '"/>'].join('');
+                    document.getElementById('list_edit_img_exp').insertBefore(span, null);
+                  };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
+
+        document.getElementById('imgs_edit_experiencia').addEventListener('change', vistaPreviaImgExpEdit, false);
+        
     </script>
 
     
