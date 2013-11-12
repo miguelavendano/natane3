@@ -2,10 +2,15 @@
 
 require_once('coneccion.php');
 require_once('Servicio.php');
-
+require_once('Imagen.php');
 
 use Everyman\Neo4j\Node,
-    Everyman\Neo4j\Index;
+    Everyman\Neo4j\Index,
+    Everyman\Neo4j\Query\ResultSet,
+    Everyman\Neo4j\Relationship,
+    Everyman\Neo4j\Cypher,
+    Everyman\Neo4j\Cypher\Query,
+    Everyman\Neo4j\Command;
 
 class ModelServicio{
     
@@ -40,7 +45,7 @@ class ModelServicio{
         public function get_servicio($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $result = $query->getResultSet();
+            $result = $query->getResultSet();            
             
             $array = array();
             
@@ -51,13 +56,13 @@ class ModelServicio{
                     $servicio->id = $row['']->getId();
                     $servicio->nombre = $row['']->getProperty('nombre');
                     $servicio->descripcion = $row['']->getProperty('descripcion');                    
-                    array_push($array, $usuario);
+                    array_push($array, $servicio);
                 }
                 return $array;
             }                        
         }
 
-        
+       
         /*
          * Funcion que edita una propiedad de una experiencia y si no existe la crea
          */        
@@ -70,14 +75,12 @@ class ModelServicio{
 	}              
 
         /*
-         * Elimina las imagenes de una experiencia
+         * Elimina el nodo servicio
          */
 	public static function eliminarServicio($id_servicio){
             
-            foreach($id_servicio as $value){
-                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
-                    $eliminar->delete();			    	                                                                            
-            }
+            $eliminar = Neo4Play::client()->getNode($id_servicio);		
+            $eliminar->delete();	
             
 	}                
         

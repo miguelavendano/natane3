@@ -169,8 +169,8 @@ if(isset($_POST['opcion'])){
 
         case "guardar_edicionExpEmp":                                                                      
 
-            ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['titulo']);
-            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['descripcion']);            
+            ModelExperiencia::editar_experiencia($_POST['servicio'], "nombre", $_POST['titulo']);
+            ModelExperiencia::editar_experiencia($_POST['servicio'], "descripcion", $_POST['descripcion']);            
             $band="true";
             
         break;        
@@ -201,13 +201,11 @@ if(isset($_POST['opcion'])){
                     ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
                 }
 
-                // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
+                // obtengo el id de la relacion Autor-Experiencia (Comparte)
                 $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['experiencia'], 'Comparte');
+                ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
+                ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                                                       
                 
-                if($id_relacionUserExp){
-                    ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
-                    ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                                                       
-                }                
                                 
             }
             elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
@@ -262,9 +260,9 @@ if(isset($_POST['opcion'])){
             
         break;    
 
-        case "guardaEdiServ":                                                                      
+        case "guardaEdicionServicio":                                                                      
 
-            ModelServicio::editar_servicio($_POST['servicio'], "nombre", $_POST['titulo']);
+            ModelServicio::editar_servicio($_POST['servicio'], "nombre", $_POST['nombre']);
             ModelServicio::editar_servicio($_POST['servicio'], "descripcion", $_POST['descripcion']);            
             $band="true";
             
@@ -284,14 +282,16 @@ if(isset($_POST['opcion'])){
                     ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
                 }
 
-                // obtengo el id de la relacion Empresa-Servicio (Ofrece), si existe la elimino
-                $id_relacionEmpSer = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['servicio'], 'Ofrece');
-                
-                if($id_relacionEmpSer){
-                    
-                    ModeloRelaciones::eliminarRelacion($id_relacionEmpSer);
-                    ModelServicio::eliminarServicio($_POST['servicio']);
+                // obtengo los id de las relacion Servicio-Sitio (Relacion), si existe la elimino
+                $ids_relacionSerSit = ModeloRelaciones::get_id_relaciones($_POST['servicio'],"Relacion");                
+                if($ids_relacionSerSit){
+                    ModeloRelaciones::eliminar_relaciones($ids_relacionSerSit);    
                 }                
+                
+                // obtengo el id de la relacion Empresa-Servicio (Ofrece)
+                $id_relacionEmpSer = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['servicio'], 'Ofrece');                    
+                ModeloRelaciones::eliminarRelacion($id_relacionEmpSer);
+                ModelServicio::eliminarServicio($_POST['servicio']);                
             
             $band="true";
             

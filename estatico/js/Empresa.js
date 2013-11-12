@@ -266,8 +266,10 @@ $(document).ready(function(){
      */
     $("#guarda_edicionExpEmpresa").click(function(){
 
-            var id_exp=$(".info_exp").parent().attr('id');
-
+            var id_exp=$("#formEditarExperienciaEmpresa").parent().attr('id'); //obtengo el id de la experiencia
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("="); 
+            
             $.ajax({
                 url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
@@ -351,16 +353,16 @@ $(document).ready(function(){
     $("#guardaEdicionServicio").click(function(){
 
             //var id_exp=$(".info_exp").parent().attr('id'); //obtengo el id de la experiencia
-            var id_exp=$("#formEditarExperiencia").parent().attr('id'); //obtengo el id de la experiencia
+            var id_servicio=$("#formEditarServicio").parent().parent().attr('id'); //obtengo el id de la experiencia
           
             $.ajax({
-                url:'/natane3/estatico/php/opcionesUsuario.php'
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'                    
                 ,data: {
-                    opcion: 'guardar_edicionExp',                   
-                    experiencia: id_exp,   
-                    titulo: $("#ediExpUsTitulo").val(),
-                    descripcion: $("#ediExpUsDesc").val()
+                    opcion: 'guardaEdicionServicio',                   
+                    servicio: id_servicio,   
+                    nombre: $("#EditNomSer").val(),
+                    descripcion: $("#EditDescSer").val()
                 }
                 ,dataType:'JSON'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -413,11 +415,13 @@ $(document).ready(function(){
                                     });   
                 }
                 ,success: function(data,textStatus,jqXHR){                           
-                    alert(data.nombre+"_"+data.descripcion);
+                    
+                    
                     $("#reload").css({visibility: 'hidden'});                       
+                    alert(data.nombre+"_"+data.descripcion);
                     $("#ediExpEmTitulo").val(data.nombre);
                     $("#ediExpEmDesc").val(data.descripcion);
-                    
+                    /*
                     var marco="";
                     var edicion="";                    
                     var img="";
@@ -437,7 +441,7 @@ $(document).ready(function(){
                         //lis_img=lis_img+"<div id="+data.imagenes[i].img_id+" class='span3 im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
                     }
                     
-                    $("#imgs_experiencia").html(lis_img);                    
+                    $("#imgs_experiencia").html(lis_img);                    */
                 }
             });                                    
     }
@@ -481,15 +485,15 @@ $(document).ready(function(){
 
     function editarServicio(id_servicio) {
             
-            $(".modalEditaServicio").attr('id', id_experiencia);            
-            $("#servicios_empresa").css({display:'none'});
+            $(".modalEditaServicio").attr('id', id_servicio);            
+            //$("#servicios_empresa").css({display:'none'});
             
             $.ajax({
                 url:'/natane3/estatico/php/opcionesEmpresa.php'
                 ,type:'POST'
                 ,data:{
                     opcion:'editarServicio',                            
-                    experiencia: id_servicio                    
+                    servicio: id_servicio                    
                 }
                 ,dataType:'JSON'
                 ,beforeSend:function(jqXHR, settings ){
@@ -524,7 +528,7 @@ $(document).ready(function(){
                 ,type:'POST'                    
                 ,data:{
                     opcion:'eliminarServicio',                            
-                    experiencia: id_servicio,
+                    servicio: id_servicio,
                     empresa: id_url[1]
                 }
                 ,dataType:'JSON'
