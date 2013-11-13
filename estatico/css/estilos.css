@@ -164,12 +164,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 /************************ EDICION IMAGENES DE EXPERIENCIAS ************************/
-#imgs_experiencia{
+/*#imgs_experiencia{
     display: table;
 }
 .marco_img_exp{
     display: table-cell;
-}
+}*/
 .opc_img{
     position: relative;
     z-index:2;

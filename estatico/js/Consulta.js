@@ -8,9 +8,12 @@ $(document).ready(function(){
         
         if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
             alert("No hay datos para relizar una busqueda")
+            exit();
         }else{
-            document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?busqueda="+$("#loBusca").val();            
+            document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?busqueda="+$("#loBusca").val();                        
         }        
+        
+        $("#loBusca").val(busqueda[1]);        
     });      
 
     /*
@@ -22,12 +25,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
 
-        if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
-        } else{
-            alert("No hay datos para relizar una busqueda")                        
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
 
             $.ajax({
@@ -56,13 +62,18 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
 
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+
+        if(busqueda[1]){
             query = busqueda[1];
         }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
+        }
+        
         
             $.ajax({
                 url:'/natane3/estatico/php/opcionesConsulta.php'
@@ -90,12 +101,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
         
             $.ajax({
@@ -109,7 +123,7 @@ $(document).ready(function(){
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                       
                             $("#contenido_respuesta").html(data);    
-                            $("#loBusca").val(busqueda[1]);                            
+                            $("#loBusca").val(busqueda[1]);
                 }
             });                                   
             
@@ -125,12 +139,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
         
             $.ajax({
@@ -159,12 +176,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
         
             $.ajax({
@@ -193,12 +213,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
         
             $.ajax({
@@ -227,12 +250,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
         
             $.ajax({
@@ -261,12 +287,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
         
             $.ajax({
@@ -296,12 +325,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
         
             $.ajax({
@@ -330,12 +362,15 @@ $(document).ready(function(){
         var busqueda=mi_url.split("=");         
         var query="";
         
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
-        }else if($("#loBusca").val().length >= 1){
-            query = $("#loBusca").val();
-        } else if(busqueda[1]){
+        if(busqueda[1]){
             query = busqueda[1];
+        }
+        else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda")
+            exit();
+        }
+        else if($("#loBusca").val().length >= 1){
+            query = $("#loBusca").val();
         }
         
             $.ajax({

@@ -334,7 +334,7 @@ $(document).ready(function(){
                     success: function(data,textStatus,jqXHR){                           
                                 if(/true/.test(data)) {                                
                                     alert("Experiancia ingresada :D");                                                                          
-                                    //document.location.reload();                                     
+                                    document.location.reload();                                     
                                 }
                                 else{ alert("No se ha podido ingresar su experiencia"); }  
                     }
@@ -599,19 +599,32 @@ $(document).ready(function(){
                     var img="";
                     var todo="";
                     var lis_img="";
-
-                    for(var i=0; i<data.imagenes.length; i++){
+                    var ciclo=0;
+                    
+                    for(var i=0; i<data.imagenes.length; i++){                        
+                        
                         marco="<div id="+data.imagenes[i].img_id+"_"+id_experiencia+" class='span3 marco_img_exp'>";
                         edicion="<div class='btn-block opc_img'>\n\
                                     <button class='btn icon-trash tooltip1' rel='tooltip' title='Eliminar' onclick='eliminarImgExperiencia("+id_experiencia+","+data.imagenes[i].img_id+")'></button>\n\
                                 </div>";
-                        
+
                         img="<div class='im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
-                        
+
                         todo=marco+edicion+img+"</div>";
-                        lis_img=lis_img+todo;
-                        //lis_img=lis_img+"<div id="+data.imagenes[i].img_id+" class='span3 im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
-                    }
+
+                        if(ciclo==0){
+                            lis_img=lis_img+"<div class='row-fluid'>"+todo;                                                                                    
+                            ciclo++;            
+                        }
+                        else if(ciclo<3){
+                            lis_img=lis_img+todo;                            
+                            ciclo++;                                                                      
+                        }else if(ciclo==3){      
+                            lis_img=lis_img+todo+"</div>";                            
+                            ciclo=0;                                         
+                        }  
+                        
+                    }                    
                     
                     $("#imgs_experiencia").html(lis_img);
                 }

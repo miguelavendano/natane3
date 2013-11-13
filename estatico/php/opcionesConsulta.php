@@ -44,7 +44,6 @@ if(isset($_POST['opcion'])){
             array_push($resultado, $resultado_sitios);
             array_push($resultado, $resultado_empresas);
             
-
             $no_hay=0;
             $contenido="";
             $band="";
@@ -97,18 +96,18 @@ if(isset($_POST['opcion'])){
                             $html='<div class="container-fluid">'.$contenido;
                             $cont++;
                         }
-                        elseif($cont==3){
-                            $html=$contenido.'</div>';
-                            $cont=0;
-                        }
-                        else{
+                        elseif($cont<3){
                             $html=$contenido;
                             $cont++;
                         }
+                        elseif($cont==3){
+                            $html=$contenido.'</div>';
+                            $cont=0;
+                        }                        
 
                         $band.=$html;
                     }
-                    exit();
+                    //exit();
                 }
            
             
