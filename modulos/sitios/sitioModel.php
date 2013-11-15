@@ -31,21 +31,9 @@
         
         public function  get_slider(){
             
-            $query = "START n=node(".$this->id_sitio.") MATCH n<-[:ImgSlider]-i RETURN i.nombre";
+            $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Asociada]-e-[:Img]->i RETURN i.nombre";
             $imagenes = $this->modelsitios->get_img_slider($query);
-            
-            if(count($imagenes)){
-                return $imagenes;
-            }/*
-            else{
-                $imagenes="slider_sin_imagenes.jpg";
-                return $imagenes;
-            }*/
-            
-            
-            /*
-            $eslaider = array("panoramica1.jpg","panoramica4.jpg","panoramica3.jpg","panoramica6.jpeg","panoramica7.jpeg");
-            return $eslaider;         */
+            return $imagenes;
         }        
 
         

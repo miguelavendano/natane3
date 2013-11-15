@@ -48,10 +48,10 @@
             
             $this->id_empresa = $id;
             $this->img_slider_act = '<div class="item active">
-                                        <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
+                                        <img src="{IMG_NATANE}/{url}" />
                                     </div>';
             $this->img_slider = '<div class="item">
-                                    <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
+                                    <img src="{IMG_NATANE}/{url}" />
                                 </div>';            
                   
         

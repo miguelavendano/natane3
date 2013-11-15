@@ -48,10 +48,10 @@
             return $resultado;            
         }          
         
-        public function get_gustaria(){   
+        public function get_visitaria(){   
             
             $query = "start n=node(".$this->id_user.") match n<-[:Desea]->b return b;";            
-            $resultado = $this->modelsitio->get_prueba($query);
+            $resultado = $this->modelsitio->get_sitio($query);
 
             return $resultado;
         }   

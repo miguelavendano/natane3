@@ -1,8 +1,7 @@
 <?php
 
 require_once('coneccion.php');
-require_once('Servicio.php');
-require_once('Imagen.php');
+require_once('Comentario.php');
 
 use Everyman\Neo4j\Node,
     Everyman\Neo4j\Index,
@@ -22,19 +21,19 @@ class ModelServicio{
          * funcion para crear el nodo tipo Servicio
          * parametros: objeto tipo Servicio
          */	
-	public static function crearNodoServicio(Servicio $minodo){
+	public static function crearNodoComentario(Comentario $minodo){
 		if (!$minodo->node) {
 			$minodo->node = new Node(Neo4Play::client());
 		}
 
-		$minodo->node->setProperty('nombre', $minodo->nombre)                        
-				->setProperty('descripcion', $minodo->descripcion)
+		$minodo->node->setProperty('usuario', $minodo->usuario)                        
+				->setProperty('detalle', $minodo->detalle)
                                 ->setProperty('type', $minodo->type)
 				->save();
 
 		$minodo->id = $minodo->node->getId();                
-		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Servicio');
-		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
+		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Comentario');
+		$minodoIndex->add($minodo->node, 'detalle', $minodo->nombre);
                 
 	}    
         
@@ -42,7 +41,7 @@ class ModelServicio{
         /*
          * Obtiene las propiedades de un servicio
          */        
-        public function get_servicio($queryString){
+        public function get_comentario($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();            
@@ -54,8 +53,8 @@ class ModelServicio{
                 foreach($result as $row) {
                     $servicio = new Servicio();
                     $servicio->id = $row['']->getId();
-                    $servicio->nombre = $row['']->getProperty('nombre');
-                    $servicio->descripcion = $row['']->getProperty('descripcion');                    
+                    $servicio->usuario = $row['']->getProperty('usuario');
+                    $servicio->detalle = $row['']->getProperty('detalle');                    
                     array_push($array, $servicio);
                 }
                 return $array;
@@ -66,7 +65,7 @@ class ModelServicio{
         /*
          * Funcion que edita una propiedad de una experiencia y si no existe la crea
          */        
-	public static function editar_servicio($idnodo, $propiedad, $detalle){
+	public static function editar_comentario($idnodo, $propiedad, $detalle){
 		//Obtengo toda la informacion del nodo
 		$editar = Neo4Play::client()->getNode($idnodo);
 		//edita la propiedad y si no existe la crea
@@ -75,25 +74,14 @@ class ModelServicio{
 	}              
 
         /*
-         * Elimina el nodo servicio
+         * Elimina el nodo del comentario
          */
-	public static function eliminarServicio($id_servicio){
+	public static function eliminarComentario($id_comentario){
             
-            $eliminar = Neo4Play::client()->getNode($id_servicio);		
+            $eliminar = Neo4Play::client()->getNode($id_comentario);		
             $eliminar->delete();	
             
 	}                
-        
-        /*
-         * Elimina las imagenes de una experiencia
-         
-	public static function eliminar_nodos_ImgServicio($ids_nodoImgExp){
-            
-            foreach($ids_nodoImgExp as $value){
-                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
-                    $eliminar->delete();			    	                                                                            
-            }
-            
-	} */       
+             
         
 }

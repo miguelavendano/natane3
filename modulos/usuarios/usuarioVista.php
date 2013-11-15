@@ -43,10 +43,8 @@
             $this->comparte = file_get_contents('../../plantillas/usuario/compartirExperiencia.html');
             $this->editExp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');
             $this->creaSitio = file_get_contents('../../plantillas/sitios/registrarSitio.html');
-            $this->creaEmpre = file_get_contents('../../plantillas/empresas/registrarEmpresa.html');
-            
-            
-            $this->gustaria = $this->expe;
+            $this->creaEmpre = file_get_contents('../../plantillas/empresas/registrarEmpresa.html');                        
+            $this->gustaria = file_get_contents('../../plantillas/usuario/sitiosAvisitar.html');            
                      
             $this->metas = '<meta charset="utf-8">
                             <title> {TITULO}</title>
@@ -78,7 +76,7 @@
             
             $this->dic_contenido = array('datos_usuario' => $this->usuario, 
                                         'seguidores' => $this->segui, 
-                                        'le_gustaria_ir' => $this->gustaria,
+                                        'quiere_visitar' => $this->gustaria,
                                         'modales'=> $this->modal,
                                         'editarUsuario'=>$this->editar,
                                         'experiencia'=>$this->expe,
@@ -170,7 +168,7 @@
                 $aux = $this->expe;
                 $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);                    
-                $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
+                $aux = str_ireplace('{titulo_exp}', $valor->nombre, $aux);
                 $aux = str_ireplace('{comentario}', $valor->descripcion, $aux);
                 
                 $experiencias .= $aux;
@@ -181,15 +179,19 @@
         }
         
 
-        public function refactory_gustaria($datos){            
+        public function refactory_visitaria($datos){            
             
+            $global = new Global_var();
+            $url = $global->url_sitio;
             $quiere = "";
             
             foreach ($datos as $valor){
                 $aux = $this->gustaria;
-                $aux = str_ireplace('{imagen}', $valor->img, $aux);
-                $aux = str_ireplace('{dirigido_a}', $valor->name, $aux);
-                $aux = str_ireplace('{comentario}', "Uff bacanisimo este sitio me gustaria ir definitivamente", $aux);
+                //$aux = str_ireplace('{imagen}', $valor->img, $aux);
+                $aux = str_ireplace('{sitio}', $valor->nombre, $aux);
+                $aux = str_ireplace('{descripcion}', $valor->descripcion, $aux);
+                $aux = str_ireplace('{url}', $url, $aux);                
+                $aux = str_ireplace('{id_sitio}', $valor->id, $aux);                
                 
                 $quiere .= $aux;
             }

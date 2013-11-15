@@ -26,8 +26,8 @@
             return $this->modelo->get_experiencias();            
         }
 
-        public function gustaria(){            
-            return $this->modelo->get_gustaria();            
+        public function visitaria(){            
+            return $this->modelo->get_visitaria();            
         }        
         
         
@@ -40,7 +40,7 @@
             $this->vista->refactory_usuario($this->datos_usuario());
             $this->vista->refactory_amigos($this->amigos());
             $this->vista->refactory_experiencias($this->experiencias());
-            //$this->vista->refactory_gustaria($this->gustaria());            
+            $this->vista->refactory_visitaria($this->visitaria());            
             $this->vista->refactory_contenido();
             $this->vista->refactory_total();
             

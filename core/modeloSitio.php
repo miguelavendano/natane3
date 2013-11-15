@@ -407,14 +407,22 @@ class ModelSitios{
             
             $imagenes = array();
             
-            if($result){                
+//            $cant=0;
+//            $i=rand(0, count($result)-1);            
+//            
+//            do{
+//                array_push($imagenes, $result[$i]);                    
+//                $cant++;
+//                }while($result && $cant<4);
+//                    
+
+            
+                
                 foreach($result as $row) {
-                    $img= $row[''];
-                    array_push($imagenes, $img);                    
+                    array_push($imagenes, $row['']);                    
                 }
                 return $imagenes;
-           }
-               
+            return $imagenes;                   
         }
         
         

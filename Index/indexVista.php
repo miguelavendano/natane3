@@ -33,11 +33,11 @@
             $this->modal = file_get_contents('../plantillas/generales/barraModal.html');         
    	    $this->img_principal ='
 	    <div class="item active">
-		<img alt="Jaipur" src="{IMG_NATANE}/{url}" />
+		<img src="{IMG_NATANE}/{url}" />
 	    </div>';  	
             $this->img_secun ='
             <div class="item">
-                <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
+                <img src="{IMG_NATANE}/{url}" />
             </div>';  
             
             $this->metas = '<meta charset="utf-8">
