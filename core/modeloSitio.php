@@ -407,22 +407,52 @@ class ModelSitios{
             
             $imagenes = array();
             
-//            $cant=0;
-//            $i=rand(0, count($result)-1);            
-//            
-//            do{
-//                array_push($imagenes, $result[$i]);                    
-//                $cant++;
-//                }while($result && $cant<4);
-//                    
-
-            
+            if(count($result)>5){
                 
-                foreach($result as $row) {
-                    array_push($imagenes, $row['']);                    
+                for($i=0; $i<5; $i++){
+                    $aux = rand(0, count($result)-1);  
+                    $posiciones[]=$aux;
                 }
-                return $imagenes;
-            return $imagenes;                   
+//                print_r($posiciones);
+//                echo "<br>";
+                
+                for($i=0; $i<count($posiciones); $i++){
+                    for($j=0; $j<count($posiciones); $j++){
+//                        echo $posiciones[$i]."-".$posiciones[$j]."<br>";
+                        if($i!=$j){                            
+                            if($posiciones[$i]==$posiciones[$j]){                                                                
+                                $aux = rand(0, count($result)-1);                                
+//                                echo "iguales nuevo numero ->".$aux."<br>";
+                                $posiciones[$i]=$aux;
+                            }
+                        }
+                    }
+                }                   
+            
+//                echo "<br>";
+//                print_r($posiciones);
+//                echo "<br>";
+//                foreach($result as $key=>$row) {
+//                    echo $key."=>".$row[0]."<br>";
+//                }            
+//                echo "<br>";                
+            
+                foreach($result as $key=>$row) {
+                    for($j=0; $j<count($posiciones); $j++){
+                        if($key==$posiciones[$j]){
+                            echo $key."=>".$row[0]."<br>";
+                            array_push($imagenes, $row[0]);                        
+                        }       
+                    }       
+                }                
+            }
+            else{
+                foreach($result as $row) {
+                    array_push($imagenes, $row[0]);                        
+                }                            
+            }
+                
+            return $imagenes;  
         }
         
         

@@ -109,7 +109,7 @@ class ModeloRelaciones
 
 	public static function consultarIDRelacion($idStart,$idEnd,$tipoRelacion){
 
-                $queryString = "START i=node(".$idStart."), f=node(".$idEnd.") MATCH i<-[r:".$tipoRelacion."]->f RETURN r";                
+                $queryString = "START i=node(".$idStart."), f=node(".$idEnd.") MATCH i-[r:".$tipoRelacion."]->f RETURN r";                
 
                 $query = new Cypher\Query(Neo4Play::client(), $queryString);            
                 $resultado = $query->getResultSet();
