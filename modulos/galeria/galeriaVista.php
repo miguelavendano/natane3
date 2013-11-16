@@ -24,7 +24,8 @@
             $this->base = file_get_contents('../../plantillas/generales/base.html');            
             $this->head = file_get_contents('../../plantillas/generales/head.html');            
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');            
-            $this->galeria = file_get_contents('../../plantillas/galeria/galeria.html');
+            //$this->galeria = file_get_contents('../../plantillas/galeria/galeria.html');
+            $this->galeria = file_get_contents('../../plantillas/galeria/imagenGaleria.html');
             $this->fotos = file_get_contents('../../plantillas/galeria/fotosGaleria.html');
             $this->albun = file_get_contents('../../plantillas/galeria/albun.html');
 
@@ -38,15 +39,13 @@
             $this->links = '<link href="{CSS}/bootstrap.css" rel="stylesheet">
                         <link href="{CSS}/bootstrap-responsive.css" rel="stylesheet">
                         <link href="{CSS}/estilos.css" rel="stylesheet">    
-                        <link href="{CSS}/estilos_galeria_sitio.css" rel="stylesheet">    
+                       <link href="{CSS}/estilos_galeria.css" rel="stylesheet">    
 
                         <link href="{CSS}/estilos_modal.css" rel="stylesheet" />    
                         <link href="{CSS}/datepicker.css" rel="stylesheet" />
                         <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    
                         <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />                                    
-                        <link rel="stylesheet" href="{CSS}/styles.css" />                        
-
-';            
+                        <link rel="stylesheet" href="{CSS}/styles.css" />';            
             
             
             $this->script ='    

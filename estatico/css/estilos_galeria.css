@@ -1,0 +1,63 @@
+/************************ GALERIA DE FOTOS ************************/
+#Galeria .navbar-inner{
+  min-height: 40px;
+} 
+
+.ubicacion button{
+	border: 1px solid #88bfe8;
+}
+
+/*.ubicacion .btn{
+	color: #007E00;
+	font-weight: bold;	
+}*/
+
+#galeria_sitio{
+  	background-color: white;  	
+  	margin-top: 10px;
+  	margin-bottom: 10px;
+  	border: 1px solid #ccc;
+  	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;	
+}
+
+.foto_galeria{
+	width: auto;
+	height: 150px;	
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.foto_galeria img{
+   	width: auto;
+	height: 100%;
+}
+
+.foto_galeria img:hover{
+	border: 1px solid #00FF00;
+}
+
+.autor{
+	width: auto;
+	margin-left: 10px;
+	overflow: hidden;	
+	
+}
+.autor .autor_galeria{
+	width: 30px;
+	height: 30px;		
+	float: left;
+}
+
+.autor .autor_galeria img{
+   	width: 100%;
+	height: 100%;
+}
+.autor h6{
+	width: 150px;
+	height: 20px;
+ 	margin-left: 10px;
+ 	float: left;
+	overflow: hidden;	
+}
