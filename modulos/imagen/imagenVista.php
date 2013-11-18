@@ -2,7 +2,7 @@
 
     require_once '../../core/global_var.php';
 
-    class GaleriaVista{
+    class ImagenVista{
         
         public $base;        
         public $head;        
@@ -24,9 +24,9 @@
             $this->base = file_get_contents('../../plantillas/generales/base.html');            
             $this->head = file_get_contents('../../plantillas/generales/head.html');            
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');            
-            $this->galeria = file_get_contents('../../plantillas/galeria/galeria.html');
-            $this->fotos = file_get_contents('../../plantillas/galeria/fotosGaleria.html');
-            $this->albun = file_get_contents('../../plantillas/galeria/albun.html');
+            $this->contenido = file_get_contents('../../plantillas/imagen/imagen.html');
+            $this->comentarios = file_get_contents('../../plantillas/imagen/comentarios.html');
+
 
             
             $this->metas = '<meta charset="utf-8">
@@ -50,14 +50,7 @@
             $this->script ='    
                         <script src="{JS}/jquery-1.8.2.min.js"></script>
                         <script src="{JS}/plugins.js"></script>
-                        <script src="{JS}/scripts.js"></script>
-                        <script>
-                          $(document).ready(function(){
-                           $('.'"#gallery-container").sGallery({
-                              fullScreenEnabled: true
-                            });
-                          });
-                        </script> ';
+                        <script src="{JS}/scripts.js"></script>';
             
             
             
@@ -67,10 +60,10 @@
                                 'links'=>$this->links,
                                 'script' => $this->script,
                                 'head'=>$this->head,
-                                'contenido'=>$this->galeria);     
+                                'contenido'=>$this->contenido);     
             
-            $this->dic_galeria = array('fotos'=>  $this->fotos,
-                                    'modales'=>  $this->modal);              
+            $this->dic_imagen = array('imagen'=>  $this->imagen,
+                                    'comentarios'=>  $this->comentarios);
             
             
         }

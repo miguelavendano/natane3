@@ -1,70 +1,116 @@
 /************************ MiRAR FOTOS DEL SITIO ************************/
 .foto-publicada{
-	width: auto;
-	height: auto;
- 	margin: 0px auto;	
-	position: relative;
-	z-index: 1;	
+    width: auto;
+    height: auto;
+    margin: 0px auto;	
+    position: relative;
+    z-index: 1;	
 }
 .foto-publicada img{
- 	width: 100%;
-  	height: 100%; 
+    width: 100%;
+    height: 100%; 
 }
 
 .lopublico{
-	width: 50px;
-	height: 50px;	
-	position: relative;
-	float: right;	
-	right: 10px;
-	bottom: 60px;
-	z-index: 2;
-	border: 1px solid #88bfe8;
+    width: 50px;
+    height: 50px;	
+    position: relative;
+    float: right;	
+    right: 10px;
+    bottom: 60px;
+    z-index: 2;
+/*    border: 1px solid #88bfe8;*/
+    border: 1px solid rgb(22, 155, 27);
+        
 }
 .lopublico img{
-   	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .comentarios{	
-	padding-left: 15px;
-	padding-right: 15px;
-	border: 1px solid red;
-	height: 425px;
-	overflow: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid red;
+    height: 425px;
+    overflow: auto;
 }
 .comentarios .im_usu{	
-	width: 48px;
-	height: 48px;	
-	position: relative;
-	float: left;
-	margin: 0px auto;
-	margin-bottom: 10px;	
+    width: 48px;
+    height: 48px;	
+    position: relative;
+    float: left;
+    margin: 0px auto;
+    margin-bottom: 10px;	
 }
 .comentarios .im_usu img{	
-	width: 100%;
-	height: 100%;
-	border: 1px solid #88bfe8;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #88bfe8;
 }
 .comentarios .exp_usu{	
-	margin-left: 65px;
-	margin-bottom: 15px;
-	padding: 8px;
-	width: auto;
-	background: white;
-	border: 1px solid #88bfe8;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	font: 13px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    margin-left: 65px;
+    margin-bottom: 15px;
+    padding: 8px;
+    width: auto;
+    background: white;
+    border: 1px solid #88bfe8;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font: 13px 'lucida sans', 'trebuchet MS', 'Tahoma';
 }
 
 .tucomen textarea{	
-	font: 13px 'lucida sans', 'trebuchet MS', 'Tahoma';	
-	resize: none;
-	overflow: auto;
+    font: 13px 'lucida sans', 'trebuchet MS', 'Tahoma';	
+    resize: none;
+    overflow: auto;
 }
 
 
 
 
+
+/************************ ALBUM DEL SITIO ***********************/
+.foto-album{
+    height: 180px;
+    margin: 0px auto;	
+    position: relative;
+    z-index: 1;
+}
+.foto-album img{
+    width: 100%;
+    height: 100%; 
+}
+.foto-autor{
+    padding: 3px 10px 3px 10px;
+    float: right;
+}
+.info-autor>a{
+    color: rgb(22, 155, 27);
+}
+.info-autor>a:hover{
+    text-decoration: none;
+}
+.foto-autor img{
+    width: 30px;
+    height: 30px;	
+    border: 1px solid rgb(22, 155, 27);
+}
+
+.info-autor{
+    margin: 0 auto;
+    position: relative;    
+    bottom: 40px;
+    z-index: 2;
+
+
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.65) 81%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(81%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.65) 81%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.65) 81%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.65) 81%,rgba(0,0,0,0.65) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.65) 81%,rgba(0,0,0,0.65) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-8 */        
+}

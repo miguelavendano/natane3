@@ -12,26 +12,22 @@
         
         
         public function __construct() {
-                
+            
                 $this->vista = new GaleriaVista();
                 $this->modelo = new GaleriaModel();
-    
-            
         }       
         
         
         public function fotos($id, $galeria){
 
             if($galeria == 0)
-                $resutlados = $this->modelo->get_img_todas($id);
+                $resutlados = $this->modelo->get_img_asociadas($id);
+                //$resutlados = $this->modelo->get_img_todas($id);
             else
                 $resutlados = $this->modelo->get_img_empresas($id);
             
             
-            
             return $resutlados;
-            
-            
         }
         
         
@@ -40,7 +36,7 @@
          *  
          * retorna 0 si el id no pertenece a un sitio o empresa
          * 
-         * ret 1, si es un sitio o 2 si es una empresa
+         * retorna 1, si es un sitio o 2 si es una empresa
          */
 
         public function validar($id){
@@ -57,20 +53,17 @@
         
         public function nombre_padre($id){
             
-            $nombre = $this->modelo->traer_nombre($id);
-            
-            return $nombre;
-            
+            $nombre = $this->modelo->traer_nombre($id);            
+            return $nombre;            
         }
         
         
         
         public function main($id, $url_padre, $galeria){
             
-            
             $this->vista->refactory_fotos($this->fotos($id, $galeria));            
             $this->vista->refactory_galeria($id, $url_padre,$this->nombre_padre($id));
-            $this->vista->refactory_albun();
+            //$this->vista->refactory_albun();
             $this->vista->refactory_resultados_total();
             
         }

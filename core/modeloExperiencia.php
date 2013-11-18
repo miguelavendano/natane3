@@ -207,7 +207,10 @@ class ModelExperiencia{
             return $lis_imagenes;
         }
 
-        
+
+        /*
+         * Obtine todas las imagenes de una galeria ya sea de Sitio o Empresa
+         */         
         public static function get_imagenes_galeria($queryString){
                        
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
@@ -250,7 +253,7 @@ class ModelExperiencia{
             return $img_galeria;                      
         }
 
-        
+
         /*
          * Consulta todas las relaciones segun un tipo especifico
          * recibe el nodo de la experiencia y el tiipo de relacion

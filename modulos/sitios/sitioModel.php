@@ -24,12 +24,14 @@
         }       
         
         public function get_contacto(){
+            
             $query = "START n=node(".$this->id_sitio.") RETURN n";            
             $resultado = $this->modelsitios->get_contacto($query);
             return $resultado;                        
+            
         }
         
-        public function  get_slider(){
+        public function get_slider(){
             
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Asociada]-e-[:Img]->i RETURN i.nombre";
             $imagenes = $this->modelsitios->get_img_slider($query);

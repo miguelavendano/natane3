@@ -440,7 +440,7 @@ class ModelSitios{
                 foreach($result as $key=>$row) {
                     for($j=0; $j<count($posiciones); $j++){
                         if($key==$posiciones[$j]){
-                            echo $key."=>".$row[0]."<br>";
+//                            echo $key."=>".$row[0]."<br>";
                             array_push($imagenes, $row[0]);                        
                         }       
                     }       

@@ -1,12 +1,13 @@
-    <li class="item{tam_foto_big}">         
-        <div class="cursor_link img-galeria{tam_foto_big}">
-            <img  src="{IMG_NATANE}/{imagen}" alt="" />
-        </div>
-        
-        <div class="autor-{tamano}">
-          <a href="{url_autor}?id={id_usuario}">
-              <img class="imgautor" src="{IMG_NATANE}/{img_usuario}"/>
-              <p>{nombre_usuario}</p>                          
-          </a>
-        </div>                           
-    </li>
+    <div class="span3">
+        <div class="foto-album">
+            <a href="{url_img}?id={id_imagen}">
+                <img src="{IMG_NATANE}/{imagen}">
+            </a>
+        </div>        
+        <div class="row-fluid info-autor">
+            <a class="foto-autor" href="{url_autor}?id={id_usuario}">
+                {nombre_usuario}
+                <img src="{IMG_NATANE}/{img_usuario}" alt="{nombre_usuario}"/>              
+            </a>
+        </div>            
+    </div>
