@@ -9,6 +9,7 @@ class Comentario{
 	public $id = null;
 	public $usuario = '';
 	public $detalle = '';        
+        public $fecha = '';        
         public $type = '';        
 	public $node = null;
         

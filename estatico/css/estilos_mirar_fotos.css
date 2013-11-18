@@ -31,7 +31,6 @@
 .comentarios{	
     padding-left: 15px;
     padding-right: 15px;
-    border: 1px solid red;
     height: 425px;
     overflow: auto;
 }
@@ -46,7 +45,7 @@
 .comentarios .im_usu img{	
     width: 100%;
     height: 100%;
-    border: 1px solid #88bfe8;
+
 }
 .comentarios .exp_usu{	
     margin-left: 65px;
@@ -54,7 +53,7 @@
     padding: 8px;
     width: auto;
     background: white;
-    border: 1px solid #88bfe8;
+    border: 1px solid #ccc;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;

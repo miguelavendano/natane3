@@ -33,7 +33,7 @@
             
             $this->vista->refactory_imagen($this->imagen($id));            
             $this->vista->refactory_comentarios($this->comentarios($id));
-            $this->vista->refactory_resultados_total();
+            $this->vista->refactory_total();
             
         }
     }

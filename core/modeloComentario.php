@@ -28,6 +28,7 @@ class ModelServicio{
 
 		$minodo->node->setProperty('usuario', $minodo->usuario)                        
 				->setProperty('detalle', $minodo->detalle)
+                                ->setProperty('fecha', $minodo->fecha)
                                 ->setProperty('type', $minodo->type)
 				->save();
 

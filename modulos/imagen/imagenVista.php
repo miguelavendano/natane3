@@ -11,9 +11,9 @@
         public $metas;
         public $script;
         
-        public $galeria;
-        public $fotos;   
-        public $albun;
+        public $contenido;
+        public $imagen;   
+        public $comentarios;
         
         public $dic_galeria;
         public $dic_base;
@@ -63,7 +63,8 @@
                                 'contenido'=>$this->contenido);     
             
             $this->dic_imagen = array('imagen'=>  $this->imagen,
-                                    'comentarios'=>  $this->comentarios);
+                                    'comentarios'=>  $this->comentarios,
+                                    'modales'=>  $this->modal);
             
             
         }
@@ -76,36 +77,27 @@
                                 'links'=>$this->links,
                                 'script'=> $this->script,
                                 'head'=>$this->head,
-                                'contenido'=>$this->galeria);
+                                'contenido'=>$this->contenido);
             
-            $this->dic_galeria = array('fotos'=>  $this->fotos,
+            $this->dic_imagen = array('imagen'=>  $this->imagen,
+                                    'comentarios'=>  $this->comentarios,
                                     'modales'=>  $this->modal);
             
             
-            
-            
         }
         
+       
         
-        public function refactory_galeria($id, $url_padre, $nombre_galeria){
-            
-            $this->galeria = str_ireplace("{url_padre}", $url_padre, $this->galeria);
-            $this->galeria = str_ireplace("{id}", $id, $this->galeria);
-            $this->galeria = str_ireplace("{nombre_galeria}", $nombre_galeria, $this->galeria);
-            
-        }
-        
-        
-        public function refactory_fotos($datos){            
+        public function refactory_imagen($datos){            
             
             $resultados="";
-            $fotos = $this->fotos;
+            $fotos = $this->imagen;
             
             for($c=0; count($datos); $c++){
                 
-                $resultados .= '<div class="row-fluid">';                            
-                $i=0;
-                do{ 
+                //$resultados .= '<div class="row-fluid">';                            
+                //$i=0;
+                //do{ 
                     $sitio=array_shift($datos);
                     $aux = $fotos;
                     
@@ -114,69 +106,76 @@
                     else
                         $aux = str_ireplace("{url_autor}", "{url_empresa}", $aux);
                     
-                    $aux = str_ireplace("{url_img}", "{url_imagen}", $aux);
+
                     $aux = str_ireplace("{id_imagen}", $sitio['img_id'], $aux);
                     $aux = str_ireplace("{imagen}", $sitio['img_nombre'], $aux);  
                     $aux = str_ireplace("{id_usuario}", $sitio['usuario_id'], $aux);
-                    $aux = str_ireplace("{nombre_usuario}", $sitio['usuario_nick'], $aux);
                     $aux = str_ireplace("{img_usuario}", $sitio['usuario_img'], $aux);  
+                    
+                    $resultados .= $aux;
+                //    $i++;
+                //}while((count($datos)!=0)&& $i<4);
+
+                //$resultados .= '</div>';
+            }
+            
+            $this->imagen = $resultados;
+            $this->actualizar_diccionarios();
+            
+        }
+        
+        
+        public function refactory_comentarios($datos){            
+            
+            $resultados="";
+            $fotos = $this->comentarios;
+            
+            for($c=0; count($datos); $c++){
+                
+                //$resultados .= '<div class="row-fluid">';                            
+                $i=0;
+                do{ 
+                    $sitio=array_shift($datos);
+                    $aux = $fotos;
+                    
+                    if($sitio['type']=="Usuario")
+                        $aux = str_ireplace("{url_usuario}", "{url_usuario}", $aux);
+                    else
+                        $aux = str_ireplace("{url_usuario}", "{url_empresa}", $aux);
+                    
+                    
+                    $aux = str_ireplace("{id_comentario}", $sitio['id_comentario'], $aux);  
+                    $aux = str_ireplace("{comentario}", $sitio['detalle'], $aux);  
+                    $aux = str_ireplace("{fecha}", $sitio['fecha'], $aux);
+                    $aux = str_ireplace("{id_usuario}", $sitio['id_usuario'], $aux);
+                    $aux = str_ireplace("{img_usuario}", $sitio['img_usuario'], $aux);  
                     
                     $resultados .= $aux;
                     $i++;
                 }while((count($datos)!=0)&& $i<4);
 
-                $resultados .= '</div>';
+                //$resultados .= '</div>';
             }
             
-            
-            
-            $this->fotos = $resultados;
+            $this->imagen = $resultados;
             $this->actualizar_diccionarios();
-            
-//                    'img_nombre'=>$img['']->getProperty('nombre'), 
-//                    'img_id'=>$img['']->getId(), 
-//                    'usuario_img'=>$usuario[0]->getProperty('imagen'), 
-//                    'usuario_nick'=>$usuario[0]->getProperty('nick'), 
-//                    'usuario_id'=>$usuario[0]->getId());            
             
         }
         
-       
-//        public function refactory_albun(){
-//
-//            $fotos_small = str_ireplace("{tamano}", "small", $this->fotos);
-//            $fotos_small = str_ireplace("{tam_foto_big}", "", $fotos_small );
-//            
-//            $fotos_big = str_ireplace("{tamano}", "big", $this->fotos);
-//            $fotos_big = str_ireplace("{tam_foto_big}", "--big", $fotos_big );            
-//            
-//            
-//            $this->albun = str_ireplace("{foto_small}", $fotos_small , $this->albun);
-//            $this->albun = str_ireplace("{foto_big}", $fotos_big , $this->albun);
-//                       
-//            
-//            $this->actualizar_diccionarios();
-//            
-//        }
         
-        
-        public function refactory_resultados_total(){
+        public function refactory_total(){
             
             $globales = new Global_var();
             
             
-            foreach($this->dic_galeria as $clave=>$valor){
-               
-                $this->galeria = str_ireplace('{'.$clave.'}', $valor, $this->galeria);
-                
+            foreach($this->dic_imagen as $clave=>$valor){               
+                $this->contenido = str_ireplace('{'.$clave.'}', $valor, $this->contenido);                
             }           
             
             $this->actualizar_diccionarios();
             
-            foreach ($this->dic_base as $clave=>$valor){
-                    
-                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
-                
+            foreach ($this->dic_base as $clave=>$valor){                    
+                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);                
             }
             
             foreach ($globales->global_var as $clave => $valor){
@@ -185,7 +184,6 @@
             
             
             echo $this->base;
-            
             
             
         }

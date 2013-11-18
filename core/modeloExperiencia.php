@@ -226,8 +226,57 @@ class ModelExperiencia{
                 
                     $img_nombre = $img['']->getProperty('nombre');
                     $img_id = $img['']->getId();
-                    $suario_id=$usuario[0]['']->getId();
-                    $suario_img=$usuario[0]['']->getProperty('imagen'); 
+                    $id_usuario=$usuario[0]['']->getId();
+                    $img_usuario=$usuario[0]['']->getProperty('imagen'); 
+                    $type = "";
+                    
+                    if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
+                        $nick_usuario=$usuario[0]['']->getProperty('nombre');                
+                        $type="Empresa";
+                    }else{
+                        $nick_usuario=$usuario[0]['']->getProperty('nick');                
+                        $type="Usuario";
+                    }
+                    
+                $retorno = array(
+                    'type'=>$type,
+                    'img_nombre'=>$img_nombre,
+                    'img_id'=>$img_id,
+                    'usuario_id'=>$id_usuario,
+                    'usuario_img'=>$img_usuario,
+                    'usuario_nick'=>$nick_usuario
+                    );
+
+
+                array_push($img_galeria, $retorno);
+            }    
+            return $img_galeria;                      
+        }
+
+
+        /*
+         * Obtine todas las imagenes de una galeria ya sea de Sitio o Empresa
+         */                 
+        public static function get_comentarios_imagen($queryString){
+                                        
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $comentarios = $query->getResultSet();                                              
+            $lis_cometarios = array();
+
+            foreach($comentarios as $com) {                    
+                
+                $query = "START u=node(".$com['']->getProperty('usuario').") RETURN u";
+                $queryRes = new Cypher\Query(Neo4Play::client(), $query);                          
+                $usuario = $queryRes->getResultSet();                    
+                
+                    $id_usuario = $com['']->getProperty('usuario');
+                    $detalle = $com['']->getProperty('detalle');
+                    $fecha = $com['']->getProperty('fecha');                    
+                    $id_comentario = $com['']->getId();
+                    
+                    //$id_usuariod=$usuario[0]['']->getId();
+                    $img_usuario=$usuario[0]['']->getProperty('imagen'); 
                     $type = "";
                     
                     if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
@@ -238,22 +287,23 @@ class ModelExperiencia{
                         $type="Usuario";
                     }
                     
-                $retorno = array(
-                    'type'=>$type,
-                    'img_nombre'=>$img_nombre,
-                    'img_id'=>$img_id,
-                    'usuario_id'=>$suario_id,
-                    'usuario_img'=>$suario_img,
-                    'usuario_nick'=>$suario_nick
-                    );
+                    $retorno = array(
+                        'type'=>$type,
+                        'id_usuario'=>$id_usuario,
+                        'img_usuario'=>$img_usuario,
+                        'detalle'=>$detalle,                            
+                        'fecha'=>$fecha,
+                        'id_comentario'=>$id_comentario,                                                            
+                        );
 
-
-                array_push($img_galeria, $retorno);
-            }    
-            return $img_galeria;                      
+                    array_push($lis_cometarios, $retorno);                                                                    
+            }
+            
+            return $lis_cometarios;                      
+            
         }
-
-
+        
+        
         /*
          * Consulta todas las relaciones segun un tipo especifico
          * recibe el nodo de la experiencia y el tiipo de relacion

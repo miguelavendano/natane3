@@ -15,12 +15,10 @@ use Everyman\Neo4j\Node,
     
     class ImagenModel{
         
-        public $modelsitios;
         public $modelexperiencia;
         
         
         public function __construct() {            
-            $this->modelsitios = new ModelSitios();
             $this->modelexperiencia = new ModelExperiencia();                      
         }       
         
