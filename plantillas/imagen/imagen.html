@@ -1,22 +1,12 @@
-    <section id="Galeria">        
+    <section id="Imagen">        
         <div class="container-fluid">
             <!-- foto del sitio -->
             <div class="row-fluid">
                 <div class="span7">
-                    <div class="foto-publicada">
-                        <img src="{IMG_NATANE}/{imagen}" />
-
-                        <div class="lopublico">       
-                            <a href="{url_autor}?id={id_usuario}">
-                                <img src="{IMG_NATANE}/{img_usuario}" />    
-                            </a>                    
-                        </div>
-                    </div>                          
-
+                    {imagen}
                 </div>                
 
-            <!-- comentarios -->
-                <div class="span5 comentarios">
+                <div class="span5 comen">
                     
                     <h3>Cometarios</h3>
                     
@@ -24,9 +14,11 @@
 
                     <div class="row-fluid">
                         <div class="tucomen">
-                            <textarea rows="2" class="span12" placeholder="Escribe tu comentario..."></textarea>
+                            <textarea id="detalleComenta" name="detalleComenta" rows="2" class="span12" placeholder="Escribe tu comentario..."></textarea>
                         </div>
-                    </div>              
+                    </div>   
+                    
+                    <button id="comentar" class="btn btn-blue">Publicar</button>
                     
                 </div>                 
             </div>         

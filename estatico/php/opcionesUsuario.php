@@ -219,8 +219,6 @@ if(isset($_POST['opcion'])){
             
         break;        
 
-        case "eliminarExp":   
-
         case "eliminaExpEmp":
             
             $etiquetado=ModeloRelaciones::consultaNodosEtiquetadosEnRelacion($_POST['experiencia']); 
@@ -265,17 +263,8 @@ if(isset($_POST['opcion'])){
            
             $band="true";
             
-        break;        
-            
         break;    
-    
-    
-        case "relacion_amigo":                       
-            
-            
-        break;    
-
-    
+   
     
         case "seguir":  
   

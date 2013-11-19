@@ -152,6 +152,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	border: 1px solid #ccc;
 	overflow: auto;
 }
+.seguidores a{
+    text-decoration: none;
+}
 .seguidores h3{	
 	margin: 0px;
 	margin-bottom: 10px;
@@ -167,7 +170,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	height: 55px;
 	border: 1px solid #ccc;        
 }
-
+/************************ AMIGOS DE MIS AMIGOS ************************/
+.amigos{	
+	height: auto;	
+	background-color: white;
+	border: 1px solid #ccc;
+}
+.amigos a{
+    text-decoration: none;
+}
+.amigos h3{	
+	margin: 0px;
+	margin-bottom: 10px;
+        color: #0088cc;
+}
+.amigos p{	
+	padding-left: 15px;	
+	height: 55px;
+ 	overflow: hidden;                
+}
+.amigos img{
+	width: 55px;
+	height: 55px;
+	border: 1px solid #ccc;        
+}
 /************************ PESTAÑA DE EXPERIENCIAS ************************/
 .experiencia{     
     background-color: #FFFFFF;    

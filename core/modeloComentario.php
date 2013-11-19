@@ -11,7 +11,7 @@ use Everyman\Neo4j\Node,
     Everyman\Neo4j\Cypher\Query,
     Everyman\Neo4j\Command;
 
-class ModelServicio{
+class ModelComentario{
     
         public function __construct() {
             
@@ -56,6 +56,7 @@ class ModelServicio{
                     $servicio->id = $row['']->getId();
                     $servicio->usuario = $row['']->getProperty('usuario');
                     $servicio->detalle = $row['']->getProperty('detalle');                    
+                    $servicio->fecha = $row['']->getProperty('fecha');                    
                     array_push($array, $servicio);
                 }
                 return $array;

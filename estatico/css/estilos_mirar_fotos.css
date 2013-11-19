@@ -19,38 +19,37 @@
     right: 10px;
     bottom: 60px;
     z-index: 2;
-/*    border: 1px solid #88bfe8;*/
-    border: 1px solid rgb(22, 155, 27);
-        
+    border: 1px solid rgb(22, 155, 27);        
 }
 .lopublico img{
     width: 100%;
     height: 100%;
 }
 
-.comentarios{	
+.comen{	
     padding-left: 15px;
     padding-right: 15px;
     height: 425px;
     overflow: auto;
 }
-.comentarios .im_usu{	
+.comen .im_usu{	
     width: 48px;
     height: 48px;	
     position: relative;
     float: left;
     margin: 0px auto;
     margin-bottom: 10px;	
+    border: 1px solid rgb(22, 155, 27);
 }
-.comentarios .im_usu img{	
+.comen .im_usu img{	
     width: 100%;
     height: 100%;
 
 }
-.comentarios .exp_usu{	
-    margin-left: 65px;
-    margin-bottom: 15px;
-    padding: 8px;
+.comen .comen_usu{	
+    margin-left: 60px;
+    margin-bottom: 5px;
+    padding: 3px 5px;
     width: auto;
     background: white;
     border: 1px solid #ccc;
@@ -59,11 +58,20 @@
     border-radius: 4px;
     font: 13px 'lucida sans', 'trebuchet MS', 'Tahoma';
 }
+.comen .fecha_comen{
+    color: rgb(8, 196, 0);
+/*    color: rgb(22, 155, 27);*/
+}
 
 .tucomen textarea{	
     font: 13px 'lucida sans', 'trebuchet MS', 'Tahoma';	
     resize: none;
     overflow: auto;
+    color: #000;
+}
+
+#comentar{
+    float: right;
 }
 
 

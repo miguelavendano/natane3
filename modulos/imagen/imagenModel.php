@@ -27,17 +27,15 @@ use Everyman\Neo4j\Node,
             
             $query = "START i=node(".$id_imagen.") RETURN i";
             $imagen = $this->modelexperiencia->get_imagenes_galeria($query);            
-            return $imagen;            
-            
+            return $imagen;                        
         }
 
         
         public function get_comentarios($id_imagen){
 
             $query = "START i=node(".$id_imagen.") MATCH i<-[:Sobre]-c RETURN c";
-            $imagen = $this->modelexperiencia->get_comentarios_imagen($query);            
-            return $imagen;            
-            
+            $comentarios = $this->modelexperiencia->get_comentarios_imagen($query);            
+            return $comentarios;
         }        
         
         

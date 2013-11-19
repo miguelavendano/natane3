@@ -25,7 +25,7 @@
         
         public function comentarios($id){
             $resutlados = $this->modelo->get_comentarios($id);
-            return $resutlados;
+            return $resutlados;                   
         }        
                 
         

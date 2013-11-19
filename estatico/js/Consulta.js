@@ -7,7 +7,7 @@ $(document).ready(function(){
     $(".BarraBuscaTodo").click(function(){        
         
         if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }else{
             document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?busqueda="+$("#loBusca").val();                        
@@ -29,7 +29,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -67,7 +67,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -105,7 +105,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -143,7 +143,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -180,7 +180,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -217,7 +217,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -254,7 +254,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -291,7 +291,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -329,7 +329,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){
@@ -366,7 +366,7 @@ $(document).ready(function(){
             query = busqueda[1];
         }
         else if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
             exit();
         }
         else if($("#loBusca").val().length >= 1){

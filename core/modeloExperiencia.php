@@ -259,10 +259,9 @@ class ModelExperiencia{
          */                 
         public static function get_comentarios_imagen($queryString){
                                         
-            
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $comentarios = $query->getResultSet();                                              
-            $lis_cometarios = array();
+            $lis_comentarios = array();
 
             foreach($comentarios as $com) {                    
                 
@@ -280,10 +279,10 @@ class ModelExperiencia{
                     $type = "";
                     
                     if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
-                        $suario_nick=$usuario[0]['']->getProperty('nombre');                
+                        $nick_usuario=$usuario[0]['']->getProperty('nombre');                
                         $type="Empresa";
                     }else{
-                        $suario_nick=$usuario[0]['']->getProperty('nick');                
+                        $nick_usuario=$usuario[0]['']->getProperty('nick');  
                         $type="Usuario";
                     }
                     
@@ -291,15 +290,16 @@ class ModelExperiencia{
                         'type'=>$type,
                         'id_usuario'=>$id_usuario,
                         'img_usuario'=>$img_usuario,
+                        'nick_usuario'=>$nick_usuario,
                         'detalle'=>$detalle,                            
                         'fecha'=>$fecha,
                         'id_comentario'=>$id_comentario,                                                            
                         );
 
-                    array_push($lis_cometarios, $retorno);                                                                    
+                    array_push($lis_comentarios, $retorno);                                                                    
             }
             
-            return $lis_cometarios;                      
+            return $lis_comentarios;
             
         }
         

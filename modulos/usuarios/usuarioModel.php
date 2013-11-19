@@ -55,6 +55,15 @@
 
             return $resultado;
         }   
+
+        public function get_AmigosDeAmigos(){   
+            
+            $query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a<-[:Amigo]->o return o";
+            //$query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a return a";
+            $resultado = $this->modelusuarios->get_AmigosDeAmigos($query);
+
+            return $resultado;
+        }           
         
 //        public function get_usuario_gustaria($queryString){           
 //            

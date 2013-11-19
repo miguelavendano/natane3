@@ -30,15 +30,19 @@
             return $this->modelo->get_visitaria();            
         }        
         
-        
         public function amigos(){            
             return $this->modelo->get_amigos();            
         }
+
+        public function AmigosDeAmigos(){            
+            return $this->modelo->get_AmigosDeAmigos();            
+        }        
         
         public function main(){
             
             $this->vista->refactory_usuario($this->datos_usuario());
             $this->vista->refactory_amigos($this->amigos());
+            $this->vista->refactory_AmigosDeAmigos($this->AmigosDeAmigos());
             $this->vista->refactory_experiencias($this->experiencias());
             $this->vista->refactory_visitaria($this->visitaria());            
             $this->vista->refactory_contenido();

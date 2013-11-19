@@ -26,6 +26,7 @@
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');            
             $this->contenido = file_get_contents('../../plantillas/imagen/imagen.html');
             $this->comentarios = file_get_contents('../../plantillas/imagen/comentarios.html');
+            $this->imagen = file_get_contents('../../plantillas/imagen/img_usuario.html');
 
 
             
@@ -108,9 +109,10 @@
                     
 
                     $aux = str_ireplace("{id_imagen}", $sitio['img_id'], $aux);
-                    $aux = str_ireplace("{imagen}", $sitio['img_nombre'], $aux);  
+                    $aux = str_ireplace("{imagen_galeria}", $sitio['img_nombre'], $aux);  
                     $aux = str_ireplace("{id_usuario}", $sitio['usuario_id'], $aux);
                     $aux = str_ireplace("{img_usuario}", $sitio['usuario_img'], $aux);  
+                    $aux = str_ireplace("{nick_usuario}", $sitio['usuario_nick'], $aux);                      
                     
                     $resultados .= $aux;
                 //    $i++;
@@ -149,6 +151,7 @@
                     $aux = str_ireplace("{fecha}", $sitio['fecha'], $aux);
                     $aux = str_ireplace("{id_usuario}", $sitio['id_usuario'], $aux);
                     $aux = str_ireplace("{img_usuario}", $sitio['img_usuario'], $aux);  
+                    $aux = str_ireplace("{nick_usuario}", $sitio['nick_usuario'], $aux);                      
                     
                     $resultados .= $aux;
                     $i++;
@@ -157,7 +160,7 @@
                 //$resultados .= '</div>';
             }
             
-            $this->imagen = $resultados;
+            $this->comentarios = $resultados;
             $this->actualizar_diccionarios();
             
         }

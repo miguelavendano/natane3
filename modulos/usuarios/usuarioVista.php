@@ -16,6 +16,7 @@
         public $editar;
         public $expe;
         public $gustaria;
+        public $amigos;
         public $perfil;
         public $comparte;
         public $editExp;
@@ -45,6 +46,7 @@
             $this->creaSitio = file_get_contents('../../plantillas/sitios/registrarSitio.html');
             $this->creaEmpre = file_get_contents('../../plantillas/empresas/registrarEmpresa.html');                        
             $this->gustaria = file_get_contents('../../plantillas/usuario/sitiosAvisitar.html');            
+            $this->amigos = file_get_contents('../../plantillas/usuario/amigos.html');            
                      
             $this->metas = '<meta charset="utf-8">
                             <title> {TITULO}</title>
@@ -77,6 +79,7 @@
             $this->dic_contenido = array('datos_usuario' => $this->usuario, 
                                         'seguidores' => $this->segui, 
                                         'quiere_visitar' => $this->gustaria,
+                                        'amigos_de_amigos' => $this->amigos,
                                         'modales'=> $this->modal,
                                         'editarUsuario'=>$this->editar,
                                         'experiencia'=>$this->expe,
@@ -99,7 +102,8 @@
             
             $this->dic_contenido = array('datos_usuario' => $this->usuario, 
                                         'seguidores' => $this->segui, 
-                                        'le_gustaria_ir' => $this->gustaria,
+                                        'quiere_visitar' => $this->gustaria,
+                                        'amigos_de_amigos' => $this->amigos,
                                         'modales'=> $this->modal,
                                         'editarUsuario'=> $this->editar,
                                         'experiencia'=>$this->expe,
@@ -122,8 +126,6 @@
             $this->usuario = str_ireplace('{web_site}',$datos[0]->sitio_web ,$this->usuario );
 
             $this->actualizar_diccionarios();
-            
-
 
         }
         
@@ -156,6 +158,7 @@
             
             $this->segui = $complete;
             $this->actualizar_diccionarios();
+            
         }
         
         
@@ -202,7 +205,96 @@
             
             
         }        
-             
+
+
+        public function refactory_AmigosDeAmigos($datos){
+            
+            $complete = "";            
+            
+            foreach ($datos as $valor){
+                $global = new Global_var();
+                $empresa = '';
+                $nombre = '';
+                $url = '';
+                $aux = $this->amigos;
+                //echo $valor->type;
+                if($valor->type == "Empresa"){                                    	         
+                    $empresa = 'style="background-color: #CBFEC1"';
+                    $nombre = $valor->nombre;
+                    $url = $global->url_empresa;
+                }else{
+                    //$nombre = $valor->nick;
+                    $nombre = $valor->nombre." ".$valor->apellido;
+                    $url = $global->url_usuario;
+                }            
+                $aux = str_ireplace('{empresa}', $empresa, $aux);            
+                $aux = str_ireplace('{id}', $valor->id, $aux);
+                $aux = str_ireplace('{url}', $url, $aux);
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                $aux = str_ireplace('{nombre}', $nombre, $aux);
+                //$aux = str_ireplace('{amigo}', $amigo, $aux);
+                $complete .= $aux;
+            }
+            
+            $this->amigos = $complete;
+            $this->actualizar_diccionarios();
+
+        }
+
+        
+        
+        /*
+        public function refactory_AmigosDeAmigos($datos){
+            
+            $complete = "";            
+            
+            foreach ($datos as $valor){
+                $global = new Global_var();
+                $empresa = '';
+                $nombre_a = '';
+                $nombre_u = '';
+                $url = '';
+                $aux = $this->amigos;
+
+                if($valor->type_amigo == "Empresa"){                                    	         
+                    $empresa = 'style="background-color: #CBFEC1"';
+                    $nombre_a = $valor->nombre_amigo;
+                    $url_usuario = $global->url_empresa;
+                }else{
+                    //$nombre_a = $valor->nick_amigo;
+                    $nombre_a = $valor->nombre_amigo;
+                    $url_usuario = $global->url_usuario;
+                }            
+
+                if($valor->type_usuario == "Empresa"){                                    	         
+                    $empresa = 'style="background-color: #CBFEC1"';
+                    $nombre_u = $valor->nombre_usuario;
+                    $url_usuario = $global->url_empresa;
+                }else{
+                    //$nombre_u = $valor->nick_usuario;
+                    $nombre_u = $valor->nombre_usuario;
+                    $url_usuario = $global->url_usuario;
+                }                            
+                
+                $aux = str_ireplace('{empresa}', $empresa, $aux);            
+                $aux = str_ireplace('{url_conocido}', $url_usuario, $aux);
+                $aux = str_ireplace('{id_conocido}', $valor->id_usuario, $aux);
+                $aux = str_ireplace('{img_conocido}', $valor->img_usuario, $aux);
+                $aux = str_ireplace('{nom_conocido}', $nombre_u, $aux);
+                $aux = str_ireplace('{url_amigo}', $url_usuario, $aux);
+                $aux = str_ireplace('{id_amigo}', $valor->id_amigo, $aux);
+                $aux = str_ireplace('{img_amigo}', $valor->img_amigo, $aux);
+                $aux = str_ireplace('{nom_amigo}', $nombre_a, $aux);
+                                
+                $complete .= $aux;
+            }
+            
+            $this->amigos = $complete;
+            $this->actualizar_diccionarios();
+
+        }
+        */        
+        
         
         public function refactory_contenido(){            
             
