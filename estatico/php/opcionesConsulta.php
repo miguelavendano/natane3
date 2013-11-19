@@ -23,9 +23,9 @@ if(isset($_POST['opcion'])){
         case "busca_todo":     
             
             /*BUSCA LOS SITIOS*/            
-            //$query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' AND n.type<>'Servicio' RETURN n";
-            $query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta']."*' AND (n.type='Usuario' OR n.type='Sitio' OR n.type='Empresa') RETURN n";                        
-            //$query="START n=node(*) WHERE n.nombre =~ '(?i)".$_POST['consulta'].".*' AND n.type='Sitio' RETURN n";
+            $query = "START n=node(*) WHERE n.type<>'Imagen' AND n.type<>'Experiencia' AND n.type<>'Servicio' AND n.type<>'Comentario' AND n.nombre =~ '(?i).*".$_POST['consulta'].".*' RETURN n";
+            //$query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta']."*' AND (n.type='Usuario' OR n.type='Sitio' OR n.type='Empresa') RETURN n";
+            //
             //expreciones regulares utiles
             //  n.nombre =~ 'ju.*'          -->  busca los nodos que empiezan exactamente con "ju"
             //  n.nombre =~ '(?i)JULI:*'    -->  busca los nodos que empiezan con "ju" sin importar mayusculas o minusculas
@@ -178,7 +178,7 @@ if(isset($_POST['opcion'])){
          */        
         case "busca_usuario":     
             
-            $query="START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type='Usuario' RETURN n";
+            $query="START n=node(*) WHERE n.type='Usuario' AND n.nombre =~ '(?i).*".$_POST['consulta'].".*' RETURN n";
 
             $modelusuarios = new ModelUsuarios();            
             $resultado = $modelusuarios->get_usuario($query);         
@@ -230,9 +230,9 @@ if(isset($_POST['opcion'])){
             $filtro = $_POST['filtro'];
 
             if( strlen($filtro) > 0 ){
-                $query="START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type='Sitio' AND n.tipo_sitio='".$filtro."' RETURN n";
+                $query="START n=node(*) WHERE n.type='Sitio' AND n.tipo_sitio='".$filtro."' AND n.nombre =~ '(?i).*".$_POST['consulta'].".*' RETURN n";
             }else{
-                $query="START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type='Sitio' RETURN n";
+                $query="START n=node(*) WHERE n.type='Sitio' n.nombre =~ '(?i).*".$_POST['consulta'].".*'  RETURN n";
             }
 
             $modelsitios = new ModelSitios();            
@@ -282,7 +282,7 @@ if(isset($_POST['opcion'])){
          */                
         case "busca_empresa":     
             
-            $query="START n=node(*) WHERE n.nombre =~ '(?i).*".$_POST['consulta'].".*' AND n.type='Empresa' RETURN n";
+            $query="START n=node(*) WHERE n.type='Empresa' AND n.nombre =~ '(?i).*".$_POST['consulta'].".*' RETURN n";
 
             $modelempresa = new ModelEmpresa();            
             $resultado = $modelempresa->get_empresa($query);         
