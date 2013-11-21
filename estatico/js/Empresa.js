@@ -51,7 +51,9 @@ $(document).ready(function(){
     $("#BeditarE").click(function(){
 
             $("#editarEmpresa").css({display:'inline'});   
+            $("#campoConfio").css({display:'none'});
             $("#slider_empresa").css({display:'none'});
+            $("#contenidoE").css({display:'none'});
             //$("#Enom").val("julian");
 
             var mi_url=document.location.href;
@@ -114,8 +116,8 @@ $(document).ready(function(){
 
 
     /*
-     * Guardar edicion de los datos del sitio
-     */
+     * Guardar edicion de los datos de la empresa
+     
     $("#guarda_edicion_empresa").click(function(){
 
             var mi_url=document.location.href;
@@ -153,6 +155,7 @@ $(document).ready(function(){
                 }
             });                        
     });    
+        */
 
     /*
      * Cancelar edicion de los datos de la empresa

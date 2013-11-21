@@ -99,12 +99,19 @@
                             <input type="radio" name="EtipoS" value="icon-road" id="Et_camina"><i class="icon-road"></i> Caminata
                         </label>
                     </div>
-                </div>        
+                </div>      
                 <div class="control-group">
-                    <span class="help-inline">Arrastra el icono y ubicalo en donde se encuentre el sitio:</span>
-                    <div id="EmapaSitio" class="maps">                                    
-                        <!--<div class="mapa-natane"></div>-->
-                    </div>                    
+                    <div class="controls">
+                        <a class="btn btn-purple" id="EditarMapaSitio">Editar Ubicacion</a>                
+                    
+                        <div id="edicionMapaSitio" class="control-group" style="display: none">
+                            <span class="help-inline">Arrastra el icono y ubicalo en donde se encuentre el sitio:</span>
+                            <div class="maps">                                    
+                                <div id="EmapaSitio" class="mapa-natane"></div>
+                            </div>
+        <!--                   <button class="btn btn-primary" id="guardaCoordenadasSitio">Guarda Coordenadas del sitio</button>-->
+                        </div>
+                    </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="Epass1S">Contraseña: </label>

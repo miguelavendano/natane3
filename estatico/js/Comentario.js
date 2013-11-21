@@ -4,7 +4,7 @@ $(document).ready(function(){
      * Crea el comentario
      */
     $("#comentar").click(function(){       
-       
+        
         if( $("#detalleComenta").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
             alert("El campo esta vacio");
             //Es un excelente lugar, allí se viven las mejores aventuras.... Recomendado... :D
@@ -27,25 +27,24 @@ $(document).ready(function(){
 
                             if(/true/.test(data)) {                                
                                 alert("Comentario Publicado :D");                                                                          
-                                //document.location.reload();                                     
+                                document.location.reload();                                     
                             }
                             else alert("No se ha podido ingresar su comentario."); 
                     }
                 });          
             }
+        
     });
         
     
 });
 
-
+/*
     function editarComentario(id_comentario) {
         
             $(".pestañas").css({display:'none'});
             $(".editarExperiencia").css({display:'inline'});            
             $(".editarExperiencia").attr('id', id_experiencia);
-            /*$('.editarExperiencia').attr('id', id_experiencia);
-            $('.opc_img.tooltip1').attr('id', id_experiencia);*/
 
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
@@ -66,22 +65,12 @@ $(document).ready(function(){
                                         width: 'auto',
                                         margin: '0 auto'
                                     });   
-                    /*
-                    $(".reload-backdrop").css({ position: 'fixed',
-                                                top: '0',
-                                                right: '0',
-                                                bottom: '0',
-                                                left: '0',
-                                                zIindex: '99999',
-                                                background: '#000000',
-                                                opacity:'0.4'
-                                            });                  
-                   */
+
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
                     $("#reload").css({visibility: 'hidden'});   
-                    //$(".reload-backdrop").css({visibility: 'hidden'});                                     
+                              
                    
                     $("#ediExpTitulo").val(data.nombre);
                     $("#ediExpDesc").val(data.descripcion);
@@ -150,4 +139,4 @@ $(document).ready(function(){
                 }
             });                            
     }    
-    
+    */

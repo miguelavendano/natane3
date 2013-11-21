@@ -87,8 +87,6 @@ if(isset($_POST['opcion'])){
             ModelSitios::editar_sitio($_POST['sitio'], "direccion",$_POST['direc']);
             ModelSitios::editar_sitio($_POST['sitio'], "telefono", $_POST['tele']);
             ModelSitios::editar_sitio($_POST['sitio'], "correo", $_POST['mail']);
-            ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat']);
-            ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lon']);             
             ModelSitios::editar_sitio($_POST['sitio'], "sitio_web", $_POST['s_web']);
             ModelSitios::editar_sitio($_POST['sitio'], "facebook", $_POST['face']);
             ModelSitios::editar_sitio($_POST['sitio'], "twitter", $_POST['twit']);
@@ -96,6 +94,12 @@ if(isset($_POST['opcion'])){
             ModelSitios::editar_sitio($_POST['sitio'], "tipo_sitio", $_POST['tsitio']);
             ModelSitios::editar_sitio($_POST['sitio'], "contraseña", $_POST['pass']);
             //ModelSitios::editar_sitio($_POST['usuario'], "imagen", );    
+            
+            if(count($_POST['lat_lon'])>0){
+                ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat_lon']['latitud']);
+                ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lat_lon']['longitud']);
+            }
+            
             $band="true";
             
         break;    
@@ -237,11 +241,12 @@ if(isset($_POST['opcion'])){
                        
             $band = array(
                 "automatico"=>false,
-                "drag"=>false,                
-                "lat"=> $resultado[0]->latitud,
-                "lon"=> $resultado[0]->longitud
+                "drag" =>true,                
+                "lat" => $resultado[0]->latitud,
+                "lon" => $resultado[0]->longitud,
+                "idMapa" => "MapaPerfil"
             );
-                        
+            
            $band = json_encode($band);
             
         break;        

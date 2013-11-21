@@ -80,14 +80,18 @@ if(isset($_POST['opcion'])){
             ModelEmpresa::editar_empresa($_POST['empresa'], "direccion",$_POST['direc']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "telefono", $_POST['tele']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "correo", $_POST['mail']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "latitud", $_POST['lat']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "longitud", $_POST['lon']);             
             ModelEmpresa::editar_empresa($_POST['empresa'], "sitio_web", $_POST['s_web']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "facebook", $_POST['face']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "twitter", $_POST['twit']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "youtube", $_POST['youtube']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "contraseña", $_POST['pass']);
             //ModelEmpresa::editar_empresa($_POST['usuario'], "imagen", );    
+            
+            if(count($_POST['lat_lon'])>0){
+                ModelEmpresa::editar_empresa($_POST['empresa'], "latitud", $_POST['lat_lon']['latitud']);
+                ModelEmpresa::editar_empresa($_POST['empresa'], "longitud", $_POST['lat_lon']['longitud']);
+            }
+            
             $band="true";
             
         break;    
@@ -295,7 +299,25 @@ if(isset($_POST['opcion'])){
             
             $band="true";
             
-        break;                           
+        break;          
+        
+        case "obtieneCoordenadasE":                       
+                    
+            $modelempresa = new ModelEmpresa();
+            $query = "START n=node(".$_POST['sitio'].") RETURN n";                        
+            $resultado = $modelempresa->get_empresa($query);
+                       
+            $band = array(
+                "automatico"=>false,
+                "drag" =>true,                
+                "lat" => $resultado[0]->latitud,
+                "lon" => $resultado[0]->longitud,
+                "idMapa" => "MapaPerfil"
+            );
+            
+           $band = json_encode($band);
+            
+        break;                
     
         default : break; 
     }    

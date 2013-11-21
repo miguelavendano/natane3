@@ -63,7 +63,7 @@ $(document).ready(function(){
 
             $("#editarSitio").css({display:'inline'});   
             $("#slider_sitio").css({display:'none'});
-            //$("#mapaSItio").css({display:'none'});
+            $("#ContenidoSitio").css({display:'none'});
             //$("#EmapaSitio").html("<div class='mapa-natane'></div>");
            
 
@@ -153,7 +153,7 @@ $(document).ready(function(){
 
     /*
      * Guardar edicion de los datos del sitio
-     */
+     
     $("#guarda_edicion_sitio").click(function(){
 
             var mi_url=document.location.href;
@@ -195,6 +195,7 @@ $(document).ready(function(){
                 }
             });                        
     });    
+    */
 
 
     /*

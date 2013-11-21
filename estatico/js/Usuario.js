@@ -1,5 +1,5 @@
 $(document).ready(function(){
-      
+
     /*
      * Registro de un nuevo Usuario
      */
@@ -161,8 +161,7 @@ $(document).ready(function(){
                             else alert("No se han podido realizar los cambios");                                                     
                     }
                 });                        
-            }
-            else{ alert("Las contraseñas no coinciden"); }                    
+            }else{ alert("Las contraseñas no coinciden"); }                    
     });    
 
     /*

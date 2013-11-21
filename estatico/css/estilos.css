@@ -85,6 +85,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   max-width: none;
 }
 
+#EditarMapaSitio,#EditarMapaEmpresa{
+ margin-bottom: 10px;   
+}
+#edicionMapaSitio{
+ margin: 10px;   
+}
+
 /* -------------------- Estilos del SLIDER DE SITIOS Y EMRPESAS -------------------- */
 .carousel .item {
     background-color: #000;
