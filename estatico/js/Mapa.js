@@ -194,13 +194,65 @@
         }
         
     }//CIERRA FUNCION NATANE_MAPA
+
+    var mapa;
+    var mapa_edit;
+
+
+        function editarMapaSitio(){                     
+                    
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'obtieneCoordenadasS',                   
+                    sitio: id_url[1]
+                }
+                ,dataType:'JSON'
+                ,success: function(data,textStatus,jqXHR){                           
+                            //alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);                            
+                            data.idMapa='EmapaSitio';
+                            //alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);
+                            mapa = new mapa_natane(data);  //carga el mapa 
+                            mapa.getPosicion() //obtiene las coordenadas de mapa
+                }
+            }); 
+        }
         
-        
+        /*
+         * Muestar el mapa de la empresa para su edicion
+         */        
+        function editarMapaEmpresa(){                     
+
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'obtieneCoordenadasE',                   
+                    sitio: id_url[1]
+                }
+                ,dataType:'JSON'
+                ,success: function(data,textStatus,jqXHR){                           
+                            //alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);                            
+                            data.idMapa='EmapaEmpresa';
+                            //alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);
+                            mapa = new mapa_natane(data);  //carga el mapa 
+                            mapa.getPosicion() //obtiene las coordenadas de mapa
+                }
+            }); 
+        }
+
+
 $(document).ready(function(){        
             
     /********************* Princpal*******************/
-    var mapa;
-    var mapa_edit;
+
 
 //    google.maps.event.addDomListener(window, 'load', function(){
 //        mapa=new mapa_natane({idMapa:'P2'});
@@ -224,104 +276,20 @@ $(document).ready(function(){
                             //alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);
                             data.drag='false';
                             //alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);
-                            mapa = new mapa_natane(data);  //carga el mapa 
+                            mapa = new mapa_natane(data);  //carga el mapa                             
                 }
             });                                
-    
-
-        /*
-         * Muestar el mapa del sitio para su edicion
-         */            
-        $("#EditarMapaSitio").click(function(){
-                     
-            $("#edicionMapaSitio").css({display:'inline'});           
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
-            
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'obtieneCoordenadasS',                   
-                    sitio: id_url[1]
-                }
-                ,dataType:'JSON'
-                ,success: function(data,textStatus,jqXHR){                           
-                            //alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);                            
-                            data.idMapa='EmapaSitio';
-                            //alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);
-                            mapa_edit = new mapa_natane(data);  //carga el mapa 
-                }
-            });             
-        });
-        
-        /*
-         * Muestar el mapa de la empresa para su edicion
-         */        
-        $("#EditarMapaEmpresa").click(function(){
-                     
-            $("#edicionMapaEmpresa").css({display:'inline'});           
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
-            
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'obtieneCoordenadasE',                   
-                    sitio: id_url[1]
-                }
-                ,dataType:'JSON'
-                ,success: function(data,textStatus,jqXHR){                           
-                            alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);                            
-                            data.idMapa='EmapaEmpresa';
-                            alert(data.lat+"____"+data.lon+"____"+data.idMapa+"____"+data.drag);
-                            mapa_edit = new mapa_natane(data);  //carga el mapa 
-                }
-            });             
-        });
-        
+       
     });                                
-    
-    /*
-     * Guardar coordenadas del sitio
-     */
-    $("#guardaCoordenadasSitio").click(function(){
-
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");              
-            alert(mapa_edit.getPosicion());
-            /*
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'guardaCoodenadasS',                   
-                    sitio: id_url[1],
-                    lat_lon: mapa_edit.getPosicion()
-                }
-                ,dataType:'JSON'
-                ,success: function(data,textStatus,jqXHR){                           
-
-                        if(/true/.test(data)) {                                
-                            alert("Cambios guardados.");
-                            document.location.reload();                                     
-                        }
-                        else alert("No se han podido realizar los cambios");                                                     
-                }
-            });  */                      
-    });
     
     
     /*
      * Guardar edicion de los datos del sitio
-     */        
+     */
     $("#guarda_edicion_sitio").click(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
-            
-            if($("#Epass1S").val()==$("#Epass2S").val()){  //valida contraseñas                                        
 
                 $.ajax({
                     url:'/natane3/estatico/php/opcionesSitio.php'
@@ -335,7 +303,7 @@ $(document).ready(function(){
                         direc: $("#EdirS").val(),
                         tele: $("#EtelS").val(),                    
                         mail: $("#EmailS").val(),                    
-                        lat_lon: mapa_edit.getPosicion(),
+                        lat_lon: mapa.getPosicion(),
                         s_web: $("#Es_webS").val(),
                         face: $("#EfaceS").val(),
                         twit: $("#EtwiS").val(),
@@ -345,9 +313,6 @@ $(document).ready(function(){
                         //imagen: $("#Epass1").val(data.imagen),
                     }
                     ,dataType:'JSON'
-                    /*,beforeSend:function(jqXHR, settings ){
-                        alert("Debe confirmar su identidad, para realizar los cambios.");                                        
-                    }*/
                     ,success: function(data,textStatus,jqXHR){                           
 
                             if(/true/.test(data)) {                                
@@ -357,20 +322,18 @@ $(document).ready(function(){
                             else alert("No se han podido realizar los cambios");                                                     
                     }
                 });                        
-            }else{ alert("Las contraseñas no coinciden"); }                    
-    });        
+    });
 
 
 
     /*
      * Guardar edicion de los datos de la empresa
-     */     
+     */
     $("#guarda_edicion_empresa").click(function(){
-
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
+                     
             
-            if($("#Epass1E").val()==$("#Epass2E").val()){  //valida contraseñas                                                    
                 $.ajax({
                     url:'/natane3/estatico/php/opcionesEmpresa.php'
                     ,type:'POST'                    
@@ -384,7 +347,7 @@ $(document).ready(function(){
                         direc: $("#EdirE").val(),
                         tele: $("#EtelE").val(),                    
                         mail: $("#EmailE").val(),                    
-                        lat_lon: mapa_edit.getPosicion(),                 
+                        lat_lon: mapa.getPosicion(),
                         s_web: $("#Es_webE").val(),
                         face: $("#EfaceE").val(),
                         twit: $("#EtwiE").val(),
@@ -401,8 +364,8 @@ $(document).ready(function(){
                             else alert("No se han podido realizar los cambios");                                                     
                     }
                 });                        
-            }else{ alert("Las contraseñas no coinciden"); }                                    
     });    
+    
 
 });
 

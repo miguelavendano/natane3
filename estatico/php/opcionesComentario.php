@@ -20,6 +20,7 @@ if(isset($_POST['opcion'])){
             $nodo_comentario->usuario = $_POST['autor'];
             $nodo_comentario->detalle = $_POST['comentario'];
             $nodo_comentario->fecha = date("d")." de ".date("F")." de ".date("Y")." a la(s) ".date("H:i");
+            $nodo_comentario->nombre = "";
             $nodo_comentario->type = 'Comentario';            
             ModelComentario::crearNodoComentario($nodo_comentario);
             

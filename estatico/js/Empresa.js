@@ -102,8 +102,6 @@ $(document).ready(function(){
                         $("#EtelE").val(data.tel);                
                         $("#EdirE").val(data.direc);
                         $("#EmailE").val(data.mail);                        
-                        $("#ElatE").val(data.lat);
-                        $("#ElongE").val(data.lon);
                         $("#Es_webE").val(data.s_web);
                         $("#EfaceE").val(data.face);
                         $("#EtwiE").val(data.twi);
@@ -111,51 +109,51 @@ $(document).ready(function(){
                         $("#Epass1E").val(data.pass);
                       
                 }
-            });            
+            });    
+            
+            editarMapaEmpresa(); //carga el mapa con la posibilidad de editar su posicion
     });
 
 
     /*
      * Guardar edicion de los datos de la empresa
-     
-    $("#guarda_edicion_empresa").click(function(){
 
+    $("#guarda_edicion_empresa").click(function(){
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'guardar_edicionE',
-                    empresa: id_url[1],
-                    nombre: $("#EnomE").val(),
-                    descri: $("#EdescE").val(),
-                    nit: $("#EnitE").val(),
-                    city: $("#EcityE").val(),                    
-                    direc: $("#EdirE").val(),
-                    tele: $("#EtelE").val(),                    
-                    mail: $("#EmailE").val(),                    
-                    lat: $("#ElatE").val(),                    
-                    lon: $("#ElongE").val(),                    
-                    s_web: $("#Es_webE").val(),
-                    face: $("#EfaceE").val(),
-                    twit: $("#EtwiE").val(),
-                    youtube: $("#EyouE").val(),
-                    pass: $("#Epass1E").val()
-                }
-                ,dataType:'JSON'
-                ,success: function(data,textStatus,jqXHR){                           
+                $.ajax({
+                    url:'/natane3/estatico/php/opcionesEmpresa.php'
+                    ,type:'POST'                    
+                    ,data:{
+                        opcion: 'guardar_edicionE',
+                        empresa: id_url[1],
+                        nombre: $("#EnomE").val(),
+                        descri: $("#EdescE").val(),
+                        nit: $("#EnitE").val(),
+                        city: $("#EcityE").val(),                    
+                        direc: $("#EdirE").val(),
+                        tele: $("#EtelE").val(),                    
+                        mail: $("#EmailE").val(),                    
+                        lat_lon: mapa.getPosicion(),
+                        s_web: $("#Es_webE").val(),
+                        face: $("#EfaceE").val(),
+                        twit: $("#EtwiE").val(),
+                        youtube: $("#EyouE").val(),
+                        pass: $("#Epass1E").val()
+                    }
+                    ,dataType:'JSON'
+                    ,success: function(data,textStatus,jqXHR){                           
 
-                        if(/true/.test(data)) {                                
-                            alert("Cambios guardados.");
-                            document.location.reload();                                     
-                        }
-                        else alert("No se han podido realizar los cambios");                                                     
-                }
-            });                        
+                            if(/true/.test(data)) {                                
+                                alert("Cambios guardados.");
+                                document.location.reload();                                     
+                            }
+                            else alert("No se han podido realizar los cambios");                                                     
+                    }
+                });                        
     });    
-        */
+*/        
 
     /*
      * Cancelar edicion de los datos de la empresa
