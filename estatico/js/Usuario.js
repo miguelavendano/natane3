@@ -389,8 +389,7 @@ $(document).ready(function(){
                     type : 'POST',
                     data : datosform,
                     processData : false, 
-                    contentType : false, 
-                    dataType:'html',
+                    contentType : false,
                     success: function(data,textStatus,jqXHR){                           
                                 
                                 if(/true/.test(data)){                                
@@ -410,7 +409,15 @@ $(document).ready(function(){
              $(".editarExperiencia").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
     });  
-   
+
+    /*
+     * Cerrar la vista de una experiencia
+     */
+    $(".cierravistaExp").click(function(){        
+             $(".verExperiencia").css({display:'none'});   
+             $(".pestañas").css({display:'inline'});                                      
+    });  
+
 
     /*
      * Registro de un nuevo Sitio
@@ -549,7 +556,7 @@ $(document).ready(function(){
 
     function editarExperiencia(id_experiencia) {
         
-            $(".pestañas").css({display:'none'});
+            $(".pestañas").css({display:'none'});            
             $(".editarExperiencia").css({display:'inline'});            
             $(".editarExperiencia").attr('id', id_experiencia);
             /*$('.editarExperiencia').attr('id', id_experiencia);
@@ -594,13 +601,14 @@ $(document).ready(function(){
                     $("#ediExpTitulo").val(data.nombre);
                     $("#ediExpDesc").val(data.descripcion);
                     
+                    var url_imagen= '/natane3/modulos/imagen/imagen.php';
                     var marco="";
                     var edicion="";                    
                     var img="";
                     var todo="";
                     var lis_img="";
                     var ciclo=0;
-                    
+                                        
                     for(var i=0; i<data.imagenes.length; i++){                        
                         
                         marco="<div id="+data.imagenes[i].img_id+"_"+id_experiencia+" class='span3 marco_img_exp'>";
@@ -608,7 +616,13 @@ $(document).ready(function(){
                                     <button class='btn icon-trash tooltip1' rel='tooltip' title='Eliminar' onclick='eliminarImgExperiencia("+id_experiencia+","+data.imagenes[i].img_id+")'></button>\n\
                                 </div>";
 
-                        img="<div class='im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+                        //img="<div class='im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+
+                        img="<div class='im_exp_edit'>\n\
+                                <a href="+url_imagen+"?id="+data.imagenes[i].img_id+">\n\
+                                    <img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' />\n\
+                                </a>\n\
+                            </div>";
 
                         todo=marco+edicion+img+"</div>";
 
@@ -661,10 +675,7 @@ $(document).ready(function(){
     
     
     function eliminarImgExperiencia(id_experiencia,id_img){
-        
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
-            
+                    
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
@@ -684,4 +695,80 @@ $(document).ready(function(){
                             else alert("No se puede eliminar la imagen, la experiencia debe contener almenos una imagen"); 
                 }
             });                            
+    }
+    
+    
+    function verExperiencia(id_experiencia){
+        
+//            id="#"+id_experiencia;
+//            $(id).css({display:'none'});
+            $(".pestañas").css({display:'none'});
+            $(".verExperiencia").css({display:'inline'});            
+
+
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'editarExp',                            
+                    experiencia: id_experiencia                    
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+
+                    $("#reload").css({visibility: 'visible',
+                                        opacity:'1',
+                                        position: 'fixed',
+                                        top: '200px',
+                                        right: '50px',
+                                        left: '50px',
+                                        width: 'auto',
+                                        margin: '0 auto'
+                                    });   
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                    $("#reload").css({visibility: 'hidden'});   
+                
+                    $("#verExpTitulo").html(data.nombre);
+                    $("#verExpDesc").html(data.descripcion);                    
+                    
+                    var url_imagen= '/natane3/modulos/imagen/imagen.php';
+                    var marco="";
+                    var edicion="";                    
+                    var img="";
+                    var todo="";
+                    var lis_img="";
+                    var ciclo=0;
+                                        
+                    for(var i=0; i<data.imagenes.length; i++){                        
+                        
+                        marco="<div class='span3 marco_img_exp'>";
+                        //img="<div class='im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+
+                        img="<div class='im_exp_edit'>\n\
+                                <a href="+url_imagen+"?id="+data.imagenes[i].img_id+">\n\
+                                    <img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' />\n\
+                                </a>\n\
+                            </div>";
+
+                        todo=marco+img+"</div>";
+
+                        if(ciclo==0){
+                            lis_img=lis_img+"<div class='row-fluid'>"+todo;                                                                                    
+                            ciclo++;            
+                        }
+                        else if(ciclo<3){
+                            lis_img=lis_img+todo;                            
+                            ciclo++;                                                                      
+                        }else if(ciclo==3){      
+                            lis_img=lis_img+todo+"</div>";                            
+                            ciclo=0;                                         
+                        }  
+                        
+                    }                    
+                    
+                    $(".vista_imgs_experiencia").html(lis_img);
+                }
+            });                                            
     }

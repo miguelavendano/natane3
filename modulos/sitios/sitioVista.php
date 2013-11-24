@@ -249,28 +249,29 @@
         public function refactory_experiencias($datos){            
             
             $experiencias_sitio = "";
-            
-            foreach ($datos as $valor){
-                $aux = $this->expe;
-                $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
-                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
-                $aux = str_ireplace('{titulo}', $valor->nombre, $aux);
-                $aux = str_ireplace('{descripcion}',$valor->descripcion , $aux);
+
+            for($c=0; count($datos); $c++){                
                 
-                $experiencias_sitio .= $aux;
-            }
+                $experiencias_sitio .= '<div class="row-fluid">';                            
+                $i=0;
+                do{ 
+                    $expe=array_shift($datos);
+                    $aux = $this->experiencias;
+                    $aux = str_ireplace('{id_experiencia}', $expe->id, $aux);                
+                    $aux = str_ireplace('{imagen}', $expe->imagen, $aux);
+                    $aux = str_ireplace('{titulo}', $expe->nombre, $aux);
+                    $aux = str_ireplace('{descripcion}', $expe->descripcion , $aux);
+                    $experiencias_sitio .= $aux;
+                    $i++;
+                }while((count($datos)!=0)&& $i<3);                
+                
+                $experiencias_sitio .= '</div>';
+            }            
             
             $this->experiencias = $experiencias_sitio;            
             $this->actualizar_diccionarios();
                         
-        }        
-
-        
-        public function refactory_mapa( $coordenadas ){            
-            $this->latitud = $coordenadas[0]->latitud;
-            $this->longitud = $coordenadas[0]->longitud;                      
-            $this->actualizar_diccionarios();
-        }        
+        }               
         
         
         public function refactory_contenido(){            

@@ -190,26 +190,52 @@ if(isset($_POST['opcion'])){
                     }
                 }
                 
-                
             if($tipo_relacion==""){
 
+                // obtengo los id de las relaciones Experiencia-Sitio (Asociada), si existen las elimino
+                $ids_relacionImgEmp = ModeloRelaciones::get_id_relaciones($_POST['experiencia'],"Asociada");                
+                if($ids_relacionImgEmp){
+                    //elimino la relacion entre la experiencia y las empresas
+                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgEmp);    
+                }
+                
                 // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino                
                 $ids_relacionImgExp = ModeloRelaciones::get_id_relaciones($_POST['experiencia'],"Img");
 
                 if($ids_relacionImgExp){
-                    //elimino la relacion entre la experiencia y las imagenes                    
-                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgExp);
 
-                    // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino                                
-                    $ids_nodoImgExp = ModeloRelaciones::get_ids_imagenes_relacion('experiencia');
+                    // obtengo los id de los nodos vinculados al nodo dado segun su relacion
+                    $ids_nodoImgExp = ModeloRelaciones::get_ids_nodos_relacion($_POST['experiencia'],"Img");
+
+                    //reviso si las imagenes tienen comentarios, si es asi los elimina
+                    foreach($ids_nodoImgExp as $row){                        
+
+                        // obtengo los id de las relaciones Img-Comentario (Sobre), si existen las elimino                
+                        $ids_relacionImgComen = ModeloRelaciones::get_id_relaciones($row,"Sobre");                        
+
+                        if($ids_relacionImgComen){                            
+                            //elimino la relacion entre la imagen y sus comentarios
+                            ModeloRelaciones::eliminar_relaciones($ids_relacionImgComen);                        
+                            // obtengo los id de los nodos vinculados al nodo dado segun su relacion
+                            $ids_nodoImgComen = ModeloRelaciones::get_ids_nodos_relacion($row,"Sobre");
+                            //elimino las imagenes de la experiencia
+                            ModeloRelaciones::eliminar_nodos($ids_nodoImgComen);                        
+                        }
+                    }
+                    
+                    //elimino la relacion entre la experiencia y las imagenes                    
+                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgExp);                        
+                    //elimino las imagenes de la experiencia
                     ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
                 }
-
-                // obtengo el id de la relacion Autor-Experiencia (Comparte)
-                $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['experiencia'], 'Comparte');
-                ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
-                ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                                                       
                 
+                // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
+                $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['experiencia'], 'Comparte');
+                
+                if($id_relacionUserExp){
+                    ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
+                    ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                                                       
+                }                
                                 
             }
             elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta

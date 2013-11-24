@@ -297,8 +297,6 @@
         public function refactory_servicios($datos){            
             
             $resultados="";
-            //$elemento = $this->servicios;
-            
             
             for($c=0; count($datos); $c++){                
                 

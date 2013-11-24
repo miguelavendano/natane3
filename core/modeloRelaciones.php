@@ -12,8 +12,7 @@ use Everyman\Neo4j\Node,
  * Clase con las funciones para ejecutar sobre cualquier tipo de relacion
  * (crear, eliminar, contar, consultar ...) 
  */	
-class ModeloRelaciones
-{
+class ModeloRelaciones{
 
 	public static function crearRelacion($idNodoStart,$idNodoEnd,$nameRelacion){
 
@@ -164,9 +163,9 @@ class ModeloRelaciones
         /*
          *Obtengo el id de las imagenes de una relacion
          */
-	public static function get_ids_imagenes_relacion($TipoRelacion){
+	public static function get_ids_nodos_relacion($idNodo,$TipoRelacion){
             
-            $queryString = "START n=node(".$TipoRelacion.") MATCH n-[:Img]->i RETURN i;";            
+            $queryString = "START n=node(".$idNodo.") MATCH n-[:".$TipoRelacion."]->i RETURN i";            
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();            
             
@@ -195,12 +194,12 @@ class ModeloRelaciones
                      
         
         /*
-         * Elimina Varios NOdos
+         * Elimina Varios Nodos
          */
 	public static function eliminar_nodos($ids_nodos){
             
-            foreach($ids_nodos as $value){
-                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
+            foreach($ids_nodos as $row){
+                    $eliminar = Neo4Play::client()->getNode($row);
                     $eliminar->delete();			    	                                                                            
             }
             

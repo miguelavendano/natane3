@@ -202,8 +202,9 @@ $(document).ready(function(){
      * Cancelar edicion de los datos del sitio
      */
     $(".cancelar_edicion_sitio").click(function(){        
-             $("#editarSitio").css({display:'none'});                
-             $("#slider_sitio").css({display:'inline'});
+            $("#editarSitio").css({display:'none'});   
+            $("#slider_sitio").css({display:'inline'});
+            $("#ContenidoSitio").css({display:'inline'});             
     }); 
     
     /*

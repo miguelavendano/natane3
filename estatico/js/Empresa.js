@@ -161,8 +161,10 @@ $(document).ready(function(){
      * Cancelar edicion de los datos de la empresa
      */
     $(".cancelar_edicion_empresa").click(function(){        
-             $("#editarEmpresa").css({display:'none'});                
-             $("#slider_empresa").css({display:'inline'});
+            $("#editarEmpresa").css({display:'none'});   
+            $("#campoConfio").css({display:'inline'});
+            $("#slider_empresa").css({display:'inline'});
+            $("#contenidoE").css({display:'inline'});             
     }); 
     
     /*

@@ -244,6 +244,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     margin-left: 5px;
 }
 
+.verExperiencia{
+
+}
+#verExpDesc{
+    padding: 10px;
+}
+
 /************************ EDICION IMAGENES DE EXPERIENCIAS ************************/
 /*#imgs_experiencia{
     display: table;

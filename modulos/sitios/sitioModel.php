@@ -68,19 +68,11 @@
             $resultado = $this->modelusuario->get_desean($query);
             return $resultado;            
         } 
-        
-        
-        public function get_coordenadas_mapa(){
-            $query = "START n=node(".$this->id_sitio.") RETURN n";
-            //$resultado = $this->modelsitios->get_property_mapa($query);
-            $resultado = $this->modelsitios->get_sitio($query);
-            return $resultado;                        
-        } 
-        
+                
         
         public function get_experiencias_visitantes(){   
                         
-            $query = "start n=node(".$this->id_sitio.") match n<-[:Comparte|Etiqueta]->b return b;";            
+            $query = "start n=node(".$this->id_sitio.") match n<-[:Asociada|Etiqueta]->b return b;";            
             //$resultado = $this->modelexpe->get_exper_usuario($query);
             $resultado = $this->modelexpe->get_experiencias($query);
             

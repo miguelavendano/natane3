@@ -52,53 +52,6 @@ if(isset($_POST['opcion'])){
             $band="true";
             
         break;        
-/*
-        case "eliminaComen":
-            
-            $etiquetado=ModeloRelaciones::consultaNodosEtiquetadosEnRelacion($_POST['experiencia']); 
-            $tipo_relacion="";
-            
-            foreach($etiquetado as $row){
-                    if($row==$_POST['empresa']){
-                        $tipo_relacion="etiqueta";
-                    }
-                }
-                
-                
-            if($tipo_relacion==""){
-
-                // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino                
-                $ids_relacionImgExp = ModeloRelaciones::get_id_relaciones($_POST['experiencia'],"Img");
-
-                if($ids_relacionImgExp){
-                    //elimino la relacion entre la experiencia y las imagenes                    
-                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgExp);
-
-                    // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino                                
-                    $ids_nodoImgExp = ModeloRelaciones::get_ids_imagenes_relacion('experiencia');
-                    ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
-                }
-
-                // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
-                $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['experiencia'], 'Comparte');
-                
-                if($id_relacionUserExp){
-                    ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
-                    ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                                                       
-                }                
-                                
-            }
-            elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
-                
-                $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['usuario'], "Etiqueta");  //consulto el ID de la relacion
-                ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa                               
-                //$band="etiqueta";
-            }    
-           
-            $band="true";
-            
-        break;        
-  */  
         default : break; 
     }    
     

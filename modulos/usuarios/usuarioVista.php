@@ -20,6 +20,7 @@
         public $perfil;
         public $comparte;
         public $editExp;
+        public $verExp;
         public $creaSitio;
         public $creaEmpre;
         
@@ -43,6 +44,7 @@
             $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
             $this->comparte = file_get_contents('../../plantillas/usuario/compartirExperiencia.html');
             $this->editExp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');
+            $this->verExp = file_get_contents('../../plantillas/usuario/verExperiencia.html');
             $this->creaSitio = file_get_contents('../../plantillas/sitios/registrarSitio.html');
             $this->creaEmpre = file_get_contents('../../plantillas/empresas/registrarEmpresa.html');                        
             $this->gustaria = file_get_contents('../../plantillas/usuario/sitiosAvisitar.html');            
@@ -85,6 +87,7 @@
                                         'experiencia'=>$this->expe,
                                         'comparteExp'=>$this->comparte,
                                         'editaExp'=>$this->editExp,
+                                        'verExp'=>$this->verExp,
                                         'registrarSitio'=>$this->creaSitio,
                                         'registrarrEmpresa'=>$this->creaEmpre                    
                                         );
@@ -109,6 +112,7 @@
                                         'experiencia'=>$this->expe,
                                         'comparteExp'=>$this->comparte,
                                         'editaExp'=>$this->editExp,                    
+                                        'verExp'=>$this->verExp,
                                         'registrarSitio'=>$this->creaSitio,
                                         'registrarEmpresa'=>$this->creaEmpre                    
                                         );           
