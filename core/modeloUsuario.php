@@ -123,7 +123,7 @@ class ModelUsuarios{
             $queryString = "START n=node(".$id_user.") MATCH n-[:Publica]->s RETURN count(s) as Nsitios;";
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
             $result = $query->getResultSet();
-            return $result[0]['Nsitios'];            
+            return $result[0]['Nsitios'];
             
         }
         
@@ -315,6 +315,7 @@ class ModelUsuarios{
             $user = array(
                 "tipo"=>$result[0]['tipoUser'],
                 "nick"=>$result[0]['nick'],
+                "img"=>$result[0]['img'],
                 "empresas"=>$this->get_empresas_creadas($id_usuario),
                 "sitios"=>$this->get_sitios_publicados($id_usuario)
             );

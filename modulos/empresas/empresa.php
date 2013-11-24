@@ -2,6 +2,7 @@
     require_once 'empresaVista.php';    
     require_once 'empresaModel.php';
     require_once '../../core/Validar.php';
+    require_once '../login/loginControl.php';
 
     
 
@@ -62,7 +63,11 @@
         
         
         
-        public function main(){            
+        public function principal_empresa($login){    
+            
+            
+            
+            $this->vista->refactory_header( $login );
             $this->vista->refactory_slider( $this->slider_empresa());
             $this->vista->refactory_contacto( $this->datos_contacto());
             $this->vista->refactory_amigos( $this->amigos());
@@ -76,13 +81,33 @@
         }
     }
 
+//    session_start();
 
     $id = $_GET['id'];    
     $validar = new Validar();
     
     if($validar->validar_id($id, "Empresa")){             
-        $empresas = new Empresas($id);
-        $empresas->main();        
+        $empresa = new Empresas($id);        
+                       
+        if(isset($_SESSION['id'])){ // existe sesion ?                                    
+            
+            if(Login::acceso_Pempresa($id)){  //El usr logueado es el dueño de esta Empresa ?
+                
+                $empresa->principal_empresa(1);
+
+            }else{
+
+                $empresa->principal_empresa(2);
+                
+            }
+        }else{
+            
+            $empresa->principal_empresa(3);
+        }   
+        
+        
+        
+        
     }else{        
         header('Location: /natane3/Index/');
     }        

@@ -346,7 +346,46 @@ class ModelSitios{
                 //$experiencia->imagen= "no hay";}            
             
             
+        }   
+        
+        
+        /**
+         * Funcion que trae informaion basica sobre los sitios
+         * que un usuario ha publicado.
+         * @param string $id_usuario Es el id noe4j del  usuario a consultar
+         * @return array Datos basicos nombre, idSitio... sino posee sitios creadas retorna false.
+         */
+        public function get_sitios_usuario($id_usuario, $cyper){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $cyper);
+            
+            $result = $query->getResultSet();
+            
+            $array_general = array();
+            
+            
+            if($result){
+                
+            
+                foreach($result as $row) {   
+                    
+                    $array_empresa = array(
+                        'id'=>$row['id'],
+                        'nombre'=>$row['nombre'],
+                        'imagen'=>$row['imagen']);
+                    
+                    array_push($array_general, $array_empresa);
+                }
+                
+                return $array_general;
+            }else{
+                
+                return false;
+            }                                            
+                    
+            
         }        
+        
         
         public function get_query($queryString, $aleatorio){
             

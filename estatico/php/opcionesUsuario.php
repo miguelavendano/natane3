@@ -106,6 +106,9 @@ if(isset($_POST['opcion'])){
             ModelUsuarios::editar_usuario($_POST['usuario'], "youtube", $_POST['youtube']);
             ModelUsuarios::editar_usuario($_POST['usuario'], "contraseña", $_POST['pass']);
             
+            $_SESSION['nick'] = $_POST['nick'];
+            
+            
             $band="true";
             
         break;        
@@ -163,6 +166,8 @@ if(isset($_POST['opcion'])){
                     echo $nomFotoPerfil;
 
                     move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen
+                    
+                    $_SESSION['img'] = $nomFotoPerfil;
                 }
             }            
             

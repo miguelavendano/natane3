@@ -26,6 +26,7 @@
             
             $this->base = file_get_contents('../plantillas/generales/base.html');
             $this->file = file_get_contents('../plantillas/index/index.html');
+            $this->headlogin = file_get_contents('../plantillas/generales/head.html');    
             $this->head = file_get_contents('../plantillas/generales/head.html');    
             $this->slider = file_get_contents('../plantillas/index/slider.html');
             $this->ferro = file_get_contents('../plantillas/generales/ferrocarril.html');
@@ -55,6 +56,19 @@
                 <link href="{CSS}/datepicker.css" rel="stylesheet" />
                 <link href="{CSS}/font-awesome.min.css" rel="stylesheet" /> 
             ';
+            
+            
+            $this->diccionario = array('slider'=>$this->slider,  
+                                'ferrocarril'=>$this->ferro,
+                                'modales'=>$this->modal);   
+         
+
+            $this->diccionario2 = array('metas'=>$this->metas,
+                                'links'=>$this->links,  
+                                'head'=>$this->head,
+                                'contenido'=>$this->file,
+                                'opciones_login'=>$this->headlogin);              
+            
 
         }
         
@@ -68,11 +82,35 @@
             $this->diccionario2 = array('metas'=>$this->metas,
                                 'links'=>$this->links,  
                                 'head'=>$this->head,
-                                'contenido'=>$this->file);                           
+                                'contenido'=>$this->file,
+                                'opciones_login'=>$this->headlogin);                           
             
+            
+            
+        }   
+        
+        
+        /**
+         * Funcion que refactoriza el header dependiendo el estado de login en el que este el usuario que 
+         * esta accediendo.
+         */
+        public function refactory_header($opcion){
+            
+            switch($opcion){                                
+                case 1:
+                                        
+                    $this->head = Global_var::refactory_header(true);                                        
+                    
+                    break;
+                
+                default:
+                    
+                    break;               
+            }
             
         }        
 
+        
 
         public function refactory_slider(array $datos){   // contruye el slider
             

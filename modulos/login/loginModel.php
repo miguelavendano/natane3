@@ -1,6 +1,8 @@
 <?php
 
     require_once('../../core/modeloUsuario.php');
+    require_once '../../core/modeloEmpresa.php';
+    require_once '../../core/modeloSitio.php';    
     require_once('../../core/ConexionMysql.php');
     require_once('../../librerias/neo4jphp.phar');
     require_once('../../librerias/Neo4Play.php');    
@@ -9,6 +11,8 @@
     class LoginModel{
         
         public $modelusuario;
+        public $modeloSitio;
+        public $modeloEmpresa;
         public $Conexion;
              
         
@@ -17,7 +21,30 @@
             $this->modelusuario = new ModelUsuarios();
             $this->Conexion = new Conexion();
             
+            $this->modeloEmpresa = new ModelEmpresa();
+            $this->modeloSitio = new ModelSitios();
+            
         }
+        
+        
+        public function get_sitios($id_user){
+            
+            $cyper = "start n=node(".$id_user.") match n-[:Publica]->s return id(s) as id, s.nombre as nombre, s.imagen as imagen;";
+            
+            return $this->modeloSitio->get_sitios_usuario($id_user, $cyper);
+            
+        }        
+        
+        
+        
+        public function get_empresas($id_user){
+            
+            $cyper = "start n=node(".$id_user.") match n-[:Crea]->e return id(e) as id, e.nombre as nombre, e.imagen as imagen;";            
+            
+            return $this->modeloEmpresa->get_empresa_usuario($id_user, $cyper);
+            
+        }        
+        
         
         
         /*
@@ -111,7 +138,7 @@
         
         public function get_inicio_session($id_usaurio){
             
-            $query = "start a=node(128) return a.type as tipoUser, a.nick as nick;";
+            $query = "start a=node(".$id_usaurio.") return a.type as tipoUser, a.nick as nick, a.imagen as img;";
             
             return $this->modelusuario->get_datos_session($query, $id_usaurio);
                         

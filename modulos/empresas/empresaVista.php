@@ -54,7 +54,7 @@
                   
         
             $this->base = file_get_contents('../../plantillas/generales/base.html');
-            $this->head = file_get_contents('../../plantillas/generales/headEmpresa.html');
+            $this->head = file_get_contents('../../plantillas/generales/head.html');
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
             
             $this->empresa= file_get_contents('../../plantillas/empresas/perfilEmpresa.html');   
@@ -141,6 +141,32 @@
                                         'confianza'=>$this->confianza,
                                         'id_empresa'=>$this->id_empresa);
         }
+        
+        
+        
+        /**
+         * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
+         * esta accediendo.
+         */
+        public function refactory_header($opcion){
+            
+            switch($opcion){                                
+                case 1:
+                    
+                    $this->head = Global_var::refactory_header(false);                    
+                    $this->head .= "<br> <h1>Este es mi empresa</h1>";
+                    break;
+                case 2:
+                    $this->head = Global_var::refactory_header(false);                                        
+                    break;
+                
+                default:
+                    
+                    break;               
+            }
+            
+        }  
+        
         
         public function refactory_slider($datos){   // contruye el slider
             

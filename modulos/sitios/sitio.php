@@ -2,6 +2,7 @@
     require_once 'sitioVista.php';    
     require_once 'sitioModel.php';
     require_once '../../core/Validar.php';
+    require_once '../login/loginControl.php';
 
 
     class Sitios{
@@ -47,7 +48,9 @@
         }
         
         
-        public function main(){            
+        public function principal_sitio($login){            
+            
+            $this->vista->refactory_header( $login );
             $this->vista->refactory_slider( $this->slider_sitio() );
             $this->vista->refactory_contacto( $this->datos_contacto() );
             $this->vista->refactory_visitantes( $this->visitantes() );
@@ -59,14 +62,34 @@
         }
     }
 
+    
+    
+    //session_start();
 
     $idsitio = $_GET['id'];
     $validar = new Validar();
 
     if($validar->validar_id($idsitio, "Sitio")){
-        $usuairo = new Sitios($idsitio);
-        $usuairo->main();        
-    }else{        
+        $sitio = new Sitios($idsitio);              
+        
+        if(isset($_SESSION['id'])){ // existe sesion ?                                               
+            if(Login::acceso_Susuario($idsitio)){  //El usr logueado es el dueño de este sitio ?
+                
+                $sitio->principal_sitio(1);
+
+            }else{
+
+                
+                $sitio->principal_sitio(2);
+                
+            }
+        }else{
+            
+            $sitio->principal_sitio(3);
+        }        
+        
+        
+    }else{
         header('Location: /natane3/Index/');
     }
 

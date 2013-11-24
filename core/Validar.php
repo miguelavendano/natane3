@@ -19,6 +19,12 @@ class Validar{
     }
     
     
+    /**
+     * Realiza la consulta a Neo4j que se necesita para completar la validación
+     * 
+     * @param strig $id es el id del sitio que pasan por metodo get y se esta validando
+     * @return array retorna el resultado de la consulta que es el typo de nodo al que pertenese el id consultado.
+     */
     public function aux_validar($id){
 
         $query = "START n=node(".$id.") RETURN n.type";            
@@ -35,9 +41,15 @@ class Validar{
     
     
    
-/*
- * validar si el ID que le pasan corresponde a una sitio, empresa o usuario
- */    
+    /**
+     * valida si el ID que le pasan por metodo GET, corresponde a un sitio, empresa o usuario
+     * 
+     * @param stirng $id es el ide pasado por get
+     * @param string $caso El caso al que hace referencia ya que esta funcion es 
+     * utilizada para todos los espacios de natane.
+     * 
+     * @return bool retorna true si es verdadero false si es negativo.
+     */        
     public function validar_id( $id, $caso){  
         
         $array_ids = array('Empresa', 'Sitio', 'Experiencia', 'Imagen', 'Usuario');
@@ -47,9 +59,9 @@ class Validar{
         if(in_array($opcion, $array_ids)){                        
             
             if($opcion == $caso){
-                return 1;        
+                return true;        
             }else{
-                return 0;
+                return false;
             }
             
         }else{

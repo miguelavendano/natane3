@@ -31,8 +31,8 @@
         public function __construct() {
             
             $this->base = file_get_contents('../../plantillas/generales/base.html');
-            $this->head = file_get_contents('../../plantillas/generales/headUsuario.html');
-            $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
+            $this->head = file_get_contents('../../plantillas/generales/head.html');
+            $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');
             
             
             $this->perfil = file_get_contents('../../plantillas/usuario/perfilUsuario.html');
@@ -56,10 +56,10 @@
             
             $this->links='  <link href="{CSS}/bootstrap.css" rel="stylesheet" />    
                             <link href="{CSS}/bootstrap-responsive.css" rel="stylesheet" /> 
-
+                            
                             <link href="{CSS}/estilos.css" rel="stylesheet" />
                             <link href="{CSS}/estilos_perfil_usuario.css" rel="stylesheet" />    
-
+                            
                             <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
                             <link href="{CSS}/datepicker.css" rel="stylesheet" />
                             <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />                               
@@ -72,7 +72,7 @@
             $this->dic_general = array( 'metas' => $this->metas,
                                         'links' => $this->links ,
                                         'script' => $this->script,
-                                        'head' => $this->head ,
+                                        'head'=>$this->head,
                                         'contenido' => $this->perfil
                                         );
             
@@ -94,27 +94,54 @@
          * Funcion encargada de actualizar los datos de los diccionarios
          * a medida que se van refactorizando y cambiando constantemente.
          * 
-         */                                           
+         */
         public function actualizar_diccionarios(){
+                        
             
-            $this->dic_general = array( 'metas' => $this->metas,
-                                        'links' => $this->links ,
-                                        'script' => $this->script,
-                                        'head' => $this->head ,
-                                        'contenido' => $this->perfil
-                                        );
+            $this->dic_general['metas'] = $this->metas;
+            $this->dic_general['links'] = $this->links;
+            $this->dic_general['script'] = $this->script;
+            $this->dic_general['head'] = $this->head;                                     
+            $this->dic_general['contenido'] = $this->perfil;            
             
-            $this->dic_contenido = array('datos_usuario' => $this->usuario, 
-                                        'seguidores' => $this->segui, 
-                                        'le_gustaria_ir' => $this->gustaria,
-                                        'modales'=> $this->modal,
-                                        'editarUsuario'=> $this->editar,
-                                        'experiencia'=>$this->expe,
-                                        'comparteExp'=>$this->comparte,
-                                        'editaExp'=>$this->editExp,                    
-                                        'registrarSitio'=>$this->creaSitio,
-                                        'registrarEmpresa'=>$this->creaEmpre                    
-                                        );           
+            $this->dic_contenido['datos_usuario'] = $this->usuario;
+            $this->dic_contenido['seguidores'] = $this->segui;
+            $this->dic_contenido['le_gustaria_ir'] = $this->gustaria;
+            $this->dic_contenido['modales']= $this->modal;
+            $this->dic_contenido['editarUsuario']= $this->editar;
+            $this->dic_contenido['experiencia']=$this->expe;
+            $this->dic_contenido['comparteExp']=$this->comparte;
+            $this->dic_contenido['editaExp']=$this->editExp;                    
+            $this->dic_contenido['registrarSitio']=$this->creaSitio;
+            $this->dic_contenido['registrarEmpresa']=$this->creaEmpre;       
+        }
+        
+        
+        
+        /**
+         * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
+         * esta accediendo.
+         */
+        public function refactory_header($opcion){
+            
+            switch($opcion){                                
+                case 1:
+                    
+                    
+                    $this->head = Global_var::refactory_header(false);                    
+                    $this->head .= "<br> <h1>Este es mi perfil</h1>";
+                    
+                    break;
+                case 2:
+                    $this->head = Global_var::refactory_header(false); 
+                    
+                    break;
+                
+                default:
+                    
+                    break;               
+            }
+            
         }
         
         
@@ -263,6 +290,7 @@
                 $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
                 
             }
+            
             
             foreach ($globales->global_var as $clave => $valor){
                 $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);

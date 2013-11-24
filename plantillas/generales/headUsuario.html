@@ -1,50 +1,68 @@
- <ul class="nav pull-right">
-    <li class="active">
-        <a class="cursor_link" id="BcomparteExp">Compartir Experiencia</a>
-    </li>
-    <li>
-        <a class="cursor_link" href="{URL_INICIO}">
-            <!--<i class="icon-screenshot"></i>-->
-            Explorar
-        </a>
-    </li>
-    <!--<li>
-        <a class="cursor_link">
-            Noticias
-            <span class="badge badge-success">2</span>                                            
-        </a>
-    </li>   -->                                 
-    <li class="dropdown">
-        <a class="cursor_link dropdown-toggle" data-toggle="dropdown">                                            
-            <!--<i class="icon-cogs"></i>-->
-            Opciones
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-              <li>
-                  <a class="cursor_link" id="BeditarU">
-                      <i class="icon-user"></i>                                                      
-                      Editar Perfil
-                  </a>
-              </li>
-              <li> 
-                  <a class="cursor_link" id="BUcreaS">
-                      <i class="icon-flag"></i>
-                      Registrar Sitio
-                  </a>
-              </li>
-              <li> 
-                  <a class="cursor_link" id="BUcreaE">
-                      <i class="icon-building"></i>
-                      Registrar Empresa
-                  </a>
-              </li>                                                                       
-              <li> 
-                  <a class="cursor_link" id="BExit">
-                      <i class="icon-signout"></i>
-                      Salir
-                  </a>
-              </li>                 
-        </ul>                                        
-    </li>                                       
-</ul>                  
+        <ul class="nav pull-right">                                
+            
+            <li class="active">
+                <a data-toggle="modal" href="#modalexpe">Compartir Experiencia</a>
+            </li>
+            <li>
+<!--                <a href="{url_usuario}?id={id_user}" class="cursor_link dropdown-toggle" data-toggle="dropdown">                    -->
+                <a href="{url_usuario}?id={id_user}">                   
+                    <img style="width: 30px; height: 30px;" src="{IMG_NATANE}/{img_user}">
+                    {nick}
+                    
+                </a>
+            </li>
+
+            <li class="dropdown">
+                <a class="cursor_link" data-toggle="dropdown">
+                    <i class="icon-cogs"></i>                 
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="cursor_link" id="BeditarU">
+                            <i class="icon-user"></i>
+                            Editar Perfil
+                        </a>
+                    </li>
+                    <li> 
+                        <a class="cursor_link" id="BUcreaS">
+                            <i class="icon-flag"></i>
+                            Registrar Sitio
+                        </a>
+                    </li>
+                    <li> 
+                        <a class="cursor_link" id="BUcreaE">
+                            <i class="icon-building"></i>
+                            Registrar Empresa
+                        </a>
+                    </li> 
+                    
+                    <li>
+                        <a>
+                            <i></i>
+                                Mis Sitios
+                        </a>
+                        
+                        <lu>                            
+                            {lista_mis_sitios}                        
+                        </lu>            
+                    </li>
+                    <li> 
+                    <li>
+                        <a>
+                            <i></i>
+                                Mis Empresas
+                        </a>                        
+                        
+                        <lu>                            
+                            {lista_mis_empresas}                        
+                        </lu>            
+                    </li>                        
+                    
+                    <li>
+                        <a href="{url_login}?enviar=Salir" class="cursor_link" id="BExit">
+                            <i class="icon-signout"></i>
+                            Salir
+                        </a>
+                    </li>                 
+                </ul>                                        

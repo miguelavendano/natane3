@@ -35,8 +35,9 @@
         }
 
         
-        public function main(){
+        public function principal_index($login){
             
+            $this->vista->refactory_header($login); 
             $this->vista->refactory_slider($this->slider());                        
             $this->vista->refactory_ferrocarril($this->ferrocarril());                        
             $this->vista->refactory_index();
@@ -47,10 +48,23 @@
     }
     
 
-    $_SESSION['id']=2;
+
     
-$obje = new IndexControl();
-$obje->main();
+    $obje = new IndexControl();
+    
+        
+    if(isset($_SESSION['id'])){ // existe sesion ?                                           
+
+        $obje->principal_index(1);
+
+    }else{
+
+        $obje->principal_index(0);
+
+    }
+
+
+
 
 
 ?>

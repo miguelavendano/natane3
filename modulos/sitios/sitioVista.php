@@ -49,7 +49,7 @@
 
         
             $this->base = file_get_contents('../../plantillas/generales/base.html');
-            $this->head = file_get_contents('../../plantillas/generales/headSitio.html');
+            $this->head = file_get_contents('../../plantillas/generales/head.html');
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
             
             $this->sitio = file_get_contents('../../plantillas/sitios/perfilSitio.html');   
@@ -131,6 +131,34 @@
                                         'id_sitio'=>$this->id_sitio);            
             
         }
+
+        
+        
+
+        /**
+         * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
+         * esta accediendo.
+         */
+        public function refactory_header($opcion){
+            
+            switch($opcion){                                
+                case 1:
+                    
+                    $this->head = Global_var::refactory_header(false);                    
+                    $this->head .= "<br> <h1>Este es mi Sitio</h1>";
+                    break;
+                case 2:
+                    $this->head = Global_var::refactory_header(false);                                        
+                    break;
+                
+                default:
+                    
+                    break;               
+            }
+            
+        }  
+        
+        
         
         public function refactory_slider($datos){   // contruye el slider
             
