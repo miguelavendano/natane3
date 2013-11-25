@@ -5,6 +5,8 @@ require_once('../../core/modeloEmpresa.php');
 require_once('../../core/modeloExperiencia.php');
 require_once('../../core/modeloRelaciones.php');
 require_once('../../core/modeloServicio.php');
+require_once('../../core/modeloImagen.php');
+
 
 
 if(isset($_POST['opcion'])){
@@ -260,7 +262,35 @@ if(isset($_POST['opcion'])){
             
             $id_servicio = $nodo_servicio->id;  //obtengo el id del nodo creado                                    
             ModeloRelaciones::crearRelacion($_POST['empresa'], $id_servicio, "Ofrece");   //crea la relacion entre la empresa y el servicio
+            
+            $cont=1;
+            //guarda la imagen de la experiencia
+            $upload_folder ='../../estatico/imagenes/';
+            foreach($_FILES['imagen_servicio']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    //alamaceno la imagen
+                    $nombre_archivo = $_FILES["imagen_servicio"]['name'][$key];
+                    $tmp_archivo = $_FILES["imagen_servicio"]['tmp_name'][$key];            
 
+                    //creo el nombre unico para la imagen
+                    $nomImgServiEmp = $_POST['empresa'].'_'.$id_servicio.'_'.$cont.'_'.$nombre_archivo;
+                    
+                    //crea el nodo de cada una de las imagenes
+                    $nodo_imagen = new Imagen();
+                    $nodo_imagen->nombre = $nomImgServiEmp;
+                    $nodo_imagen->descripcion = "";
+                    $nodo_imagen->type = 'Imagen';  
+                    ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
+
+                    $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
+                    ModeloRelaciones::crearRelacion($id_servicio, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
+                    
+                    //almaceno la imagen en la carpeta del servidor                                        
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgServiEmp);   //guarda la imagen                    
+                    $cont++;
+                }
+            }
+            
             $band="true";
             
         break;        

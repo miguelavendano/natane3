@@ -29,7 +29,7 @@
         public $latitud;
         public $longitud;   
         public $confianza;
-        public $crea_servicio;
+        public $creaServicio;
         public $editservicio;
 
         public $script;        
@@ -70,7 +70,7 @@
             $this->gustaria= $this->seguidores;
             $this->ferrocarril= file_get_contents('../../plantillas/generales/ferrocarril.html');
             $this->editar = file_get_contents('../../plantillas/empresas/editarEmpresa.html');
-            $this->crea_servicio = file_get_contents('../../plantillas/empresas/crearServicio.html');
+            $this->creaServicio = file_get_contents('../../plantillas/empresas/crearServicio.html');
             $this->elemento_ferro= file_get_contents('../../plantillas/generales/elemento_ferro.html');
             $this->modales= file_get_contents('../../plantillas/generales/barraModal.html');
                      
@@ -121,7 +121,7 @@
                                         'longitud'=>$this->longitud,
                                         'confianza'=>$this->confianza,
                                         'id_empresa'=>$this->id_empresa,
-                                        'crearServicio'=>$this->crea_servicio);
+                                        'crearServicio'=>$this->creaServicio);
         }
         
         
@@ -150,7 +150,7 @@
                                         'longitud'=>$this->longitud,
                                         'confianza'=>$this->confianza,
                                         'id_empresa'=>$this->id_empresa,
-                                        'crearServicio'=>$this->crea_servicio);
+                                        'crearServicio'=>$this->creaServicio);
         }
         
         public function refactory_slider($datos){   // contruye el slider
@@ -308,7 +308,7 @@
                     $aux = $this->servicios;
                     $aux = str_ireplace("{id_servicio}", $servicio->id, $aux);
                     $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);
-                    $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);
+                    $aux = str_ireplace("{imagen}", $servicio->imagen, $aux);
                     $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);
                     $resultados .= $aux;
                     $i++;

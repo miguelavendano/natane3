@@ -291,6 +291,20 @@ class ModelEmpresa{
                     $servicio->nombre = $row['']->getProperty('nombre');
                     $servicio->descripcion = $row['']->getProperty('descripcion');
                     //$servicio->type = $row['']->getProperty('type');
+                    
+                    
+                    $query="START n=node(".$servicio->id.") MATCH n-[:Img]->i RETURN i.nombre";                     
+                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
+                    $res = $queryRes->getResultSet();
+                    
+                    if(count($res)){
+                        foreach($res as $img) {    
+                           $servicio->imagen = $img[''];
+                        }
+                    }else{
+                        $servicio->imagen = "rafting-rio-savegre.jpg";
+                    }                    
+                    
                     array_push($array, $servicio);
                 }
                 return $array;

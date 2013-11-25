@@ -444,7 +444,8 @@ $(document).ready(function(){
                         //lis_img=lis_img+"<div id="+data.imagenes[i].img_id+" class='span3 im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
                     }
                     
-                    $("#imgs_experiencia").html(lis_img);                    */
+                    $("#imgs_experiencia").html(lis_img);        
+                     */
                 }
             });                                    
     }
@@ -540,7 +541,7 @@ $(document).ready(function(){
                 ,success: function(data,textStatus,jqXHR){                           
                     
                             if(/true/.test(data)) {                                
-                                alert("Experiancia Eliminada :D");                                                                          
+                                alert("Servicio Eliminada :D");                                                                          
                                 document.location.reload(); 
                             }
                             else alert("No se ha podido eliminar su experiencia"); 

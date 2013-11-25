@@ -8,7 +8,8 @@ class Servicio{
     
 	public $id = null;
 	public $nombre = '';
-	public $descripcion = '';        
+	public $descripcion = '';
+        public $imagen = '';
         public $type = '';        
 	public $node = null;
         
