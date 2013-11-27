@@ -329,31 +329,34 @@ if(isset($_POST['opcion'])){
         break;      
     
         case "eliminarServicio":
-                            
-                // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino                
-                $ids_relacionImgExp = ModeloRelaciones::get_id_relaciones($_POST['servicio'],"Img");
 
-                if($ids_relacionImgExp){
-                    //elimino la relacion entre la experiencia y las imagenes                    
-                    ModelExperiencia::eliminar_relaciones($ids_relacionImgExp);
+                // obtengo los id de las imagenes del servicio
+                $ids_nodoImgSer = ModeloRelaciones::get_ids_nodos_relacion($_POST['servicio'],"Img");
 
-                    // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino                                
-                    $ids_nodoImgExp = ModeloRelaciones::get_ids_imagenes_relacion('servicio');
-                    ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
-                }
+                //reviso si las imagenes tienen comentarios, si es asi los elimina
+                foreach($ids_nodoImgSer as $row){                        
 
-                // obtengo los id de las relacion Servicio-Sitio (Relacion), si existe la elimino
-                $ids_relacionSerSit = ModeloRelaciones::get_id_relaciones($_POST['servicio'],"Relacion");                
-                if($ids_relacionSerSit){
-                    ModeloRelaciones::eliminar_relaciones($ids_relacionSerSit);    
-                }                
+                    // obtengo los id de las relaciones Img-Comentario (Sobre), si existen las elimino                
+                    $ids_relacionImgSer = ModeloRelaciones::get_id_relaciones($row,"Img");                        
+
+                    if($ids_relacionImgSer){                            
+                        //elimino la relacion entre el servicio y su imagen
+                        ModeloRelaciones::eliminar_relaciones($ids_relacionImgSer);                        
+                        // obtengo los id las imagenes del servicio
+                        $ids_nodoImgComen = ModeloRelaciones::get_ids_nodos_relacion($row,"Img");
+                        //elimino las imagenes del servicio
+                        ModeloRelaciones::eliminar_nodos($ids_nodoImgComen);                        
+                    }
+                }            
                 
                 // obtengo el id de la relacion Empresa-Servicio (Ofrece)
-                $id_relacionEmpSer = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['servicio'], 'Ofrece');                    
-                ModeloRelaciones::eliminarRelacion($id_relacionEmpSer);
-                ModelServicio::eliminarServicio($_POST['servicio']);                
-            
-            $band="true";
+                $id_relacionEmpSer = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['servicio'], 'Ofrece');           
+                
+                if($id_relacionEmpSer){
+                    ModeloRelaciones::eliminarRelacion($id_relacionEmpSer);                                
+                    ModelServicio::eliminarServicio($_POST['servicio']);
+                    $band="true";
+                }                                
             
         break;          
         
