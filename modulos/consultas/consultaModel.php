@@ -5,14 +5,12 @@
     
 
     class ConsultaModel{
-        
-        //public $modelsitios;
+
         public $modelnodos;
         public $consulta;
         
         
         public function __construct($busqueda) {             
-            //$this->modelsitios = new ModelSitios();
             $this->modelnodos = new ModelNodos();
             $this->consulta = $busqueda;
         }       
@@ -29,8 +27,6 @@
                 return $resultado;
             }
             else{ return; }
-            
-                
             
         }  
     }

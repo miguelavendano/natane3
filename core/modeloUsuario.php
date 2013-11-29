@@ -293,8 +293,14 @@ class ModelUsuarios{
            
             if($result){
             
+                $ids_amigos = array();
+                
+                foreach($result as $row) {                    
+                    array_push($ids_amigos, $row['']->getId());
+                }
+                
                 foreach($result as $row) {
-                    
+                                        
                     $usuario = new Usuario();  
                     $usuario->id = $row['']->getId();
                     $usuario->type = $row['']->getProperty('type');

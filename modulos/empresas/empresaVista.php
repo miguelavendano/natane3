@@ -304,7 +304,6 @@
                 $i=0;
                 do{ 
                     $servicio=array_shift($datos);
-                    //$aux = $elemento;
                     $aux = $this->servicios;
                     $aux = str_ireplace("{id_servicio}", $servicio->id, $aux);
                     $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);

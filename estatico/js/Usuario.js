@@ -393,7 +393,7 @@ $(document).ready(function(){
                     success: function(data,textStatus,jqXHR){                           
                                 
                                 if(/true/.test(data)){                                
-                                    alert("Experiancia ingresada :D");                                                                          
+                                    alert("Edicion Realizada :D");                                                                          
                                 //document.location.reload();                                     
                                 }
                                 else alert("No se ha podido ingresar su experiencia"); 
