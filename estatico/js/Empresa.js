@@ -421,9 +421,10 @@ $(document).ready(function(){
                     
                     
                     $("#reload").css({visibility: 'hidden'});                       
-                    alert(data.nombre+"_"+data.descripcion);
+                    //alert(data.nombre+"_"+data.descripcion);
                     $("#ediExpEmTitulo").val(data.nombre);
                     $("#ediExpEmDesc").val(data.descripcion);
+                    
                     /*
                     var marco="";
                     var edicion="";                    
