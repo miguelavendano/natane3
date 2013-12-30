@@ -37,7 +37,7 @@ $(document).ready(function(){
             document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?b="+$("#loBusca").val();            
             
         }else{
-            alert("No hay datos para relizar una busqueda")
+            alert("No hay datos para relizar una busqueda");
         }        
     });      
 

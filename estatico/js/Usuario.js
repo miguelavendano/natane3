@@ -118,7 +118,7 @@ $(document).ready(function(){
             
     });
 
-    /*
+    /**
      * Guardar edicion de los datos del usuario
      */
     $("#guarda_edicion_usuario").click(function(){

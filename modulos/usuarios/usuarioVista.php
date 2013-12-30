@@ -128,8 +128,7 @@
                 case 1:
                     
                     
-                    $this->head = Global_var::refactory_header(false);                    
-                    $this->head .= "<br> <h1>Este es mi perfil</h1>";
+                    $this->head = Global_var::refactory_header(false);                                        
                     
                     break;
                 case 2:
