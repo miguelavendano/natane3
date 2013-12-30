@@ -1,7 +1,8 @@
 <?php
     
     require_once('../../core/modeloSitio.php');   
-    require_once('../../core/modeloUsuario.php');   
+    require_once('../../core/modeloUsuario.php'); 
+    require_once('../../core/modeloExperiencia.php');    
     require_once('../../librerias/neo4jphp.phar');
     require_once('../../librerias/Neo4Play.php');    
     
@@ -9,25 +10,32 @@
     class SitioModel{
         
         public $modelsitios;
-        public $id_sitio;
         public $modelusuario;
+        public $modelexpe;
+        public $id_sitio;
+        
         
         
         public function __construct($id) {            
             $this->modelsitios = new ModelSitios();
             $this->modelusuario = new ModelUsuarios();
+            $this->modelexpe = new ModelExperiencia();
             $this->id_sitio = $id;            
         }       
         
         public function get_contacto(){
+            
             $query = "START n=node(".$this->id_sitio.") RETURN n";            
             $resultado = $this->modelsitios->get_contacto($query);
             return $resultado;                        
+            
         }
         
-        public function  get_slider(){
-            $eslaider = array("panoramica1.jpg","panoramica4.jpg","panoramica3.jpg");
-            return $eslaider;         
+        public function get_slider(){
+            
+            $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Asociada]-e-[:Img]->i RETURN i.nombre";
+            $imagenes = $this->modelsitios->get_img_slider($query);
+            return $imagenes;
         }        
 
         
@@ -60,14 +68,17 @@
             $resultado = $this->modelusuario->get_desean($query);
             return $resultado;            
         } 
+                
         
-        
-        public function get_coordenadas_mapa(){
-            $query = "START n=node(".$this->id_sitio.") RETURN n";
-            //$resultado = $this->modelsitios->get_property_mapa($query);
-            $resultado = $this->modelsitios->get_sitio($query);
-            return $resultado;                        
-        } 
+        public function get_experiencias_visitantes(){   
+                        
+            $query = "start n=node(".$this->id_sitio.") match n<-[:Asociada|Etiqueta]->b return b;";            
+            //$resultado = $this->modelexpe->get_exper_usuario($query);
+            $resultado = $this->modelexpe->get_experiencias($query);
+            
+
+            return $resultado;            
+        }                  
         /*
         public function get_coordenadas_mapa(){            
             $query = "START n=node(".$this->id_sitio.") RETURN n.latitud,n.longitud";

@@ -14,6 +14,7 @@
         public $empresa; 
         public $servicios;
         public $expe;
+        public $edi_exp;
         public $slider_empresa;        
         public $contacto;
         public $seguidores;
@@ -28,7 +29,8 @@
         public $latitud;
         public $longitud;   
         public $confianza;
-
+        public $creaServicio;
+        public $editservicio;
 
         public $script;        
         
@@ -46,10 +48,10 @@
             
             $this->id_empresa = $id;
             $this->img_slider_act = '<div class="item active">
-                                        <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
+                                        <img src="{IMG_NATANE}/{url}" />
                                     </div>';
             $this->img_slider = '<div class="item">
-                                    <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
+                                    <img src="{IMG_NATANE}/{url}" />
                                 </div>';            
                   
         
@@ -60,12 +62,15 @@
             $this->empresa= file_get_contents('../../plantillas/empresas/perfilEmpresa.html');   
             $this->slider_empresa= file_get_contents('../../plantillas/empresas/slider_empresas.html');      
             $this->servicios = file_get_contents('../../plantillas/empresas/servicios.html');      
-            $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');      
+            $this->editservicio = file_get_contents('../../plantillas/empresas/editarServicio.html');
+            $this->expe = file_get_contents('../../plantillas/empresas/experiencia_empresa.html');      
+            $this->edi_exp = file_get_contents('../../plantillas/empresas/editarExperienciaEmpresa.html');
             $this->contacto = file_get_contents('../../plantillas/sitios/contacto.html'); 
             $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->gustaria= $this->seguidores;
             $this->ferrocarril= file_get_contents('../../plantillas/generales/ferrocarril.html');
             $this->editar = file_get_contents('../../plantillas/empresas/editarEmpresa.html');
+            $this->creaServicio = file_get_contents('../../plantillas/empresas/crearServicio.html');
             $this->elemento_ferro= file_get_contents('../../plantillas/generales/elemento_ferro.html');
             $this->modales= file_get_contents('../../plantillas/generales/barraModal.html');
                      
@@ -107,13 +112,16 @@
                                         'ferrocarril' => $this->ferrocarril,
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
+                                        'editarservicio' => $this->editservicio,
                                         'experiencias'=> $this->expe,
+                                        'edita_experiencia'=> $this->edi_exp,
                                         'nombre_empresa'=>$this->nombre,
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,
                                         'confianza'=>$this->confianza,
-                                        'id_empresa'=>$this->id_empresa);                                        
+                                        'id_empresa'=>$this->id_empresa,
+                                        'crearServicio'=>$this->creaServicio);
         }
         
         
@@ -133,13 +141,16 @@
                                         'ferrocarril' => $this->ferrocarril,
                                         'modales' => $this->modal,
                                         'servicios' => $this->servicios,
+                                        'editarservicio' => $this->editservicio,                
                                         'experiencias'=> $this->expe,
+                                        'edita_experiencia'=> $this->edi_exp,
                                         'nombre_empresa'=>$this->nombre,
                                         'editarEmpresa' => $this->editar,
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,
                                         'confianza'=>$this->confianza,
-                                        'id_empresa'=>$this->id_empresa);
+                                        'id_empresa'=>$this->id_empresa,
+                                        'crearServicio'=>$this->creaServicio);
         }
         
         
@@ -312,8 +323,6 @@
         public function refactory_servicios($datos){            
             
             $resultados="";
-            $elemento = $this->servicios;
-            
             
             for($c=0; count($datos); $c++){                
                 
@@ -321,29 +330,30 @@
                 $i=0;
                 do{ 
                     $servicio=array_shift($datos);
-                    $aux = $elemento;
-                    $aux = str_ireplace("{nombre}", $servicio->type, $aux);
-                    $aux = str_ireplace("{imagen}", "rafting-rio-savegre.jpg", $aux);                
+                    $aux = $this->servicios;
+                    $aux = str_ireplace("{id_servicio}", $servicio->id, $aux);
+                    $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);
+                    $aux = str_ireplace("{imagen}", $servicio->imagen, $aux);
+                    $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);
                     $resultados .= $aux;
                     $i++;
-                }while((count($datos)!=0)&& $i<3);
-                
+                }while((count($datos)!=0)&& $i<3);                
                 
                 $resultados .= '</div>';
             }
             
-            
             $this->servicios = $resultados;
             $this->actualizar_diccionarios();
-            
-            
-        }               
+        }   
+        
+        
         public function refactory_experiencias($datos){            
             
             $experiencias = "";
             
             foreach ($datos as $valor){
                 $aux = $this->expe;
+                $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
                 $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
                 $aux = str_ireplace('{comentario}',$valor->descripcion , $aux);
@@ -375,25 +385,18 @@
         }        
         
         public function refactory_total(){
-            
-            
+                        
             $globales = new Global_var();         
             
-            foreach ($this->dic_general as $clave=>$valor){
-                    
-                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
-                
+            foreach ($this->dic_general as $clave=>$valor){                    
+                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);                
             }
             
             foreach ($globales->global_var as $clave => $valor){
                 $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
             }            
-            
-            
+                        
             echo $this->base;
-            
-            
-            
         }
         
 

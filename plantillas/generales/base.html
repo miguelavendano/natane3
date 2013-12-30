@@ -8,7 +8,8 @@
     <link rel="icon" type="image/png" href="{IMG_SYS}/favicon.png" />        
 
 </head>
-<body onload="initialize()">
+<!--<body onload="initialize()">-->
+<body>
     {head} <!-- en "generales" -->
    
     <img id="reload" src="{IMG_SYS}/preload_hojas.gif" style="position: fixed; z-index: 999; visibility: hidden;">    
@@ -21,12 +22,15 @@
             <div class="row-fluid">
                 <div class="span12">
                     <div class="row-fluid">
+                        <div style="text-align: center">Gisoft Colombia</div>
+                        <!--
                         <div class="span6">
                             <p class="color_p2">&copy; Company 2012</p>
                         </div>
                         <div class="span6">
                             <p class="color_p3">&copy; Company 2012</p>
                         </div>
+                        -->
                     </div>
                 </div>
             </div>          
@@ -36,22 +40,24 @@
     
     
     <script src="{JS}/bootstrap-modal.js"></script>   <!--modal--> 
-    <script src="{JS}/jquery.js"></script>   
     <script src="{JS}/jquery-1.8.2.min.js"></script>    
+    <script src="{JS}/jquery.js"></script>   
     <script src="{JS}/bootstrap.min.js"></script>  <!--modal-->    
     <script src="{JS}/jquery.masonry.min.js"></script>
 
-    <script type="text/javascript" src="{JS}/autocompletar.js"></script>
-    <script type="text/javascript" src="{JS}/jquery.autocomplete.js"></script>
+<!--    <script type="text/javascript" src="{JS}/autocompletar.js"></script>
+    <script type="text/javascript" src="{JS}/jquery.autocomplete.js"></script>-->
 
+    <script src="{JS}/Comentario.js"></script>    
+    
     <!--<script src="{JS}/bootstrap-typeahead.js"></script>            -->
     
     <!--Calendario-->
     <script src="{JS}/bootstrap-datepicker.js"></script>            
     <script>
       $(function(){
-        $('#dp_reg').datepicker();               
-        $('#dp_edi').datepicker();             
+        $('.dp_reg').datepicker();               
+        $('.dp_edi').datepicker();             
       });
     </script>    
 
@@ -66,11 +72,11 @@
     <script src="{JS}/cargarImagenes.js"></script>-->
     
     <!--Funcion para subir las imagenes de la experiencia-->
-    <script type="text/javascript" language="javascript">   
+    <script>   
         
+        /*FUNCION PARA LA VISTA PREVIA EN LA EXPERIENCIA*/
         function vistaPreviaImagenes(evt) {
           var files = evt.target.files; // FileList object
-          var id=0;
           // Loop through the FileList and render image files as thumbnails.
           for (var i = 0, f; f = files[i]; i++) {
 
@@ -97,8 +103,102 @@
         }//cierra funcion
 
         document.getElementById('imagenes_experiencia').addEventListener('change', vistaPreviaImagenes, false);
-    
+        
+        /*FUNCION PARA LA VISTA PREVIA DE LA IMAGEN DE PERFIL*/
+        function vistaPreviaImgPerfil(evt) {
+          var files = evt.target.files; // FileList object
+          var output = [];
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+            
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                    // Render thumbnail.
+                    output.push('<img class="img-polaroid previa_fotoPerfil" src="', e.target.result,
+                                      '" title="', escape(theFile.name), '"/>');                                  
+                    document.getElementById('previa_img_perfil').innerHTML =  output.join('');
+                    
+                  };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
+
+        document.getElementById('foto_perfil').addEventListener('change', vistaPreviaImgPerfil, false);
+        
+        
+        /*FUNCION PARA LA VISTA PREVIA EN LA EDCION DE LA EXPERIENCIA*/
+        function vistaPreviaImgEditExp(evt) {
+          var files = evt.target.files; // FileList object
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+            
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                    // Render thumbnail.
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="vista_imgExp" src="', e.target.result,
+                                      '" title="', escape(theFile.name), '"/>'].join('');
+                    document.getElementById('list_edit_img_exp').insertBefore(span, null);
+                  };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
+
+        document.getElementById('imgs_edit_experiencia').addEventListener('change', vistaPreviaImgEditExp, false);
+
+        /*FUNCION PARA LA VISTA PREVIA DE LA IMAGEN DEL SERVICIO*/
+        function vistaPreviaImgServicio(evt) {
+          var files = evt.target.files; // FileList object
+          var output = [];
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+            
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                    // Render thumbnail.
+                    output.push('<img class="img-polaroid previa_fotoPerfil" src="', e.target.result,
+                                      '" title="', escape(theFile.name), '"/>');                                  
+                    document.getElementById('img_servi').innerHTML =  output.join('');
+                    
+                  };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
+
+        document.getElementById('imagen_servicio').addEventListener('change', vistaPreviaImgServicio, false);
+        
     </script>
+
     
     
     <!-- Elementos para el carrusel --> 
@@ -153,9 +253,11 @@
     <script src="{JS}/Empresa.js"></script>
     <script src="{JS}/Consulta.js"></script>
 
-{script}    
-  
+    <script src="{JS}/Mapa.js"></script>
     
+
+    
+    {script}    
     
 
 </body>

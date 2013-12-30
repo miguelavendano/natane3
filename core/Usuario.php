@@ -4,8 +4,8 @@
  * Clase con las propiedades de un Usuario
  * (nombre,apellido,imagen,...etc...) 
  */	
-class Usuario
-{
+class Usuario{
+    
 	public $id = null;
 	public $nombre = '';
 	public $apellido = '';
@@ -26,8 +26,7 @@ class Usuario
         
         public function __construct() {
             
-        }
-                
+        }                
 }
 
 

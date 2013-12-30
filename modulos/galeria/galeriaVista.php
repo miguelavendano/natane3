@@ -38,15 +38,13 @@
             $this->links = '<link href="{CSS}/bootstrap.css" rel="stylesheet">
                         <link href="{CSS}/bootstrap-responsive.css" rel="stylesheet">
                         <link href="{CSS}/estilos.css" rel="stylesheet">    
-                        <link href="{CSS}/estilos_galeria_sitio.css" rel="stylesheet">    
-
+                        <link href="{CSS}/estilos_mirar_fotos.css" rel="stylesheet">    
+                        
                         <link href="{CSS}/estilos_modal.css" rel="stylesheet" />    
                         <link href="{CSS}/datepicker.css" rel="stylesheet" />
                         <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    
                         <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />                                    
-                        <link rel="stylesheet" href="{CSS}/styles.css" />                        
-
-';            
+                        <link rel="stylesheet" href="{CSS}/styles.css" />';            
             
             
             $this->script ='    
@@ -71,9 +69,8 @@
                                 'head'=>$this->head,
                                 'contenido'=>$this->galeria);     
             
-            $this->dic_galeria = array('fotos'=>  $this->albun,
-                                    'modales'=>  $this->modal,
-                );              
+            $this->dic_galeria = array('fotos'=>  $this->fotos,
+                                    'modales'=>  $this->modal);              
             
             
         }
@@ -88,7 +85,7 @@
                                 'head'=>$this->head,
                                 'contenido'=>$this->galeria);
             
-            $this->dic_galeria = array('fotos'=>  $this->albun,
+            $this->dic_galeria = array('fotos'=>  $this->fotos,
                                     'modales'=>  $this->modal);
             
             
@@ -99,48 +96,43 @@
         
         public function refactory_galeria($id, $url_padre, $nombre_galeria){
             
-            
             $this->galeria = str_ireplace("{url_padre}", $url_padre, $this->galeria);
             $this->galeria = str_ireplace("{id}", $id, $this->galeria);
             $this->galeria = str_ireplace("{nombre_galeria}", $nombre_galeria, $this->galeria);
-            
- 
             
         }
         
         
         public function refactory_fotos($datos){            
             
-            
             $resultados="";
-            $fotos = $this->fotos;           
+            $fotos = $this->fotos;
             
-            
-
             for($c=0; count($datos); $c++){
                 
-                
-                //$resultados .= '<div class="row-fluid">';                            
+                $resultados .= '<div class="row-fluid">';                            
                 $i=0;
                 do{ 
                     $sitio=array_shift($datos);
                     $aux = $fotos;
+                    
                     if($sitio['type']=="Usuario")
                         $aux = str_ireplace("{url_autor}", "{url_usuario}", $aux);
                     else
                         $aux = str_ireplace("{url_autor}", "{url_empresa}", $aux);
                     
+                    $aux = str_ireplace("{url_img}", "{url_imagen}", $aux);
+                    $aux = str_ireplace("{id_imagen}", $sitio['img_id'], $aux);
+                    $aux = str_ireplace("{imagen}", $sitio['img_nombre'], $aux);  
                     $aux = str_ireplace("{id_usuario}", $sitio['usuario_id'], $aux);
                     $aux = str_ireplace("{nombre_usuario}", $sitio['usuario_nick'], $aux);
                     $aux = str_ireplace("{img_usuario}", $sitio['usuario_img'], $aux);  
-                    $aux = str_ireplace("{imagen}", $sitio['img_nombre'], $aux);  
-                    
                     
                     $resultados .= $aux;
                     $i++;
                 }while((count($datos)!=0)&& $i<4);
 
-                //$resultados .= '</div>';
+                $resultados .= '</div>';
             }
             
             
@@ -156,34 +148,29 @@
             
         }
         
-        
-        public function refactory_albun(){
-
-            $fotos_small = str_ireplace("{tamano}", "small", $this->fotos);
-            $fotos_small = str_ireplace("{tam_foto_big}", "", $fotos_small );
-            
-            $fotos_big = str_ireplace("{tamano}", "big", $this->fotos);
-            $fotos_big = str_ireplace("{tam_foto_big}", "--big", $fotos_big );            
-            
-            
-            $this->albun = str_ireplace("{foto_small}", $fotos_small , $this->albun);
-            $this->albun = str_ireplace("{foto_big}", $fotos_big , $this->albun);
-            
-
-            
-                       
-            
-            $this->actualizar_diccionarios();
-            
-        }
+       
+//        public function refactory_albun(){
+//
+//            $fotos_small = str_ireplace("{tamano}", "small", $this->fotos);
+//            $fotos_small = str_ireplace("{tam_foto_big}", "", $fotos_small );
+//            
+//            $fotos_big = str_ireplace("{tamano}", "big", $this->fotos);
+//            $fotos_big = str_ireplace("{tam_foto_big}", "--big", $fotos_big );            
+//            
+//            
+//            $this->albun = str_ireplace("{foto_small}", $fotos_small , $this->albun);
+//            $this->albun = str_ireplace("{foto_big}", $fotos_big , $this->albun);
+//                       
+//            
+//            $this->actualizar_diccionarios();
+//            
+//        }
         
         
         public function refactory_resultados_total(){
             
-            
             $globales = new Global_var();
             
-            $result_consulta = "";            
             
             foreach($this->dic_galeria as $clave=>$valor){
                

@@ -15,6 +15,7 @@ use Everyman\Neo4j\Node,
     Everyman\Neo4j\Command,
     Everyman\Neo4j\Query\Row;
 
+
 class ModelExperiencia{
     
         public function __construct() {
@@ -63,73 +64,11 @@ class ModelExperiencia{
             $eliminar->delete();			    	
 	}
 
+       
         /*
-         * Elimina las relaciones de una experiencia
-         */
-	public static function eliminar_relacion_experiencia($ids_relacionImgExp){
-            
-            foreach($ids_relacionImgExp as $value) {
-		$eliminar = Neo4Play::client()->getRelationship($value);
-		$eliminar->delete();                            
-            }            
-
-        }                
-                     
-        /*
-         * Elimina las imagenes de una experiencia
-         */
-	public static function eliminar_nodos_ImgExp($ids_nodoImgExp){
-            
-            foreach($ids_nodoImgExp as $value){
-                    $eliminar = Neo4Play::client()->getNode($row['']->getId());
-                    $eliminar->delete();			    	                                                                            
-            }
-            
-	}
-        
-   
-        /*
-         *Obtengo el id de la imagenes de una relacion
-         */
-	public static function get_id_nodoImgExp($queryString){
-            
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $result = $query->getResultSet();            
-            
-            $imagenes = array();
-            if($result){                
-            
-                foreach($result as $row) {   
-                    //echo $row['']->getId()."<br>";
-                    array_push($imagenes,$row['']->getId());
-                }
-                return $imagenes;
-            }   
-	}        
-
-        /*
-         * Obtine los ID de las relacines de un nodo dado segun su tipo
-         */        
-	public static function get_id_relaciones_nodo($idNodo,$tipoRelacion)
-	{
-		$miNodo = Neo4Play::client()->getNode($idNodo);
-		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
-                
-                $id_relaciones = array();
-                
-                if($relaciones){
-                    //echo "Se encontraron <b>".count($relaciones)."</b> relaciones";
-                    foreach ($relaciones as $valor){
-                        //echo "<h1>".$valor->getId()."</h1>";
-                        array_push($id_relaciones, $valor->getId());
-                    }
-                    return $id_relaciones;
-                }			
-		else return null;//echo "El nodo <b>NO</b> tiene relaciones";
-	}	
-        
-        
-        public function get_exper_usuario($queryString){
+         * Obtine las experiencias de un usuario
+         */                
+        public static function get_exper_usuario($queryString){
                         
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();
@@ -163,7 +102,7 @@ class ModelExperiencia{
                             $imagenes="";        
                         }
                         else {
-                            $experiencia->imagen= "experiencia_sin_foto.jpg";  //si la experienci no tiene imagen muestra esta por defecto
+                            $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
                         }
                         
                         
@@ -172,7 +111,7 @@ class ModelExperiencia{
                             $experiencia->imagen = $res[0]->offsetGet('');    
                         } 
                         else {
-                            $experiencia->imagen= "experiencia_sin_foto.jpg";
+                            $experiencia->imagen= "experiencia_sin_foto.png";
                         }
                         */ 
                         //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
@@ -187,13 +126,13 @@ class ModelExperiencia{
                 }
                 return $array;
             }
-
         }        
 
-
-        
-        
-        public function get_experiencias($queryString){
+       
+        /*
+         * Obtine las experiencias de una empresa o sitio
+         */                
+        public static function get_experiencias($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();            
@@ -205,17 +144,27 @@ class ModelExperiencia{
                     $experiencia = new Experiencia();
                     $experiencia->id = $row['']->getId();
                     
-                    
                     $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
                     $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
                     
                     if($queryRes){
-                        $res = $queryRes->getResultSet();                                        
-                        $experiencia->imagen= $res[0]->offsetGet('');
-                        //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
                         
-                    }else{
-                        $experiencia->imagen= "no hay";   //no hay                        
+                        $res = $queryRes->getResultSet();                                                                
+                        //$experiencia->imagen= $res[0]->offsetGet('');                        
+                        
+                        if(count($res)>0){
+                            $img_ran = rand (0, count($res)-1);   //elemento aleatorio de las imagenes de la experiencia
+
+                            foreach($res as $img){                            
+                                $imagenes[]=$img[''];                            
+                            }
+
+                            $experiencia->imagen = $imagenes[$img_ran];  //almacena la imagen aleatorio para mostrarla en la vista
+                            $imagenes="";        
+                        }
+                        else {
+                            $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
+                        }                        
                     }
                     
                     $experiencia->nombre = $row['']->getProperty('nombre');
@@ -227,11 +176,42 @@ class ModelExperiencia{
                 }
                 return $array;
             }
-
         }        
         
         
-        public function get_imagenes_galeria($queryString){
+        /*
+         * Obtine todas las imagenes de una experiencia
+         */                
+        public static function get_imagenes_experiencia($id_experiencia){                    
+            
+                    $queryString = "START n=node(".$id_experiencia.") MATCH n-[:Img]->i RETURN i";                    
+                    $queryRes = new Cypher\Query(Neo4Play::client(), $queryString);      
+                    $imagenes = $queryRes->getResultSet();                   
+                    $lis_imagenes = array();
+                    
+                    if(count($imagenes)){
+                        foreach($imagenes as $img) {                                                                    
+                            $img_nombre = $img['']->getProperty('nombre');
+                            $img_id = $img['']->getId();                        
+
+                            //almaceno las imagenes
+                            $retorno = array(                            
+                                'img_nombre'=>$img_nombre,
+                                'img_id'=>$img_id,                            
+                                );
+
+                            array_push($lis_imagenes, $retorno);                                                    
+                        }
+                    }
+                    
+            return $lis_imagenes;
+        }
+
+
+        /*
+         * Obtine todas las imagenes de una galeria ya sea de Sitio o Empresa
+         */         
+        public static function get_imagenes_galeria($queryString){
                        
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $imagen = $query->getResultSet();                                  
@@ -246,15 +226,15 @@ class ModelExperiencia{
                 
                     $img_nombre = $img['']->getProperty('nombre');
                     $img_id = $img['']->getId();
-                    $suario_id=$usuario[0]['']->getId();
-                    $suario_img=$usuario[0]['']->getProperty('imagen'); 
+                    $id_usuario=$usuario[0]['']->getId();
+                    $img_usuario=$usuario[0]['']->getProperty('imagen'); 
                     $type = "";
                     
                     if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
-                        $suario_nick=$usuario[0]['']->getProperty('nombre');                
+                        $nick_usuario=$usuario[0]['']->getProperty('nombre');                
                         $type="Empresa";
                     }else{
-                        $suario_nick=$usuario[0]['']->getProperty('nick');                
+                        $nick_usuario=$usuario[0]['']->getProperty('nick');                
                         $type="Usuario";
                     }
                     
@@ -262,9 +242,9 @@ class ModelExperiencia{
                     'type'=>$type,
                     'img_nombre'=>$img_nombre,
                     'img_id'=>$img_id,
-                    'usuario_id'=>$suario_id,
-                    'usuario_img'=>$suario_img,
-                    'usuario_nick'=>$suario_nick
+                    'usuario_id'=>$id_usuario,
+                    'usuario_img'=>$img_usuario,
+                    'usuario_nick'=>$nick_usuario
                     );
 
 
@@ -273,6 +253,57 @@ class ModelExperiencia{
             return $img_galeria;                      
         }
 
+
+        /*
+         * Obtine todas las imagenes de una galeria ya sea de Sitio o Empresa
+         */                 
+        public static function get_comentarios_imagen($queryString){
+                                        
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $comentarios = $query->getResultSet();                                              
+            $lis_comentarios = array();
+
+            foreach($comentarios as $com) {                    
+                
+                $query = "START u=node(".$com['']->getProperty('usuario').") RETURN u";
+                $queryRes = new Cypher\Query(Neo4Play::client(), $query);                          
+                $usuario = $queryRes->getResultSet();                    
+                
+                    $id_usuario = $com['']->getProperty('usuario');
+                    $detalle = $com['']->getProperty('detalle');
+                    $fecha = $com['']->getProperty('fecha');                    
+                    $id_comentario = $com['']->getId();
+                    
+                    //$id_usuariod=$usuario[0]['']->getId();
+                    $img_usuario=$usuario[0]['']->getProperty('imagen'); 
+                    $type = "";
+                    
+                    if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
+                        $nick_usuario=$usuario[0]['']->getProperty('nombre');                
+                        $type="Empresa";
+                    }else{
+                        $nick_usuario=$usuario[0]['']->getProperty('nick');  
+                        $type="Usuario";
+                    }
+                    
+                    $retorno = array(
+                        'type'=>$type,
+                        'id_usuario'=>$id_usuario,
+                        'img_usuario'=>$img_usuario,
+                        'nick_usuario'=>$nick_usuario,
+                        'detalle'=>$detalle,                            
+                        'fecha'=>$fecha,
+                        'id_comentario'=>$id_comentario,                                                            
+                        );
+
+                    array_push($lis_comentarios, $retorno);                                                                    
+            }
+            
+            return $lis_comentarios;
+            
+        }
+        
+        
         /*
          * Consulta todas las relaciones segun un tipo especifico
          * recibe el nodo de la experiencia y el tiipo de relacion

@@ -15,6 +15,7 @@
         public $url_empresa;
         public $url_consulta;
         public $url_galeria;
+        public $url_imagen;
         public $URL_INICIO;
         public $url_login;
         
@@ -25,27 +26,31 @@
             $this->IMG_NATANE = '/natane3/estatico/imagenes';
             $this->CSS = '/natane3/estatico/css';
             $this->JS = '/natane3/estatico/js';
-            $this->TITULO = "Natane Turismo";
+            $this->TITULO = "Turismeta";
             $this->url_usuario = '/natane3/modulos/usuarios/usuario.php';
             $this->url_sitio = '/natane3/modulos/sitios/sitio.php';
             $this->url_empresa = '/natane3/modulos/empresas/empresa.php';
-            $this->url_consulta = '/natane3/modulos/consultas/consulta.php';
-            $this->URL_INICIO = '/natane3/Index/';
+            $this->url_consulta = '/natane3/modulos/consultas/consulta.php';            
             $this->url_galeria= '/natane3/modulos/galeria/galeria.php';
             $this->url_login= '/natane3/modulos/login/login.php';                      
-            
-            
+            $this->url_imagen= '/natane3/modulos/imagen/imagen.php';
+            $this->URL_INICIO = '/natane3/Index/';
             
             
 
 
-            $this->global_var = array('IMG_SYS'=>$this->IMG_SYS,'IMG_NATANE'=> $this->IMG_NATANE,
+            $this->global_var = array('IMG_SYS'=>$this->IMG_SYS,
+                                    'IMG_NATANE'=> $this->IMG_NATANE,
                                     'CSS'=>$this->CSS, 'JS'=>$this->JS, 'TITULO' => $this->TITULO,
-                                    'url_usuario'=>$this->url_usuario, 'url_sitio'=>$this->url_sitio, 
-                                    'url_empresa'=>$this->url_empresa, 'URL_INICIO'=>$this->URL_INICIO,
+                                    'url_usuario'=>$this->url_usuario,
+                                    'url_sitio'=>$this->url_sitio, 
+                                    'url_empresa'=>$this->url_empresa, 
                                     'url_consulta'=>$this->url_consulta,
                                     'url_galeria'=>$this->url_galeria,
-                                    'url_login'=>$this->url_login);            
+                                    'url_login'=>$this->url_login,
+                                    'url_imagen'=>$this->url_imagen,
+                                    'URL_INICIO'=>$this->URL_INICIO
+                    );                                            
             
             
         }
@@ -133,17 +138,15 @@
             $head = str_ireplace('{opciones_login}',$headusuario,$head);
 
             
-            return $head;
-            
+            return $head;            
             
         }
         
         
         
         
+
     }
-
-
 
 
 

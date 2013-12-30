@@ -19,13 +19,19 @@ use Everyman\Neo4j\Node,
         public $modelexperiencia;
         
         
-        public function __construct() {
-            
+        public function __construct() {            
             $this->modelsitios = new ModelSitios();
-            $this->modelexperiencia = new ModelExperiencia();
-          
-            
+            $this->modelexperiencia = new ModelExperiencia();                      
         }       
+        
+        
+        public function get_img_asociadas($id_sitio){                        
+            
+            $query = "START n=node(".$id_sitio.") MATCH n<-[:Asociada]-e-[:Img]->i RETURN i";
+            $imagenes = $this->modelexperiencia->get_imagenes_galeria($query);            
+            return $imagenes;
+            
+        }        
         
         
         public function get_img_todas($id){            

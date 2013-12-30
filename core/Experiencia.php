@@ -4,8 +4,8 @@
  * Clase con las propiedades de una Experiencia
  * (nombre y descripcion) 
  */
-class Experiencia
-{
+class Experiencia{
+    
 	public $id = null;
 	public $nombre = '';
 	public $descripcion = '';
@@ -15,7 +15,6 @@ class Experiencia
         public function __construct() {
             
         }
-                
 }
 
 

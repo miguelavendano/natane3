@@ -15,6 +15,7 @@
         public $nombre;
         public $sitio;        
         public $slider_sitio;        
+        public $edita_slider;
         public $contacto;
         public $seguidores;
         public $gustaria;
@@ -29,7 +30,8 @@
         public $latitud;
         public $longitud;
         public $losvotos;
-        
+        public $experiencias;        
+                
         public $dic_general;
         public $dic_contenido;
 
@@ -41,10 +43,10 @@
 
             $this->id_sitio = $id;
             $this->img_slider_act = '<div class="item active">
-                                        <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
+                                        <img src="{IMG_NATANE}/{url}" />
                                     </div>';
             $this->img_slider = '<div class="item">
-                                    <img alt="Jaipur" src="{IMG_NATANE}/{url}" />
+                                    <img src="{IMG_NATANE}/{url}" />
                                 </div>';            
 
         
@@ -54,6 +56,7 @@
             
             $this->sitio = file_get_contents('../../plantillas/sitios/perfilSitio.html');   
             $this->slider_sitio = file_get_contents('../../plantillas/sitios/slider_sitio.html');      
+            $this->edita_slider = file_get_contents('../../plantillas/generales/editar_slider.html');      
             $this->contacto = file_get_contents('../../plantillas/sitios/contacto.html'); 
             $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
             $this->gustaria = $this->seguidores;
@@ -61,7 +64,9 @@
             $this->elemento_ferro = file_get_contents('../../plantillas/generales/elemento_ferro.html');
             $this->editar = file_get_contents('../../plantillas/sitios/editarSitio.html');
             $this->registrar = file_get_contents('../../plantillas/sitios/registrarSitio.html');
+            $this->experiencias = file_get_contents('../../plantillas/sitios/experienciaSitio.html');     
             $this->modales = file_get_contents('../../plantillas/generales/barraModal.html');
+            
                      
             $this->metas = '<meta charset="utf-8">
                             <title>{TITULO}</title>
@@ -91,6 +96,7 @@
 
             
             $this->dic_contenido = array('slider_sitio' => $this->slider_sitio, 
+                                        'editar_slider' => $this->edita_slider,                
                                         'nombre'=>$this->nombre,
                                         'descripcion' => $this->descripcion, 
                                         'contacto' => $this->contacto, 
@@ -102,6 +108,7 @@
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,                                
                                         'votos' => $this->losvotos, 
+                                        'experienciaSitio' => $this->experiencias,
                                         'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);
         }
@@ -116,6 +123,7 @@
                                     'contenido' => $this->sitio);
             
             $this->dic_contenido = array('slider_sitio' => $this->slider_sitio, 
+                                        'editar_slider' => $this->edita_slider,
                                         'nombre'=>$this->nombre,
                                         'descripcion' => $this->descripcion, 
                                         'contacto' => $this->contacto, 
@@ -127,6 +135,7 @@
                                         'latitud'=>$this->latitud,                
                                         'longitud'=>$this->longitud,                
                                         'votos' => $this->losvotos, 
+                                        'experienciaSitio' => $this->experiencias,
                                         'modales' => $this->modal,                                        
                                         'id_sitio'=>$this->id_sitio);            
             
@@ -162,17 +171,22 @@
         
         public function refactory_slider($datos){   // contruye el slider
             
-            $imagenes = str_ireplace("{url}", $datos[0], $this->img_slider_act); // carga la imagen principal del slider
+            if(count($datos)){
+                $imagenes = str_ireplace("{url}", $datos[0], $this->img_slider_act); // carga la imagen principal del slider
 
-            for($i=1; $i<count($datos); $i++){  // carga el resto de imagenes                             
-                $imagenes .= str_ireplace("{url}", $datos[$i], $this->img_slider);
-            }            
-                        
-            $this->slider_sitio = str_ireplace("{imagenes}", $imagenes, $this->slider_sitio);   // se remplazan todas las imagenes sobre el template de slider
-            
-            $this->actualizar_diccionarios();
+                for($i=1; $i<count($datos); $i++){  // carga el resto de imagenes                             
+                    $imagenes .= str_ireplace("{url}", $datos[$i], $this->img_slider);
+                }            
 
-        }        
+                $this->slider_sitio = str_ireplace("{imagenes}", $imagenes, $this->slider_sitio);   // se remplazan todas las imagenes sobre el template de slider
+
+                $this->actualizar_diccionarios();
+            }
+            else{                
+                $imagenes = str_ireplace("{url}", "slider_sin_imagenes.jpg", $this->img_slider);
+                $this->slider_sitio = str_ireplace("{imagenes}", $imagenes, $this->slider_sitio);   // se remplazan todas las imagenes sobre el template de slider
+            }
+        }
         
         
         
@@ -260,11 +274,32 @@
         }            
      
 
-        public function refactory_mapa( $coordenadas ){            
-            $this->latitud = $coordenadas[0]->latitud;
-            $this->longitud = $coordenadas[0]->longitud;                      
+        public function refactory_experiencias($datos){            
+            
+            $experiencias_sitio = "";
+
+            for($c=0; count($datos); $c++){                
+                
+                $experiencias_sitio .= '<div class="row-fluid">';                            
+                $i=0;
+                do{ 
+                    $expe=array_shift($datos);
+                    $aux = $this->experiencias;
+                    $aux = str_ireplace('{id_experiencia}', $expe->id, $aux);                
+                    $aux = str_ireplace('{imagen}', $expe->imagen, $aux);
+                    $aux = str_ireplace('{titulo}', $expe->nombre, $aux);
+                    $aux = str_ireplace('{descripcion}', $expe->descripcion , $aux);
+                    $experiencias_sitio .= $aux;
+                    $i++;
+                }while((count($datos)!=0)&& $i<3);                
+                
+                $experiencias_sitio .= '</div>';
+            }            
+            
+            $this->experiencias = $experiencias_sitio;            
             $this->actualizar_diccionarios();
-        }        
+                        
+        }               
         
         
         public function refactory_contenido(){            

@@ -12,8 +12,7 @@ use Everyman\Neo4j\Node,
  * Clase con las funciones para ejecutar sobre cualquier tipo de relacion
  * (crear, eliminar, contar, consultar ...) 
  */	
-class ModeloRelaciones
-{
+class ModeloRelaciones{
 
 	public static function crearRelacion($idNodoStart,$idNodoEnd,$nameRelacion){
 
@@ -119,33 +118,92 @@ class ModeloRelaciones
                 foreach($resultado as $row) {
                         //echo " ".$row['']->getId()."\n";                        
                    return $row['']->getId();                        
-                }
+                }                
+	}	
+
+	public static function consultaNodosEtiquetadosEnRelacion($idExperiencia){
+                                       
+                $queryString = "START n=node(".$idExperiencia.") MATCH n-[:Etiqueta]->i RETURN i";
+
+                $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+                $resultado = $query->getResultSet();
                 
-	}					        
-/*
+                $etiquetados = array();
+                //echo "Se encontraron ".count($resultado)." etiquetados.\n";
+                foreach($resultado as $row){
+                    array_push($etiquetados,$row['']->getId());
+                }        
+                
+                return $etiquetados;
+	}	
 
-	public static function consulta($idNodoStart)
-	{
+        
+        /*
+         * Obtine los ID de las relacines de un nodo dado segun su tipo
+         */        
+	public static function get_id_relaciones($idNodo,$tipoRelacion){
+	
+		$miNodo = Neo4Play::client()->getNode($idNodo);
+		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
+                
+                $id_relaciones = array();
+                
+                if($relaciones){
+                    //echo "Se encontraron <b>".count($relaciones)."</b> relaciones";
+                    foreach ($relaciones as $valor){
+                        //echo "<h1>".$valor->getId()."</h1>";
+                        array_push($id_relaciones, $valor->getId());
+                    }
+                    return $id_relaciones;
+                }			
+		else return null;//echo "El nodo <b>NO</b> tiene relaciones";
+	}	
 
-		if ($idNodoStart){			
-			
-			$nodoStart = Neo4Play::client()->getNode($idNodoStart);
-		
-			$queryString = "START d = node:sitios(name='".$nodoStart->getProperty('name')."') MATCH d-[:Socios]->friend-[:Socios]->friend_of_friend RETURN friend_of_friend";			
+        
+        /*
+         *Obtengo el id de las imagenes de una relacion
+         */
+	public static function get_ids_nodos_relacion($idNodo,$TipoRelacion){
+            
+            $queryString = "START n=node(".$idNodo.") MATCH n-[:".$TipoRelacion."]->i RETURN i";            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();            
+            
+            $imagenes = array();
+            if($result){                
+            
+                foreach($result as $row) {   
+                    //echo $row['']->getId()."<br>";
+                    array_push($imagenes,$row['']->getId());
+                }
+                return $imagenes;
+            }   
+	}               
 
-			$query = new Cypher\Query(Neo4Play::client(), $queryString);						  
-			$result = $query->getResultSet();	
-
-			if($result){							
-				echo "Se encontraron ".count($result)." amigos.\n";
-				foreach($result as $row) {
-					echo "  ".$row['']->getProperty('name')."\n";
-				}
-			}
-		}
-	}
-*/
-
+        
+        /*
+         * Elimina Varias Relaciones
+         */
+	public static function eliminar_relaciones($ids_relaciones){
+            
+            foreach($ids_relaciones as $value) {
+		$eliminar = Neo4Play::client()->getRelationship($value);
+		$eliminar->delete();                            
+            }            
+        }                
+                     
+        
+        /*
+         * Elimina Varios Nodos
+         */
+	public static function eliminar_nodos($ids_nodos){
+            
+            foreach($ids_nodos as $row){
+                    $eliminar = Neo4Play::client()->getNode($row);
+                    $eliminar->delete();			    	                                                                            
+            }
+            
+	}        
 
 }
 

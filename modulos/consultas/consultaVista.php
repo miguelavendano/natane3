@@ -76,31 +76,46 @@
                     $i=0;
                     do{ 
                         $resultado=array_shift($datos);
-                        $aux = $elemento;
-                        $aux = str_ireplace("{id_sitio}", $resultado->id, $aux);
-                        $aux = str_ireplace("{nombre}", $resultado->nombre, $aux);
-                        $aux = str_ireplace("{imagen}", $resultado->imagen, $aux);
-                        $aux = str_ireplace("{icono}", $resultado->tipo_sitio, $aux);
-                        $resultados .= $aux;
-                        $i++;
+                        
+                        if($resultado->type=="Sitio"){
+                            $aux = $elemento;
+                            $aux = str_ireplace("{url}", "{url_sitio}", $aux);
+                            $aux = str_ireplace("{id_sitio}", $resultado->id, $aux);
+                            $aux = str_ireplace("{nombre}", $resultado->nombre, $aux);
+                            $aux = str_ireplace("{imagen}", $resultado->imagen, $aux);
+                            $aux = str_ireplace("{icono}", $resultado->tipo_sitio, $aux);
+                            $resultados .= $aux;
+                        }
+                        elseif($resultado->type=="Empresa"){
+                            $aux = $elemento;
+                            $aux = str_ireplace("{url}", "{url_empresa}", $aux);
+                            $aux = str_ireplace("{id_sitio}", $resultado->id, $aux);
+                            $aux = str_ireplace("{nombre}", $resultado->nombre, $aux);
+                            $aux = str_ireplace("{imagen}", $resultado->imagen, $aux);
+                            $aux = str_ireplace("{icono}", "", $aux);
+                            $resultados .= $aux;                            
+                        }
+                        elseif($resultado->type=="Usuario"){
+                            $nom = $resultado->nombre." ".$resultado->apellido;
+                            $aux = $elemento;
+                            $aux = str_ireplace("{url}", "{url_usuario}", $aux);
+                            $aux = str_ireplace("{id_sitio}", $resultado->id, $aux);
+                            $aux = str_ireplace("{nombre}", $nom, $aux);
+                            $aux = str_ireplace("{imagen}", $resultado->imagen, $aux);
+                            $aux = str_ireplace("{icono}", "", $aux);
+                            $resultados .= $aux;
+                        }
+                        
+                        $i++;                        
                     }while((count($datos)!=0) && $i<4 && $resultado->type="Empresa" || $resultado->type="Sitio" || $resultado->type="Usuario");
 
                     $resultados .= '</div>';
                 }
 
                 $this->elem_result = $resultados;
-    //            
-    //                $sitio = new Sitio();
-    //                $sitio->id = $row['']->getId();
-    //                $sitio->nombre = $row['']->getProperty('nombre');
-    //                $sitio->descripcion = $row['']->getProperty('descripcion');
-    //                $sitio->tipo = $row['']->getProperty('tipo');
-    //                $sitio->imagen = $row['']->getProperty('imagen');            
-                
+              
             }
             else { $this->elem_result = "<h2>NO se han encontrado coincidencias.</h2>"; }
-            
-
         }
         
         

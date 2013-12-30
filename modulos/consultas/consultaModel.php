@@ -1,38 +1,32 @@
 <?php   
-    require_once('../../core/modeloSitio.php');
+    require_once('../../core/modeloNodos.php');
     require_once('../../librerias/neo4jphp.phar');
     require_once('../../librerias/Neo4Play.php');    
     
 
     class ConsultaModel{
-        
-        public $modelsitios;
+
+        public $modelnodos;
         public $consulta;
         
         
-        public function __construct($busqueda) {            
-            $this->modelsitios = new ModelSitios();
+        public function __construct($busqueda) {             
+            $this->modelnodos = new ModelNodos();
             $this->consulta = $busqueda;
         }       
         
         
         public function get_resultados(){   
+
+            //  $query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$this->consulta.".*' AND (n.type='Usuario' OR n.type='Sitio' OR n.type='Empresa') RETURN n";            
+            $query = "START n=node(*) WHERE n.type<>'Imagen' AND n.type<>'Experiencia' AND n.type<>'Servicio' AND n.type<>'Comentario' AND n.nombre =~ '(?i).*".$this->consulta.".*' RETURN n";
             
-            
-            //$query = "START n=node(*) WHERE n.type='Sitio' RETURN n;"; 
-            $query = "START n=node(*) WHERE n.nombre =~ '(?i).*".$this->consulta.".*' AND n.type<>'Imagen' AND n.type<>'Experiencia' RETURN n";
-            //$ale = rand(1, 20);
-            
-            //$resultado = $this->modelsitios->get_sitio_aleatorio($query, $ale);
-            
-            $resultado = $this->modelsitios->get_todo($query);
+            $resultado = $this->modelnodos->get_todo($query);
             
             if($resultado){
                 return $resultado;
             }
             else{ return; }
-            
-                
             
         }  
     }

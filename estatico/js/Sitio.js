@@ -62,11 +62,13 @@ $(document).ready(function(){
     $("#BeditarS").click(function(){
 
             $("#editarSitio").css({display:'inline'});   
-            //$(".pestañas").css({display:'none'});
-            //$("#Enom").val("julian");
-
+            $("#slider_sitio").css({display:'none'});
+            $("#ContenidoSitio").css({display:'none'});
+            //$("#EmapaSitio").html("<div class='mapa-natane'></div>");
+            
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");            
+            
 
             $.ajax({
                 url:'/natane3/estatico/php/opcionesSitio.php'
@@ -110,8 +112,6 @@ $(document).ready(function(){
                         $("#EtelS").val(data.tel);                
                         $("#EdirS").val(data.direc);
                         $("#EmailS").val(data.mail);                        
-                        $("#ElatS").val(data.lat);
-                        $("#ElongS").val(data.lon);
                         $("#Es_webS").val(data.s_web);
                         $("#EfaceS").val(data.face);
                         $("#EtwiS").val(data.twi);
@@ -145,61 +145,62 @@ $(document).ready(function(){
                         }
                     
                 }
-            });            
+            }); 
+            
+            editarMapaSitio(); //carga el mapa con la posibilidad de editar su posicion
     });
 
 
     /*
      * Guardar edicion de los datos del sitio
-     */
+     
     $("#guarda_edicion_sitio").click(function(){
 
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
-            
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesSitio.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion: 'guardar_edicionS',                   
-                    sitio: id_url[1],
-                    nombre: $("#EnomS").val(),
-                    descri: $("#EdescS").val(),
-                    city: $("#EcityS").val(),                    
-                    direc: $("#EdirS").val(),
-                    tele: $("#EtelS").val(),                    
-                    mail: $("#EmailS").val(),                    
-                    lat: $("#ElatS").val(),                    
-                    lon: $("#ElongS").val(),
-                    s_web: $("#Es_webS").val(),
-                    face: $("#EfaceS").val(),
-                    twit: $("#EtwiS").val(),
-                    youtube: $("#EyouS").val(),
-                    tsitio: $("input[name='EtipoS']:checked").val(),
-                    pass: $("#Epass1S").val()
-                    //imagen: $("#Epass1").val(data.imagen),
-                }
-                ,dataType:'JSON'
-                ,beforeSend:function(jqXHR, settings ){
-                    alert("Debe confirmar su identidad, para realizar los cambios.");                                        
-                }
-                ,success: function(data,textStatus,jqXHR){                           
 
-                        if(/true/.test(data)) {                                
-                            alert("Cambios guardados.");
-                            document.location.reload();                                     
-                        }
-                        else alert("No se han podido realizar los cambios");                                                     
-                }
-            });                        
-    });    
+                $.ajax({
+                    url:'/natane3/estatico/php/opcionesSitio.php'
+                    ,type:'POST'                    
+                    ,data:{
+                        opcion: 'guardar_edicionS',                   
+                        sitio: id_url[1],
+                        nombre: $("#EnomS").val(),
+                        descri: $("#EdescS").val(),
+                        city: $("#EcityS").val(),                    
+                        direc: $("#EdirS").val(),
+                        tele: $("#EtelS").val(),                    
+                        mail: $("#EmailS").val(),                    
+                        lat_lon: mapa.getPosicion(),
+                        s_web: $("#Es_webS").val(),
+                        face: $("#EfaceS").val(),
+                        twit: $("#EtwiS").val(),
+                        youtube: $("#EyouS").val(),
+                        tsitio: $("input[name='EtipoS']:checked").val(),
+                        pass: $("#Epass1S").val()
+                        //imagen: $("#Epass1").val(data.imagen),
+                    }
+                    ,dataType:'JSON'
+                    ,success: function(data,textStatus,jqXHR){                           
 
+                            if(/true/.test(data)) {                                
+                                alert("Cambios guardados.");
+                                document.location.reload();                                     
+                            }
+                            else alert("No se han podido realizar los cambios");                                                     
+                    }
+                });                        
+    });
+    */    
+        
 
     /*
      * Cancelar edicion de los datos del sitio
      */
     $(".cancelar_edicion_sitio").click(function(){        
-             $("#editarSitio").css({display:'none'});                
+            $("#editarSitio").css({display:'none'});   
+            $("#slider_sitio").css({display:'inline'});
+            $("#ContenidoSitio").css({display:'inline'});             
     }); 
     
     /*
@@ -230,7 +231,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'visito',                   
                     sitio: id_url[1],
-                    usuario: '279'
+                    usuario: '62'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                   
@@ -251,7 +252,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'elimina-visita',
                     sitio: id_url[1],
-                    usuario: '279'
+                    usuario: '62'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -278,7 +279,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'quiere-visitar',
                     sitio: id_url[1],
-                    usuario: '279'
+                    usuario: '62'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                   
@@ -299,7 +300,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'elimina-intencion-visitar',
                     sitio: id_url[1],
-                    usuario: '279'
+                    usuario: '62'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -450,5 +451,59 @@ $(document).ready(function(){
             });                                           
     });
 
+
+    /*
+     * Editar Imagenes del Slider
+     */
+    $("#edit_slider_sitio").click(function(){
+
+            $("#EditarSlider").css({display:'inline'});   
+            $("#slider_sitio").css({display:'none'});   
+
+    });
+    
+
+    /*
+     * Crea la experiencia del usuario
+     */   
+    $("#guardaSliderSitio").click(function(){            
+            //alert("entro=???");
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");       
+            
+            var datosform = new FormData(document.getElementById('formImgSlider'));            
+            datosform.append( "opcion", "guarda_slider_sitio");            
+            datosform.append( "sitio", id_url[1] );
+
+            $.ajax({
+               url : '/natane3/estatico/php/opcionesSitio.php',
+               type : 'POST',
+               data:{
+                    opcion: 'guarda_slider_sitio',
+                    sitio: id_url[1],
+                    voto: $(this).data("value")
+               },
+               processData : false, 
+               contentType : false, 
+               success: function(data,textStatus,jqXHR){                           
+
+                        if(/true/.test(data)) {                                
+                            alert("Slider Modificado... :D");
+                            $("#slider_sitio").css({display:'inline'});                            
+                        }
+                        else alert("No se han podido relizar los cambios"); 
+                }
+            });
+
+    });
+    
+    
+    /*
+     * Cancelar edicion del slider
+     */
+    $(".cancelaEdicionSlider").click(function(){        
+            $("#EditarSlider").css({display:'none'});   
+            $("#slider_sitio").css({display:'inline'});             
+    });     
 
 });

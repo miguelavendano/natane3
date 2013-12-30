@@ -16,9 +16,11 @@
         public $editar;
         public $expe;
         public $gustaria;
+        public $amigos;
         public $perfil;
         public $comparte;
         public $editExp;
+        public $verExp;
         public $creaSitio;
         public $creaEmpre;
         
@@ -42,11 +44,11 @@
             $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
             $this->comparte = file_get_contents('../../plantillas/usuario/compartirExperiencia.html');
             $this->editExp = file_get_contents('../../plantillas/usuario/editarExperiencia.html');
+            $this->verExp = file_get_contents('../../plantillas/usuario/verExperiencia.html');
             $this->creaSitio = file_get_contents('../../plantillas/sitios/registrarSitio.html');
-            $this->creaEmpre = file_get_contents('../../plantillas/empresas/registrarEmpresa.html');
-            
-            
-            $this->gustaria = $this->expe;
+            $this->creaEmpre = file_get_contents('../../plantillas/empresas/registrarEmpresa.html');                        
+            $this->gustaria = file_get_contents('../../plantillas/usuario/sitiosAvisitar.html');            
+            $this->amigos = file_get_contents('../../plantillas/usuario/amigos.html');            
                      
             $this->metas = '<meta charset="utf-8">
                             <title> {TITULO}</title>
@@ -78,12 +80,14 @@
             
             $this->dic_contenido = array('datos_usuario' => $this->usuario, 
                                         'seguidores' => $this->segui, 
-                                        'le_gustaria_ir' => $this->gustaria,
+                                        'quiere_visitar' => $this->gustaria,
+                                        'amigos_de_amigos' => $this->amigos,
                                         'modales'=> $this->modal,
                                         'editarUsuario'=>$this->editar,
                                         'experiencia'=>$this->expe,
                                         'comparteExp'=>$this->comparte,
                                         'editaExp'=>$this->editExp,
+                                        'verExp'=>$this->verExp,
                                         'registrarSitio'=>$this->creaSitio,
                                         'registrarrEmpresa'=>$this->creaEmpre                    
                                         );
@@ -141,6 +145,27 @@
                     break;               
             }
             
+
+            $this->dic_general = array( 'metas' => $this->metas,
+                                        'links' => $this->links ,
+                                        'script' => $this->script,
+                                        'head' => $this->head ,
+                                        'contenido' => $this->perfil
+                                        );
+            
+            $this->dic_contenido = array('datos_usuario' => $this->usuario, 
+                                        'seguidores' => $this->segui, 
+                                        'quiere_visitar' => $this->gustaria,
+                                        'amigos_de_amigos' => $this->amigos,
+                                        'modales'=> $this->modal,
+                                        'editarUsuario'=> $this->editar,
+                                        'experiencia'=>$this->expe,
+                                        'comparteExp'=>$this->comparte,
+                                        'editaExp'=>$this->editExp,                    
+                                        'verExp'=>$this->verExp,
+                                        'registrarSitio'=>$this->creaSitio,
+                                        'registrarEmpresa'=>$this->creaEmpre                    
+                                        );           
         }
         
         
@@ -151,7 +176,7 @@
          */                              
         public function refactory_usuario($datos){
                 
-            //$this->usuario = str_ireplace('{nombre}',$datos[0]->nick ,$this->usuario );
+            $this->usuario = str_ireplace('{nick}',$datos[0]->nick ,$this->usuario );
             $this->usuario = str_ireplace('{nombre}',$datos[0]->nombre." ".$datos[0]->apellido,$this->usuario );
             $this->usuario = str_ireplace('{genero}',$datos[0]->genero ,$this->usuario );
             $this->usuario = str_ireplace('{imagen}',$datos[0]->imagen ,$this->usuario );
@@ -161,6 +186,7 @@
             $this->usuario = str_ireplace('{web_site}',$datos[0]->sitio_web ,$this->usuario );
 
             $this->actualizar_diccionarios();          
+
 
         }
         
@@ -198,6 +224,7 @@
             
             $this->segui = $complete;
             $this->actualizar_diccionarios();
+            
         }
         
         
@@ -214,19 +241,17 @@
                 $aux = $this->expe;
                 $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);                    
-                $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
+                $aux = str_ireplace('{titulo_exp}', $valor->nombre, $aux);
                 $aux = str_ireplace('{comentario}', $valor->descripcion, $aux);
                 
                 $experiencias .= $aux;
             }
             
-            $this->expe = $experiencias;
-            
+            $this->expe = $experiencias;            
             $this->actualizar_diccionarios();
-            
-            
         }
         
+
         
         /**
          * Refactoriza datos basicos sobre sitios que al usuario le gustaria ir
@@ -234,14 +259,22 @@
          * @param array $datos trae los datos de los sitios con enlace gustaria.
          */                              
         public function refactory_gustaria($datos){            
+//
+//
+//        public function refactory_visitaria($datos){            
+//>>>>>>> origin/julian10
             
+            $global = new Global_var();
+            $url = $global->url_sitio;
             $quiere = "";
             
             foreach ($datos as $valor){
                 $aux = $this->gustaria;
-                $aux = str_ireplace('{imagen}', $valor->img, $aux);
-                $aux = str_ireplace('{dirigido_a}', $valor->name, $aux);
-                $aux = str_ireplace('{comentario}', "Uff bacanisimo este sitio me gustaria ir definitivamente", $aux);
+                //$aux = str_ireplace('{imagen}', $valor->img, $aux);
+                $aux = str_ireplace('{sitio}', $valor->nombre, $aux);
+                $aux = str_ireplace('{descripcion}', $valor->descripcion, $aux);
+                $aux = str_ireplace('{url}', $url, $aux);                
+                $aux = str_ireplace('{id_sitio}', $valor->id, $aux);                
                 
                 $quiere .= $aux;
             }
@@ -252,6 +285,7 @@
             
             
         }        
+
              
         /**
          * Convierte todas las secciones refactorizadas individualemtne en una sola cadena de texto 
@@ -259,6 +293,88 @@
          * 
          * @param array $datos trae los datos del usuario.
          */                                      
+        public function refactory_AmigosDeAmigos($datos){
+            
+            $amigos = "";            
+            
+            for($c=0; count($datos); $c++){                
+                
+                $amigos .= '<div class="row-fluid">';                            
+                $i=0;
+                do{ 
+                    $valor=array_shift($datos);
+                   
+                    $global = new Global_var();
+                    $empresa = '';
+                    $nombre = '';
+                    $url = '';
+                    $aux = $this->amigos;
+                    //echo $valor->type;
+                    if($valor->type == "Empresa"){                                    	         
+                        $empresa = 'style="background-color: #CBFEC1"';
+                        $nombre = $valor->nombre;
+                        $url = $global->url_empresa;
+                    }else{
+                        //$nombre = $valor->nick;
+                        $nombre = $valor->nombre." ".$valor->apellido;
+                        $url = $global->url_usuario;
+                    }            
+                    $aux = str_ireplace('{empresa}', $empresa, $aux);            
+                    $aux = str_ireplace('{id}', $valor->id, $aux);
+                    $aux = str_ireplace('{url}', $url, $aux);
+                    $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                    $aux = str_ireplace('{nombre}', $nombre, $aux);
+                    //$aux = str_ireplace('{amigo}', $amigo, $aux);
+                    $amigos .= $aux;
+                    $i++;
+                }while((count($datos)!=0)&& $i<3);                
+                
+                $amigos .= '</div>';
+            }            
+            
+            $this->amigos = $amigos;
+            $this->actualizar_diccionarios();
+
+        }
+
+
+        
+//        public function refactory_AmigosDeAmigos($datos){
+//            
+//            $complete = "";            
+//            
+//            foreach ($datos as $valor){
+//                $global = new Global_var();
+//                $empresa = '';
+//                $nombre = '';
+//                $url = '';
+//                $aux = $this->amigos;
+//                //echo $valor->type;
+//                if($valor->type == "Empresa"){                                    	         
+//                    $empresa = 'style="background-color: #CBFEC1"';
+//                    $nombre = $valor->nombre;
+//                    $url = $global->url_empresa;
+//                }else{
+//                    //$nombre = $valor->nick;
+//                    $nombre = $valor->nombre." ".$valor->apellido;
+//                    $url = $global->url_usuario;
+//                }            
+//                $aux = str_ireplace('{empresa}', $empresa, $aux);            
+//                $aux = str_ireplace('{id}', $valor->id, $aux);
+//                $aux = str_ireplace('{url}', $url, $aux);
+//                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+//                $aux = str_ireplace('{nombre}', $nombre, $aux);
+//                //$aux = str_ireplace('{amigo}', $amigo, $aux);
+//                $complete .= $aux;
+//            }
+//            
+//            $this->amigos = $complete;
+//            $this->actualizar_diccionarios();
+//
+//        }
+  
+      
+
         public function refactory_contenido(){            
             
             foreach($this->dic_contenido as $clave=>$valor){
@@ -267,8 +383,6 @@
                 
             }           
             $this->actualizar_diccionarios();
-            
-            
         }        
         
         
@@ -295,13 +409,9 @@
                 $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
             }            
             
-            
             echo $this->base;
             
-            
-            
         }
-        
 
     }
         

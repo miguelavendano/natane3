@@ -13,7 +13,6 @@ class ModelImagen{
             
         }
         
-        
         /**
          * funcion para crear el nodo tipo Imagen
          * parametros: objeto tipo Imagen

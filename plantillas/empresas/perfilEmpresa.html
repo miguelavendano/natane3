@@ -5,27 +5,26 @@
             <div class="span9">
                 <h1>{nombre_empresa}</h1> 
             </div>
-            <div class="span3 contenido">
+            <div id="campoConfio" class="span3 contenido">
                 <button class="btn btn-cyan btn-block" id="Bconfio"><i></i> Confio en esta empresa</button>
             </div>            
         </div>
 
         {slider_empresa}
-
-        <div class="row-fluid">
-            <br />
+        <br />
+        <div class="row-fluid">            
             {editarEmpresa}
+            {crearServicio}
         </div>        
-        
+      <div id="contenidoE">
         <div class="row-fluid">            
             <div class="span5">
                 <h2>Descipción</h2>
                 <div class="row-fluid contenido">
-                    <div class="actividades">
+                    <div class="detalle_empresa">
                         <p>{descripcion}</p>
                     </div>
                 </div>
-
                 <div class="row-fluid">
                     <div class="span8 contenido contacto">
                         {contacto}
@@ -36,9 +35,7 @@
                                 <h4>{confianza} Puntos de Confianza</h4>
                             </a>                            
                         </div>                                                               
-                    </div>           
-                    
-                                        
+                    </div>              
                 </div>                   
 
             </div>                               
@@ -47,14 +44,14 @@
                 <h2>Ubicación</h2>  
                 <div class="detalle_sitio">
                     <div class="maps">                 
-                        <div id="map_canvas"></div>   
+                        <div id="MapaPerfil" class="mapa-natane"></div>      
                     </div>
                 </div>
             </div>
             
         </div>
 
-        <div class="row-fluid"><hr/></div>
+        <hr/>
         
         <div class="container-fluid">  
             <div class="row-fluid ">
@@ -70,15 +67,23 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">           
-
-                                            {servicios}
-
+                                            
+                                            <div id="servicios_empresa">
+                                                {servicios}
+                                            </div>
+                                            
+                                            {edita_experiencia}                                             
+                                            
                                         </div>  <!-- pestaña 1 -->
                                     
                                         <div class="tab-pane" id="2"> 
-
-                                            {experiencias}
-
+                                            
+                                            <div id="experiencias_empresa">
+                                                {experiencias}
+                                            </div>
+                                            
+                                            {edita_experiencia}
+                                            
                                         </div>   <!-- pestaña 2 -->
 
                                     </div>
@@ -92,14 +97,14 @@
 
                             <div class="row-fluid">
                                 <div class="seguidores contenido">                            
-                                    <h3><a href="#seguidores">Amigos</a></h3>
+                                    <h3>Amigos</h3>
                                     {seguidores}
                                 </div> <!-- seguidores -->                        
                             </div>
 
                             <div class="row-fluid">
                                 <div class="seguidores contenido">                            
-                                    <h3><a href="#seguidores">Clientes/Aliados</a></h3>
+                                    <h3>Clientes/Aliados</h3>
                                     {gustaria}
                                 </div> <!-- seguidores -->   
                             </div>                
@@ -110,10 +115,10 @@
             </div>
         </div>        
         
-        <div class="row-fluid"><hr/></div>
+        <hr/>
         <!--<br />-->
         {ferrocarril}
-
+      </div>
     </section>
 
     <!-- VENTANAS MODAL-->
@@ -124,6 +129,7 @@
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCgDQaCxGzNVRkJ5HT8tWKcxNAW7DM8ktQ&sensor=true">
     </script>
+<!--
     <script type="text/javascript">
       function initialize() {
         var mapOptions = {
@@ -134,6 +140,6 @@
         var map = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
       }
-    </script>    
+    </script>    -->
 
 

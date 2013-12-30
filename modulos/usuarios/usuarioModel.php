@@ -48,13 +48,22 @@
             return $resultado;            
         }          
         
-        public function get_gustaria(){   
+        public function get_visitaria(){   
             
             $query = "start n=node(".$this->id_user.") match n<-[:Desea]->b return b;";            
-            $resultado = $this->modelsitio->get_prueba($query);
+            $resultado = $this->modelsitio->get_sitio($query);
 
             return $resultado;
         }   
+
+        public function get_AmigosDeAmigos(){   
+            
+            $query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a<-[:Amigo]->o return o";
+            //$query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a return a";
+            $resultado = $this->modelusuarios->get_AmigosDeAmigos($query);
+
+            return $resultado;
+        }           
         
 //        public function get_usuario_gustaria($queryString){           
 //            

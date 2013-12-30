@@ -1,5 +1,5 @@
 $(document).ready(function(){
-      
+
     /*
      * Registro de un nuevo Usuario
      */
@@ -51,7 +51,8 @@ $(document).ready(function(){
             $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
             $("#registrarSitio").css({display:'none'});   //oculta el registro de Sitio si esta visible
             $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia
-
+            $(".editarExperiencia").css({display:'none'});
+            
             var mi_url=document.location.href;
             var id_url=mi_url.split("="); 
         
@@ -74,7 +75,7 @@ $(document).ready(function(){
                                         width: 'auto',
                                         margin: '0 auto'
                                     });   
-                    
+                    /*
                     $(".reload-backdrop").css({ position: 'fixed',
                                                 top: '0',
                                                 right: '0',
@@ -84,12 +85,12 @@ $(document).ready(function(){
                                                 background: '#000000',
                                                 opacity:'0.4'
                                             });                  
-                   
+                   */
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
                     $("#reload").css({visibility: 'hidden'});   
-                    $(".reload-backdrop").css({visibility: 'hidden'});                    
+                    //$(".reload-backdrop").css({visibility: 'hidden'});                    
                     
                         $("#EnomU").val(data.nombre);
                         $("#EapeU").val(data.apellido);
@@ -149,9 +150,9 @@ $(document).ready(function(){
                         pass: $("#Epass1U").val()
                     }
                     ,dataType:'JSON'
-                    ,beforeSend:function(jqXHR, settings ){
+                    /*,beforeSend:function(jqXHR, settings ){
                         alert("Debe confirmar su identidad, para realizar los cambios.");                                        
-                    }
+                    }*/
                     ,success: function(data,textStatus,jqXHR){                           
 
                             if(/true/.test(data)) {                                                            
@@ -160,8 +161,7 @@ $(document).ready(function(){
                             else alert("No se han podido realizar los cambios");                                                     
                     }
                 });                        
-            }
-            else{ alert("Las contraseñas no coinciden"); }                    
+            }else{ alert("Las contraseñas no coinciden"); }                    
     });    
 
     /*
@@ -234,7 +234,7 @@ $(document).ready(function(){
      */   
     $(".edit_img_perfil").click(function(){
 
-            $(".eedit_img_perfildit_img_perfil").css({display:'none'});  //oculta el boton que guarda la foto 
+            $(".edit_img_perfil").css({display:'none'});  //oculta el boton que guarda la foto 
             
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
@@ -262,7 +262,7 @@ $(document).ready(function(){
 
     /*
      * Registro de una experiencia nueva
-     */        
+         
     $("#experiencia").click(function(){
        
             var mi_url=document.location.href;
@@ -291,7 +291,7 @@ $(document).ready(function(){
                     }
                 });          
         });
-
+*/
     /*
      * Muestra la interfaz de compartir experiencia
      */
@@ -301,6 +301,7 @@ $(document).ready(function(){
             $("#registrarSitio").css({display:'none'});     //oculta el registro de Sitio si esta visible
             $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
             $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible            
+            $(".editarExperiencia").css({display:'none'});  //oculta la edicion de una experiencia
     });
 
     /*
@@ -311,8 +312,8 @@ $(document).ready(function(){
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");       
             
-            var datosform = new FormData(document.getElementById('formExperiencia'));            
-            datosform.append( "opcion", "experiencia");            
+            var datosform = new FormData(document.getElementById('formComparteExperiencia'));            
+            datosform.append( "opcion", "crea_experiencia");            
             datosform.append( "autor", id_url[1] );
             
             //$("#imagenes_experiencia").css({display: 'none'});                    
@@ -323,18 +324,18 @@ $(document).ready(function(){
             */
             
                 $.ajax({
-                   url : '/natane3/estatico/php/opcionesUsuario.php',
-                   type : 'POST',
-                   data : datosform,
-                   processData : false, 
-                   contentType : false, 
-                   success: function(data,textStatus,jqXHR){                           
-
-                            if(/true/.test(data)) {                                
-                                alert("Experiancia ingresada :D");                                                                          
-                                document.location.reload();                                     
-                            }
-                            else alert("No se ha podido ingresar su experiencia"); 
+                    url : '/natane3/estatico/php/opcionesUsuario.php',
+                    type : 'POST',
+                    data : datosform,
+                    processData : false, 
+                    contentType : false, 
+                    dataType:'html',
+                    success: function(data,textStatus,jqXHR){                           
+                                if(/true/.test(data)) {                                
+                                    alert("Experiancia ingresada :D");                                                                          
+                                    document.location.reload();                                     
+                                }
+                                else{ alert("No se ha podido ingresar su experiencia"); }  
                     }
                 });                
     });
@@ -344,44 +345,79 @@ $(document).ready(function(){
      */
     $(".cancelarExperiencia").click(function(){        
             $("#compartirExperiencia").css({display:'none'});   
-            $(".pestañas").css({display:'inline'});                                      
+            $(".pestañas").css({display:'inline'});                                         
     });        
       
     /*
      * Guardar edicion de la experiencia
      */
-    $("#guarda_edicionExp").click(function(){
+    $("#guardaEdicionExp").click(function(){
 
-            var id_exp=$(".info_exp").parent().attr('id');
-
+            //var id_exp=$(".info_exp").parent().attr('id'); //obtengo el id de la experiencia
+            var id_exp=$("#formEditarExperiencia").parent().attr('id'); //obtengo el id de la experiencia
+ 
+ /*           
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data: {
                     opcion: 'guardar_edicionExp',                   
                     experiencia: id_exp,   
-                    titulo: $("#ediExptitulo").val(),
-                    descripcion: $("#ediExpdesc").val()
+                    titulo: $("#ediExpUsTitulo").val(),
+                    descripcion: $("#ediExpUsDesc").val()
                 }
                 ,dataType:'JSON'
                 ,success: function(data,textStatus,jqXHR){                           
 
                         if(/true/.test(data)) {                                                            
-                            //document.location.reload();                                     
+                            document.location.reload();                                     
                         }
                         else alert("No se han podido realizar los cambios");                                                     
                 }
-            });                        
+            });
+*/
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");       
+        
+            var datosform = new FormData(document.getElementById('formEditarExperiencia'));            
+            datosform.append( "opcion", "guardar_edicionExp");            
+            datosform.append( "experiencia", id_exp );
+            datosform.append( "autor", id_url[1] );            
+            
+                $.ajax({
+                    url : '/natane3/estatico/php/opcionesUsuario.php',
+                    type : 'POST',
+                    data : datosform,
+                    processData : false, 
+                    contentType : false,
+                    success: function(data,textStatus,jqXHR){                           
+                                
+                                if(/true/.test(data)){                                
+                                    alert("Edicion Realizada :D");                                                                          
+                                //document.location.reload();                                     
+                                }
+                                else alert("No se ha podido ingresar su experiencia"); 
+                    }
+                });      
+
     });    
     
     /*
      * Cancelar edicion de una experiencia
      */
     $(".cancelEdiExp").click(function(){        
-             $("#editarExperiencia").css({display:'none'});   
+             $(".editarExperiencia").css({display:'none'});   
              $(".pestañas").css({display:'inline'});                                      
     });  
-   
+
+    /*
+     * Cerrar la vista de una experiencia
+     */
+    $(".cierravistaExp").click(function(){        
+             $(".verExperiencia").css({display:'none'});   
+             $(".pestañas").css({display:'inline'});                                      
+    });  
+
 
     /*
      * Registro de un nuevo Sitio
@@ -392,6 +428,7 @@ $(document).ready(function(){
         $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
         $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible
         $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia        
+        $(".editarExperiencia").css({display:'none'});  //oculta la edicion de una experiencia
     });     
     
     /*
@@ -403,6 +440,7 @@ $(document).ready(function(){
         $("#registrarSitio").css({display:'none'});   //oculta el registro de Sitio si esta visible
         $("#editarUsuario").css({display:'none'});  //oculta la edicion del usuario si esta visible
         $("#compartirExperiencia").css({display:'none'});  //oculta el compartir experiencia        
+        $(".editarExperiencia").css({display:'none'});  //oculta la edicion de una experiencia
     });
     
     /*
@@ -464,7 +502,7 @@ $(document).ready(function(){
                 ,data:{
                     opcion: 'seguir',                   
                     a_seguir: id_url[1],
-                    seguidor: '61'
+                    seguidor: '279'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -511,14 +549,18 @@ $(document).ready(function(){
             });                                   
       }
     );    
-    
+        
+            
 });
 
 
     function editarExperiencia(id_experiencia) {
-    
-            $("#editarExperiencia").css({display:'inline'});   
-            $(".pestañas").css({display:'none'});
+        
+            $(".pestañas").css({display:'none'});            
+            $(".editarExperiencia").css({display:'inline'});            
+            $(".editarExperiencia").attr('id', id_experiencia);
+            /*$('.editarExperiencia').attr('id', id_experiencia);
+            $('.opc_img.tooltip1').attr('id', id_experiencia);*/
 
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
@@ -539,7 +581,7 @@ $(document).ready(function(){
                                         width: 'auto',
                                         margin: '0 auto'
                                     });   
-                    
+                    /*
                     $(".reload-backdrop").css({ position: 'fixed',
                                                 top: '0',
                                                 right: '0',
@@ -549,32 +591,75 @@ $(document).ready(function(){
                                                 background: '#000000',
                                                 opacity:'0.4'
                                             });                  
-                   
+                   */
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
                     $("#reload").css({visibility: 'hidden'});   
-                    $(".reload-backdrop").css({visibility: 'hidden'});                                     
+                    //$(".reload-backdrop").css({visibility: 'hidden'});                                     
                    
-                    $("#ediExptitulo").val(data.nombre);
-                    $("#ediExpdesc").val(data.descripcion);
-                    //$("#Eimagen").val(data.imagen);                        
+                    $("#ediExpTitulo").val(data.nombre);
+                    $("#ediExpDesc").val(data.descripcion);
+                    
+                    var url_imagen= '/natane3/modulos/imagen/imagen.php';
+                    var marco="";
+                    var edicion="";                    
+                    var img="";
+                    var todo="";
+                    var lis_img="";
+                    var ciclo=0;
+                                        
+                    for(var i=0; i<data.imagenes.length; i++){                        
+                        
+                        marco="<div id="+data.imagenes[i].img_id+"_"+id_experiencia+" class='span3 marco_img_exp'>";
+                        edicion="<div class='btn-block opc_img'>\n\
+                                    <button class='btn icon-trash tooltip1' rel='tooltip' title='Eliminar' onclick='eliminarImgExperiencia("+id_experiencia+","+data.imagenes[i].img_id+")'></button>\n\
+                                </div>";
+
+                        //img="<div class='im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+
+                        img="<div class='im_exp_edit'>\n\
+                                <a href="+url_imagen+"?id="+data.imagenes[i].img_id+">\n\
+                                    <img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' />\n\
+                                </a>\n\
+                            </div>";
+
+                        todo=marco+edicion+img+"</div>";
+
+                        if(ciclo==0){
+                            lis_img=lis_img+"<div class='row-fluid'>"+todo;                                                                                    
+                            ciclo++;            
+                        }
+                        else if(ciclo<3){
+                            lis_img=lis_img+todo;                            
+                            ciclo++;                                                                      
+                        }else if(ciclo==3){      
+                            lis_img=lis_img+todo+"</div>";                            
+                            ciclo=0;                                         
+                        }  
+                        
+                    }                    
+                    
+                    $("#imgs_experiencia").html(lis_img);
                 }
-            });                                
-    
+            });                                    
     }
 
 
-    function eliminarExperiencia(id_experiencia) {
+    function eliminarExperiencia(id_experiencia){
         
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
             $.ajax({
                 url:'/natane3/estatico/php/opcionesUsuario.php'
                 ,type:'POST'                    
                 ,data:{
                     opcion:'eliminarExp',                            
-                    experiencia: id_experiencia
+                    experiencia: id_experiencia,
+                    usuario: id_url[1]
                 }
-                ,dataType:'JSON'
+                ,dataType:'html'
                 ,beforeSend:function(jqXHR, settings ){
                 }
                 ,success: function(data,textStatus,jqXHR){                           
@@ -587,3 +672,29 @@ $(document).ready(function(){
                 }
             });                            
     }
+    
+    
+    function eliminarImgExperiencia(id_experiencia,id_img){
+                    
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'eliminarImgExp',                            
+                    experiencia: id_experiencia,
+                    imagen: id_img
+                }
+                ,dataType:'html'
+                ,beforeSend:function(jqXHR, settings ){
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                            if(/true/.test(data)) {                                
+                                alert("Imagen Eliminada :D");
+                            }
+                            else alert("No se puede eliminar la imagen, la experiencia debe contener almenos una imagen"); 
+                }
+            });                            
+    }
+    
+    

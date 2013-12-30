@@ -32,27 +32,15 @@
                 <div class="control-group">
                     <label class="control-label" for="EtelS">Telefono: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="EtelS" required>
+                        <input type="number" class="input-large" id="EtelS" required>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="EmailS">Email: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="EmailS" required>
+                        <input type="email" class="input-large" id="EmailS" required>
                     </div>
                 </div>       
-                <div class="control-group">
-                    <label class="control-label" for="ElatS">Latitud: </label>
-                    <div class="controls">
-                        <input type="text" class="input-large" id="ElatS" required>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="ElongS">Longitud: </label>
-                    <div class="controls">
-                        <input type="text" class="input-large" id="ElongS" required>
-                    </div>
-                </div>
                 <div class="control-group">
                     <label class="control-label" for="Es_webS">Sitio Web </label>
                     <div class="controls">
@@ -99,7 +87,17 @@
                             <input type="radio" name="EtipoS" value="icon-road" id="Et_camina"><i class="icon-road"></i> Caminata
                         </label>
                     </div>
-                </div>                
+                </div>      
+                <div class="control-group">
+                    <div class="controls">
+                        <div id="edicionMapaSitio" class="control-group">
+                            <span class="help-inline">Arrastra el icono y ubicalo en donde se encuentre el sitio:</span>
+                            <div class="maps">                                    
+                                <div id="EmapaSitio" class="mapa-natane"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="control-group">
                     <label class="control-label" for="Epass1S">Contraseña: </label>
                     <div class="controls">

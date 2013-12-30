@@ -1,0 +1,57 @@
+        <!-- Compartir Experiencia-->
+        <div id="EditarSlider" style="display: none">
+            <legend></legend>
+                <a class="close cancelaEdicionSlider">&times;</a>            
+                <h3 id="edita_crea_Exp">Imagenes del Slider</h3>                
+                                         
+            <form class="form-horizontal" id="formImgSlider" method=post enctype=multipart/form-data>              
+                <div class="row-fluid">                                
+                    <div class="caja_Bfile btn btn-green active"> 
+                        <i class="icon-camera"> Cargar Imagenes</i>
+                        <input class="Bfile" type="file" id="imagenes_slider" name="imagenes_slider[]" multiple />
+                    </div>
+                </div>
+                <div class="row-fluid">      
+                    <output id="list_img_slider"></output>                                           
+                </div>                                  
+                <div id="botones_edit_slider" class="control-group">                  
+                    <button class="btn btn-blue" id="guardaSliderSitio">Guardar</button>
+                    <button class="btn btn-red cancelaEdicionSlider"> Cancelar</button>                                                
+                </div>                
+            </form>        
+        </div>
+        
+        
+        <script type="text/javascript" language="javascript">   
+        
+        /*FUNCION PARA LA VISTA PREVIA EN LA EDICION DEL SLIDER*/
+        function vistaImgSlider(evt) {
+           var files = evt.target.files; // FileList object
+
+           // Loop through the FileList and render image files as thumbnails.
+           for (var i = 0, f; f = files[i]; i++) {
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                      // Render thumbnail.
+                      var span = document.createElement('span');
+                      span.innerHTML = ['<img class="vista_img_slider" src="', e.target.result,
+                                         '" title="', escape(theFile.name), '"/>'].join('');
+                      document.getElementById('list_img_slider').insertBefore(span, null);
+                  };
+                })(f);
+             
+             // Read in the image file as a data URL.
+             reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
+
+        document.getElementById('imagenes_slider').addEventListener('change', vistaImgSlider, false);
+  
+    </script>

@@ -1,20 +1,16 @@
 .maps{
     height:400px;
+    background-color: rgb(104, 177, 104);
 }
 
 
 .detalle_sitio{
-    height: 320px;
+    height: auto;    
+    margin: 15px;
 }
 
 .actividades{
     height: 200px;
-}
-
-#galeria{
-    position: absolute;
-    z-index: 100;
-    margin-top: 300px;
 }
 
 .comparte{

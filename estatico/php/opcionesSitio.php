@@ -3,6 +3,7 @@ session_start();
 require_once('../../core/coneccion.php');
 require_once('../../core/modeloSitio.php');
 require_once('../../core/modeloExperiencia.php');
+require_once('../../core/modeloImagen.php');
 require_once('../../core/modeloRelaciones.php');
 
 
@@ -16,7 +17,7 @@ if(isset($_POST['opcion'])){
         // Registro de un Usuario
         case "registrarS":                       
 
-            $img='humadea.jpg;';
+            $img='humadea.jpg';
             $web=$_POST['nombre']."_".substr($_POST['nombre'],0,1).".com";
             $face='http://www.facebook.com/AnDaLaTo';    
             $twit='https://twitter.com/JulianDVarelaP';
@@ -86,8 +87,6 @@ if(isset($_POST['opcion'])){
             ModelSitios::editar_sitio($_POST['sitio'], "direccion",$_POST['direc']);
             ModelSitios::editar_sitio($_POST['sitio'], "telefono", $_POST['tele']);
             ModelSitios::editar_sitio($_POST['sitio'], "correo", $_POST['mail']);
-            ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat']);
-            ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lon']);             
             ModelSitios::editar_sitio($_POST['sitio'], "sitio_web", $_POST['s_web']);
             ModelSitios::editar_sitio($_POST['sitio'], "facebook", $_POST['face']);
             ModelSitios::editar_sitio($_POST['sitio'], "twitter", $_POST['twit']);
@@ -95,6 +94,12 @@ if(isset($_POST['opcion'])){
             ModelSitios::editar_sitio($_POST['sitio'], "tipo_sitio", $_POST['tsitio']);
             ModelSitios::editar_sitio($_POST['sitio'], "contraseña", $_POST['pass']);
             //ModelSitios::editar_sitio($_POST['usuario'], "imagen", );    
+            
+            if(count($_POST['lat_lon'])>0){
+                ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat_lon']['latitud']);
+                ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lat_lon']['longitud']);
+            }
+            
             $band="true";
             
         break;    
@@ -177,10 +182,74 @@ if(isset($_POST['opcion'])){
             $voto--;
 
             ModelSitios::editar_sitio($_POST['sitio'], "votos", $voto);  //aumenta los votos del sitio
-            
+
             $band = "<h5>$voto Personas confían en este sitio</h5>";
             
         break;    
+    
+        case "guarda_slider_sitio":                                   
+            
+            $upload_folder ='../../estatico/imagenes/';
+            
+            foreach($_FILES['imagenes_slider']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    $nombre_archivo = $_FILES['imagenes_slider']['name'][$key];
+                    $tmp_archivo = $_FILES['imagenes_slider']['tmp_name'][$key];            
+                    //$tipo_archivo = $_FILES['imagenes_slider']['type'][$key];
+                    //$tamano_archivo = $_FILES['imagenes_slider']['size'][$key];
+
+                    //echo $nombre_archivo;
+                    $nomImgSliderSitio = $_POST['sitio'].'_'.$nombre_archivo;
+                    echo $nomImgSliderSitio;
+
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgSliderSitio);   //guarda la imagen
+            
+                    //crea el nodo de cada una de las imagenes
+                    $nodo_imagen = new Imagen();
+                    $nodo_imagen->nombre = $nomImgSliderSitio;
+                    $nodo_imagen->descripcion = "";
+                    //$nodo_imagen->comentario1 = "";
+                    $nodo_imagen->type = 'Imagen';  
+                   
+                    
+                    ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
+
+                    $id_img_slider = $nodo_imagen->id;  //obtengo el id del nodo creado                   
+                    ModeloRelaciones::crearRelacion($id_img_slider, $_POST['sitio'], "ImgSlider");   //crea la relacion entre la experiencia y la imagen
+                }
+            }
+            
+            $band="true";            
+                     
+        break;    
+
+        case "guardaCoodenadasS":  
+            
+            echo $_POST['lat_lon']['latitud'];
+            echo $_POST['lat_lon']['longitud'];
+            ModelSitios::editar_sitio($_POST['sitio'], "latitud", $_POST['lat_lon']['latitud']);
+            ModelSitios::editar_sitio($_POST['sitio'], "longitud", $_POST['lat_lon']['longitud']);
+            $band="true";
+            
+        break;    
+    
+        case "obtieneCoordenadasS":                       
+            
+            $modelsitio = new ModelSitios();            
+            $query = "START n=node(".$_POST['sitio'].") RETURN n";                        
+            $resultado = $modelsitio->get_sitio($query);
+                       
+            $band = array(
+                "automatico"=>false,
+                "drag" =>true,                
+                "lat" => $resultado[0]->latitud,
+                "lon" => $resultado[0]->longitud,
+                "idMapa" => "MapaPerfil"
+            );
+            
+           $band = json_encode($band);
+            
+        break;        
     
         default : break; 
     }    

@@ -12,40 +12,32 @@
         public $modelo;
         
         
-        
-        public function __construct($id) {
-            
+        public function __construct($id) {            
             $this->vista = new UsuarioVista();
             $this->modelo = new UsuarioModel($id);
-            
-            
         }       
         
         
         public function datos_usuario(){
-
-            $usuario = $this->modelo->get_resultados();
-            
-            return $usuario;
-            
+            $usuario = $this->modelo->get_resultados();            
+            return $usuario;            
         }
         
-        public function experiencias(){
-            
-            return $this->modelo->get_experiencias();
-            
+        public function experiencias(){            
+            return $this->modelo->get_experiencias();            
         }
 
-        public function gustaria(){
-            
-            return $this->modelo->get_gustaria();            
+        public function visitaria(){            
+            return $this->modelo->get_visitaria();            
         }        
         
-        
-        public function amigos(){
-            
+        public function amigos(){            
             return $this->modelo->get_amigos();            
         }
+
+        public function AmigosDeAmigos(){            
+            return $this->modelo->get_AmigosDeAmigos();            
+        }        
         
         public function principal_Nousuario(){
             
@@ -73,8 +65,10 @@
             $this->vista->refactory_header($login); 
             $this->vista->refactory_usuario($this->datos_usuario());
             $this->vista->refactory_amigos($this->amigos());
+            $this->vista->refactory_AmigosDeAmigos($this->AmigosDeAmigos());
             $this->vista->refactory_experiencias($this->experiencias());
-            //$this->vista->refactory_gustaria($this->gustaria());
+//            $this->vista->refactory_gustaria($this->gustaria());
+//            $this->vista->refactory_visitaria($this->visitaria());            
             $this->vista->refactory_contenido();
             $this->vista->refactory_total();
             

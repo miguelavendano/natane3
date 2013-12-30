@@ -22,6 +22,12 @@ section{
   /*border: 1px solid;*/
 }
 
+@media screen and (max-width:1006px){
+  section{
+    padding-top: 20px;
+  }
+}
+
 .contenido{	
     background-color: #FFFFFF;
     /*background-image: url("../img/body2.png");*/
@@ -33,47 +39,133 @@ section{
     margin-bottom:15px;
     box-shadow: 10px 10px 20px #ccc;
 }
+/*contenedor para slider de sitio y empresa*/
+.contenido-black{
+    background-color: black;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
 
-#contenido-black{
-	background-color: black;
-	border-radius: 4px;
-	border: 1px solid #ccc;
+.contenedor{
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;     
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: -moz-linear-gradient(top,  rgba(255,255,255,1) 70%, rgba(255,255,255,0.54) 95%, rgba(191,191,191,0.5) 97%, rgba(96,96,96,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(70%,rgba(255,255,255,1)), color-stop(95%,rgba(255,255,255,0.54)), color-stop(97%,rgba(191,191,191,0.5)), color-stop(100%,rgba(96,96,96,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#606060',GradientType=0 ); /* IE6-8 */
+
+    
+/* IE9 SVG, needs conditional override of 'filter' to 'none' 
+    background: -moz-linear-gradient(top,  rgba(96,96,96,1) 0%, rgba(176,176,176,0.5) 1%, rgba(255,255,255,0.52) 2%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 70%, rgba(255,255,255,0.54) 95%, rgba(191,191,191,0.5) 97%, rgba(96,96,96,1) 100%);  FF3.6+ 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,96,96,1)), color-stop(1%,rgba(176,176,176,0.5)), color-stop(2%,rgba(255,255,255,0.52)), color-stop(30%,rgba(255,255,255,1)), color-stop(70%,rgba(255,255,255,1)), color-stop(95%,rgba(255,255,255,0.54)), color-stop(97%,rgba(191,191,191,0.5)), color-stop(100%,rgba(96,96,96,1)));  Chrome,Safari4+ 
+    background: -webkit-linear-gradient(top,  rgba(96,96,96,1) 0%,rgba(176,176,176,0.5) 1%,rgba(255,255,255,0.52) 2%,rgba(255,255,255,1) 30%,rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%);  Chrome10+,Safari5.1+ 
+    background: -o-linear-gradient(top,  rgba(96,96,96,1) 0%,rgba(176,176,176,0.5) 1%,rgba(255,255,255,0.52) 2%,rgba(255,255,255,1) 30%,rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%);  Opera 11.10+ 
+    background: -ms-linear-gradient(top,  rgba(96,96,96,1) 0%,rgba(176,176,176,0.5) 1%,rgba(255,255,255,0.52) 2%,rgba(255,255,255,1) 30%,rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%);  IE10+ 
+    background: linear-gradient(to bottom,  rgba(96,96,96,1) 0%,rgba(176,176,176,0.5) 1%,rgba(255,255,255,0.52) 2%,rgba(255,255,255,1) 30%,rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%);  W3C 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606060', endColorstr='#606060',GradientType=0 );  IE6-8     */
+}
+
+.pestañas .tab-pane{
+    height: 830px;
+    overflow: auto;
 }
 
 /* -------------------- MAPA DE GOOGLE -------------------- */
-#map_canvas { height: 100% }
+.mapa-natane { height: 100% }
 
-/* -------------------- Carrusel -------------------- */
+.mapa-natane img,
+.google-maps img {
+  max-width: none;
+}
+
+#EditarMapaSitio,#EditarMapaEmpresa{
+ margin-bottom: 10px;   
+}
+#edicionMapaSitio{
+ margin: 10px;   
+}
+
+/* -------------------- Estilos del SLIDER DE SITIOS Y EMRPESAS -------------------- */
 .carousel .item {
     background-color: #000;
+    height: 400px;	
 }
 .carrusel_publicidad{	
-	background-color: #fff;
-	/*border: 1px blue solid;	*/
-	width: 100%;
-	height: 400px;	
+    background-color: #fff;
+    /*border: 1px blue solid;	*/
+    width: 100%;
+    height: 400px;	
 }
 .carrusel_publicidad img{
-	float: center;
-	margin: 0 auto;
-	height: 400px;
+    margin: 0 auto;
+    height: 100%;
 }
 
+/*ESTILOS PARA EL BOTON QUE ESTA SOBRE EL SLIDER DE SITIO O EMPRESA*/
+.btn-galeria{
+    position: absolute;
+    z-index: 100;
+    margin: 300px 0 0 10px;
+}
+.btn-slider{
+    width: 100px;
+    height: 25px;
+    font-size: 15px;
+    padding-top: 10px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+.btn-slider:hover{
+    opacity: 1;
+    filter: alpha(opacity=100);    
+}
+.btn-edit-slider{
+    position: absolute;
+    z-index: 100;
+    margin: 2% 0 0 48%;
+    opacity: 0.5;
+    filter: alpha(opacity=50);    
+}
+.btn-edit-slider:hover{
+    opacity: 1;
+    filter: alpha(opacity=100);    
+}
+
+@media screen and (max-width:320px){
+    .carousel .item {
+        height: 200px;	
+    }
+    .carrusel_publicidad{	
+        height: 200px;	
+    }    
+    .btn-galeria{
+        margin: 160px 0 0 10px;
+        padding: 2px;
+    }    
+}
 
 /************************ visitantes y admiradores ************************/
 .seguidores{	
 	padding: 10px;
-	height: 400px;	
+	height: 380px;	
 	background-color: white;
 	border: 1px solid #ccc;
-/*	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px; */
 	overflow: auto;
+}
+.seguidores a{
+    text-decoration: none;
 }
 .seguidores h3{	
 	margin: 0px;
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
+        color: #0088cc;
 }
 .seguidores p{	
 	padding-left: 15px;	
@@ -85,11 +177,34 @@ section{
 	height: 55px;
 	border: 1px solid #ccc;        
 }
-
+/************************ AMIGOS DE MIS AMIGOS ************************/
+.amigos{	
+	height: auto;	
+	background-color: white;
+	border: 1px solid #ccc;
+        margin-bottom: 10px;
+}
+.amigos a{
+    text-decoration: none;
+}
+.amigos h3{	
+	margin: 0px;
+	margin-bottom: 10px;
+        color: #0088cc;
+}
+.amigos p{	
+	padding-left: 15px;	
+	height: 55px;
+ 	overflow: hidden;                
+}
+.amigos img{
+	width: 55px;
+	height: 55px;
+	border: 1px solid #ccc;        
+}
 /************************ PESTAÑA DE EXPERIENCIAS ************************/
 .experiencia{     
     background-color: #FFFFFF;    
-    /*background-image: url("../img/body2.png");*/
     margin-bottom: 15px;
     padding: 8px;
     width: auto;  
@@ -97,6 +212,16 @@ section{
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
+    
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 70%, rgba(255,255,255,0.54) 95%, rgba(191,191,191,0.5) 97%, rgba(96,96,96,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(70%,rgba(255,255,255,1)), color-stop(95%,rgba(255,255,255,0.54)), color-stop(97%,rgba(191,191,191,0.5)), color-stop(100%,rgba(96,96,96,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 70%,rgba(255,255,255,0.54) 95%,rgba(191,191,191,0.5) 97%,rgba(96,96,96,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#606060',GradientType=0 ); /* IE6-8 */
+
 }
 .experiencia .im_exp{
   padding-left: 10px;
@@ -114,28 +239,54 @@ section{
   margin-top: 0px;
   font: 13px Arial;
 }
-.opc_exp button{
+.opc_exp button{    
     float: right;
     padding: 5px;
     margin-left: 5px;
-} 
-
-/************************ PESTAÑA DE EXPERIENCIAS ************************/
-.vista_imgExp{    
-    height: 75px;
-    border: 1px solid #000;
-    margin: 0 5px 10px 0;    
 }
 
-.previa_fotoPerfil{
-    /*height: 100px;
-    border: 1px solid #000;
-    margin: 0 5px 10px 0;*/
-    position: inherit;
-    z-index: 1;    
+.verExperiencia{
+
+}
+#verExpDesc{
+    padding: 10px;
 }
 
+/************************ EDICION IMAGENES DE EXPERIENCIAS ************************/
+/*#imgs_experiencia{
+    display: table;
+}
+.marco_img_exp{
+    display: table-cell;
+}*/
+.opc_img{
+    position: relative;
+    z-index:2;
+    padding-right: 5px;
+}
+.opc_img button{    
+    float: right;    
+    padding: 5px;
+    margin: 5px 0 0 5px;    
+}
 
+.im_exp_edit{  
+    width: 200px;
+    height: 125px;    
+    margin-bottom: 8px;
+    /*margin: 8px 0 5px 0;*/
+}
+.im_exp_edit img{
+    border: solid black 1px;
+    height: 125px;        
+    position: absolute;
+    z-index: 1;
+    width: 182px;
+}
+
+.botones_si_no{
+    margin-top: 15px;
+}
 
 /************************ Contacto *************************/
 .contacto{
@@ -198,6 +349,30 @@ section{
   font-size: 12px;
 }
 
+/************************ ESTILOS VISTA PREVIA DE LAS IMAGENES CARGADAS ************************/
+.vista_imgExp{    
+    height: 75px;
+    border: 1px solid #000;
+    margin: 0 5px 10px 0;    
+}
+
+.previa_fotoPerfil{
+    /*height: 100px;
+    border: 1px solid #000;
+    margin: 0 5px 10px 0;*/
+    position: inherit;
+    z-index: 1;    
+}
+
+.vista_img_slider{    
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 10px 0;    
+}
+
+#botones_edit_slider{    
+    margin-top: 10px;    
+}
 
 /************************ Botones FILE invisibles ************************/
 
@@ -231,6 +406,7 @@ section{
 	color: #FFFFFF;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #BD1717;
+        *background-color: #BD1717;
 	background-image: -moz-linear-gradient(top, #FF0000, #BD1717);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FF0000), to(#BD1717));
 	background-image: -webkit-linear-gradient(top, #FF0000, #BD1717);
@@ -249,12 +425,14 @@ section{
 .btn-red[disabled] {
 	color: #FFFFFF;
 	background-color: #BD1717;
+        *background-color: #003bb3;        
 }
 
 .btn-red-wine {
 	color: #FFFFFF;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #9E0529;
+        *background-color: #9E0529;
 	background-image: -moz-linear-gradient(top, #E8074E, #9E0529);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#E8074E), to(#9E0529));
 	background-image: -webkit-linear-gradient(top, #E8074E, #9E0529);
@@ -273,12 +451,14 @@ section{
 .btn-red-wine[disabled] {
 	color: #FFFFFF;
 	background-color: #9E0529;
+        *background-color: #003bb3;
 }
 
 .btn-purple {
 	color: #FFFFFF;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #611BBD;
+        *background-color: #611BBD;
 	background-image: -moz-linear-gradient(top, #AA4CE8, #611BBD);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#AA4CE8), to(#611BBD));
 	background-image: -webkit-linear-gradient(top, #AA4CE8, #611BBD);
@@ -297,12 +477,14 @@ section{
 .btn-purple[disabled] {
 	color: #FFFFFF;
 	background-color: #611BBD;
+        *background-color: #003bb3;        
 }
 
 .btn-blue {
 	color: #FFFFFF;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #0B29BD;
+        *background-color: #0B29BD;
 	background-image: -moz-linear-gradient(top, #0D85D6, #0B29BD);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0D85D6), to(#0B29BD));
 	background-image: -webkit-linear-gradient(top, #0D85D6, #0B29BD);
@@ -321,12 +503,14 @@ section{
 .btn-blue[disabled] {
 	color: #FFFFFF;
 	background-color: #0B29BD;
+        *background-color: #003bb3;        
 }
 
 .btn-cyan {
 	color: #FFFFFF;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #1B77BD;
+        *background-color: #1B77BD;
 	background-image: -moz-linear-gradient(top, #4CAAE8, #1B77BD);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4CAAE8), to(#1B77BD));
 	background-image: -webkit-linear-gradient(top, #4CAAE8, #1B77BD);
@@ -345,12 +529,14 @@ section{
 .btn-cyan[disabled] {
 	color: #FFFFFF;
 	background-color: #1B77BD;
+        *background-color: #003bb3;        
 }
 
 .btn-green {
 	color: #FFFFFF;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #00991A;
+        *background-color: #1B77BD;
 	background-image: -moz-linear-gradient(top, #43E312, #00991A);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#43E312), to(#00991A));
 	background-image: -webkit-linear-gradient(top, #43E312, #00991A);
@@ -369,28 +555,47 @@ section{
 .btn-green[disabled] {
 	color: #FFFFFF;
 	background-color: #00991A;
+        *background-color: #003bb3;        
+}
+.btn-purple {
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #960C96;
+        *background-color: #1B77BD;
+	background-image: -moz-linear-gradient(top, #F208CB, #960C96);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F208CB), to(#960C96));
+	background-image: -webkit-linear-gradient(top, #F208CB, #960C96);
+	background-image: -o-linear-gradient(top, #F208CB, #960C96);
+	background-image: linear-gradient(to bottom, #F208CB, #960C96);
+	background-repeat: repeat-x;
+	border-color: #960C96;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F208CB', endColorstr='#960C96', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn-purple:hover,
+.btn-purple:active,
+.btn-purple.active,
+.btn-purple.disabled,
+.btn-purple[disabled] {
+	color: #FFFFFF;
+	background-color: #960C96;
+        *background-color: #003bb3;        
 }
 
-.btn-slider{
-    width: 100px;
-    height: 25px;
-    font-size: 15px;
-    padding-top: 10px;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-}
-.btn-slider:hover{
-    opacity: 1;
-    filter: alpha(opacity=100);    
-}
 
 
-@media screen and (max-width:1006px){
-  section{
-    padding-top: 20px;
-  }
+
+
+/***FOTOS GALERIA***/
+.img-galeria img{
+    height: 20%;
+}
+.img-galeria--big img{
+    height: auto;
 }
 
-
-
-/* Css para registro de usuarios  */
+.items--big img{
+  width: 400px;
+  height: 600px;
+}

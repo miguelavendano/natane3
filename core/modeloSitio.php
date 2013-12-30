@@ -2,6 +2,7 @@
 
 require_once('coneccion.php');
 require_once('Sitio.php');
+require_once('Imagen.php');
 
 use Everyman\Neo4j\Node,
     Everyman\Neo4j\Index,
@@ -118,7 +119,7 @@ class ModelSitios{
                     $sitio->youtube = $row['']->getProperty('youtube');
                     $sitio->contraseña = $row['']->getProperty('contraseña');
                     $sitio->votos = $row['']->getProperty('votos');
-                    //$sitio->type = $row['']->getProperty('type');                                        
+                    $sitio->type = $row['']->getProperty('type');                                        
                     array_push($array, $sitio);                    
                 }
                 return $array;
@@ -165,46 +166,6 @@ class ModelSitios{
         }
         
         
-        public function get_todo($queryString){
-                        
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);
-            $result = $query->getResultSet();
-                       
-            if(count($result)>0){  //pregunta si encontro resultados
-                
-                $nodos = "";
-
-                foreach ($result as $row){            
-                    //array_push($aux, $row['']->getId());                
-                    $nodos.=",".$row['']->getId();
-                }                
-
-                $cadnodos = substr($nodos,1);
-
-
-                $losconsulta = "START n=node(".$cadnodos.") RETURN n";
-                $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
-
-                $respuesta = $consul->getResultSet();       
-
-                $arsitios = array();
-
-                foreach ($respuesta as $row){
-                    $sitio = new Sitio();
-                    $sitio->id = $row['']->getId();
-                    $sitio->nombre = $row['']->getProperty('nombre');
-                    $sitio->descripcion = $row['']->getProperty('descripcion');
-                    $sitio->tipo_sitio = $row['']->getProperty('tipo_sitio');
-                    $sitio->imagen = $row['']->getProperty('imagen');
-                    $sitio->type = $row['']->getProperty('type');
-                    array_push($arsitios, $sitio);
-                }                
-                return $arsitios;                
-            }
-            else{ return; }
-            
-        }
-
         public function get_sitio_aleatorio($queryString, $cant){
             
                         
@@ -436,6 +397,63 @@ class ModelSitios{
             
             return $arsitios;  
         }               
+
+        
+        public function get_img_slider($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $imagenes = array();
+            
+            if(count($result)>5){
+                
+                for($i=0; $i<5; $i++){
+                    $aux = rand(0, count($result)-1);  
+                    $posiciones[]=$aux;
+                }
+//                print_r($posiciones);
+//                echo "<br>";
+                
+                for($i=0; $i<count($posiciones); $i++){
+                    for($j=0; $j<count($posiciones); $j++){
+//                        echo $posiciones[$i]."-".$posiciones[$j]."<br>";
+                        if($i!=$j){                            
+                            if($posiciones[$i]==$posiciones[$j]){                                                                
+                                $aux = rand(0, count($result)-1);                                
+//                                echo "iguales nuevo numero ->".$aux."<br>";
+                                $posiciones[$i]=$aux;
+                            }
+                        }
+                    }
+                }                   
+            
+//                echo "<br>";
+//                print_r($posiciones);
+//                echo "<br>";
+//                foreach($result as $key=>$row) {
+//                    echo $key."=>".$row[0]."<br>";
+//                }            
+//                echo "<br>";                
+            
+                foreach($result as $key=>$row) {
+                    for($j=0; $j<count($posiciones); $j++){
+                        if($key==$posiciones[$j]){
+//                            echo $key."=>".$row[0]."<br>";
+                            array_push($imagenes, $row[0]);                        
+                        }       
+                    }       
+                }                
+            }
+            else{
+                foreach($result as $row) {
+                    array_push($imagenes, $row[0]);                        
+                }                            
+            }
+                
+            return $imagenes;  
+        }
+        
         
         
 }

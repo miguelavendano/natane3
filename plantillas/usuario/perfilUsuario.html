@@ -5,17 +5,17 @@
                 <div class="span12">
                     <div class="row-fluid">
                         <div class="span3">
-
+                            <!--
                             <div>
                                 <button class="btn btn-blue btn-block" id="SeguirU"><i></i> Seguir</button>
                             </div>
-                            
-                            <div class="usuario contenido"><!-- usuario -->
+                            -->
+                            <div class="usuario contenedor"><!-- usuario -->
                                 {datos_usuario}  <!-- datos_usuario.html-->
                             </div>      
                 
-                            <div class="seguidores contenido">                            
-                                <h3><a href="#seguidores">Seguidores</a></h3>
+                            <div class="seguidores contenedor">                            
+                                <h3>Seguidores</h3>
                                     {seguidores}   <!-- usa a "generales/seguidores.html" -->
                             </div> <!-- seguidores -->
                            
@@ -25,40 +25,32 @@
                         <div class="span9" id="contenidoU">
                             
                             {editarUsuario}
-                            {editaExp}
-                            {comparteExp}                            
+                            {editaExp}      
+                            {VerExp}
+                            {comparteExp}
                             {registrarSitio}
-                            {registrarEmpresa}
-                            
-    <!--<div class="container">
-        <div style="position: relative; height: 80px;">           
-            <input type="text" name="country" id="autocomplete-ajax" style="position: absolute; z-index: 2; background: transparent;"/>
-            <input type="text" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: white; z-index: 1;"/>            
-        </div>
-        <div id="selection-ajax"></div>
-    </div>-->                            
+                            {registrarEmpresa}                               
                             
                             <div class="pestañas">
                                 <div class="tabbable">
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#1" data-toggle="tab">Experiencias</a></li>
                                         <li><a href="#2" data-toggle="tab">Visitaría</a></li>
+                                        <li><a href="#3" data-toggle="tab">Personas que quizas conoces</a></li>
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">      
+                                            
                                             {experiencia}  <!--usa usuaro/experiencia.html-->                                                                                                                     
                                         </div>  <!-- pestaña 1 -->
-<!--
-    <div class="menu">
-        <ul>
-            <li><a><div class="circle"><span class="icon-wrench"></span></div></a></li>
-            <li><a><span class="icon-remove"></span></a></li>
-        </ul>
-    </div>                                   
--->     
+
                                         <div class="tab-pane" id="2"> 
-                                            {le_gustaria_ir} <!-- usando usuario/experiencia tambien>--->
+                                            {quiere_visitar} <!-- usando usuario/experiencia tambien>--->
                                         </div>   <!-- pestaña 2 -->
+                                        
+                                        <div class="tab-pane" id="3"> 
+                                            {amigos_de_amigos}
+                                        </div>   <!-- pestaña 3 -->                                        
 
                                     </div>
                                 </div>
@@ -74,35 +66,27 @@
 
     <!-- VENTANAS MODAL-->    
     {modales}
+    
+    
 
+        <!--<div class="container">
+        <div style="position: relative; height: 80px;">           
+            <input type="text" name="country" id="autocomplete-ajax" style="position: absolute; z-index: 2; background: transparent;"/>
+            <input type="text" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: white; z-index: 1;"/>            
+        </div>
+        <div id="selection-ajax"></div>
+    </div>-->                            
+    
+<!--
+    <div class="menu">
+        <ul>
+            <li><a><div class="circle"><span class="icon-wrench"></span></div></a></li>
+            <li><a><span class="icon-remove"></span></a></li>
+        </ul>
+    </div>                                   
+-->     
+<!--
     <script src="{JS}/base-galeria.js"></script>
-
-
-    <!--Elementos para el scroll -->
-    <script type="text/javascript" src="{JS}/jquery.mousewheel.js"></script>
-    <script type="text/javascript" src="{JS}/jquery.jscrollpane.min.js"></script>
-
-    <script>
-        $(function(){            
-            $('.scroll-pane').jScrollPane(
-                {
-                    'showArrows': false,
-                    //horizontalGutter:5,
-                    //verticalGutter:5,
-                    //verticalDragMinHeight: 30,
-                    //verticalDragMaxHeight: 100                    
-                }
-            );
-            $('.jspDrag').hide();
-            $('.jspScrollable').mouseenter(function(){
-               $('.jspDrag').stop(true, true).fadeIn('slow');
-            });
-            $('.jspScrollable').mouseleave(function(){
-               $('.jspDrag').stop(true, true).fadeOut('slow');
-            });
-        });
-    </script>    
-    
     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
-    
+    -->
 

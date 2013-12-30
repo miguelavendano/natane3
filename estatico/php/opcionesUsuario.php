@@ -3,8 +3,8 @@ session_start();
 require_once('../../core/coneccion.php');
 require_once('../../core/modeloUsuario.php');
 require_once('../../core/modeloExperiencia.php');
-require_once('../../core/modeloImagen.php');
 require_once('../../core/modeloRelaciones.php');
+require_once('../../core/modeloImagen.php');
 
 
 if(isset($_POST['opcion'])){
@@ -23,7 +23,11 @@ if(isset($_POST['opcion'])){
             $nodo_usuario->genero = $_POST['genero'];
             $nodo_usuario->fecha_nacimiento = $_POST['nacimiento'];
             $nodo_usuario->correo = $_POST['mail'];
-            $nodo_usuario->imagen = $img;           
+//<<<<<<< HEAD
+//            $nodo_usuario->imagen = $img;           
+//=======
+            $nodo_usuario->imagen = "usuario_sin_avatar.jpg";            
+
             /*
             $nodo_usuario->nick = $nik;
             $nodo_usuario->ciudad_origen = $orig;
@@ -112,44 +116,7 @@ if(isset($_POST['opcion'])){
             $band="true";
             
         break;        
-/*
-        case "guardar_edicionU":       
-            
-            $upload_folder ='../../estatico/imagenes/';
-            foreach($_FILES['foto_perfil']['error'] as $key => $error){                
-                if($error == UPLOAD_ERR_OK){                    
-                    $nombre_archivo = $_FILES['foto_perfil']['name'][$key];
-                    $tmp_archivo = $_FILES['foto_perfil']['tmp_name'][$key];            
-                    //$tipo_archivo = $_FILES['foto_perfil']['type'][$key];
-                    //$tamano_archivo = $_FILES['foto_perfil']['size'][$key];
-
-                    //echo $nombre_archivo;
-                    $nomFotoPerfil = $_POST['usuario'].'_'.$nombre_archivo;
-                    echo $nomFotoPerfil;
-
-                    move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen
-                }
-            }            
-                                
-            ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['EnomU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['EapeU']);            
-            ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", $nomFotoPerfil);         
-            ModelUsuarios::editar_usuario($_POST['usuario'], "nick", $_POST['EnickU']);            
-            ModelUsuarios::editar_usuario($_POST['usuario'], "genero",$_POST['EgeneroU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "fecha_nacimiento", $_POST['EnaciU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "ciudad_origen", $_POST['EcityU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "lugar_recidencia", $_POST['ErecideU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "correo", $_POST['EmailU']); 
-            ModelUsuarios::editar_usuario($_POST['usuario'], "sitio_web", $_POST['Es_webU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "facebook", $_POST['EfaceU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "twitter", $_POST['EtwiU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "youtube", $_POST['EyouU']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "contraseña", $_POST['Epass1U']);
-            
-            $band="true";
-            
-        break;      
-*/
+    
         case "ediFotoPerfil":       
             
             $upload_folder ='../../estatico/imagenes/';
@@ -163,8 +130,7 @@ if(isset($_POST['opcion'])){
 
                     //echo $nombre_archivo;
                     $nomFotoPerfil = $_POST['usuario'].'_'.$nombre_archivo;
-                    echo $nomFotoPerfil;
-
+                    
                     move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen
                     
                     $_SESSION['img'] = $nomFotoPerfil;
@@ -177,10 +143,7 @@ if(isset($_POST['opcion'])){
             
         break;        
         
-        case "experiencia":                       
-
-            echo $_POST['Exptitulo'];
-            echo $_POST['Expdesc'];
+        case "crea_experiencia":                       
             
             $nodo_experiencia = new Experiencia();
             $nodo_experiencia->nombre = $_POST['Exptitulo'];
@@ -190,8 +153,8 @@ if(isset($_POST['opcion'])){
             
             $id_exp = $nodo_experiencia->id;  //obtengo el id del nodo creado                                    
             ModeloRelaciones::crearRelacion($_POST['autor'], $id_exp, "Comparte");   //crea la relacion entre el autor y la experiencia
-            
-            
+
+            //guarda las imagenes de la experiencia
             $upload_folder ='../../estatico/imagenes/';
             foreach($_FILES['imagenes_experiencia']['error'] as $key => $error){                
                 if($error == UPLOAD_ERR_OK){                    
@@ -201,21 +164,21 @@ if(isset($_POST['opcion'])){
                     //$tipo_archivo = $_FILES["imagenes_experiencia"]['type'][$key];
                     //$tamano_archivo = $_FILES["imagenes_experiencia"]['size'][$key];
 
-                    //almaceno la imagen en la carpeta del servidor                    
+                    //creo el nombre unico para la imagen
                     $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$nombre_archivo;
                     
-                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgExpUser);   //guarda la imagen
-
                     //crea el nodo de cada una de las imagenes
                     $nodo_imagen = new Imagen();
                     $nodo_imagen->nombre = $nomImgExpUser;
                     $nodo_imagen->descripcion = "";
-                    $nodo_imagen->comentario1 = "";
                     $nodo_imagen->type = 'Imagen';  
                     ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
 
                     $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
                     ModeloRelaciones::crearRelacion($id_exp, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
+                    
+                    //almaceno la imagen en la carpeta del servidor                                        
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgExpUser);   //guarda la imagen                    
                 }
             }
             
@@ -223,66 +186,140 @@ if(isset($_POST['opcion'])){
             
         break;
     
-        case "editarExp":                       
+        case "editarExp":                                   
             
             $modelexperiencia = new ModelExperiencia();
             $query = "START n=node(".$_POST['experiencia'].") RETURN n";                        
-            $resultado = $modelexperiencia->get_experiencias($query);
+            $resultado = $modelexperiencia->get_experiencias($query);            
             
             $band = array(
                 "nombre"=> $resultado[0]->nombre,
                 "descripcion"=> $resultado[0]->descripcion
             );
-                        
-           $band = json_encode($band);
+                                    
+            $lista_imgs = $modelexperiencia->get_imagenes_experiencia($_POST['experiencia']);            
+            //inserto el array de imagenes al array de las propiedades de la  experiencia
+            array_push($band, $lista_imgs);                                                    
+            
+            //cambio el nombre que asigna la insertar el array de imagenes
+            $band["imagenes"] = $band["0"];
+            unset($band["0"]);
+            
+            //combierto el array en un json
+            $band = json_encode($band);
             
         break;    
 
         case "guardar_edicionExp":                                                                      
-
+            
+            /*
             ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['titulo']);
             ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['descripcion']);            
+            */
+            
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['ediExpTitulo']);
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['ediExpDesc']);            
+            
+            //guarda las imagenes de la experiencia            
+            $upload_folder ='../../estatico/imagenes/';
+            foreach($_FILES['imgs_edit_experiencia']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    //alamaceno la imagen
+                    $nombre_archivo = $_FILES["imgs_edit_experiencia"]['name'][$key];
+                    $tmp_archivo = $_FILES["imgs_edit_experiencia"]['tmp_name'][$key];            
+
+                    //creo el nombre unico para la imagen
+                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$nombre_archivo;                    
+                    
+                    //crea el nodo de cada una de las imagenes                    
+                    $nodo_newImgExp = new Imagen();
+                    $nodo_newImgExp->nombre = $nomImgExpUser;
+                    $nodo_newImgExp->descripcion = "";
+                    $nodo_newImgExp->type = 'Imagen';  
+                    ModelImagen::crearNodoImagen($nodo_newImgExp);  //crea el nodo de la imagen
+
+                    $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
+                    ModeloRelaciones::crearRelacion($id_exp, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
+
+                    //almaceno la imagen en la carpeta del servidor                                        
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgExpUser);   //guarda la imagen                    
+                }
+            }
+            
             $band="true";
             
         break;        
 
-        case "eliminarExp":   
-            
-            //elimino la relacion entre la experiencia y las imagenes
-            $modeloexperiencia = new ModelExperiencia();            
-            
-            // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino
-            $ids_relacionImgExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Img");
-            
-            if($ids_relacionImgExp){
-                $modeloexperiencia->eliminar_relacion_experiencia($ids_relacionImgExp);     
-                
-                // obtengo los id de los nodos de imagenes de la experiencia y luego las elimino            
-                $query = "START n=node(".$_POST['experiencia'].") MATCH n-[:Img]->i RETURN i;";
-                $ids_nodoImgExp = $modeloexperiencia->get_id_nodoImgExp($query);
-                $modeloexperiencia->eliminar_nodos_ImgExp($ids_nodoImgExp);
-            }
+        case "eliminarExp":
                         
-            // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
-            $id_relacionUserExp = $modeloexperiencia->get_id_relaciones_nodo($_POST['experiencia'],"Comparte");
-            if($id_relacionUserExp){
-                $modeloexperiencia->eliminar_relacion_experiencia($id_relacionUserExp); 
+            $etiquetado=ModeloRelaciones::consultaNodosEtiquetadosEnRelacion($_POST['experiencia']); 
+            $tipo_relacion="";
+            
+            foreach($etiquetado as $row){
+                    if($row==$_POST['usuario']){
+                        $tipo_relacion="etiqueta";
+                    }
+                }
+                
+            if($tipo_relacion==""){
 
-                // elimino el nodo de la experiencia
-                ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                
+                // obtengo los id de las relaciones Experiencia-Sitio (Asociada), si existen las elimino
+                $ids_relacionImgEmp = ModeloRelaciones::get_id_relaciones($_POST['experiencia'],"Asociada");                
+                if($ids_relacionImgEmp){
+                    //elimino la relacion entre la experiencia y las empresas
+                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgEmp);    
+                }
+                
+                // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino                
+                $ids_relacionImgExp = ModeloRelaciones::get_id_relaciones($_POST['experiencia'],"Img");
+
+                if($ids_relacionImgExp){
+
+                    // obtengo los id de los nodos vinculados al nodo dado segun su relacion
+                    $ids_nodoImgExp = ModeloRelaciones::get_ids_nodos_relacion($_POST['experiencia'],"Img");
+
+                    //reviso si las imagenes tienen comentarios, si es asi los elimina
+                    foreach($ids_nodoImgExp as $row){                        
+
+                        // obtengo los id de las relaciones Img-Comentario (Sobre), si existen las elimino                
+                        $ids_relacionImgComen = ModeloRelaciones::get_id_relaciones($row,"Sobre");                        
+
+                        if($ids_relacionImgComen){                            
+                            //elimino la relacion entre la imagen y sus comentarios
+                            ModeloRelaciones::eliminar_relaciones($ids_relacionImgComen);                        
+                            // obtengo los id de los nodos vinculados al nodo dado segun su relacion
+                            $ids_nodoImgComen = ModeloRelaciones::get_ids_nodos_relacion($row,"Sobre");
+                            //elimino las imagenes de la experiencia
+                            ModeloRelaciones::eliminar_nodos($ids_nodoImgComen);                        
+                        }
+                    }
+                    
+                    //elimino la relacion entre la experiencia y las imagenes                    
+                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgExp);                        
+                    //elimino las imagenes de la experiencia
+                    ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
+                }
+                
+                // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
+                $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['experiencia'], 'Comparte');
+                
+                if($id_relacionUserExp){
+                    ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
+                    ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                                                       
+                }                
+                                
             }
+            elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
+                
+                $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['usuario'], "Etiqueta");  //consulto el ID de la relacion
+                ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa                               
+                //$band="etiqueta";
+            }    
            
             $band="true";
             
         break;    
-    
-    
-        case "relacion_amigo":                       
-            
-            
-        break;    
-
-    
+   
     
         case "seguir":  
   
@@ -298,8 +335,17 @@ if(isset($_POST['opcion'])){
             ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa
             $band = 'true';
             
+        break;        
+
+        case "eliminarImgExp":   
+            
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['imagen'], "Img");  
+            ModeloRelaciones::eliminarRelacion($idRelacion);                          
+            ModelExperiencia::eliminar_nodos_ImgExp($_POST['imagen']);
+
+            $band="true";        
+            
         break;    
-    
     
         case "login":                                                                      
 
