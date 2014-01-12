@@ -68,7 +68,7 @@
             $this->vista->refactory_AmigosDeAmigos($this->AmigosDeAmigos());
             $this->vista->refactory_experiencias($this->experiencias());
 //            $this->vista->refactory_gustaria($this->gustaria());
-//            $this->vista->refactory_visitaria($this->visitaria());            
+            $this->vista->refactory_visitaria($this->visitaria());            
             $this->vista->refactory_contenido();
             $this->vista->refactory_total();
             

@@ -45,7 +45,7 @@ $(document).ready(function(){
      * Editar datos del Usuarios
      */
     $("#BeditarU").click(function(){
-        
+            
             $("#editarUsuario").css({display:'inline'});   
             $(".pestañas").css({display:'none'});     //oculta las experiencias si esta visible
             $("#registrarEmpresa").css({display:'none'});   //oculta el registro de Empresa si esta visible
@@ -697,4 +697,76 @@ $(document).ready(function(){
             });                            
     }
     
-    
+
+
+    function verExperiencia(id_experiencia){
+        
+            $(".pestañas").css({display:'none'});
+            $(".verExperiencia").css({display:'inline'});            
+
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion:'editarExp',                            
+                    experiencia: id_experiencia                    
+                }
+                ,dataType:'JSON'
+                ,beforeSend:function(jqXHR, settings ){
+
+                    $("#reload").css({visibility: 'visible',
+                                        opacity:'1',
+                                        position: 'fixed',
+                                        top: '200px',
+                                        right: '50px',
+                                        left: '50px',
+                                        width: 'auto',
+                                        margin: '0 auto'
+                                    });   
+                }
+                ,success: function(data,textStatus,jqXHR){                           
+                    
+                    $("#reload").css({visibility: 'hidden'});   
+                
+                    $("#verExpTitulo").html(data.nombre);
+                    $("#verExpDesc").html(data.descripcion);                    
+                    
+                    var url_imagen= '/natane3/modulos/imagen/imagen.php';
+                    var marco="";
+                    var edicion="";                    
+                    var img="";
+                    var todo="";
+                    var lis_img="";
+                    var ciclo=0;
+                                        
+                    for(var i=0; i<data.imagenes.length; i++){                        
+                        
+                        marco="<div class='span3 marco_img_exp'>";
+                        //img="<div class='im_exp_edit'><img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' /></div>";
+
+                        img="<div class='im_exp_edit'>\n\
+                                <a href="+url_imagen+"?id="+data.imagenes[i].img_id+">\n\
+                                    <img src='/natane3/estatico/imagenes/"+data.imagenes[i].img_nombre+"' />\n\
+                                </a>\n\
+                            </div>";
+
+                        todo=marco+img+"</div>";
+
+                        if(ciclo==0){
+                            lis_img=lis_img+"<div class='row-fluid'>"+todo;                                                                                    
+                            ciclo++;            
+                        }
+                        else if(ciclo<3){
+                            lis_img=lis_img+todo;                            
+                            ciclo++;                                                                      
+                        }else if(ciclo==3){      
+                            lis_img=lis_img+todo+"</div>";                            
+                            ciclo=0;                                         
+                        }  
+                        
+                    }                    
+                    
+                    $(".vista_imgs_experiencia").html(lis_img);
+                }
+            });                                            
+    }

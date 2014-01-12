@@ -70,7 +70,7 @@ if(isset($_POST['opcion'])){
         case "editarU":                       
             
             $modelusuarios = new ModelUsuarios();            
-            $query = "START n=node(".$_POST['autor'].") RETURN n";                        
+            $query = "START n=node(".$_SESSION['id'].") RETURN n";            
             $resultado = $modelusuarios->get_usuario($query);
             
             $band = array(
@@ -96,19 +96,19 @@ if(isset($_POST['opcion'])){
   
         case "guardar_edicionU":       
                    
-            ModelUsuarios::editar_usuario($_POST['usuario'], "nombre", $_POST['nombre']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "apellido", $_POST['apellido']);            
-            ModelUsuarios::editar_usuario($_POST['usuario'], "nick", $_POST['nick']);            
-            ModelUsuarios::editar_usuario($_POST['usuario'], "genero",$_POST['genero']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "fecha_nacimiento", $_POST['f_nace']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "ciudad_origen", $_POST['city']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "lugar_recidencia", $_POST['recide']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "correo", $_POST['mail']); 
-            ModelUsuarios::editar_usuario($_POST['usuario'], "sitio_web", $_POST['s_web']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "facebook", $_POST['face']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "twitter", $_POST['twit']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "youtube", $_POST['youtube']);
-            ModelUsuarios::editar_usuario($_POST['usuario'], "contraseña", $_POST['pass']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "nombre", $_POST['nombre']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "apellido", $_POST['apellido']);            
+            ModelUsuarios::editar_usuario($_SESSION['id'], "nick", $_POST['nick']);            
+            ModelUsuarios::editar_usuario($_SESSION['id'], "genero",$_POST['genero']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "fecha_nacimiento", $_POST['f_nace']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "ciudad_origen", $_POST['city']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "lugar_recidencia", $_POST['recide']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "correo", $_POST['mail']); 
+            ModelUsuarios::editar_usuario($_SESSION['id'], "sitio_web", $_POST['s_web']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "facebook", $_POST['face']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "twitter", $_POST['twit']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "youtube", $_POST['youtube']);
+            ModelUsuarios::editar_usuario($_SESSION['id'], "contraseña", $_POST['pass']);
             
             $_SESSION['nick'] = $_POST['nick'];
             
@@ -129,7 +129,7 @@ if(isset($_POST['opcion'])){
                     //$tamano_archivo = $_FILES['foto_perfil']['size'][$key];
 
                     //echo $nombre_archivo;
-                    $nomFotoPerfil = $_POST['usuario'].'_'.$nombre_archivo;
+                    $nomFotoPerfil = $_SESSION['id'].'_'.$nombre_archivo;
                     
                     move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen
                     
@@ -137,7 +137,7 @@ if(isset($_POST['opcion'])){
                 }
             }            
             
-            ModelUsuarios::editar_usuario($_POST['usuario'], "imagen", $nomFotoPerfil);         
+            ModelUsuarios::editar_usuario($_SESSION['id'], "imagen", $nomFotoPerfil);         
             
             $band="true";
             
@@ -152,7 +152,7 @@ if(isset($_POST['opcion'])){
             ModelExperiencia::crearNodoExperiencia($nodo_experiencia);  //crea el nodo de la experiencia
             
             $id_exp = $nodo_experiencia->id;  //obtengo el id del nodo creado                                    
-            ModeloRelaciones::crearRelacion($_POST['autor'], $id_exp, "Comparte");   //crea la relacion entre el autor y la experiencia
+            ModeloRelaciones::crearRelacion($_SESSION['id'], $id_exp, "Comparte");   //crea la relacion entre el autor y la experiencia
 
             //guarda las imagenes de la experiencia
             $upload_folder ='../../estatico/imagenes/';
@@ -165,7 +165,7 @@ if(isset($_POST['opcion'])){
                     //$tamano_archivo = $_FILES["imagenes_experiencia"]['size'][$key];
 
                     //creo el nombre unico para la imagen
-                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$nombre_archivo;
+                    $nomImgExpUser = $_SESSION['id'].'_'.$id_exp.'_'.$nombre_archivo;
                     
                     //crea el nodo de cada una de las imagenes
                     $nodo_imagen = new Imagen();
@@ -229,7 +229,7 @@ if(isset($_POST['opcion'])){
                     $tmp_archivo = $_FILES["imgs_edit_experiencia"]['tmp_name'][$key];            
 
                     //creo el nombre unico para la imagen
-                    $nomImgExpUser = $_POST['autor'].'_'.$id_exp.'_'.$nombre_archivo;                    
+                    $nomImgExpUser = $_SESSION['id'].'_'.$id_exp.'_'.$nombre_archivo;                    
                     
                     //crea el nodo de cada una de las imagenes                    
                     $nodo_newImgExp = new Imagen();
@@ -256,7 +256,7 @@ if(isset($_POST['opcion'])){
             $tipo_relacion="";
             
             foreach($etiquetado as $row){
-                    if($row==$_POST['usuario']){
+                    if($row==$_SESSION['id']){
                         $tipo_relacion="etiqueta";
                     }
                 }
@@ -301,7 +301,7 @@ if(isset($_POST['opcion'])){
                 }
                 
                 // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
-                $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['experiencia'], 'Comparte');
+                $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_SESSION['id'], $_POST['experiencia'], 'Comparte');
                 
                 if($id_relacionUserExp){
                     ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
@@ -311,7 +311,7 @@ if(isset($_POST['opcion'])){
             }
             elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
                 
-                $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['usuario'], "Etiqueta");  //consulto el ID de la relacion
+                $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_SESSION['id'], "Etiqueta");  //consulto el ID de la relacion
                 ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa                               
                 //$band="etiqueta";
             }    
@@ -323,14 +323,14 @@ if(isset($_POST['opcion'])){
     
         case "seguir":  
   
-            ModeloRelaciones::crearRelacion($_POST['seguidor'], $_POST['a_seguir'], "Amigo");   //crea la relacion de amistad            
+            ModeloRelaciones::crearRelacion($_SESSION["id"], $_POST['a_seguir'], "Amigo");   //crea la relacion de amistad            
             $band = 'true';
                         
         break;    
     
         case "no_seguir":  
 
-            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['seguidor'], $_POST['a_seguir'], "Amigo");  //consulto el ID de la relacion
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_SESSION["id"], $_POST['a_seguir'], "Amigo");  //consulto el ID de la relacion
            
             ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa
             $band = 'true';
@@ -350,7 +350,7 @@ if(isset($_POST['opcion'])){
         case "login":                                                                      
 
             $modelusuarios = new ModelUsuarios();            
-            $query = "SELECT idneo4j, email, password FROM natane.usuario WHERE email = '".$_POST['usuario']."';";                     
+            $query = "SELECT idneo4j, email, password FROM natane.usuario WHERE email = '".$_SESSION['id']."';";                     
             $mysql = new Conexion();            
             $resultado = $mysql->get_resultados_query($query);
             
@@ -362,7 +362,7 @@ if(isset($_POST['opcion'])){
             $_SESSION["id"] = $resultado[0]['idneo4j'];
             echo $resultado[0]['idneo4j'];
             
-            if($_POST['usuario'] == $resultado[0]['email'] && $_POST['clave'] == $resultado[0]['password']){
+            if($_SESSION['id'] == $resultado[0]['email'] && $_POST['clave'] == $resultado[0]['password']){
                 
                // $band=$_SESSION["id"];
                 $band = $band." true";

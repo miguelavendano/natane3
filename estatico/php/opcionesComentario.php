@@ -17,7 +17,7 @@ if(isset($_POST['opcion'])){
         case "creaComentario":                       
             
             $nodo_comentario = new Comentario();
-            $nodo_comentario->usuario = $_POST['autor'];
+            $nodo_comentario->usuario = $_SESSION['id'];
             $nodo_comentario->detalle = $_POST['comentario'];
             $nodo_comentario->fecha = date("d")." de ".date("F")." de ".date("Y")." a la(s) ".date("H:i");
             $nodo_comentario->nombre = "";

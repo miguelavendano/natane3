@@ -110,12 +110,16 @@
             
             $this->dic_contenido['datos_usuario'] = $this->usuario;
             $this->dic_contenido['seguidores'] = $this->segui;
-            $this->dic_contenido['le_gustaria_ir'] = $this->gustaria;
+            
             $this->dic_contenido['modales']= $this->modal;
             $this->dic_contenido['editarUsuario']= $this->editar;
             $this->dic_contenido['experiencia']=$this->expe;
             $this->dic_contenido['comparteExp']=$this->comparte;
-            $this->dic_contenido['editaExp']=$this->editExp;                    
+            $this->dic_contenido['editaExp']=$this->editExp;
+            
+            $this->dic_contenido['quiere_visitar']=$this->gustaria;
+            $this->dic_contenido['amigos_de_amigos']=$this->amigos;
+            
             $this->dic_contenido['registrarSitio']=$this->creaSitio;
             $this->dic_contenido['registrarEmpresa']=$this->creaEmpre;       
         }
@@ -146,26 +150,26 @@
             }
             
 
-            $this->dic_general = array( 'metas' => $this->metas,
-                                        'links' => $this->links ,
-                                        'script' => $this->script,
-                                        'head' => $this->head ,
-                                        'contenido' => $this->perfil
-                                        );
-            
-            $this->dic_contenido = array('datos_usuario' => $this->usuario, 
-                                        'seguidores' => $this->segui, 
-                                        'quiere_visitar' => $this->gustaria,
-                                        'amigos_de_amigos' => $this->amigos,
-                                        'modales'=> $this->modal,
-                                        'editarUsuario'=> $this->editar,
-                                        'experiencia'=>$this->expe,
-                                        'comparteExp'=>$this->comparte,
-                                        'editaExp'=>$this->editExp,                    
-                                        'verExp'=>$this->verExp,
-                                        'registrarSitio'=>$this->creaSitio,
-                                        'registrarEmpresa'=>$this->creaEmpre                    
-                                        );           
+//            $this->dic_general = array( 'metas' => $this->metas,
+//                                        'links' => $this->links ,
+//                                        'script' => $this->script,
+//                                        'head' => $this->head ,
+//                                        'contenido' => $this->perfil
+//                                        );
+//            
+//            $this->dic_contenido = array('datos_usuario' => $this->usuario, 
+//                                        'seguidores' => $this->segui, 
+//                                        'quiere_visitar' => $this->gustaria,
+//                                        'amigos_de_amigos' => $this->amigos,
+//                                        'modales'=> $this->modal,
+//                                        'editarUsuario'=> $this->editar,
+//                                        'experiencia'=>$this->expe,
+//                                        'comparteExp'=>$this->comparte,
+//                                        'editaExp'=>$this->editExp,                    
+//                                        'verExp'=>$this->verExp,
+//                                        'registrarSitio'=>$this->creaSitio,
+//                                        'registrarEmpresa'=>$this->creaEmpre                    
+//                                        );           
         }
         
         
@@ -258,11 +262,9 @@
          * 
          * @param array $datos trae los datos de los sitios con enlace gustaria.
          */                              
-        public function refactory_gustaria($datos){            
-//
-//
-//        public function refactory_visitaria($datos){            
-//>>>>>>> origin/julian10
+//        public function refactory_gustaria($datos){            
+        public function refactory_visitaria($datos){            
+
             
             $global = new Global_var();
             $url = $global->url_sitio;
@@ -286,13 +288,7 @@
             
         }        
 
-             
-        /**
-         * Convierte todas las secciones refactorizadas individualemtne en una sola cadena de texto 
-         * para finalmente ser empotrada en la plantilla base.
-         * 
-         * @param array $datos trae los datos del usuario.
-         */                                      
+        
         public function refactory_AmigosDeAmigos($datos){
             
             $amigos = "";            

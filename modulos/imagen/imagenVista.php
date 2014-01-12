@@ -22,7 +22,7 @@
         public function __construct() {
             
             $this->base = file_get_contents('../../plantillas/generales/base.html');            
-            $this->head = file_get_contents('../../plantillas/generales/head.html');            
+            $this->head = file_get_contents('../../plantillas/generales/head.html');         
             $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');            
             $this->contenido = file_get_contents('../../plantillas/imagen/imagen.html');
             $this->comentarios = file_get_contents('../../plantillas/imagen/comentarios.html');
@@ -87,6 +87,33 @@
             
         }
         
+        
+        
+        /**
+         * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
+         * esta accediendo.
+         */
+        public function refactory_header($opcion){
+            
+            switch($opcion){                                
+                case 1:
+                    
+                    
+                    $this->head = Global_var::refactory_header(false);                                        
+                    
+                    break;
+                case 2:
+                    $this->head = Global_var::refactory_header(false); 
+                    
+                    break;
+                
+                default:
+                    
+                    break;               
+            }
+            
+
+        }        
        
         
         public function refactory_imagen($datos){            

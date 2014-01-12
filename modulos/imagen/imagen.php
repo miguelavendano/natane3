@@ -3,7 +3,7 @@
     require_once 'imagenVista.php';    
     require_once 'imagenModel.php';
 
-    
+    session_start();
     
     class Imagenes{
 
@@ -31,6 +31,7 @@
         
         public function main($id){
             
+            $this->vista->refactory_header(1); 
             $this->vista->refactory_imagen($this->imagen($id));            
             $this->vista->refactory_comentarios($this->comentarios($id));
             $this->vista->refactory_total();
@@ -39,11 +40,17 @@
     }
     
     
-
+   
     $id = $_GET['id'];
     $imagen = new Imagenes();
     $imagen->main($id);  
 
+    
+    
+    
+    
+    
+    
     
 
 ?>

@@ -3,6 +3,7 @@
     require_once 'galeriaVista.php';    
     require_once 'galeriaModel.php';
 
+    session_start();
     
 
     class Galerias{
@@ -61,6 +62,7 @@
         
         public function main($id, $url_padre, $galeria){
             
+            $this->vista->refactory_header(1); 
             $this->vista->refactory_fotos($this->fotos($id, $galeria));            
             $this->vista->refactory_galeria($id, $url_padre,$this->nombre_padre($id));
             //$this->vista->refactory_albun();
