@@ -124,14 +124,14 @@ if(isset($_POST['opcion'])){
       
         case "visito":  
                                                                                 //Visitante  
-            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['sitio'], "Fan");   //crea la relacion entre el usuario y la empresa que ha visitado           
+            ModeloRelaciones::crearRelacion($_SESSION['id'], $_POST['sitio'], "Fan");   //crea la relacion entre el usuario y la empresa que ha visitado           
             $band="true";
             
         break;    
     
         case "elimina-visita":  
   
-            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['sitio'], "Fan");  //consulto el ID de la relacion           
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_SESSION['id'], $_POST['sitio'], "Fan");  //consulto el ID de la relacion           
             ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y el sitio visitado
             $band="true";
             
@@ -139,14 +139,14 @@ if(isset($_POST['opcion'])){
 
         case "quiere-visitar":  
    
-            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['sitio'], "Desea");   //crea la relacion entre el usuario y la empresa que ha visitado           
+            ModeloRelaciones::crearRelacion($_SESSION['id'], $_POST['sitio'], "Desea");   //crea la relacion entre el usuario y la empresa que ha visitado           
             $band="true";
             
         break;    
     
         case "elimina-intencion-visitar":  
   
-            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['sitio'], "Desea");  //consulto el ID de la relacion           
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_SESSION['id'], $_POST['sitio'], "Desea");  //consulto el ID de la relacion           
             ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y el sitio visitado
             $band="true";
             

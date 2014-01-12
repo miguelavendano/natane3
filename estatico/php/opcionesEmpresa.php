@@ -111,7 +111,7 @@ if(isset($_POST['opcion'])){
                                                 
             ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);   //aumenta los puntos de confianza
                      
-            ModeloRelaciones::crearRelacion($_POST['usuario'], $_POST['empresa'], "Cliente");   //crea la relacion entre el usuario y la empresa
+            ModeloRelaciones::crearRelacion($_SESSION['id'], $_POST['empresa'], "Cliente");   //crea la relacion entre el usuario y la empresa
             
             $html = "<a class='btn btn-cyan active btn-block'>
                         <h4>$puntos Puntos de Confianza</h4>
@@ -135,7 +135,7 @@ if(isset($_POST['opcion'])){
                                   
             ModelEmpresa::editar_empresa($_POST['empresa'], "confianza", $puntos);     //disminuye los puntos de confianza
 
-            $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['usuario'], $_POST['empresa'], "Cliente");  //consulto el ID de la relacion
+            $idRelacion = ModeloRelaciones::consultarIDRelacion($_SESSION['id'], $_POST['empresa'], "Cliente");  //consulto el ID de la relacion
             
             ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa
             
