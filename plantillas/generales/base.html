@@ -197,6 +197,69 @@
 
         document.getElementById('imagen_servicio').addEventListener('change', vistaPreviaImgServicio, false);
         
+        
+        /*FUNCION PARA LA VISTA PREVIA DE LA IMAGEN AL CREAR SITIO*/
+        function vistaPreviaImgSitio(evt) {
+          var files = evt.target.files; // FileList object
+          var output = [];
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+            
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                    // Render thumbnail.
+                    output.push('<img class="vista_prev_img" src="', e.target.result,
+                                      '" title="', escape(theFile.name), '"/>');                                  
+                    document.getElementById('prev-img-sitio').innerHTML =  output.join('');
+                    
+                  };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
+
+        document.getElementById('img-sitio').addEventListener('change', vistaPreviaImgSitio, false);
+
+        /*FUNCION PARA LA VISTA PREVIA DE LA IMAGEN AL CREAR EMPRESA*/
+        function vistaPreviaImgEmpresa(evt) {
+          var files = evt.target.files; // FileList object
+          var output = [];
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+            
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                    // Render thumbnail.
+                    output.push('<img class="vista_prev_img" src="', e.target.result,
+                                      '" title="', escape(theFile.name), '"/>');                                  
+                    document.getElementById('prev-img-empresa').innerHTML =  output.join('');
+                    
+                  };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
+
+        document.getElementById('img-empresa').addEventListener('change', vistaPreviaImgEmpresa, false);
+        
     </script>
 
     

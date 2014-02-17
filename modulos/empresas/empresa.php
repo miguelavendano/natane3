@@ -29,7 +29,6 @@
             return $slider;            
         }        
         
-        
         public function amigos(){            
             return $this->modelo->get_amigos();
         }

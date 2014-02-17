@@ -138,7 +138,7 @@
         
         public function get_inicio_session($id_usaurio){
             
-            $query = "start a=node(".$id_usaurio.") return a.type as tipoUser, a.nick as nick, a.imagen as img;";
+            $query = "start a=node(".$id_usaurio.") return a.type as tipoUser, a.nick as nick, a.imagen as img";
             
             return $this->modelusuario->get_datos_session($query, $id_usaurio);
                         

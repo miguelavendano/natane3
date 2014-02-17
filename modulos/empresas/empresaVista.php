@@ -165,7 +165,7 @@
                 case 1:
                     
                     $this->head = Global_var::refactory_header(false);                    
-                    $this->head .= "<br> <h1>Este es mi empresa</h1>";
+                    //$this->head .= "<br> <h1>Este es mi empresa</h1>";
                     break;
                 case 2:
                     $this->head = Global_var::refactory_header(false);                                        

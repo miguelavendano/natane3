@@ -23,8 +23,15 @@
         }
         
         public function slider_sitio(){
+            
             $slider = $this->modelo->get_slider();            
-            return $slider;
+            
+            if(count($slider)){
+                return $slider;    
+            }else {
+                $img = $this->modelo->get_img_perfil();            
+                return $img;    
+            }
         }        
 
         public function ferrocarril(){

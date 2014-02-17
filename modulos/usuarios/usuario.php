@@ -31,9 +31,13 @@
             return $this->modelo->get_visitaria();            
         }        
         
-        public function amigos(){            
-            return $this->modelo->get_amigos();            
+        public function seguidores(){            
+            return $this->modelo->get_seguidores();            
         }
+        
+        public function siguiendo(){            
+            return $this->modelo->get_siguiendo();            
+        }        
 
         public function AmigosDeAmigos(){            
             return $this->modelo->get_AmigosDeAmigos();            
@@ -41,13 +45,9 @@
         
         public function principal_Nousuario(){
             
-            
-            
         }        
         
         public function principal_Nologin(){
-            
-            
             
         }       
         
@@ -64,7 +64,8 @@
             
             $this->vista->refactory_header($login); 
             $this->vista->refactory_usuario($this->datos_usuario());
-            $this->vista->refactory_amigos($this->amigos());
+            $this->vista->refactory_amigos($this->seguidores(),"segui");
+            $this->vista->refactory_amigos($this->siguiendo(),"sigo");
             $this->vista->refactory_AmigosDeAmigos($this->AmigosDeAmigos());
             $this->vista->refactory_experiencias($this->experiencias());
 //            $this->vista->refactory_gustaria($this->gustaria());

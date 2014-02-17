@@ -5,50 +5,50 @@
                 <h3>Registar Empresa</h3>
             </legend>        
             
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" id='fromCreaEmpresa' >                              
                 <div class="control-group">
                     <label class="control-label" for="RnomE">Nombre: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RnomE" required> 
+                        <input type="text" class="input-large" id="RnomE" name="RnomE" required> 
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="RnitE">NIT </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RnitE" required>
+                        <input type="text" class="input-large" id="RnitE" name="RnitE" required>
                     </div>
                 </div>                     
                 <div class="control-group">
                     <label class="control-label" for="RdesE">Descripcion: </label>
                     <div class="controls">
-                        <textarea id="RdesE" style="min-width: 200px; max-width: 500px; max-height: 200px" required></textarea>
+                        <textarea id="RdesE" name="RdesE" style="min-width: 200px; max-width: 500px; max-height: 200px" required></textarea>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="RcityE">Ciudad: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RcityE" required>
+                        <input type="text" class="input-large" id="RcityE" name="RcityE" required>
                     </div>
                 </div>                       
                 <div class="control-group">
                     <label class="control-label" for="RdirE">Direccion: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RdirE" required>
+                        <input type="text" class="input-large" id="RdirE" name="RdirE" required>
                     </div>
                 </div>                
                 <div class="control-group">
                     <label class="control-label" for="RtelE">Telefono: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RtelE" required>
+                        <input type="text" class="input-large" id="RtelE" name="RtelE" required>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="RmailE">Email: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RmailE" required>
+                        <input type="text" class="input-large" id="RmailE" name="RmailE" required>
                     </div>
                 </div>       
-                <div class="control-group">
+<!--                <div class="control-group">
                     <label class="control-label" for="RlatE">Latitud: </label>
                     <div class="controls">
                         <input type="text" class="input-large" id="RlatE" required>
@@ -59,36 +59,47 @@
                     <div class="controls">
                         <input type="text" class="input-large" id="RlonE" required>
                     </div>
-                </div>
+                </div>-->
                 <div class="control-group">
                     <label class="control-label" for="RwebE">Sitio Web </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RwebE">
+                        <input type="text" class="input-large" id="RwebE" name="RwebE" placeholder="link">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="RfaceE">Perfil de Facebook: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RfaceE">
+                        <input type="text" class="input-large" id="RfaceE" name="RfaceE" placeholder="link">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="RtwiE">Perfil de Twitter: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RtwiE" placeholder="@tu_perfil">
+                        <input type="text" class="input-large" id="RtwiE" name="RtwiE" placeholder="@tu_perfil">
                     </div>
                 </div>                
                 <div class="control-group">
                     <label class="control-label" for="RyouE">Canal de Youtube: </label>
                     <div class="controls">
-                        <input type="text" class="input-large" id="RyouE">
+                        <input type="text" class="input-large" id="RyouE" name="RyouE" placeholder="link">
                     </div>
-                </div>                
+                </div>   
                 <div class="control-group">
+                    <label class="control-label" for="img-empresa">Selecciona una imagen de la empresa: </label>
+                    <div class="controls">
+                        <div class="caja_Bfile btn btn-green active"> 
+                            <i class="icon-camera"> Imagen de la Empresa</i>
+                            <input class="Bfile" type="file" id="img-empresa" name="img-empresa[]" />                                  
+                        </div>      
+                        <div class="row-fluid">  
+                            <output id="prev-img-empresa"></output>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="control-group">
                     <label class="control-label" for="Rpass1E">Contraseña: </label>
                     <div class="controls">
-                        <input type="password" class="input-medium" id="Rpass1E" required>
-                        <span class="help-inline">minimo 6 caracteres entre letras y números</span>      
+                        <input type="password" class="input-medium" id="Rpass1E" required>      
                     </div>
                 </div>
                 <div class="control-group">
@@ -96,10 +107,10 @@
                     <div class="controls">
                         <input type="password" class="input-medium" id="Rpass2E" required>
                     </div>
-                </div>
+                </div>-->
                 <div class="control-group">                  
                   <div class="controls">
-                    <a class="btn btn-primary" id="guarda_empresa">Crear Sitio</a>
+                    <a class="btn btn-primary" id="guarda_empresa">Crear Empresa</a>
                     <a class="btn btn-red cancelarRegistroEmpresa">Cancelar</a>
                   </div>
                 </div>                

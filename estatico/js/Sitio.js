@@ -10,50 +10,82 @@ $(document).ready(function(){
     /*
      * Guardar la creacion de un Sitio nuevo
      */
+//    $("#guarda_sitio").click(function(){
+//                
+////        if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas         
+//                    $.ajax({
+//                        url:'/natane3/estatico/php/opcionesSitio.php'
+//                        ,type:'POST'                    
+//                        ,data:{
+//                            opcion:'registrarS',
+//                            nombre: $("#RnomS").val(),
+//                            desc: $("#RdescS").val(),
+//                            tipo: $("input[name='RtipoS']:checked").val(),
+//                            city: $("#RcityS").val(),
+//                            dir: $("#RdirS").val(),
+//                            tel: $("#RtelS").val(),
+//                            mail: $("#RmailS").val(),
+////                            lat: $("#RlatS").val(),
+////                            lon: $("#RlonS").val(),
+//                            lat:"4.15",
+//                            lon:"-73.64",
+//                            web: $("#RwebS").val(),
+//                            face: $("#RfaceS").val(),
+//                            twit: $("#RtwiS").val(),
+//                            you: $("#RyouS").val()
+////                            contra1: $("#Rpass1S").val()
+//                        }
+//                        ,dataType:'html'
+//                        ,beforeSend:function(jqXHR, settings ){
+//                            //alert("Se esta creando su perfil");
+//                        }
+//                        ,success: function(data,textStatus,jqXHR){                           
+//
+//                            var n=data.split(" ");                           
+//
+//                            if(/true/.test(data)) {                                
+//                                alert("Registro Exitoso  :D"+n[0]);
+//                                //document.location.href="http://localhost/natane3/modulos/sitios/sitio.php?id="+n[0];
+//                            }
+//                            else alert("No se ha podido realizar su registro"); 
+//
+//                        }
+//                    });          
+////            }//cierre if
+////            else{
+////                alert("Las contraseñas no coinciden");
+////                }
+//        });
+
+
+    /*
+     * Guardar la creacion de un Sitio nuevo
+     */
     $("#guarda_sitio").click(function(){
                 
-        if($("#Rpass1").val()==$("#Rpass2").val()){  //valida contraseñas         
-                    $.ajax({
-                        url:'/natane3/estatico/php/opcionesSitio.php'
-                        ,type:'POST'                    
-                        ,data:{
-                            opcion:'registrarS',
-                            nombre: $("#RnomS").val(),
-                            desc: $("#RdescS").val(),
-                            tipo: $("input[name='RtipoS']:checked").val(),
-                            city: $("#RcityS").val(),
-                            dir: $("#RdirS").val(),
-                            tel: $("#RtelS").val(),
-                            mail: $("#RmailS").val(),
-                            lat: $("#RlatS").val(),
-                            lon: $("#RlonS").val(),
-                            web: $("#RwebS").val(),
-                            face: $("#RfaceS").val(),
-                            twit: $("#RtwiS").val(),
-                            you: $("#RyouS").val(),
-                            contra1: $("#Rpass1S").val()
-                        }
-                        ,dataType:'html'
-                        ,beforeSend:function(jqXHR, settings ){
-                            //alert("Se esta creando su perfil");
-                        }
-                        ,success: function(data,textStatus,jqXHR){                           
+            var dataform = new FormData(document.getElementById('fromCreaSitio'));            
+            dataform.append( "opcion", "registrarS");            
+
+            $.ajax({
+                url : '/natane3/estatico/php/opcionesSitio.php',
+                type : 'POST',
+                data : dataform,
+                processData : false, 
+                contentType : false, 
+                success: function(data,textStatus,jqXHR){                           
 
                             var n=data.split(" ");                           
 
                             if(/true/.test(data)) {                                
                                 alert("Registro Exitoso  :D"+n[0]);
-                                document.location.href="http://localhost/natane3/modulos/sitios/sitio.php?id="+n[0];                                
+                                document.location.href="http://localhost/natane3/modulos/sitios/sitio.php?id="+n[0];
                             }
                             else alert("No se ha podido realizar su registro"); 
 
                         }
-                    });          
-            }//cierre if
-            else{
-                alert("Las contraseñas no coinciden");
-                }
-        });
+            });          
+
+    });
         
         
     /*

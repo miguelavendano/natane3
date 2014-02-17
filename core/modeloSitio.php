@@ -456,5 +456,17 @@ class ModelSitios{
         
         
         
+        public function get_img_perfil($id_sitio){
+            
+            $queryString = "start n=node(".$id_sitio.") return n";
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();              
+            
+            return $result[0]['']->getProperty('imagen');
+            
+        }        
+        
+        
 }
 

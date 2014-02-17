@@ -2,49 +2,78 @@ $(document).ready(function(){
 
     /**
      * @
-     * Registro de un nuevo Sitio
+     * Registro de una nueva Empresa
      */
-    $("#guarda_empresa").click(function(){
-        if($("#Rpass1E").val()==$("#Rpass2E").val()){  //valida contraseñas         
-                    $.ajax({
-                        url:'/natane3/estatico/php/opcionesEmpresa.php'
-                        ,type:'POST'                    
-                        ,data:{
-                            opcion:'registrarE',
-                            nombre: $("#RnomE").val(),
-                            nit: $("#RnitE").val(),
-                            desc: $("#RdesE").val(),                            
-                            city: $("#RcityE").val(),
-                            dir: $("#RdirE").val(),
-                            tel: $("#RtelE").val(),
-                            mail: $("#RmailE").val(),
-                            lat: $("#RlatE").val(),
-                            lon: $("#RlonE").val(),                            
-                            web: $("#RwebE").val(),
-                            face: $("#RfaceE").val(),
-                            twit: $("#RtwiE").val(),
-                            you: $("#RyouE").val(),
-                            contra1: $("#Rpass1E").val()
-                        }
-                        ,dataType:'html'
-                        ,success: function(data,textStatus,jqXHR){                           
-
-                            var n=data.split(" ");                           
-                            
-                            if(/true/.test(data)) {                                
-                                alert("Registro Exitoso  :D"+n[0]);
-                                document.location.href="http://localhost/natane3/modulos/empresas/empresa.php?id="+n[0];
-                            }
-                            else alert("No se ha podido realizar su registro"); 
-
-                        }
-                    });          
-            }//cierre if
-            else{
-                alert("Las contraseñas no coinciden");
-                }
-        });
+//    $("#guarda_empresa").click(function(){
+//
+//        //if($("#Rpass1E").val()==$("#Rpass2E").val()){  //valida contraseñas         
+//                    $.ajax({
+//                        url:'/natane3/estatico/php/opcionesEmpresa.php'
+//                        ,type:'POST'                    
+//                        ,data:{
+//                            opcion:'registrarE',
+//                            nombre: $("#RnomE").val(),
+//                            nit: $("#RnitE").val(),
+//                            desc: $("#RdesE").val(),                            
+//                            city: $("#RcityE").val(),
+//                            dir: $("#RdirE").val(),
+//                            tel: $("#RtelE").val(),
+//                            mail: $("#RmailE").val(),
+////                            lat: $("#RlatE").val(),
+////                            lon: $("#RlonE").val(),                            
+//                            lat:"4.15",
+//                            lon:"-73.64",
+//                            web: $("#RwebE").val(),
+//                            face: $("#RfaceE").val(),
+//                            twit: $("#RtwiE").val(),
+//                            you: $("#RyouE").val()
+////                            contra1: $("#Rpass1E").val()
+//                        }
+//                        ,dataType:'html'
+//                        ,success: function(data,textStatus,jqXHR){                           
+//
+//                            var n=data.split(" ");                           
+//                            
+//                            if(/true/.test(data)) {                                
+//                                alert("Registro Exitoso  :D"+n[0]);
+//                                document.location.href="http://localhost/natane3/modulos/empresas/empresa.php?id="+n[0];
+//                            }
+//                            else alert("No se ha podido realizar su registro"); 
+//
+//                        }
+//                    });          
+////            }//cierre if
+////            else{
+////                alert("Las contraseñas no coinciden");
+////                }
+//        });
         
+
+    $("#guarda_empresa").click(function(){
+        
+            var dataform = new FormData(document.getElementById('fromCreaEmpresa'));            
+            dataform.append( "opcion", "registrarE");            
+
+            $.ajax({
+                url : '/natane3/estatico/php/opcionesEmpresa.php',
+                type : 'POST',
+                data : dataform,
+                processData : false, 
+                contentType : false, 
+                success: function(data,textStatus,jqXHR){                           
+
+                    var n=data.split(" ");                           
+
+                    if(/true/.test(data)) {                                
+                        alert("Registro Exitoso  :D"+n[0]);
+                        //document.location.href="http://localhost/natane3/modulos/empresas/empresa.php?id="+n[0];
+                    }
+                    else alert("No se ha podido realizar su registro"); 
+
+                }
+            });                     
+            
+        });
         
     /*
      * Editar datos del Sitio

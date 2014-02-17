@@ -23,9 +23,6 @@ if(isset($_POST['opcion'])){
             $nodo_usuario->genero = $_POST['genero'];
             $nodo_usuario->fecha_nacimiento = $_POST['nacimiento'];
             $nodo_usuario->correo = $_POST['mail'];
-//<<<<<<< HEAD
-//            $nodo_usuario->imagen = $img;           
-//=======
             $nodo_usuario->imagen = "usuario_sin_avatar.jpg";            
 
             /*

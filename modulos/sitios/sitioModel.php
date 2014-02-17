@@ -38,6 +38,10 @@
             return $imagenes;
         }        
 
+        public function get_img_perfil(){
+            
+            return $this->modelsitios->get_img_perfil($this->id_sitio);
+        }        
         
         public function get_ferrocarril(){
 

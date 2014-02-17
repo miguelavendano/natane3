@@ -92,9 +92,7 @@
 
             
             if($_SESSION['sitios']){          
-                
-                
-                
+                               
                 foreach ($_SESSION['sitios'] as $valor){                    
                 
                     $auxsitio = $sitioshtml;

@@ -177,6 +177,8 @@
                     $_SESSION['tipo'] = $datosuser['tipo'];
                     $_SESSION['nick'] = $datosuser['nick'];
                     $_SESSION['img'] = $datosuser['img'];
+                    //$_SESSION['clave'] = $this->modelo->get_pass($_SESSION['id']);
+                    
                     $_SESSION['sitios'] = array();
                     $_SESSION['empresas'] = array();
                     

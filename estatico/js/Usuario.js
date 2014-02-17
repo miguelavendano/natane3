@@ -243,21 +243,21 @@ $(document).ready(function(){
             dataform.append( "opcion", "ediFotoPerfil");            
             dataform.append( "usuario", id_url[1] );
 
-                $.ajax({
-                   url : '/natane3/estatico/php/opcionesUsuario.php',
-                   type : 'POST',
-                   data : dataform,
-                   processData : false, 
-                   contentType : false, 
-                   success: function(data,textStatus,jqXHR){                           
+            $.ajax({
+               url : '/natane3/estatico/php/opcionesUsuario.php',
+               type : 'POST',
+               data : dataform,
+               processData : false, 
+               contentType : false, 
+               success: function(data,textStatus,jqXHR){                           
 
-                            if(/true/.test(data)) {                                
-                                //alert("Datos cambiados :D");                                                                                                          
-                                document.location.reload();                                     
-                            }
-                            else alert("No se ha podido ingresar su experiencia"); 
-                    }
-                });             
+                        if(/true/.test(data)) {                                
+                            //alert("Datos cambiados :D");                                                                                                          
+                            document.location.reload();                                     
+                        }
+                        else alert("No se ha podido cambiar la imagen"); 
+                }
+            });             
     });
 
     /*
@@ -485,7 +485,7 @@ $(document).ready(function(){
 //    
     
     /*
-     * Le da o le quita un punto de confianza a la empresa, crear su relacion con esa empresa
+     * Crea o elimina la relacion de seguir a otro usuario
      */            
     $("#SeguirU").toggle(
       function() {      //le da un punto de confianza
@@ -501,8 +501,8 @@ $(document).ready(function(){
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'seguir',                   
-                    a_seguir: id_url[1],
-                    seguidor: '279'
+                    a_seguir: id_url[1]
+                    //seguidor: '279'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
@@ -530,8 +530,8 @@ $(document).ready(function(){
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'no_seguir',                   
-                    a_seguir: id_url[1],
-                    seguidor: '61'
+                    a_seguir: id_url[1]
+                    //seguidor: '61'
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           

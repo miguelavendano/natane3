@@ -17,32 +17,51 @@ if(isset($_POST['opcion'])){
     switch ($opcion){
 
         // Registro de un Usuario
-        case "registrarE":                       
-                      
-            $img='elcielo.jpg';            
-
+        case "registrarE":                      
             $nodo_empresa = new Empresa();
-            $nodo_empresa->nombre = $_POST['nombre'];            
-            $nodo_empresa->imagen = $img;
-            $nodo_empresa->nit = $_POST['nit'];
-            $nodo_empresa->descripcion = $_POST['desc'];
-            $nodo_empresa->ciudad = $_POST['city'];
-            $nodo_empresa->telefono = $_POST['tel'];
-            $nodo_empresa->direccion = $_POST['dir'];
-            $nodo_empresa->latitud = $_POST['lat'];
-            $nodo_empresa->longitud = $_POST['lon'];
-            $nodo_empresa->correo = $_POST['mail'];
-            $nodo_empresa->empresa_web = $_POST['web'];    
-            $nodo_empresa->facebook = $_POST['face'];
-            $nodo_empresa->twitter = $_POST['twit'];
-            $nodo_empresa->youtube = $_POST['you'];
-            $nodo_empresa->contraseña = $_POST['contra1'];
+            $nodo_empresa->nombre = $_POST['RnomE'];            
+            //$nodo_empresa->imagen = $img;
+            $nodo_empresa->nit = $_POST['RnitE'];
+            $nodo_empresa->descripcion = $_POST['RdesE'];
+            $nodo_empresa->ciudad = $_POST['RcityE'];
+            $nodo_empresa->telefono = $_POST['RtelE'];
+            $nodo_empresa->direccion = $_POST['RdirE'];   
+            $nodo_empresa->latitud = "4.15";
+            $nodo_empresa->longitud = "-73.64";
+            $nodo_empresa->correo = $_POST['RmailE'];
+            $nodo_empresa->sitio_web = $_POST['RwebE'];    
+            $nodo_empresa->facebook = $_POST['RfaceE'];
+            $nodo_empresa->twitter = $_POST['RtwiE'];
+            $nodo_empresa->youtube = $_POST['RyouE'];
+            //$nodo_empresa->contraseña = $_SESSION['clave'];
             $nodo_empresa->type = 'Empresa';
             ModelEmpresa::crearNodoEmpresa($nodo_empresa); //crea el nodo del Usuario 
                         
             $band=$nodo_empresa->id;  //obtengo el id del nodo creado
-            $band=$band." true";
+            
+            
+            ModeloRelaciones::crearRelacion($_SESSION['id'], $nodo_empresa->id, "Crea");   //crea la relacion entre el usuario y la empresa que ha visitado                                   
 
+            
+            $upload_folder ='../../estatico/imagenes/';
+            
+            foreach($_FILES['img-empresa']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    $nombre_archivo = $_FILES['img-empresa']['name'][$key];
+                    $tmp_archivo = $_FILES['img-empresa']['tmp_name'][$key];            
+                    //$tipo_archivo = $_FILES['foto_perfil']['type'][$key];
+                    //$tamano_archivo = $_FILES['foto_perfil']['size'][$key];
+
+                    $nomFotoPerfil = $nodo_empresa->id.'_'.$nombre_archivo;
+                    
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen                    
+                    
+                    ModelEmpresa::editar_empresa($nodo_empresa->id, "imagen", $nomFotoPerfil);                                         
+                }
+            }
+            
+            $band=$band." true";
+            
         break;
 
         case "editarE":

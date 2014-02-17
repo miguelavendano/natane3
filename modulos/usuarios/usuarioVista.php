@@ -12,6 +12,7 @@
         public $script;
 
         public $segui;
+        public $sigo;
         public $usuario;
         public $editar;
         public $expe;
@@ -39,6 +40,7 @@
             
             $this->perfil = file_get_contents('../../plantillas/usuario/perfilUsuario.html');
             $this->segui = file_get_contents('../../plantillas/generales/seguidores.html');
+            $this->sigo = file_get_contents('../../plantillas/generales/seguidores.html');            
             $this->usuario = file_get_contents('../../plantillas/usuario/datos_usuario.html');
             $this->editar = file_get_contents('../../plantillas/usuario/editarUsuario.html');
             $this->expe = file_get_contents('../../plantillas/usuario/experiencia.html');            
@@ -80,6 +82,7 @@
             
             $this->dic_contenido = array('datos_usuario' => $this->usuario, 
                                         'seguidores' => $this->segui, 
+                                        'siguiendo' => $this->sigo,
                                         'quiere_visitar' => $this->gustaria,
                                         'amigos_de_amigos' => $this->amigos,
                                         'modales'=> $this->modal,
@@ -110,6 +113,7 @@
             
             $this->dic_contenido['datos_usuario'] = $this->usuario;
             $this->dic_contenido['seguidores'] = $this->segui;
+            $this->dic_contenido['siguiendo'] = $this->sigo;
             
             $this->dic_contenido['modales']= $this->modal;
             $this->dic_contenido['editarUsuario']= $this->editar;
@@ -199,8 +203,8 @@
          * 
          * @param array $datos trae los datos de los usuarios amigos del usuario actual.
          */                                      
-        public function refactory_amigos($datos){
-            
+        public function refactory_amigos($datos,$tipo){
+
             $complete = "";            
             
             foreach ($datos as $valor){
@@ -208,7 +212,8 @@
                 $empresa = '';
                 $nombre = '';
                 $url = '';
-                $aux = $this->segui;
+                $aux = $this->$tipo;
+                //$aux = $this->segui;
                 //echo $valor->type;
                 if($valor->type == "Empresa"){                                    	         
                     $empresa = 'style="background-color: #CBFEC1"';
@@ -226,7 +231,8 @@
                 $complete .= $aux;
             }
             
-            $this->segui = $complete;
+            //$this->$segui = $complete;
+            $this->$tipo = $complete;
             $this->actualizar_diccionarios();
             
         }

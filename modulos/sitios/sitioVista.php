@@ -154,7 +154,7 @@
                 case 1:
                     
                     $this->head = Global_var::refactory_header(false);                    
-                    $this->head .= "<br> <h1>Este es mi Sitio</h1>";
+                    //$this->head .= "<br> <h1>Este es mi Sitio</h1>";
                     break;
                 case 2:
                     $this->head = Global_var::refactory_header(false);                                        
@@ -171,7 +171,7 @@
         
         public function refactory_slider($datos){   // contruye el slider
             
-            if(count($datos)){
+            if(count($datos)>1){
                 $imagenes = str_ireplace("{url}", $datos[0], $this->img_slider_act); // carga la imagen principal del slider
 
                 for($i=1; $i<count($datos); $i++){  // carga el resto de imagenes                             
@@ -179,13 +179,14 @@
                 }            
 
                 $this->slider_sitio = str_ireplace("{imagenes}", $imagenes, $this->slider_sitio);   // se remplazan todas las imagenes sobre el template de slider
-
-                $this->actualizar_diccionarios();
+                
             }
             else{                
-                $imagenes = str_ireplace("{url}", "slider_sin_imagenes.jpg", $this->img_slider);
+                $imagenes = str_ireplace("{url}", $datos, $this->img_slider);
                 $this->slider_sitio = str_ireplace("{imagenes}", $imagenes, $this->slider_sitio);   // se remplazan todas las imagenes sobre el template de slider
             }
+            
+            $this->actualizar_diccionarios();
         }
         
         

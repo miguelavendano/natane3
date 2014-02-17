@@ -173,7 +173,6 @@ class ModelUsuarios{
             
             return $result[0]['']->getProperty('contraseña');
             
-            
         }
         
         
@@ -356,28 +355,54 @@ class ModelUsuarios{
             $query = new Cypher\Query(Neo4Play::client(), $queryString);
             $result = $query->getResultSet();
             $array = array();
-            
-            $amigo="";
            
             if($result){
             
                 $ids_amigos = array();
+                $pos_repetidos = array();
                 
                 foreach($result as $row) {                    
                     array_push($ids_amigos, $row['']->getId());
+                }                            
+                
+                sort($ids_amigos);      //ordena los ids de los amigos
+                
+//                foreach ($ids_amigos as $clave => $valor) {
+//                    echo "ids_amigos[" . $clave . "] = " . $valor . "\n";
+//                }                
+
+                //busca la posicion de los ids repetidos
+                for($i=1;count($ids_amigos)-1>$i;$i++){
+                    if($ids_amigos[$i]==$ids_amigos[$i-1]){
+                        array_push($pos_repetidos, $i);
+                    }                    
                 }
                 
-                foreach($result as $row) {
-                                        
-                    $usuario = new Usuario();  
-                    $usuario->id = $row['']->getId();
-                    $usuario->type = $row['']->getProperty('type');
-                    $usuario->nick = $row['']->getProperty('nick');
-                    $usuario->nombre = $row['']->getProperty('nombre');
-                    $usuario->apellido = $row['']->getProperty('apellido');
-                    $usuario->imagen = $row['']->getProperty('imagen');
-                    array_push($array, $usuario);
+//                foreach ($pos_repetidos as $clave => $valor) {
+//                    echo "pos_repetidos[" . $clave . "] = " . $valor . "\n";
+//                }                
                     
+                //elimina los elementos repetidos de la lista
+                for($i=0;count($pos_repetidos)>$i;$i++){
+                    unset($ids_amigos[$pos_repetidos[$i]]);                    
+                }
+                
+//                foreach ($ids_amigos as $clave => $valor) {
+//                    echo "ids_amigos[" . $clave . "] = " . $valor . "\n";
+//                }                     
+              
+                
+                foreach($result as $row) {
+                                                                
+                            $usuario = new Usuario();  
+                            $usuario->id = $row['']->getId();
+                            $usuario->type = $row['']->getProperty('type');
+                            $usuario->nick = $row['']->getProperty('nick');
+                            $usuario->nombre = $row['']->getProperty('nombre');
+                            $usuario->apellido = $row['']->getProperty('apellido');
+                            $usuario->imagen = $row['']->getProperty('imagen');
+                            array_push($array, $usuario);
+                        
                 }
                 return $array;
             }

@@ -17,37 +17,57 @@ if(isset($_POST['opcion'])){
         // Registro de un Usuario
         case "registrarS":                       
 
-            $img='humadea.jpg';
-            $web=$_POST['nombre']."_".substr($_POST['nombre'],0,1).".com";
+            //$web=$_POST['nombre']."_".substr($_POST['nombre'],0,1).".com";
             $face='http://www.facebook.com/AnDaLaTo';    
             $twit='https://twitter.com/JulianDVarelaP';
             $you='http://www.youtube.com/user/GisoftCo';
 
             $nodo_sitio = new Sitio();
-            $nodo_sitio->nombre = $_POST['nombre'];            
-            $nodo_sitio->imagen = $img;
-            $nodo_sitio->tipo_sitio = $_POST['tipo'];
-            $nodo_sitio->descripcion = $_POST['desc'];                        
-            $nodo_sitio->ciudad = $_POST['city'];
-            $nodo_sitio->telefono = $_POST['tel'];
-            $nodo_sitio->direccion = $_POST['dir'];
-            $nodo_sitio->latitud = $_POST['lat'];
-            $nodo_sitio->longitud = $_POST['lon'];
-            $nodo_sitio->correo = $_POST['mail'];            
-            /*$nodo_sitio->empresa_web = $_POST['web'];    
-            $nodo_sitio->facebook = $_POST['face'];
-            $nodo_sitio->twitter = $_POST['twit'];
-            $nodo_sitio->youtube = $_POST['you'];*/
-            $nodo_sitio->empresa_web = $web;
+            $nodo_sitio->nombre = $_POST['RnomS'];            
+            //$nodo_sitio->imagen = $img;
+            $nodo_sitio->tipo_sitio = $_POST['RtipoS'];
+            $nodo_sitio->descripcion = $_POST['RdescS'];                        
+            $nodo_sitio->ciudad = $_POST['RcityS'];
+            $nodo_sitio->telefono = $_POST['RtelS'];
+            $nodo_sitio->direccion = $_POST['RdirS'];
+            $nodo_sitio->latitud = "4.15";
+            $nodo_sitio->longitud = "-73.64";
+            $nodo_sitio->correo = $_POST['RmailS'];            
+            $nodo_sitio->sitio_web = $_POST['RwebS'];    
+            $nodo_sitio->facebook = $_POST['RfaceS'];
+            $nodo_sitio->twitter = $_POST['RtwiS'];
+            $nodo_sitio->youtube = $_POST['RyouS'];
             $nodo_sitio->facebook = $face;
             $nodo_sitio->twitter = $twit;
             $nodo_sitio->youtube = $you;            
-            $nodo_sitio->contraseña = $_POST['contra1'];
+            //$nodo_sitio->contraseña = $_SESSION['clave'];
             $nodo_sitio->type = 'Sitio';
             ModelSitios::crearNodoSitio($nodo_sitio); //crea el nodo del Sitio
             
             $band=$nodo_sitio->id;  //obtengo el id del nodo creado
+            
+            ModeloRelaciones::crearRelacion($_SESSION['id'], $nodo_sitio->id, "Publica");   //crea la relacion entre el usuario y la empresa que ha visitado                       
+            
+            $upload_folder ='../../estatico/imagenes/';
+            
+            foreach($_FILES['img-sitio']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    $nombre_archivo = $_FILES['img-sitio']['name'][$key];
+                    $tmp_archivo = $_FILES['img-sitio']['tmp_name'][$key];            
+                    //$tipo_archivo = $_FILES['foto_perfil']['type'][$key];
+                    //$tamano_archivo = $_FILES['foto_perfil']['size'][$key];
+
+                    $nomFotoPerfil = $nodo_sitio->id.'_'.$nombre_archivo;
+                    
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen                    
+                    
+                    ModelSitios::editar_sitio($nodo_sitio->id, "imagen", $nomFotoPerfil);                     
+                }
+            }            
+            
             $band=$band." true";
+            
+            
             
         break;
 
@@ -123,7 +143,7 @@ if(isset($_POST['opcion'])){
         break;
       
         case "visito":  
-                                                                                //Visitante  
+            //Visitante  
             ModeloRelaciones::crearRelacion($_SESSION['id'], $_POST['sitio'], "Fan");   //crea la relacion entre el usuario y la empresa que ha visitado           
             $band="true";
             
