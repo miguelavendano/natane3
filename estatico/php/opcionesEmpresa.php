@@ -283,7 +283,7 @@ if(isset($_POST['opcion'])){
             ModeloRelaciones::crearRelacion($_POST['empresa'], $id_servicio, "Ofrece");   //crea la relacion entre la empresa y el servicio
             
             $cont=1;
-            //guarda la imagen de la experiencia
+            //guarda la imagen del servicio
             $upload_folder ='../../estatico/imagenes/';
             foreach($_FILES['imagen_servicio']['error'] as $key => $error){                
                 if($error == UPLOAD_ERR_OK){                    
@@ -341,8 +341,38 @@ if(isset($_POST['opcion'])){
 
         case "guardaEdicionServicio":                                                                      
 
-            ModelServicio::editar_servicio($_POST['servicio'], "nombre", $_POST['nombre']);
-            ModelServicio::editar_servicio($_POST['servicio'], "descripcion", $_POST['descripcion']);            
+            ModelServicio::editar_servicio($_POST['servicio'], "nombre", $_POST['EditNomSer']);
+            ModelServicio::editar_servicio($_POST['servicio'], "descripcion", $_POST['EditDescSer']);            
+            
+            $cont=1;
+            //guarda la imagen del servicio
+            $upload_folder ='../../estatico/imagenes/';
+            foreach($_FILES['imagen_edit_servicio']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    //alamaceno la imagen
+                    $nombre_archivo = $_FILES["imagen_edit_servicio"]['name'][$key];
+                    $tmp_archivo = $_FILES["imagen_edit_servicio"]['tmp_name'][$key];            
+
+                    //creo el nombre unico para la imagen
+                    $nomImgServiEmp = $_POST['empresa'].'_'.$_POST['servicio'].'_'.$cont.'_'.$nombre_archivo;
+                    
+                    //crea el nodo de cada una de las imagenes
+                    $nodo_imagen = new Imagen();
+                    $nodo_imagen->nombre = $nomImgServiEmp;
+                    $nodo_imagen->descripcion = "";
+                    $nodo_imagen->type = 'Imagen';  
+                    ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
+
+                    $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
+                    ModeloRelaciones::crearRelacion($_POST['servicio'], $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
+                    
+                    //almaceno la imagen en la carpeta del servidor                                        
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgServiEmp);   //guarda la imagen                    
+                    $cont++;
+                }
+            }
+            
+            
             $band="true";
             
         break;      

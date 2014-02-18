@@ -358,38 +358,38 @@ class ModelUsuarios{
            
             if($result){
             
-                $ids_amigos = array();
-                $pos_repetidos = array();
-                
-                foreach($result as $row) {                    
-                    array_push($ids_amigos, $row['']->getId());
-                }                            
-                
-                sort($ids_amigos);      //ordena los ids de los amigos
-                
-//                foreach ($ids_amigos as $clave => $valor) {
-//                    echo "ids_amigos[" . $clave . "] = " . $valor . "\n";
-//                }                
-
-                //busca la posicion de los ids repetidos
-                for($i=1;count($ids_amigos)-1>$i;$i++){
-                    if($ids_amigos[$i]==$ids_amigos[$i-1]){
-                        array_push($pos_repetidos, $i);
-                    }                    
-                }
-                
-//                foreach ($pos_repetidos as $clave => $valor) {
-//                    echo "pos_repetidos[" . $clave . "] = " . $valor . "\n";
-//                }                
-                    
-                //elimina los elementos repetidos de la lista
-                for($i=0;count($pos_repetidos)>$i;$i++){
-                    unset($ids_amigos[$pos_repetidos[$i]]);                    
-                }
-                
-//                foreach ($ids_amigos as $clave => $valor) {
-//                    echo "ids_amigos[" . $clave . "] = " . $valor . "\n";
-//                }                     
+//                $ids_amigos = array();
+//                $pos_repetidos = array();
+//                
+//                foreach($result as $row) {                    
+//                    array_push($ids_amigos, $row['']->getId());
+//                }                            
+//                
+//                sort($ids_amigos);      //ordena los ids de los amigos
+//                
+////                foreach ($ids_amigos as $clave => $valor) {
+////                    echo "ids_amigos[" . $clave . "] = " . $valor . "\n";
+////                }                
+//
+//                //busca la posicion de los ids repetidos
+//                for($i=1;count($ids_amigos)-1>$i;$i++){
+//                    if($ids_amigos[$i]==$ids_amigos[$i-1]){
+//                        array_push($pos_repetidos, $i);
+//                    }                    
+//                }
+//                
+////                foreach ($pos_repetidos as $clave => $valor) {
+////                    echo "pos_repetidos[" . $clave . "] = " . $valor . "\n";
+////                }                
+//                    
+//                //elimina los elementos repetidos de la lista
+//                for($i=0;count($pos_repetidos)>$i;$i++){
+//                    unset($ids_amigos[$pos_repetidos[$i]]);                    
+//                }
+//                
+////                foreach ($ids_amigos as $clave => $valor) {
+////                    echo "ids_amigos[" . $clave . "] = " . $valor . "\n";
+////                }                     
               
                 
                 foreach($result as $row) {

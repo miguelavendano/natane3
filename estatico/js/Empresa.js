@@ -353,21 +353,21 @@ $(document).ready(function(){
             datosform.append( "opcion", "creaServicio");            
             datosform.append( "empresa", id_url[1] );
                         
-                $.ajax({
-                   url:'/natane3/estatico/php/opcionesEmpresa.php',
-                   type : 'POST',
-                   data : datosform,
-                   processData : false, 
-                   contentType : false, 
-                   success: function(data,textStatus,jqXHR){                           
+            $.ajax({
+               url:'/natane3/estatico/php/opcionesEmpresa.php',
+               type : 'POST',
+               data : datosform,
+               processData : false, 
+               contentType : false, 
+               success: function(data,textStatus,jqXHR){                           
 
-                            if(/true/.test(data)) {                                
-                                alert("Servicio creado :D");                                                                          
-                                document.location.reload();                                     
-                            }
-                            else alert("No se ha podido ingresar su servicio"); 
-                    }
-                });                
+                        if(/true/.test(data)) {                                
+                            alert("Servicio creado :D");                                                                          
+                            document.location.reload();                                     
+                        }
+                        else alert("No se ha podido ingresar su servicio"); 
+                }
+            });                
     });    
      
 
@@ -385,27 +385,31 @@ $(document).ready(function(){
      */
     $("#guardaEdicionServicio").click(function(){
 
-            //var id_exp=$(".info_exp").parent().attr('id'); //obtengo el id de la experiencia
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
             var id_servicio=$("#formEditarServicio").parent().parent().attr('id'); //obtengo el id de la experiencia
-          
-            $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
-                ,type:'POST'                    
-                ,data: {
-                    opcion: 'guardaEdicionServicio',                   
-                    servicio: id_servicio,   
-                    nombre: $("#EditNomSer").val(),
-                    descripcion: $("#EditDescSer").val()
-                }
-                ,dataType:'JSON'
-                ,success: function(data,textStatus,jqXHR){                           
 
-                        if(/true/.test(data)) {                                                            
+            var datosform = new FormData(document.getElementById('formEditarServicio'));            
+            datosform.append( "opcion", "guardaEdicionServicio");            
+            datosform.append( "servicio", id_servicio );
+            datosform.append( "empresa", id_url[1] );            
+                        
+            $.ajax({
+               url:'/natane3/estatico/php/opcionesEmpresa.php',
+               type : 'POST',
+               data : datosform,
+               processData : false, 
+               contentType : false, 
+               success: function(data,textStatus,jqXHR){                           
+
+                        if(/true/.test(data)) {                                
+                            alert("Servicio editado :D");                                                                          
                             document.location.reload();                                     
                         }
-                        else alert("No se han podido realizar los cambios");                                                     
+                        else alert("No se ha podido editar su servicio"); 
                 }
-            });
+            });                  
     });
 
 
@@ -434,7 +438,7 @@ $(document).ready(function(){
                     opcion:'editaExpEmp',                            
                     experiencia: id_experiencia                    
                 }
-                ,dataType:'JSON'
+                ,dataType:'json'
                 ,beforeSend:function(jqXHR, settings ){
 
                     $("#reload").css({visibility: 'visible',
@@ -495,7 +499,7 @@ $(document).ready(function(){
                     experiencia: id_experiencia,
                     empresa: id_url[1]
                 }
-                ,dataType:'JSON'
+                ,dataType:'json'
                 ,beforeSend:function(jqXHR, settings ){
                 }
                 ,success: function(data,textStatus,jqXHR){                           
@@ -530,7 +534,7 @@ $(document).ready(function(){
                     opcion:'editarServicio',                            
                     servicio: id_servicio                    
                 }
-                ,dataType:'JSON'
+                ,dataType:'json'
                 ,beforeSend:function(jqXHR, settings ){
 
                     $("#reload").css({visibility: 'visible',
@@ -549,7 +553,8 @@ $(document).ready(function(){
                     $("#EditNomSer").val(data.nombre);
                     $("#EditDescSer").val(data.descripcion);
                 }
-            });                                    
+            });              
+            
     }
     
 
@@ -566,7 +571,7 @@ $(document).ready(function(){
                     servicio: id_servicio,
                     empresa: id_url[1]
                 }
-                ,dataType:'JSON'
+                ,dataType:'json'
                 ,beforeSend:function(jqXHR, settings ){
                 }
                 ,success: function(data,textStatus,jqXHR){                           

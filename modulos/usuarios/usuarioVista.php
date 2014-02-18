@@ -278,7 +278,7 @@
             
             foreach ($datos as $valor){
                 $aux = $this->gustaria;
-                //$aux = str_ireplace('{imagen}', $valor->img, $aux);
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
                 $aux = str_ireplace('{sitio}', $valor->nombre, $aux);
                 $aux = str_ireplace('{descripcion}', $valor->descripcion, $aux);
                 $aux = str_ireplace('{url}', $url, $aux);                
@@ -296,6 +296,24 @@
 
         
         public function refactory_AmigosDeAmigos($datos){
+            
+            /********EVITO QUE SE REPITAN AMIGOS***********/
+            $pos_repetidos = array();         
+
+            array_multisort($datos, SORT_ASC); //ordeno los datos de menor a mayor segun su ID            
+
+//                //busca la posicion de los ids repetidos
+            for($i=1;count($datos)-1>$i;$i++){
+                if($datos[$i]->id==$datos[$i-1]->id){
+                    array_push($pos_repetidos, $i);
+                }                              
+            }   
+
+            //elimina los elementos repetidos de la lista
+            for($i=0;count($pos_repetidos)>$i;$i++){
+                unset($datos[$pos_repetidos[$i]]);  
+            }    
+                
             
             $amigos = "";            
             

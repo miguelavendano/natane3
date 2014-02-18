@@ -66,7 +66,8 @@
 
         public function get_AmigosDeAmigos(){   
             
-            $query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a<-[:Amigo]->o return o";
+            //$query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a<-[:Amigo]->o return o";
+            $query = "START n=node(".$this->id_user.") MATCH n-[:Amigo]->a<-[:Amigo]->o return o";
             //$query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a return a";
             $resultado = $this->modelusuarios->get_AmigosDeAmigos($query);
 
