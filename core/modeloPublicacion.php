@@ -1,7 +1,7 @@
 <?php
 
 require_once('coneccion.php');
-require_once('Experiencia.php');
+require_once('Publicacion.php');
 require_once('Imagen.php');
 //require_once('Usuario.php');
 
@@ -16,7 +16,7 @@ use Everyman\Neo4j\Node,
     Everyman\Neo4j\Query\Row;
 
 
-class ModelExperiencia{
+class ModelPublicacion{
     
         public function __construct() {
             
@@ -27,7 +27,7 @@ class ModelExperiencia{
          * funcion para crear el nodo tipo Experiencia
          * parametros: objeto tipo Experiencia
          */	
-	public static function crearNodoExperiencia(Experiencia $minodo)
+	public static function crearNodoPublicacion(Publicacion $minodo)
 	{
 		if (!$minodo->node) {
 			$minodo->node = new Node(Neo4Play::client());
@@ -35,12 +35,13 @@ class ModelExperiencia{
 
 		$minodo->node->setProperty('nombre', $minodo->nombre)
 				->setProperty('descripcion', $minodo->descripcion)
+                                ->setProperty('fecha', $minodo->fecha)
                                 ->setProperty('type', $minodo->type)
 				->save();
 
 		$minodo->id = $minodo->node->getId();
 
-		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Experiencia');
+		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode, $minodo->type);
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
 	}  
@@ -48,7 +49,7 @@ class ModelExperiencia{
         /*
          * Funcion que edita una propiedad de una experiencia y si no existe la crea
          */        
-	public static function editar_experiencia($idnodo, $propiedad, $detalle){
+	public static function editar_publicacion($idnodo, $propiedad, $detalle){
 		//Obtengo toda la informacion del nodo
 		$editar = Neo4Play::client()->getNode($idnodo);
 		//edita la propiedad y si no existe la crea
@@ -59,16 +60,16 @@ class ModelExperiencia{
         /*
          * Elimina el nodo de una experiencia
          */
-	public static function eliminar_experiencia($idnodo){
+	public static function eliminar_publicacion($idnodo){
             $eliminar = Neo4Play::client()->getNode($idnodo);		
             $eliminar->delete();			    	
 	}
 
        
         /*
-         * Obtine las experiencias de un usuario
+         * Obtine las publicaciones de un usuario
          */                
-        public static function get_exper_usuario($queryString){
+        public static function get_publicacion_usuario($queryString){
                         
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();
@@ -105,17 +106,6 @@ class ModelExperiencia{
                             $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
                         }
                         
-                        
-                        /*
-                        if($res[0]->offsetGet('')){
-                            $experiencia->imagen = $res[0]->offsetGet('');    
-                        } 
-                        else {
-                            $experiencia->imagen= "experiencia_sin_foto.png";
-                        }
-                        */ 
-                        //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
-                        
                     }
                     
                     
@@ -132,7 +122,7 @@ class ModelExperiencia{
         /*
          * Obtine las experiencias de una empresa o sitio
          */                
-        public static function get_experiencias($queryString){
+        public static function get_publicaciones($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();            
@@ -182,7 +172,7 @@ class ModelExperiencia{
         /*
          * Obtine todas las imagenes de una experiencia
          */                
-        public static function get_imagenes_experiencia($id_experiencia){                    
+        public static function get_imagenes_publicacio($id_experiencia){                    
             
                     $queryString = "START n=node(".$id_experiencia.") MATCH n-[:Img]->i RETURN i";                    
                     $queryRes = new Cypher\Query(Neo4Play::client(), $queryString);      
@@ -208,113 +198,6 @@ class ModelExperiencia{
         }
 
 
-        /*
-         * Obtine todas las imagenes de una galeria ya sea de Sitio o Empresa
-         */         
-        public static function get_imagenes_galeria($queryString){
-                       
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $imagen = $query->getResultSet();                                  
-            
-            $img_galeria = array();
-
-            foreach($imagen as $img) {                    
-                
-                $query = "START n=node(".$img['']->getId().") MATCH n<-[:Img]-e<-[:Comparte]-u RETURN u";
-                $queryRes = new Cypher\Query(Neo4Play::client(), $query);                          
-                $usuario = $queryRes->getResultSet();                    
-                
-                    $img_nombre = $img['']->getProperty('nombre');
-                    $img_id = $img['']->getId();
-                    $id_usuario=$usuario[0]['']->getId();
-                    $img_usuario=$usuario[0]['']->getProperty('imagen'); 
-                    $type = "";
-                    
-                    if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
-                        $nick_usuario=$usuario[0]['']->getProperty('nombre');                
-                        $type="Empresa";
-                    }else{
-                        $nick_usuario=$usuario[0]['']->getProperty('nick');                
-                        $type="Usuario";
-                    }
-                    
-                $retorno = array(
-                    'type'=>$type,
-                    'img_nombre'=>$img_nombre,
-                    'img_id'=>$img_id,
-                    'usuario_id'=>$id_usuario,
-                    'usuario_img'=>$img_usuario,
-                    'usuario_nick'=>$nick_usuario
-                    );
-
-
-                array_push($img_galeria, $retorno);
-            }    
-            return $img_galeria;                      
-        }
-
-
-        /*
-         * Obtine todas las imagenes de una galeria ya sea de Sitio o Empresa
-         */                 
-        public static function get_comentarios_imagen($queryString){
-                                        
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $comentarios = $query->getResultSet();                                              
-            $lis_comentarios = array();
-
-            foreach($comentarios as $com) {                    
-                
-                $query = "START u=node(".$com['']->getProperty('usuario').") RETURN u";
-                $queryRes = new Cypher\Query(Neo4Play::client(), $query);                          
-                $usuario = $queryRes->getResultSet();                    
-                
-                    $id_usuario = $com['']->getProperty('usuario');
-                    $detalle = $com['']->getProperty('detalle');
-                    $fecha = $com['']->getProperty('fecha');                    
-                    $id_comentario = $com['']->getId();
-                    
-                    //$id_usuariod=$usuario[0]['']->getId();
-                    $img_usuario=$usuario[0]['']->getProperty('imagen'); 
-                    $type = "";
-                    
-                    if($usuario[0]['']->getProperty('type') == "Empresa"){ //valida si es una empresa o un usuario el dueño de esta imagen
-                        $nick_usuario=$usuario[0]['']->getProperty('nombre');                
-                        $type="Empresa";
-                    }else{
-                        $nick_usuario=$usuario[0]['']->getProperty('nick');  
-                        $type="Usuario";
-                    }
-                    
-                    $retorno = array(
-                        'type'=>$type,
-                        'id_usuario'=>$id_usuario,
-                        'img_usuario'=>$img_usuario,
-                        'nick_usuario'=>$nick_usuario,
-                        'detalle'=>$detalle,                            
-                        'fecha'=>$fecha,
-                        'id_comentario'=>$id_comentario,                                                            
-                        );
-
-                    array_push($lis_comentarios, $retorno);                                                                    
-            }
-            
-            return $lis_comentarios;
-            
-        }
-        
-        
-        /*
-         * Consulta todas las relaciones segun un tipo especifico
-         * recibe el nodo de la experiencia y el tiipo de relacion
-         
-	public static function relacionesExperiencia($idNodo,$tipoRelacion){
-		$miNodo = Neo4Play::client()->getNode($idNodo);
-		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
-
-                echo $relaciones;
-	}        */
-        
         
 }
 ?>
