@@ -608,3 +608,79 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   width: 400px;
   height: 600px;
 }
+
+
+/***************ESTILOS ADMINISTRADO************/
+
+
+.publicacion{
+    margin-bottom: 15px;
+}
+.opc_publi{
+    position: relative;
+    z-index:2;
+    padding-right: 5px;
+}
+.opc_publi button{
+    float: right;    
+    padding: 5px;
+    margin: 5px 0 0 5px;        
+}
+.titulo-publicacion{
+    text-align: center;  
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -moz-border-top-left-radius: 8px;
+    -moz-border-top-right-radius: 8px;
+    border-top: 8px;   
+}
+.titulo-publicacion h5{
+    color: rgb(255, 255, 255);
+    text-shadow: -2px -1px 1px #333;
+}
+
+.imagen-publicacion{
+    background-color: #FFFFFF;
+    padding-top: 10px;
+    text-align: center;
+}
+.imagen-publicacion img{
+    height: 150px;   
+}
+.desc-publicacion{
+    border-top: none;
+    text-align: justify;  
+    -webkit-border-bottom-left-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    -moz-border-bottom-left-radius: 8px;
+    -moz-border-bottom-right-radius: 8px;
+    border-bottom: 8px;   
+    background: #FFFFFF;    
+    
+}
+.desc-publicacion p{
+    margin: 10px;
+}
+
+
+#listaNoticias .publicacion > .titulo-publicacion{
+    background: rgb(30,105,222); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(30,105,222,1) 0%, rgba(84,163,238,1) 50%, rgba(30,105,222,1) 51%, rgba(30,105,222,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,105,222,1)), color-stop(50%,rgba(84,163,238,1)), color-stop(51%,rgba(30,105,222,1)), color-stop(100%,rgba(30,105,222,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(30,105,222,1) 0%,rgba(84,163,238,1) 50%,rgba(30,105,222,1) 51%,rgba(30,105,222,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(30,105,222,1) 0%,rgba(84,163,238,1) 50%,rgba(30,105,222,1) 51%,rgba(30,105,222,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(30,105,222,1) 0%,rgba(84,163,238,1) 50%,rgba(30,105,222,1) 51%,rgba(30,105,222,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(30,105,222,1) 0%,rgba(84,163,238,1) 50%,rgba(30,105,222,1) 51%,rgba(30,105,222,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e69de', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+}
+
+#listaEventos .publicacion > .titulo-publicacion{
+    background: #2e991e; /* Old browsers */
+    background: -moz-linear-gradient(top,  #2e991e 0%, #21ce26 0%, #ce2367 0%, #e54980 50%, #e5447d 50%, #ce2367 51%, #ce2367 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2e991e), color-stop(0%,#21ce26), color-stop(0%,#ce2367), color-stop(50%,#e54980), color-stop(50%,#e5447d), color-stop(51%,#ce2367), color-stop(100%,#ce2367)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #2e991e 0%,#21ce26 0%,#ce2367 0%,#e54980 50%,#e5447d 50%,#ce2367 51%,#ce2367 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #2e991e 0%,#21ce26 0%,#ce2367 0%,#e54980 50%,#e5447d 50%,#ce2367 51%,#ce2367 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #2e991e 0%,#21ce26 0%,#ce2367 0%,#e54980 50%,#e5447d 50%,#ce2367 51%,#ce2367 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #2e991e 0%,#21ce26 0%,#ce2367 0%,#e54980 50%,#e5447d 50%,#ce2367 51%,#ce2367 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2e991e', endColorstr='#ce2367',GradientType=0 ); /* IE6-9 */
+}

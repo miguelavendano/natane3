@@ -44,21 +44,21 @@ class Validar{
     /**
      * valida si el ID que le pasan por metodo GET, corresponde a un sitio, empresa o usuario
      * 
-     * @param stirng $id es el ide pasado por get
+     * @param stirng $id es el ID pasado por get
      * @param string $caso El caso al que hace referencia ya que esta funcion es 
      * utilizada para todos los espacios de natane.
      * 
      * @return bool retorna true si es verdadero false si es negativo.
      */        
-    public function validar_id( $id, $caso){  
+    public function validar_id($id, $caso){  
         
-        $array_ids = array('Empresa', 'Sitio', 'Experiencia', 'Imagen', 'Usuario');
+        $array_ids = array('Empresa', 'Sitio', 'Experiencia', 'Imagen', 'Usuario', 'Administrador');
         
-        $opcion = $this->aux_validar($id);
+        $tipo_nodo = $this->aux_validar($id);
         
-        if(in_array($opcion, $array_ids)){                        
+        if(in_array($tipo_nodo, $array_ids)){                        
             
-            if($opcion == $caso){
+            if($tipo_nodo == $caso){
                 return true;        
             }else{
                 return false;

@@ -6,7 +6,7 @@
 
     
 
-    class Administrador{
+    class Administradores{
 
         public $vista;
         public $modelo;
@@ -18,31 +18,19 @@
         }       
         
         
-        public function datos_usuario(){
-            $usuario = $this->modelo->get_resultados();            
+        public function datos_administrador(){
+            $usuario = $this->modelo->get_admin();            
             return $usuario;            
         }
         
-        public function experiencias(){            
-            return $this->modelo->get_experiencias();            
+        public function noticias(){            
+            return $this->modelo->get_noticias();            
         }
 
-        public function visitaria(){            
-            return $this->modelo->get_visitaria();            
-        }        
-        
-        public function seguidores(){            
-            return $this->modelo->get_seguidores();            
-        }
-        
-        public function siguiendo(){            
-            return $this->modelo->get_siguiendo();            
+        public function eventos(){            
+            return $this->modelo->get_eventos();            
         }        
 
-        public function AmigosDeAmigos(){            
-            return $this->modelo->get_AmigosDeAmigos();            
-        }        
-        
         public function principal_Nousuario(){
             
         }        
@@ -50,8 +38,7 @@
         public function principal_Nologin(){
             
         }       
-        
-        
+              
         
         
         /**
@@ -60,16 +47,12 @@
          * @param int $login valor numerico que indica el tipo de login que hay
          * 1->loguado y  es el dueño. 2: logueado y no es el dueño y 3:no esta logueado. 
          */
-        public function principal_usuario($login){
+        public function principal_administrador($login){
             
             $this->vista->refactory_header($login); 
-            $this->vista->refactory_usuario($this->datos_usuario());
-            $this->vista->refactory_amigos($this->seguidores(),"segui");
-            $this->vista->refactory_amigos($this->siguiendo(),"sigo");
-            $this->vista->refactory_AmigosDeAmigos($this->AmigosDeAmigos());
-            $this->vista->refactory_experiencias($this->experiencias());
-//            $this->vista->refactory_gustaria($this->gustaria());
-            $this->vista->refactory_visitaria($this->visitaria());            
+            $this->vista->refactory_administrador($this->datos_administrador());          
+            $this->vista->refactory_noticias($this->noticias());
+            $this->vista->refactory_eventos($this->eventos());          
             $this->vista->refactory_contenido();
             $this->vista->refactory_total();
             
@@ -82,30 +65,30 @@
 
     $validar = new Validar();
 
-    if($validar->validar_id($id, "Usuario")){    // el id del nodo corresponde a un Usuario ?
+    if($validar->validar_id($id, "Administrador")){    // el id del nodo corresponde a un Administrador ?
 
-        $usuario = new Usuarios($id);
+        $admin = new Administradores($id);
         
         if(isset($_SESSION['id'])){ // existe sesion ?                                   
             
             if(Login::acceso_Pusuario($id)){  //El usr logueado es el dueño de este perfil ?
                 
-                $usuario->principal_usuario(1);
+                $admin->principal_administrador(1);
 
             }else{
 
-                $usuario->principal_usuario(2);
+                $admin->principal_administrador(2);
                 
             }
         }else{
             
-            $usuario->principal_usuario(3);
+            $admin->principal_administrador(3);
         }
 
     }else{
 
         header('Location: /natane3/Index/');
-    }        
+    }  
     
 
 ?>

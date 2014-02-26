@@ -1,0 +1,117 @@
+        <!-- editar perfil-->
+        <div id="editarUsuario" style="display: none">
+            <legend>
+                <a class="close cancel_edicion_usuario">&times;</a>            
+                <h3>Editar Perfil</h3>
+            </legend>        
+            
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" id='formEditarUsuario'>
+                <div class="control-group">
+                    <label class="control-label" for="EnomU">Nombres: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EnomU" name="EnomU" required> 
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EapeU">Apellidos: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EapeU" name="EapeU" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EmailU">Email: </label>
+                    <div class="controls">
+                        <input type="email" class="input-large" id="EmailU" name="EmailU" required>
+                    </div>
+                </div>       
+                <div class="control-group">
+                    <label class="control-label" for="EgeneroU">Genero: </label>
+                    <div class="controls">
+                        <label class="radio"> 
+                            <input type="radio" name="EgeneroU" value="Masculino" id="EgeneroM">Masculino
+                        </label>
+                        <label class="radio"> 
+                            <input type="radio" name="EgeneroU" value="Femenino" id="EgeneroF">Femenino
+                        </label>            
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EnaciU">Fecha de Nacimiento: </label>
+                    <div class="controls">
+                        <div class="input-append date dp_edi" data-date="12/02/2013" data-date-format="dd-mm-yyyy">
+                            <input class="input-medium" type="text" id="EnaciU" size="16" value="" readonly="readonly" name="EnaciU">
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="control-group">
+                    <label class="control-label" for="EnickU">Nick: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EnickU" name="EnickU" required>
+                        <span class="help-inline">El nombre que veran tus seguidores</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EcityU">Ciudad de origen: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EcityU" name="EcityU" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="ErecideU">Ciudad de residencia: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="ErecideU" name="ErecideU" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Es_webU">Sitio Web </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="Es_webU" name="Es_webU">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EfaceU">Perfil de Facebook: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EfaceU" name="EfaceU">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EtwiU">Perfil de Twitter: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EtwiU" name="EtwiU" placeholder="@tu_perfil">
+                    </div>
+                </div>                
+                <div class="control-group">
+                    <label class="control-label" for="EyouU">Canal de Youtube: </label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="EyouU" name="EyouU">
+                    </div>
+                </div>       
+                <div class="control-group">
+                    <label class="control-label" for="Epass1U">Contraseña: </label>
+                    <div class="controls">
+                        <input type="password" class="input-medium" id="Epass1U" name="Epass1U" required>
+                        <span class="help-inline">minimo 6 caracteres entre letras y números</span>      
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Epass2U">Confirma tu Contraseña: </label>
+                    <div class="controls">
+                        <input type="password" class="input-medium" id="Epass2U" required>
+                    </div>
+                </div>
+                <div class="control-group">                  
+                  <div class="controls">
+                    <a class="btn btn-primary" id="guarda_edicion_usuario">Guardar Cambios</a>
+                    <a class="btn btn-red cancel_edicion_usuario">Cancelar</a>
+                  </div>
+                </div>
+            </form>   
+        </div>   
+        
+    <!--Funcion para subir las imagenes de la experiencia-->
+    <script type="text/javascript" language="javascript">   
+
+    </script>
+        

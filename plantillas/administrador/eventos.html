@@ -1,0 +1,17 @@
+<div id="{id_evento}" class="span4 publicacion">
+    <div class="btn-block opc_publi">         
+        <button class="btn icon-trash tooltip1" rel="tooltip" title="Eliminar" onclick="eliminarPublicacion({id_evento})"></button>
+        <button class="btn icon-pencil tooltip2" rel="tooltip" title="Editar" data-toggle="modal" href=".modalEditaEvento" onclick="editarPublicacion({id_evento})"></button>                                    
+    </div>                   
+    <div class="row-fluid titulo-publicacion">
+        <h5>{nombre}</h5>
+    </div>            
+    <div class="row-fluid imagen-publicacion">
+        <img src="{IMG_NATANE}/{imagen}">
+    </div>    
+    <div class="row-fluid desc-publicacion">        
+        <p>{descripcion}</p>
+        <p><b>Fecha:</b> {fecha_evento}</p>
+        <p><b>Hora:</b> {hora_evento}</p>
+    </div>    
+</div>

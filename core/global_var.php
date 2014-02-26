@@ -15,6 +15,7 @@
         public $url_empresa;
         public $url_consulta;
         public $url_galeria;
+        public $url_administrador;
         public $url_imagen;
         public $URL_INICIO;
         public $url_login;
@@ -31,7 +32,8 @@
             $this->url_sitio = '/natane3/modulos/sitios/sitio.php';
             $this->url_empresa = '/natane3/modulos/empresas/empresa.php';
             $this->url_consulta = '/natane3/modulos/consultas/consulta.php';            
-            $this->url_galeria= '/natane3/modulos/galeria/galeria.php';
+            $this->url_galeria = '/natane3/modulos/galeria/galeria.php';
+            $this->url_administrador = '/natane3/modulos/administrador/administrador.php';
             $this->url_login= '/natane3/modulos/login/login.php';                      
             $this->url_imagen= '/natane3/modulos/imagen/imagen.php';
             $this->URL_INICIO = '/natane3/Index/';
@@ -47,6 +49,7 @@
                                     'url_empresa'=>$this->url_empresa, 
                                     'url_consulta'=>$this->url_consulta,
                                     'url_galeria'=>$this->url_galeria,
+                                    'url_administrador'=>$this->url_administrador,
                                     'url_login'=>$this->url_login,
                                     'url_imagen'=>$this->url_imagen,
                                     'URL_INICIO'=>$this->URL_INICIO

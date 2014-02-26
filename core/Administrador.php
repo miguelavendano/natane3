@@ -10,8 +10,8 @@ class Administrador{
 	public $nombre = '';
 	public $apellido = '';
 	public $imagen = '';
-	public $genero = '';
-	public $fecha_nacimiento = '';
+//	public $genero = '';
+//	public $fecha_nacimiento = '';
 	public $correo	= '';
 	public $password = '';
         public $type = '';

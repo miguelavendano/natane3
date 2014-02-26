@@ -25,30 +25,63 @@ class ModelPublicacion{
         
         /**
          * funcion para crear el nodo tipo Experiencia
-         * parametros: objeto tipo Experiencia
+         * @param objeto $minodo Objeto de tipo publicacion que contiene los datos
+         *  para un nodo tipo Noticia
          */	
-	public static function crearNodoPublicacion(Publicacion $minodo)
-	{
+	public static function crearNodoNoticia(Publicacion $minodo){
+            
 		if (!$minodo->node) {
 			$minodo->node = new Node(Neo4Play::client());
 		}
 
 		$minodo->node->setProperty('nombre', $minodo->nombre)
 				->setProperty('descripcion', $minodo->descripcion)
-                                ->setProperty('fecha', $minodo->fecha)
+                                ->setProperty('imagen', $minodo->fecha)
+                                ->setProperty('fecha', $minodo->fecha)                       
                                 ->setProperty('type', $minodo->type)
 				->save();
 
 		$minodo->id = $minodo->node->getId();
 
-		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode, $minodo->type);
+		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode, 'Noticia');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
                 
 	}  
 
-        /*
-         * Funcion que edita una propiedad de una experiencia y si no existe la crea
-         */        
+        /**
+         * funcion para crear el nodo tipo Experiencia
+         * @param objeto $minodo Objeto de tipo publicacion que contiene los datos
+         *  para un nodo tipo Evento
+         */	        
+	public static function crearNodoEvento(Publicacion $minodo){
+            
+		if (!$minodo->node) {
+			$minodo->node = new Node(Neo4Play::client());
+		}
+
+		$minodo->node->setProperty('nombre', $minodo->nombre)
+				->setProperty('descripcion', $minodo->descripcion)
+                                ->setProperty('imagen', $minodo->imagen)
+                                ->setProperty('fecha_evento', $minodo->fecha_evento)
+                                ->setProperty('hora_evento', $minodo->hora_evento)                        
+                                ->setProperty('fecha', $minodo->fecha)                       
+                                ->setProperty('type', $minodo->type)
+				->save();
+
+		$minodo->id = $minodo->node->getId();
+
+		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode, 'Evento');
+		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
+                
+	}  
+        
+        /**
+         * Funcion que edita una propiedad de una publicacion y si no existe la crea
+         * 
+         * @param integer $idnodo ID del nodo administrador a editar
+         * @param string $propiedad Propiedad del nodo administrador a editar
+         * @param string $detalle Detalle a ingresar en la propiedad
+         */
 	public static function editar_publicacion($idnodo, $propiedad, $detalle){
 		//Obtengo toda la informacion del nodo
 		$editar = Neo4Play::client()->getNode($idnodo);
@@ -57,8 +90,9 @@ class ModelPublicacion{
 		    	->save();
 	}              
 
-        /*
-         * Elimina el nodo de una experiencia
+        /**
+         * Funcion que elimina una publicacion
+         * @param integer $idnodo ID de la publicacion a eliminar
          */
 	public static function eliminar_publicacion($idnodo){
             $eliminar = Neo4Play::client()->getNode($idnodo);		
@@ -66,107 +100,84 @@ class ModelPublicacion{
 	}
 
        
-        /*
-         * Obtine las publicaciones de un usuario
-         */                
-        public static function get_publicacion_usuario($queryString){
-                        
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $result = $query->getResultSet();
-            
-            $array = array();
-//                    $experiencia->imagen= $res[0]->offsetGet('');//                    
-//                    echo "<h1>".$experiencia->imagen."</h1>";                    
-            
-            if($result){
-            
-                $imagenes="";
-                foreach($result as $row) {
-                    $experiencia = new Experiencia();
-                    $experiencia->id = $row['']->getId();
-                    
-                    $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
-                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
-                    
-                    if($queryRes){
-                        
-                        $res = $queryRes->getResultSet();
-                        
-                        if(count($res)>0){
-                            $img_ran = rand (0, count($res)-1);   //elemento aleatorio de las imagenes de la experiencia
-
-                            foreach($res as $img){                            
-                                $imagenes[]=$img[''];                            
-                            }
-
-                            $experiencia->imagen = $imagenes[$img_ran];  //almacena la imagen aleatorio para mostrarla en la vista
-                            $imagenes="";        
-                        }
-                        else {
-                            $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
-                        }
-                        
-                    }
-                    
-                    
-                    $experiencia->nombre = $row['']->getProperty('nombre');
-                    $experiencia->descripcion = $row['']->getProperty('descripcion');
-                    array_push($array, $experiencia);
-                    $res=null;
-                }
-                return $array;
-            }
-        }        
-
-       
-        /*
-         * Obtine las experiencias de una empresa o sitio
-         */                
-        public static function get_publicaciones($queryString){
+        /**
+         * Funcion que obtiene las noticias publicadas por el administrados
+         * @param string $queryString cadena de texto que contiene la consulta de las noticias
+         */
+        public static function get_noticias($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();            
             $array = array();
             
             if($result){
-
                 foreach($result as $row) {
-                    $experiencia = new Experiencia();
-                    $experiencia->id = $row['']->getId();
                     
-                    $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
-                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
+                    $publicacion = new Publicacion();  
+                    $publicacion->id = $row['']->getId();
+                    $publicacion->nombre = $row['']->getProperty('nombre');
+                    $publicacion->descripcion = $row['']->getProperty('descripcion');
+                    $publicacion->imagen = $row['']->getProperty('imagen');
+                    //$servicio->type = $row['']->getProperty('type');                    
                     
-                    if($queryRes){
-                        
-                        $res = $queryRes->getResultSet();                                                                
-                        //$experiencia->imagen= $res[0]->offsetGet('');                        
-                        
-                        if(count($res)>0){
-                            $img_ran = rand (0, count($res)-1);   //elemento aleatorio de las imagenes de la experiencia
-
-                            foreach($res as $img){                            
-                                $imagenes[]=$img[''];                            
-                            }
-
-                            $experiencia->imagen = $imagenes[$img_ran];  //almacena la imagen aleatorio para mostrarla en la vista
-                            $imagenes="";        
-                        }
-                        else {
-                            $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
-                        }                        
-                    }
+//                    $query="START n=node(".$servicio->id.") MATCH n-[:Img]->i RETURN i.nombre";                     
+//                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
+//                    $res = $queryRes->getResultSet();
+//                    
+//                    if(count($res)){
+//                        foreach($res as $img) {    
+//                           $servicio->imagen = $img[''];
+//                        }
+//                    }else{
+//                        $servicio->imagen = "rafting-rio-savegre.jpg";
+//                    }                    
                     
-                    $experiencia->nombre = $row['']->getProperty('nombre');
-                    $experiencia->descripcion = $row['']->getProperty('descripcion');
-                    array_push($array, $experiencia);
-                    $res=null;
-                    
-                    
+                    array_push($array, $publicacion);
                 }
                 return $array;
-            }
+            }           
+        }
+        
+
+        /**
+         * Funcion que obtiene los eventos publicadas por el administrados
+         * @param string $queryString cadena de texto que contiene la consulta de los eventos
+         */
+        public static function get_eventos($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();            
+            $array = array();
+            
+            if($result){
+                foreach($result as $row) {
+                    
+                    $publicacion = new Publicacion();  
+                    $publicacion->id = $row['']->getId();
+                    $publicacion->nombre = $row['']->getProperty('nombre');
+                    $publicacion->descripcion = $row['']->getProperty('descripcion');
+                    $publicacion->imagen = $row['']->getProperty('imagen');
+                    $publicacion->fecha_evento = $row['']->getProperty('fecha_evento');
+                    $publicacion->hora_evento = $row['']->getProperty('hora_evento');
+                    
+//                    $query="START n=node(".$servicio->id.") MATCH n-[:Img]->i RETURN i.nombre";                     
+//                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
+//                    $res = $queryRes->getResultSet();
+//                    
+//                    if(count($res)){
+//                        foreach($res as $img) {    
+//                           $servicio->imagen = $img[''];
+//                        }
+//                    }else{
+//                        $servicio->imagen = "rafting-rio-savegre.jpg";
+//                    }                    
+                    
+                    array_push($array, $publicacion);
+                }
+                return $array;
+            }           
         }        
+             
         
         
         /*

@@ -1,0 +1,39 @@
+        <!-- Editar Experiencia-->
+        <div class="editarExperiencia" style="display: none">
+            <legend>
+                <a class="close cancelEdiExp">&times;</a>            
+                <h3 id="edita_crea_Exp">Edita tu Experiencia</h3>                
+            </legend>                             
+            <form class="form-horizontal" id="formEditarExperiencia" method=post enctype=multipart/form-data>              
+                <div class="row-fluid">
+                    <div class="span12">                  
+                        <div class="row-fluid control-group">
+                            <div class="span6 titu_exp">
+                                <input type="text" class="input-xlarge" id="ediExpTitulo" name="ediExpTitulo" placeholder="Titulo de tu experiencia..." required>
+                            </div>                            
+<!--                            <div class="span6">                                            
+                                <div class="caja_Bfile btn btn-green active"> 
+                                    <i class="icon-camera"> Adicionar Imagenes</i>
+                                    <input class="Bfile" type="file" id="imgs_edit_experiencia" name="imgs_edit_experiencia[]" multiple />
+                                </div>                        
+                            </div>-->
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12 text_exp">
+                                <div class="control-group">
+                                    <textarea rows="4" class="span12" id="ediExpDesc" name="ediExpDesc" placeholder="Escribe todas las experiencias que viviste en este sitio...¡TODO!" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="imgs_experiencia"></div>     <!--campo en donde se cargan imagenes-->                   
+                        <div class="row-fluid">      
+                            <output id="list_edit_img_exp"></output>                                           
+                        </div>
+                    </div>
+                </div>                                
+                <div class="control-group botones_si_no">                  
+                    <button class="btn btn-blue" id="guardaEdicionExp">Guardar</button>
+                    <button class="btn btn-red cancelEdiExp">Cancelar</button>                    
+                </div>                
+            </form>        
+        </div>

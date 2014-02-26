@@ -1,0 +1,79 @@
+
+    <section id="P_admin">        
+        <div class="container-fluid perfil">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="row-fluid">
+                        <div class="span3">
+                            
+                            <div class="usuario contenedor"><!-- usuario -->
+                                {datos_admin}  <!-- datos_usuario.html-->
+                            </div>   
+                            
+                            <a data-toggle="modal" href="#modalCreaNoticia">Crear Noticias</a>
+                            <br>
+                            <a data-toggle="modal" href="#modalCreaEvento">Crear Evento</a>
+                            
+                        </div>   <!-- span3 -->
+                                                    
+                                                    
+                        <div class="span9" id="contenidoU">
+                            
+                            <div class="pestañas">
+                                <div class="tabbable">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#listaNoticias" data-toggle="tab">Noticias</a></li>
+                                        <li><a href="#listaEventos" data-toggle="tab">Eventos</a></li>
+                                        <li><a href="#3" data-toggle="tab">Estadisticas</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="listaNoticias">                                                  
+                                            {noticias}
+                                        </div>  <!-- pestaña 1 -->
+
+                                        <div class="tab-pane" id="listaEventos"> 
+                                            {eventos}                                            
+                                        </div>   <!-- pestaña 2 -->
+                                        
+                                        <div class="tab-pane" id="3"> 
+                                            {estadisticas}
+                                        </div>   <!-- pestaña 3 -->                                        
+
+                                    </div>
+                                </div>
+                            </div>     <!-- pestañas -->
+                        </div>   <!-- span9 -->
+                    </div>
+                </div>
+            </div>          
+        </div>
+
+    </section>    
+
+
+    <!-- VENTANAS MODAL-->    
+    {modales}
+    
+    
+
+        <!--<div class="container">
+        <div style="position: relative; height: 80px;">           
+            <input type="text" name="country" id="autocomplete-ajax" style="position: absolute; z-index: 2; background: transparent;"/>
+            <input type="text" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: white; z-index: 1;"/>            
+        </div>
+        <div id="selection-ajax"></div>
+    </div>-->                            
+    
+<!--
+    <div class="menu">
+        <ul>
+            <li><a><div class="circle"><span class="icon-wrench"></span></div></a></li>
+            <li><a><span class="icon-remove"></span></a></li>
+        </ul>
+    </div>                                   
+-->     
+<!--
+    <script src="{JS}/base-galeria.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+    -->
+

@@ -32,7 +32,7 @@
         }
         
         
-        /* Esta funcion valida el tipo de eleento que 
+        /* Esta funcion valida el tipo de elemento que 
          * esta solicitando su galeria.
          *  
          * retorna 0 si el id no pertenece a un sitio o empresa
@@ -94,13 +94,7 @@
     }else{
         
         
-        
     }
-    
- 
-    
-
-
 
 
 ?>

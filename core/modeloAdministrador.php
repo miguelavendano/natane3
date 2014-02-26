@@ -30,8 +30,8 @@ class ModelAdministrador{
 		$minodo->node->setProperty('nombre', $minodo->nombre)
 				->setProperty('apellido', $minodo->apellido)
 				->setProperty('imagen', $minodo->imagen)
-                                ->setProperty('genero',$minodo->genero)    
-                                ->setProperty('fecha_nacimiento', $minodo->fecha_nacimiento)
+                                //->setProperty('genero',$minodo->genero)    
+                                //->setProperty('fecha_nacimiento', $minodo->fecha_nacimiento)
                                 ->setProperty('correo', $minodo->correo)
                                 ->setProperty('password', $minodo->password)
                                 ->setProperty('type', $minodo->type)
@@ -113,8 +113,9 @@ class ModelAdministrador{
                     $usuario->id = $row['']->getId();                    
                     $usuario->nombre = $row['']->getProperty('nombre');
                     $usuario->apellido = $row['']->getProperty('apellido');                    
-                    $usuario->genero = $row['']->getProperty('genero');    
-                    $usuario->fecha_nacimiento = $row['']->getProperty('fecha_nacimiento');
+                    $usuario->imagen = $row['']->getProperty('imagen');                    
+                    //$usuario->genero = $row['']->getProperty('genero');    
+                    //$usuario->fecha_nacimiento = $row['']->getProperty('fecha_nacimiento');
                     $usuario->correo = $row['']->getProperty('correo');
                     $usuario->password = $row['']->getProperty('password');
                     $usuario->type = $row['']->getProperty('type');                    

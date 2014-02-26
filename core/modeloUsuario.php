@@ -198,23 +198,14 @@ class ModelUsuarios{
                     $usuario->lugar_recidencia = $row['']->getProperty('lugar_recidencia');
                     $usuario->correo = $row['']->getProperty('correo');
                     $usuario->sitio_web = $row['']->getProperty('sitio_web');                    
-                                        
-                    
-                        $usuario->nombre = $row['']->getProperty('nombre');
-                        $usuario->apellido = $row['']->getProperty('apellido');
-                        //$usuario->imagen = $row['']->getProperty('imagen');
-                        //$usuario->nick = $row['']->getProperty('nick');
-                        //$usuario->genero = $row['']->getProperty('genero');    
-                        //$usuario->fecha_nacimiento = $row['']->getProperty('fecha_nacimiento');
-                        $usuario->ciudad_origen = $row['']->getProperty('ciudad_origen');
-                        //$usuario->lugar_recidencia = $row['']->getProperty('lugar_recidencia');
-                        //$usuario->correo = $row['']->getProperty('correo');
-                        //$usuario->sitio_web = $row['']->getProperty('sitio_web');
-                        $usuario->facebook = $row['']->getProperty('facebook');
-                        $usuario->twitter = $row['']->getProperty('twitter');
-                        $usuario->youtube = $row['']->getProperty('youtube');
-                        $usuario->contraseña = $row['']->getProperty('contraseña');
-                        $usuario->type = $row['']->getProperty('type');                    
+                    $usuario->nombre = $row['']->getProperty('nombre');
+                    $usuario->apellido = $row['']->getProperty('apellido');
+                    $usuario->ciudad_origen = $row['']->getProperty('ciudad_origen');
+                    $usuario->facebook = $row['']->getProperty('facebook');
+                    $usuario->twitter = $row['']->getProperty('twitter');
+                    $usuario->youtube = $row['']->getProperty('youtube');
+                    $usuario->contraseña = $row['']->getProperty('contraseña');
+                    $usuario->type = $row['']->getProperty('type');                    
                     
                     array_push($array, $usuario);
                     

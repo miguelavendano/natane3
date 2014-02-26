@@ -64,8 +64,6 @@
         
         public function principal_empresa($login){    
             
-            
-            
             $this->vista->refactory_header( $login );
             $this->vista->refactory_slider( $this->slider_empresa());
             $this->vista->refactory_contacto( $this->datos_contacto());
