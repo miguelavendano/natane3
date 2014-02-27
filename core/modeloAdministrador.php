@@ -66,7 +66,7 @@ class ModelAdministrador{
          * @param integer $id_user ID de administrador a consultar
          * @return string $administrador Nombre completo del administrador.
          */
-        public function get_nombre_admin($id_user){
+        public static function get_nombre_admin($id_user){
             
             $queryString = "start n=node(".$id_user.") return n.nombre, n.apellido";
             
@@ -82,7 +82,7 @@ class ModelAdministrador{
          * @param integer $id_user ID de administrador a consultar
          * @return string $password Clave de acceso del administrador.
          */        
-        public function get_pass($id_user){
+        public static function get_pass($id_user){
             
             $queryString = "start n=node(".$id_user.") return n";
             
@@ -99,7 +99,7 @@ class ModelAdministrador{
          * @param string $queryString Consulta que trae el ID del administrador a consultar
          * @return array $array Array con los datos del nodo del administrador.
          */                                   
-        public function get_administrador($queryString){
+        public static function get_administrador($queryString){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();
@@ -128,58 +128,28 @@ class ModelAdministrador{
                                                                         
 
         /**
-         * Esta funcion consulta la cantidad de usuarios registrados en la red social.
+         * Esta funcion consulta la cantidad de nodos de un mismo tipo
+         * @param string $tipoNodo Cadena de texto que especifica el tipo de nodo a buscar
          * @return integer $total Retorna la cantidad de usuarios registrados
          */        
-        public function get_total_usuarios() {
+        public static function get_totalNodos($tipoNodo) {
             
-            $queryString = "START n=node(*) WHERE n.type='Usuario' RETURN count(n) as total";
-            
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $result = $query->getResultSet();              
-            
-            return $result[0]['total'];
-        }        
-
-        
-        /**
-         * Esta funcion consulta la cantidad de sitios registrados en la red social.
-         * @return integer $total Retorna la cantidad de sitios registrados
-         */        
-        public function get_total_sitios() {
-            
-            $queryString = "START n=node(*) WHERE n.type='Sitio' RETURN count(n) as total";
+            $queryString = "START n=node(*) WHERE n.type='".$tipoNodo."' RETURN count(n) as total";
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();              
             
             return $result[0]['total'];
-        }                
-
-        
-        /**
-         * Esta funcion consulta la cantidad de empresas registrados en la red social.
-         * @return integer $total Retorna la cantidad de empresas registrados
-         */        
-        public function get_total_empresas() {
-            
-            $queryString = "START n=node(*) WHERE n.type='Empresa' RETURN count(n) as total";
-            
-            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
-            $result = $query->getResultSet();              
-            
-            return $result[0]['total'];
-        }                
-
+        }               
         
         /**
          * Esta funcion consulta la cantidad de relaciones existentes segun el tipo enviado por parametro
-         * @param string $relacion Tipo de relacion sobre la cual se ejecuta la consulta
+         * @param string $tipoRelacion Tipo de relacion sobre la cual se ejecuta la consulta
          * @return integer $total Retorna la cantidad de relaciones existentes
          */        
-        public function get_total_relaciones($relacion) {
+        public static function get_totalRelaciones($tipoRelacion) {
             
-            $queryString = "START n=node(*) MATCH n-[:".$relacion."]->i RETURN count(n) as total";
+            $queryString = "START n=node(*) MATCH n-[:".$tipoRelacion."]->i RETURN count(n) as total";
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
             $result = $query->getResultSet();              
