@@ -168,6 +168,7 @@
                     $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);
                     $aux = str_ireplace("{imagen}", $servicio->imagen, $aux);
                     $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);
+                    $aux = str_ireplace("{tipo}", $servicio->type, $aux);
                     $resultados .= $aux;
                     $i++;
                 }while((count($datos)!=0)&& $i<3);                
@@ -201,6 +202,7 @@
                     $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);
                     $aux = str_ireplace("{fecha_evento}", $servicio->fecha_evento, $aux);
                     $aux = str_ireplace("{hora_evento}", $servicio->hora_evento, $aux);
+                    $aux = str_ireplace("{tipo}", $servicio->type, $aux);
                     $resultados .= $aux;
                     $i++;
                 }while((count($datos)!=0)&& $i<3);                

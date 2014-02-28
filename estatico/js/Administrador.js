@@ -1,5 +1,5 @@
 /*
- * Funcion que muestra la estadistica de Usuarios, Empresas y Sitios registrados 
+ * Funcion que muestra la grafica estadistica de nodos existentes
  */
     function estadisticaNodos(){
 
@@ -16,16 +16,15 @@
                     ,error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         alert("Se presentó un problema con la conexión a Internet")
                     }                    
-                    ,success: function(data,textStatus,jqXHR){                
-        
-                                $("#convenciones").html(data.opciones);
-                                $("#titulo-encuesta").html(data.titulo);
+                    ,success: function(data,textStatus,jqXHR){                       
                                 
                                 var vector = [parseInt(data.usuarios), parseInt(data.sitios), parseInt(data.empresas), parseInt(data.experiencias), parseInt(data.servicios), parseInt(data.imagenes), parseInt(data.comentarios), parseInt(data.noticias), parseInt(data.eventos)];
                                 var contenedor="estadisticasNodos";   //id div contenedor
                                 var etiquetas = ['Usuarios', 'Sitios', 'Empresas', 'Experiencias', 'Servicios', 'Imagenes', 'Comentarios', 'Noticias', 'Eventos'];        
-                                //var titulo = data.titulo;
-                              
+                                
+                                var total = parseInt(data.usuarios)+parseInt(data.sitios)+parseInt(data.empresas)+parseInt(data.experiencias)+parseInt(data.servicios)+parseInt(data.imagenes)+parseInt(data.comentarios)+parseInt(data.noticias)+parseInt(data.eventos);                                
+                                $("#conclusion-nodos").html("EL total de nodos consultados fue: <span>" +total+"</span>");
+                                
 
                                 var grafica = new Highcharts.Chart({
                                             chart: {
@@ -33,7 +32,7 @@
                                                 type: 'column'
                                             },
                                             title: {
-                                                text: "Cantidad de nodos segun el tipo",
+                                                text: "",
                                                 style: {
                                                     color: '#000000',
                                                     fontSize: '16px',
@@ -106,8 +105,9 @@
                     });                          
                     
     }
+    
 /*
- * Funcion que muestra la estadistica de Usuarios, Empresas y Sitios registrados 
+ * Funcion que muestra la grafica estadistica de relaciones existentes
  */
     function estadisticaRelaciones(){
 
@@ -126,14 +126,14 @@
                     }                    
                     ,success: function(data,textStatus,jqXHR){                
         
-                                $("#convenciones").html(data.opciones);
-                                $("#titulo-encuesta").html(data.titulo);
                                 
                                 var vector = [parseInt(data.informa),parseInt(data.amigos), parseInt(data.comparte),parseInt(data.publica),parseInt(data.crea)];
                                 var contenedor="estadisticasRelaciones";   //id div contenedor
                                 var etiquetas = ['Informa','Amigo', 'Comparte', 'Publica','Crea'];        
-                                //var titulo = data.titulo;
-                              
+
+                                var total = parseInt(data.informa)+parseInt(data.amigos)+parseInt(data.comparte)+parseInt(data.publica)+parseInt(data.crea);
+                                $("#conclusion-relaciones").html("EL total de relaciones consultados fue: <span>" +total+"</span>");
+
 
                                 var grafica = new Highcharts.Chart({
                                             chart: {
@@ -141,7 +141,7 @@
                                                 type: 'column'
                                             },
                                             title: {
-                                                text: "Cantidad de relaciones segun el tipo",
+                                                text: "",
                                                 style: {
                                                     color: '#000000',
                                                     fontSize: '16px',
@@ -216,17 +216,21 @@
     }
     
     
-    function editarServicio(id_servicio) {
+    function editarPublicacion(id_publicacion, tipo) {
             
-            $(".modalEditaServicio").attr('id', id_servicio);            
-            //$("#servicios_empresa").css({display:'none'});
-            
+            if(tipo=="Noticia"){
+                $(".modalEditaNoticia").attr('id', id_publicacion);        
+            }else if(tipo=="Evento"){
+                $(".modalEditaEvento").attr('id', id_publicacion);        
+            }
+                        
             $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                url:'/natane3/estatico/php/opcionesAdministrador.php'
                 ,type:'POST'
                 ,data:{
-                    opcion:'editarServicio',                            
-                    servicio: id_servicio                    
+                    opcion:'datosEdicionPublicacion',                            
+                    publicacion: id_publicacion,
+                    tipo: tipo
                 }
                 ,dataType:'json'
                 ,beforeSend:function(jqXHR, settings ){
@@ -243,38 +247,46 @@
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
-                    $("#reload").css({visibility: 'hidden'});                       
-                    $("#EditNomSer").val(data.nombre);
-                    $("#EditDescSer").val(data.descripcion);
+                    $("#reload").css({visibility: 'hidden'}); 
+                    
+                    if(data.tipo=='Noticia'){
+                        
+                        $("#EnomNoti").val(data.nombre);
+                        $("#EdescNoti").val(data.descripcion);
+                    
+                    }else if(data.tipo=='Evento'){
+                        
+                        $("#EnomEve").val(data.nombre);
+                        $("#EdescEve").val(data.descripcion);                        
+                        $("#EfechaEve").val(data.fecha);                        
+                        $("#EhoraEve").val(data.hora);                        
+                    }    
                 }
             });              
             
     }
     
 
-    function eliminarServicio(id_servicio) {
-     
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
+
+    function eliminarPublicacion(id_publicacion) {
             
             $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                url:'/natane3/estatico/php/opcionesAdministrador.php'
                 ,type:'POST'                    
                 ,data:{
-                    opcion:'eliminarServicio',                            
-                    servicio: id_servicio,
-                    empresa: id_url[1]
+                    opcion:'eliminaPublicacion',                            
+                    publicacion: id_publicacion
                 }
-                ,dataType:'json'
+                ,dataType:'html'
                 ,beforeSend:function(jqXHR, settings ){
                 }
                 ,success: function(data,textStatus,jqXHR){                           
                     
                             if(/true/.test(data)) {                                
-                                alert("Servicio Eliminada :D");                                                                          
-                                document.location.reload(); 
+                                alert("Publicacion Eliminada :D");                                                                          
+                                location.reload();
                             }
-                            else alert("No se ha podido eliminar su experiencia"); 
+                            else alert("No se ha podido eliminar su publicación"); 
                 }
             });                            
     }   
@@ -285,204 +297,118 @@ $(document).ready(function(){
     estadisticaNodos();
     estadisticaRelaciones();
     
-    $("#guarda_empresa").click(function(){
+    /*
+     * Guarda la Noticia ingresada
+     */    
+    $("#guardarNoticia").click(function(){
         
-            var dataform = new FormData(document.getElementById('fromCreaEmpresa'));            
-            dataform.append( "opcion", "registrarE");            
+            var dataform = new FormData(document.getElementById('formCrearNoticia'));            
+            dataform.append( "opcion", "creaNoticia");            
 
             $.ajax({
-                url : '/natane3/estatico/php/opcionesEmpresa.php',
+                url : '/natane3/estatico/php/opcionesAdministrador.php',
                 type : 'POST',
                 data : dataform,
                 processData : false, 
                 contentType : false, 
                 success: function(data,textStatus,jqXHR){                           
 
-                    var n=data.split(" ");                           
+                    if(/true/.test(data)) {                                
+                        alert("Noticia Publicada  :D");
+                        location.reload();
+                    }
+                    else alert("No se ha podido publicar la noticia"); 
+
+                }
+            });                                 
+    });
+      
+    /*
+     * Guarda el Evento ingresado
+     */        
+    $("#guardarEvento").click(function(){
+        
+            var dataform = new FormData(document.getElementById('formCrearEvento'));            
+            dataform.append( "opcion", "creaEvento");            
+
+            $.ajax({
+                url : '/natane3/estatico/php/opcionesAdministrador.php',
+                type : 'POST',
+                data : dataform,
+                processData : false, 
+                contentType : false, 
+                success: function(data,textStatus,jqXHR){                           
 
                     if(/true/.test(data)) {                                
-                        alert("Registro Exitoso  :D"+n[0]);
-                        //document.location.href="http://localhost/natane3/modulos/empresas/empresa.php?id="+n[0];
+                        alert("Evento Publicado  :D");
+                        location.reload();
                     }
-                    else alert("No se ha podido realizar su registro"); 
+                    else alert("No se ha podido publicar el evento"); 
 
                 }
-            });                     
-            
-        });
+            });         
+    });        
+
+    /*
+     * Guardar la edicion de la noticia
+     */
+    $("#editarNoticia").click(function(){
         
-    /*
-     * Editar datos del Sitio
-     */
-    $("#BeditarE").click(function(){
-
-            $("#editarEmpresa").css({display:'inline'});   
-            $("#campoConfio").css({display:'none'});
-            $("#slider_empresa").css({display:'none'});
-            $("#contenidoE").css({display:'none'});
-            //$("#Enom").val("julian");
-
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");            
+            var id_noticia = $("#formEditarNoticia").parent().parent().attr('id'); //obtengo el id del evento
+            
+            var datosform = new FormData(document.getElementById('formEditarNoticia'));            
+            datosform.append( "opcion", "guardaEdicionPublicacion");            
+            datosform.append( "tipo", "Noticia");            
+            datosform.append( "publicacion", id_noticia );            
 
             $.ajax({
-                url:'/natane3/estatico/php/opcionesEmpresa.php'
-                ,type:'POST'                    
-                ,data:{
-                    opcion:'editarE',                            
-                    empresa: id_url[1]                    
-                }
-                ,dataType:'JSON'
-                ,beforeSend:function(jqXHR, settings ){
+                url : '/natane3/estatico/php/opcionesAdministrador.php',
+                type : 'POST',
+                data : datosform,
+                processData : false, 
+                contentType : false, 
+                success: function(data,textStatus,jqXHR){                           
 
-                    $("#reload").css({visibility: 'visible',
-                                        opacity:'1',
-                                        position: 'fixed',
-                                        top: '200px',
-                                        right: '50px',
-                                        left: '50px',
-                                        width: 'auto',
-                                        margin: '0 auto'                                        
-                                    });   
-                    
-                    $(".reload-backdrop").css({ position: 'fixed',
-                                                top: '0',
-                                                right: '0',
-                                                bottom: '0',
-                                                left: '0',
-                                                zIindex: '99999',
-                                                background: '#000000',
-                                                opacity:'0.4'
-                                             });                  
-                   
-                }
-                ,success: function(data,textStatus,jqXHR){                           
-                    
-                        $("#reload").css({visibility: 'hidden'});   
-                        $(".reload-backdrop").css({visibility: 'hidden'});                    
-                    
-                        $("#EnomE").val(data.nombre);
-                        $("#EnitE").val(data.nit);
-                        $("#EdescE").val(data.desc);
-                        $("#EcityE").val(data.city);
-                        $("#EtelE").val(data.tel);                
-                        $("#EdirE").val(data.direc);
-                        $("#EmailE").val(data.mail);                        
-                        $("#Es_webE").val(data.s_web);
-                        $("#EfaceE").val(data.face);
-                        $("#EtwiE").val(data.twi);
-                        $("#EyouE").val(data.you);
-                        $("#Epass1E").val(data.pass);
-                      
-                }
-            });    
-            
-    });
-
-
-    /*
-     * Guardar edicion de los datos de la empresa
-
-    $("#guarda_edicion_empresa").click(function(){
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
-            
-                $.ajax({
-                    url:'/natane3/estatico/php/opcionesEmpresa.php'
-                    ,type:'POST'                    
-                    ,data:{
-                        opcion: 'guardar_edicionE',
-                        empresa: id_url[1],
-                        nombre: $("#EnomE").val(),
-                        descri: $("#EdescE").val(),
-                        nit: $("#EnitE").val(),
-                        city: $("#EcityE").val(),                    
-                        direc: $("#EdirE").val(),
-                        tele: $("#EtelE").val(),                    
-                        mail: $("#EmailE").val(),                    
-                        lat_lon: mapa.getPosicion(),
-                        s_web: $("#Es_webE").val(),
-                        face: $("#EfaceE").val(),
-                        twit: $("#EtwiE").val(),
-                        youtube: $("#EyouE").val(),
-                        pass: $("#Epass1E").val()
+                    if(/true/.test(data)) {                                
+                        alert("Noticia Editado  :D");
+                        location.reload();
                     }
-                    ,dataType:'JSON'
-                    ,success: function(data,textStatus,jqXHR){                           
+                    else alert("No se ha podido editar la noticia"); 
 
-                            if(/true/.test(data)) {                                
-                                alert("Cambios guardados.");
-                                document.location.reload();                                     
-                            }
-                            else alert("No se han podido realizar los cambios");                                                     
-                    }
-                });                        
-    });    
-*/        
-         
-       
-    /*
-     * Guarda el servicio creado
-     */
-    $("#guardarServicio").click(function(){
-
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
-
-            var datosform = new FormData(document.getElementById('formCrearServicio'));            
-            datosform.append( "opcion", "creaServicio");            
-            datosform.append( "empresa", id_url[1] );
-                        
-            $.ajax({
-               url:'/natane3/estatico/php/opcionesEmpresa.php',
-               type : 'POST',
-               data : datosform,
-               processData : false, 
-               contentType : false, 
-               success: function(data,textStatus,jqXHR){                           
-
-                        if(/true/.test(data)) {                                
-                            alert("Servicio creado :D");                                                                          
-                            document.location.reload();                                     
-                        }
-                        else alert("No se ha podido ingresar su servicio"); 
                 }
-            });                
+            });                                 
     });    
-     
-
+    
     /*
-     * Guardar edicion del servicio
-     */
-    $("#guardaEdicionServicio").click(function(){
-
-            var mi_url=document.location.href;
-            var id_url=mi_url.split("=");  
+     * Guardar la edicion del evento
+     */   
+    $("#editarEvento").click(function(){
+        
+            var id_evento = $("#formEditarEvento").parent().parent().attr('id'); //obtengo el id del evento
             
-            var id_servicio=$("#formEditarServicio").parent().parent().attr('id'); //obtengo el id de la experiencia
+            var datosform = new FormData(document.getElementById('formEditarEvento'));            
+            datosform.append( "opcion", "guardaEdicionPublicacion");            
+            datosform.append( "tipo", "Evento");            
+            datosform.append( "publicacion", id_evento );
 
-            var datosform = new FormData(document.getElementById('formEditarServicio'));            
-            datosform.append( "opcion", "guardaEdicionServicio");            
-            datosform.append( "servicio", id_servicio );
-            datosform.append( "empresa", id_url[1] );            
-                        
             $.ajax({
-               url:'/natane3/estatico/php/opcionesEmpresa.php',
-               type : 'POST',
-               data : datosform,
-               processData : false, 
-               contentType : false, 
-               success: function(data,textStatus,jqXHR){                           
+                url : '/natane3/estatico/php/opcionesAdministrador.php',
+                type : 'POST',
+                data : datosform,
+                processData : false, 
+                contentType : false, 
+                success: function(data,textStatus,jqXHR){                           
 
-                        if(/true/.test(data)) {                                
-                            alert("Servicio editado :D");                                                                          
-                            document.location.reload();                                     
-                        }
-                        else alert("No se ha podido editar su servicio"); 
+                    if(/true/.test(data)) {                                
+                        alert("Evento Editado  :D");
+                        location.reload();
+                    }
+                    else alert("No se ha podido editar el evento"); 
+
                 }
-            });                  
-    });
-
+            });         
+    });          
+    
 
 
 });

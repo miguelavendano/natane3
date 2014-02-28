@@ -24,7 +24,7 @@
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#listaNoticias" data-toggle="tab">Noticias</a></li>
                                         <li><a href="#listaEventos" data-toggle="tab">Eventos</a></li>
-                                        <li><a href="#3" data-toggle="tab">Estadisticas</a></li>
+                                        <li><a href="#Estadisticas" data-toggle="tab">Estadisticas</a></li>
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="listaNoticias">                                                  
@@ -35,10 +35,20 @@
                                             {eventos}                                            
                                         </div>   <!-- pestaña 2 -->
                                         
-                                        <div class="tab-pane" id="3"> 
-                                            <div id="estadisticasNodos"></div>
+                                        <div class="tab-pane" id="Estadisticas"> 
+                                            <div class="row-fluid">
+                                                <h4>Cantidad de nodos clasificados por tipo</h4>                                                
+                                                <div id="estadisticasNodos" class="span8"></div>
+                                            </div>                                            
+                                            <h5 id="conclusion-nodos"></h5>
                                             <br>
-                                            <div id="estadisticasRelaciones"></div>
+                                            
+                                            <div class="row-fluid">
+                                                <h4>Cantidad de relaciones clasificadas por tipo</h4>                                                
+                                                <div id="estadisticasRelaciones" class="span8"></div>
+                                            </div>
+                                            <h5 id="conclusion-relaciones"></h5>
+                                            <br>
                                         </div>   <!-- pestaña 3 -->                                        
 
                                     </div>

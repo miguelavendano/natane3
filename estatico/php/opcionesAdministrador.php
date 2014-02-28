@@ -14,264 +14,123 @@ if(isset($_POST['opcion'])){
     $opcion=$_POST['opcion'];
             
     switch ($opcion){
-
-        // Registro de un Usuario
-        case "registrarE":                      
-            $nodo_empresa = new Empresa();
-            $nodo_empresa->nombre = $_POST['RnomE'];            
-            //$nodo_empresa->imagen = $img;
-            $nodo_empresa->nit = $_POST['RnitE'];
-            $nodo_empresa->descripcion = $_POST['RdesE'];
-            $nodo_empresa->ciudad = $_POST['RcityE'];
-            $nodo_empresa->telefono = $_POST['RtelE'];
-            $nodo_empresa->direccion = $_POST['RdirE'];   
-            $nodo_empresa->latitud = "4.15";
-            $nodo_empresa->longitud = "-73.64";
-            $nodo_empresa->correo = $_POST['RmailE'];
-            $nodo_empresa->sitio_web = $_POST['RwebE'];    
-            $nodo_empresa->facebook = $_POST['RfaceE'];
-            $nodo_empresa->twitter = $_POST['RtwiE'];
-            $nodo_empresa->youtube = $_POST['RyouE'];
-            //$nodo_empresa->contraseña = $_SESSION['clave'];
-            $nodo_empresa->type = 'Empresa';
-            ModelEmpresa::crearNodoEmpresa($nodo_empresa); //crea el nodo del Usuario 
-                        
-            $band=$nodo_empresa->id;  //obtengo el id del nodo creado
-            
-            
-            ModeloRelaciones::crearRelacion($_SESSION['id'], $nodo_empresa->id, "Crea");   //crea la relacion entre el usuario y la empresa que ha visitado                                   
-
-            
-            $upload_folder ='../../estatico/imagenes/';
-            
-            foreach($_FILES['img-empresa']['error'] as $key => $error){                
-                if($error == UPLOAD_ERR_OK){                    
-                    $nombre_archivo = $_FILES['img-empresa']['name'][$key];
-                    $tmp_archivo = $_FILES['img-empresa']['tmp_name'][$key];            
-                    //$tipo_archivo = $_FILES['foto_perfil']['type'][$key];
-                    //$tamano_archivo = $_FILES['foto_perfil']['size'][$key];
-
-                    $nomFotoPerfil = $nodo_empresa->id.'_'.$nombre_archivo;
-                    
-                    move_uploaded_file($tmp_archivo, $upload_folder.$nomFotoPerfil);   //guarda la imagen                    
-                    
-                    ModelEmpresa::editar_empresa($nodo_empresa->id, "imagen", $nomFotoPerfil);                                         
-                }
-            }
-            
-            $band=$band." true";
-            
-        break;
-
-        case "editarE":
-            
-            $modelempresa = new ModelEmpresa();            
-            $query = "START n=node(".$_POST['empresa'].") RETURN n";                        
-            $resultado = $modelempresa->get_empresa($query);
-            
-            $band = array(
-                "nombre"=> $resultado[0]->nombre,
-                "nit"=> $resultado[0]->nit,
-                "desc"=> $resultado[0]->descripcion,
-                "city"=> $resultado[0]->ciudad,
-                "tel"=> $resultado[0]->telefono,
-                "direc"=> $resultado[0]->direccion,
-                "lat"=> $resultado[0]->latitud,
-                "lon"=> $resultado[0]->longitud,
-                "mail"=> $resultado[0]->correo,
-                "s_web"=> $resultado[0]->sitio_web,
-                "face"=> $resultado[0]->facebook,
-                "twi"=> $resultado[0]->twitter,
-                "you"=> $resultado[0]->youtube,
-                "pass"=> $resultado[0]->contraseña,
-                "imagen"=> $resultado[0]->imagen,
-            );
-                        
-           $band = json_encode($band);
-            
-        break;    
-    
-        case "guardar_edicionE":  
-                        
-            ModelEmpresa::editar_empresa($_POST['empresa'], "nombre", $_POST['nombre']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "nit", $_POST['nit']);            
-            ModelEmpresa::editar_empresa($_POST['empresa'], "descripcion", $_POST['descri']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "ciudad", $_POST['city']);            
-            ModelEmpresa::editar_empresa($_POST['empresa'], "direccion",$_POST['direc']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "telefono", $_POST['tele']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "correo", $_POST['mail']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "sitio_web", $_POST['s_web']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "facebook", $_POST['face']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "twitter", $_POST['twit']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "youtube", $_POST['youtube']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "contraseña", $_POST['pass']);
-            //ModelEmpresa::editar_empresa($_POST['usuario'], "imagen", );    
-            
-            if(count($_POST['lat_lon'])>0){
-                ModelEmpresa::editar_empresa($_POST['empresa'], "latitud", $_POST['lat_lon']['latitud']);
-                ModelEmpresa::editar_empresa($_POST['empresa'], "longitud", $_POST['lat_lon']['longitud']);
-            }
-            
-            $band="true";
-            
-        break;    
-      
-        case "editaExpEmp":                       
-            
-            $modelexperiencia = new ModelExperiencia();
-            $query = "START n=node(".$_POST['experiencia'].") RETURN n";                        
-            $resultado = $modelexperiencia->get_experiencias($query);            
-            
-            $info = array(
-                "nombre"=> $resultado[0]->nombre,
-                "descripcion"=> $resultado[0]->descripcion
-            );
-                                    
-            $lista_imgs = $modelexperiencia->get_imagenes_experiencia($_POST['experiencia']);            
-            //inserto el array de imagenes al array de las propiedades de la  experiencia
-            array_push($info, $lista_imgs);                                                    
-            
-            //cambio el nombre que asigna la insertar el array de imagenes
-            $info["imagenes"] = $info["0"];
-            unset($info["0"]);
-            
-            //combierto el array en un json
-            $band = json_encode($info);           
-            
-        break;    
-
-        case "guardar_edicionExpEmp":                                                                      
-
-            ModelExperiencia::editar_experiencia($_POST['servicio'], "nombre", $_POST['titulo']);
-            ModelExperiencia::editar_experiencia($_POST['servicio'], "descripcion", $_POST['descripcion']);            
-            $band="true";
-            
-        break;        
-
-        case "eliminaExpEmp":
-            
-            $etiquetado=ModeloRelaciones::consultaNodosEtiquetadosEnRelacion($_POST['experiencia']); 
-            $tipo_relacion="";
-            
-            foreach($etiquetado as $row){
-                    if($row==$_POST['empresa']){
-                        $tipo_relacion="etiqueta";
-                    }
-                }
-                
-            if($tipo_relacion==""){
-
-                // obtengo los id de las relaciones Experiencia-Sitio (Asociada), si existen las elimino
-                $ids_relacionImgEmp = ModeloRelaciones::get_id_relaciones($_POST['experiencia'],"Asociada");                
-                if($ids_relacionImgEmp){
-                    //elimino la relacion entre la experiencia y las empresas
-                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgEmp);    
-                }
-                
-                // obtengo los id de las relaciones Img-Experiencia (Img), si existen las elimino                
-                $ids_relacionImgExp = ModeloRelaciones::get_id_relaciones($_POST['experiencia'],"Img");
-
-                if($ids_relacionImgExp){
-
-                    // obtengo los id de los nodos vinculados al nodo dado segun su relacion
-                    $ids_nodoImgExp = ModeloRelaciones::get_ids_nodos_relacion($_POST['experiencia'],"Img");
-
-                    //reviso si las imagenes tienen comentarios, si es asi los elimina
-                    foreach($ids_nodoImgExp as $row){                        
-
-                        // obtengo los id de las relaciones Img-Comentario (Sobre), si existen las elimino                
-                        $ids_relacionImgComen = ModeloRelaciones::get_id_relaciones($row,"Sobre");                        
-
-                        if($ids_relacionImgComen){                            
-                            //elimino la relacion entre la imagen y sus comentarios
-                            ModeloRelaciones::eliminar_relaciones($ids_relacionImgComen);                        
-                            // obtengo los id de los nodos vinculados al nodo dado segun su relacion
-                            $ids_nodoImgComen = ModeloRelaciones::get_ids_nodos_relacion($row,"Sobre");
-                            //elimino las imagenes de la experiencia
-                            ModeloRelaciones::eliminar_nodos($ids_nodoImgComen);                        
-                        }
-                    }
-                    
-                    //elimino la relacion entre la experiencia y las imagenes                    
-                    ModeloRelaciones::eliminar_relaciones($ids_relacionImgExp);                        
-                    //elimino las imagenes de la experiencia
-                    ModeloRelaciones::eliminar_nodos($ids_nodoImgExp);
-                }
-                
-                // obtengo el id de la relacion Autor-Experiencia (Comparte), si existe la elimino
-                $id_relacionUserExp = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['experiencia'], 'Comparte');
-                
-                if($id_relacionUserExp){
-                    ModeloRelaciones::eliminarRelacion($id_relacionUserExp);
-                    ModelExperiencia::eliminar_experiencia($_POST['experiencia']); //elimino el nodo de la experiencia                                                       
-                }                
-                                
-            }
-            elseif($tipo_relacion=="etiqueta"){  //pregunta si es una Etiqueta
-                
-                $idRelacion = ModeloRelaciones::consultarIDRelacion($_POST['experiencia'], $_POST['empresa'], "Etiqueta");  //consulto el ID de la relacion
-                ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa                               
-                //$band="etiqueta";
-            }    
            
+        case "creaNoticia":
+            
+            $id_admin='16708';
+            
+            $nodo_publicacion = new Publicacion();
+            $nodo_publicacion->nombre = $_POST['nomNoti'];
+            $nodo_publicacion->descripcion = $_POST['descNoti'];
+            $nodo_publicacion->fecha = date("d")." de ".date("F")." de ".date("Y")." a la(s) ".date("H:i");
+            $nodo_publicacion->type = 'Noticia';
+            ModelPublicacion::crearNodoNoticia($nodo_publicacion);
+
+            $id_noticia = $nodo_publicacion->id;  //obtengo el id del nodo creado                                    
+            ModeloRelaciones::crearRelacion($id_admin, $id_noticia, "Informa");   //crea la relacion entre el admin y la noticia
+            
+            //guarda la imagen de la noticia
+            $upload_folder ='../../estatico/imagenes/';
+            foreach($_FILES['imagen_noticia']['error'] as $key => $error){                
+                if($error == UPLOAD_ERR_OK){                    
+                    //alamaceno la imagen
+                    $nombre_archivo = $_FILES["imagen_noticia"]['name'][$key];
+                    $tmp_archivo = $_FILES["imagen_noticia"]['tmp_name'][$key];            
+
+                    //creo el nombre unico para la imagen
+                    $nomImgNoticia = $id_admin.'_'.$id_noticia.'_'.$nombre_archivo;
+                    
+                    ModelPublicacion::editar_publicacion($id_noticia, 'imagen', $nomImgNoticia);
+                    //almaceno la imagen en la carpeta del servidor                                        
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgNoticia);   //guarda la imagen                    
+                }
+            }
+            
             $band="true";
             
         break;        
         
-        case "creaServicio":
+        case "creaEvento":
             
-            //echo $_POST['precioSer'];
-            $nodo_servicio = new Servicio();
-            $nodo_servicio->nombre = $_POST['nomSer'];
-            $nodo_servicio->descripcion = $_POST['descSer'];
-            $nodo_servicio->type = 'Servicio';            
-            ModelServicio::crearNodoServicio($nodo_servicio);
+            $id_admin='16708';
             
-            $id_servicio = $nodo_servicio->id;  //obtengo el id del nodo creado                                    
-            ModeloRelaciones::crearRelacion($_POST['empresa'], $id_servicio, "Ofrece");   //crea la relacion entre la empresa y el servicio
+            $nodo_publicacion = new Publicacion();
+            $nodo_publicacion->nombre = $_POST['nomEve'];
+            $nodo_publicacion->descripcion = $_POST['descEve'];
+            $nodo_publicacion->fecha_evento = $_POST['fechaEve'];
+            $nodo_publicacion->hora_evento = $_POST['horaEve'];
+            $nodo_publicacion->fecha = date("d")." de ".date("F")." de ".date("Y")." a la(s) ".date("H:i");
+            $nodo_publicacion->type = 'Evento';
+            ModelPublicacion::crearNodoEvento($nodo_publicacion);
+
+            $id_evento = $nodo_publicacion->id;  //obtengo el id del nodo creado                                    
+            ModeloRelaciones::crearRelacion($id_admin, $id_evento, "Informa");   //crea la relacion entre el admin y la noticia
             
-            $cont=1;
-            //guarda la imagen del servicio
+            //guarda la imagen de la noticia
             $upload_folder ='../../estatico/imagenes/';
-            foreach($_FILES['imagen_servicio']['error'] as $key => $error){                
+            foreach($_FILES['imagen_evento']['error'] as $key => $error){                
                 if($error == UPLOAD_ERR_OK){                    
                     //alamaceno la imagen
-                    $nombre_archivo = $_FILES["imagen_servicio"]['name'][$key];
-                    $tmp_archivo = $_FILES["imagen_servicio"]['tmp_name'][$key];            
+                    $nombre_archivo = $_FILES["imagen_evento"]['name'][$key];
+                    $tmp_archivo = $_FILES["imagen_evento"]['tmp_name'][$key];            
 
                     //creo el nombre unico para la imagen
-                    $nomImgServiEmp = $_POST['empresa'].'_'.$id_servicio.'_'.$cont.'_'.$nombre_archivo;
+                    $nomImgEvento = $id_admin.'_'.$id_evento.'_'.$nombre_archivo;
                     
-                    //crea el nodo de cada una de las imagenes
-                    $nodo_imagen = new Imagen();
-                    $nodo_imagen->nombre = $nomImgServiEmp;
-                    $nodo_imagen->descripcion = "";
-                    $nodo_imagen->type = 'Imagen';  
-                    ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
-
-                    $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
-                    ModeloRelaciones::crearRelacion($id_servicio, $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
-                    
+                    ModelPublicacion::editar_publicacion($id_evento, 'imagen', $nomImgEvento);
                     //almaceno la imagen en la carpeta del servidor                                        
-                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgServiEmp);   //guarda la imagen                    
-                    $cont++;
+                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgEvento);   //guarda la imagen                    
                 }
             }
             
             $band="true";
             
         break;        
+        
     
-        case "editarServicio":                       
+        case "eliminaPublicacion":
+                
+            $id_admin='16708';
+            // obtengo el id de la relacion Administrador-Publicacion (Informa)
+            $id_relacionAdminPub = ModeloRelaciones::consultarIDRelacion($id_admin, $_POST['publicacion'], 'Informa');           
+
+            if($id_relacionAdminPub){
+                ModeloRelaciones::eliminarRelacion($id_relacionAdminPub);                                
+                ModelPublicacion::eliminar_publicacion($_POST['publicacion']);
+                $band="true";
+            }                                
             
-            $modelservicio = new ModelServicio();
-            $query = "START n=node(".$_POST['servicio'].") RETURN n";                        
-            $resultado = $modelservicio->get_servicio($query);            
+        break;                
+    
+        case "datosEdicionPublicacion":                       
             
-            $band = array(
-                "nombre"=> $resultado[0]->nombre,
-                "descripcion"=> $resultado[0]->descripcion
-            );
+
+            $query = "START n=node(".$_POST['publicacion'].") RETURN n"; 
+            
+            if($_POST['tipo']=='Noticia'){                
+                
+                $resultado = ModelPublicacion::get_noticias($query);    
+                
+                $band = array(
+                    "tipo"=> $resultado[0]->type,
+                    "nombre"=> $resultado[0]->nombre,
+                    "descripcion"=> $resultado[0]->descripcion
+                );                
+                
+                
+            }else if($_POST['tipo']=='Evento'){
+                
+                $resultado = ModelPublicacion::get_eventos($query);
+
+                $band = array(
+                    "tipo"=> $resultado[0]->type,
+                    "nombre"=> $resultado[0]->nombre,
+                    "descripcion"=> $resultado[0]->descripcion,
+                    "fecha"=> $resultado[0]->fecha_evento,
+                    "hora"=> $resultado[0]->hora_evento,
+                );                                
+            }
+            
             /*                        
             $lista_imgs = $modelexperiencia->get_imagenes_experiencia($_POST['experiencia']);            
             //inserto el array de imagenes al array de las propiedades de la  experiencia
@@ -282,80 +141,70 @@ if(isset($_POST['opcion'])){
             unset($band["0"]);
             */
             //combierto el array en un json
-            $band = json_encode($band);
-           
+            $band = json_encode($band);           
             
         break;    
 
-        case "guardaEdicionServicio":                                                                      
+        case "guardaEdicionPublicacion":                                                                      
 
-            ModelServicio::editar_servicio($_POST['servicio'], "nombre", $_POST['EditNomSer']);
-            ModelServicio::editar_servicio($_POST['servicio'], "descripcion", $_POST['EditDescSer']);            
-            
-            $cont=1;
-            //guarda la imagen del servicio
-            $upload_folder ='../../estatico/imagenes/';
-            foreach($_FILES['imagen_edit_servicio']['error'] as $key => $error){                
-                if($error == UPLOAD_ERR_OK){                    
-                    //alamaceno la imagen
-                    $nombre_archivo = $_FILES["imagen_edit_servicio"]['name'][$key];
-                    $tmp_archivo = $_FILES["imagen_edit_servicio"]['tmp_name'][$key];            
+            if($_POST['tipo']=='Noticia'){                
+                
+                ModelPublicacion::editar_publicacion($_POST['publicacion'], "nombre", $_POST['EnomNoti']);
+                ModelPublicacion::editar_publicacion($_POST['publicacion'], "descripcion", $_POST['EdescNoti']);                            
+                
+                if($_FILES["Eimagen_noticia"]!=""){
 
-                    //creo el nombre unico para la imagen
-                    $nomImgServiEmp = $_POST['empresa'].'_'.$_POST['servicio'].'_'.$cont.'_'.$nombre_archivo;
-                    
-                    //crea el nodo de cada una de las imagenes
-                    $nodo_imagen = new Imagen();
-                    $nodo_imagen->nombre = $nomImgServiEmp;
-                    $nodo_imagen->descripcion = "";
-                    $nodo_imagen->type = 'Imagen';  
-                    ModelImagen::crearNodoImagen($nodo_imagen);  //crea el nodo de la imagen
+                    $id_admin='16708';                    
+                    //guarda la imagen de la noticia
+                    $upload_folder ='../../estatico/imagenes/';
+                    foreach($_FILES['Eimagen_noticia']['error'] as $key => $error){                
+                        if($error == UPLOAD_ERR_OK){                    
+                            //alamaceno la imagen
+                            $nombre_archivo = $_FILES["Eimagen_noticia"]['name'][$key];
+                            $tmp_archivo = $_FILES["Eimagen_noticia"]['tmp_name'][$key];            
 
-                    $id_img = $nodo_imagen->id;  //obtengo el id del nodo creado                   
-                    ModeloRelaciones::crearRelacion($_POST['servicio'], $id_img, "Img");   //crea la relacion entre la experiencia y la imagen
-                    
-                    //almaceno la imagen en la carpeta del servidor                                        
-                    move_uploaded_file($tmp_archivo, $upload_folder.$nomImgServiEmp);   //guarda la imagen                    
-                    $cont++;
-                }
-            }
-            
+                            //creo el nombre unico para la imagen
+                            $nomImgNoticia = $id_admin.'_'.$_POST['publicacion'].'_'.$nombre_archivo;
+
+                            ModelPublicacion::editar_publicacion($_POST['publicacion'], 'imagen', $nomImgNoticia);
+                            //almaceno la imagen en la carpeta del servidor                                        
+                            move_uploaded_file($tmp_archivo, $upload_folder.$nomImgNoticia);   //guarda la imagen                    
+                        }
+                    }   
+                }                
+                
+            }else if($_POST['tipo']=='Evento'){
+                
+                ModelPublicacion::editar_publicacion($_POST['publicacion'], "nombre", $_POST['EnomEve']);
+                ModelPublicacion::editar_publicacion($_POST['publicacion'], "descripcion", $_POST['EdescEve']);                            
+                ModelPublicacion::editar_publicacion($_POST['publicacion'], "fecha_evento", $_POST['EfechaEve']);
+                ModelPublicacion::editar_publicacion($_POST['publicacion'], "hora_evento", $_POST['EhoraEve']);
+                
+                if($_FILES["Eimagen_evento"]!=""){
+
+                    $id_admin='16708';                    
+                    //guarda la imagen de la noticia
+                    $upload_folder ='../../estatico/imagenes/';
+                    foreach($_FILES['Eimagen_evento']['error'] as $key => $error){                
+                        if($error == UPLOAD_ERR_OK){                    
+                            //alamaceno la imagen
+                            $nombre_archivo = $_FILES["Eimagen_evento"]['name'][$key];
+                            $tmp_archivo = $_FILES["Eimagen_evento"]['tmp_name'][$key];            
+
+                            //creo el nombre unico para la imagen
+                            $nomImgNoticia = $id_admin.'_'.$_POST['publicacion'].'_'.$nombre_archivo;
+
+                            ModelPublicacion::editar_publicacion($_POST['publicacion'], 'imagen', $nomImgNoticia);
+                            //almaceno la imagen en la carpeta del servidor                                        
+                            move_uploaded_file($tmp_archivo, $upload_folder.$nomImgNoticia);   //guarda la imagen                    
+                        }
+                    }   
+                }                                
+            }            
             
             $band="true";
             
-        break;      
-    
-        case "eliminarServicio":
-
-                // obtengo los id de las imagenes del servicio
-                $ids_nodoImgSer = ModeloRelaciones::get_ids_nodos_relacion($_POST['servicio'],"Img");
-
-                //reviso si las imagenes tienen comentarios, si es asi los elimina
-                foreach($ids_nodoImgSer as $row){                        
-
-                    // obtengo los id de las relaciones Img-Comentario (Sobre), si existen las elimino                
-                    $ids_relacionImgSer = ModeloRelaciones::get_id_relaciones($row,"Img");                        
-
-                    if($ids_relacionImgSer){                            
-                        //elimino la relacion entre el servicio y su imagen
-                        ModeloRelaciones::eliminar_relaciones($ids_relacionImgSer);                        
-                        // obtengo los id las imagenes del servicio
-                        $ids_nodoImgComen = ModeloRelaciones::get_ids_nodos_relacion($row,"Img");
-                        //elimino las imagenes del servicio
-                        ModeloRelaciones::eliminar_nodos($ids_nodoImgComen);                        
-                    }
-                }            
-                
-                // obtengo el id de la relacion Empresa-Servicio (Ofrece)
-                $id_relacionEmpSer = ModeloRelaciones::consultarIDRelacion($_POST['empresa'], $_POST['servicio'], 'Ofrece');           
-                
-                if($id_relacionEmpSer){
-                    ModeloRelaciones::eliminarRelacion($id_relacionEmpSer);                                
-                    ModelServicio::eliminarServicio($_POST['servicio']);
-                    $band="true";
-                }                                
-            
-        break; 
+        break;              
         
         case "EstadisticasNodos":
             

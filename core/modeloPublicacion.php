@@ -118,7 +118,7 @@ class ModelPublicacion{
                     $publicacion->nombre = $row['']->getProperty('nombre');
                     $publicacion->descripcion = $row['']->getProperty('descripcion');
                     $publicacion->imagen = $row['']->getProperty('imagen');
-                    //$servicio->type = $row['']->getProperty('type');                    
+                    $publicacion->type = $row['']->getProperty('type');                    
                     
 //                    $query="START n=node(".$servicio->id.") MATCH n-[:Img]->i RETURN i.nombre";                     
 //                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
@@ -159,6 +159,7 @@ class ModelPublicacion{
                     $publicacion->imagen = $row['']->getProperty('imagen');
                     $publicacion->fecha_evento = $row['']->getProperty('fecha_evento');
                     $publicacion->hora_evento = $row['']->getProperty('hora_evento');
+                    $publicacion->type = $row['']->getProperty('type');                    
                     
 //                    $query="START n=node(".$servicio->id.") MATCH n-[:Img]->i RETURN i.nombre";                     
 //                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
