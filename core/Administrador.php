@@ -14,6 +14,7 @@ class Administrador{
 //	public $fecha_nacimiento = '';
 	public $correo	= '';
 	public $password = '';
+        public $nick = '';
         public $type = '';
 	public $node = null;
         

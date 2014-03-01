@@ -12,6 +12,9 @@
         public $head;
         public $slider;
         public $ferro;
+        public $noticias;
+        public $eventos;
+        public $usuarios;
         public $elemento_ferro;
         public $modal;
         public $diccionario;
@@ -30,6 +33,9 @@
             $this->head = file_get_contents('../plantillas/generales/head.html');    
             $this->slider = file_get_contents('../plantillas/index/slider.html');
             $this->ferro = file_get_contents('../plantillas/generales/ferrocarril.html');
+            $this->noticias = file_get_contents('../plantillas/index/listaNoticias.html');
+            $this->eventos = file_get_contents('../plantillas/index/listaEventos.html');
+            $this->usuarios = file_get_contents('../plantillas/index/listaUsuarios.html');
             $this->elemento_ferro=file_get_contents('../plantillas/generales/elemento_ferro.html');
             $this->modal = file_get_contents('../plantillas/generales/barraModal.html');         
    	    $this->img_principal ='
@@ -59,15 +65,18 @@
             
             
             $this->diccionario = array('slider'=>$this->slider,  
-                                'ferrocarril'=>$this->ferro,
-                                'modales'=>$this->modal);   
+                                        'ferrocarril'=>$this->ferro,
+                                        'listaNoticias'=>$this->noticias,
+                                        'listaEventos'=>$this->eventos,
+                                        'listaUsuarios'=>$this->usuarios,                
+                                        'modales'=>$this->modal);   
          
 
             $this->diccionario2 = array('metas'=>$this->metas,
-                                'links'=>$this->links,  
-                                'head'=>$this->head,
-                                'contenido'=>$this->file,
-                                'opciones_login'=>$this->headlogin);              
+                                        'links'=>$this->links,  
+                                        'head'=>$this->head,
+                                        'contenido'=>$this->file,
+                                        'opciones_login'=>$this->headlogin);              
             
 
         }
@@ -75,15 +84,18 @@
         public function actualizar_diccionary(){
             
             $this->diccionario = array('slider'=>$this->slider,  
-                                'ferrocarril'=>$this->ferro,
-                                'modales'=>$this->modal);   
+                                        'ferrocarril'=>$this->ferro,
+                                        'listaNoticias'=>$this->noticias,
+                                        'listaEventos'=>$this->eventos,
+                                        'listaUsuarios'=>$this->usuarios,                 
+                                        'modales'=>$this->modal);   
          
 
             $this->diccionario2 = array('metas'=>$this->metas,
-                                'links'=>$this->links,  
-                                'head'=>$this->head,
-                                'contenido'=>$this->file,
-                                'opciones_login'=>$this->headlogin);                           
+                                        'links'=>$this->links,  
+                                        'head'=>$this->head,
+                                        'contenido'=>$this->file,
+                                        'opciones_login'=>$this->headlogin);                           
             
             
             
@@ -124,6 +136,7 @@
 
         }
         
+        
         public function refactory_ferrocarril(array $datos){  // contruye el ferrocarril
             
             $this->actualizar_diccionary();  // actualiza los valores del diccionarios de datos
@@ -148,16 +161,94 @@
             // termina de ensamblar los elementos del ferrocarril con la estructura general del mismo            
             $this->ferro = str_ireplace("{contenido_ferro}", $elementos, $this->ferro);
             
-        }            
+        }   
+        
+        
+        public function refactory_noticias($datos){
+            
+            $misnoticias="";     
+            $aux="";                        
+            
+            for ($i=0; $i<count($datos); $i++){  
+                                      
+                //$global = new Global_var();
+                
+                $aux = $this->noticias;                  
+                //$aux = str_ireplace("{id_noticia}", $datos[$i]->id, $aux);                
+                //$aux = str_ireplace("{url}", $global->url_noticia, $aux);                 
+                $aux = str_ireplace("{imagen}", $datos[$i]->imagen, $aux);                                              
+                $aux = str_ireplace("{titular}", $datos[$i]->nombre, $aux);                
+                
+                $misnoticias = $misnoticias.$aux;                 
+            }
+            
+            $this->noticias = $misnoticias;            
+            $this->noticias = str_ireplace("{listaNoticias}", $misnoticias, $this->noticias);            
+            
+        }        
+        
+        
+        public function refactory_eventos($datos){
+                        
+            $miseventos="";     
+            $aux="";                        
+            
+            for ($i=0; $i<count($datos); $i++){  
+                                      
+                //$global = new Global_var();
+                
+                $aux = $this->eventos;                  
+                //$aux = str_ireplace("{id_noticia}", $datos[$i]->id, $aux);                
+                //$aux = str_ireplace("{url}", $global->url_noticia, $aux);                 
+                $aux = str_ireplace("{imagen}", $datos[$i]->imagen, $aux);                                              
+                $aux = str_ireplace("{nombre}", $datos[$i]->nombre, $aux);                
+                
+                $miseventos = $miseventos.$aux;                 
+            }
+            
+            $this->eventos = $miseventos;            
+            $this->eventos = str_ireplace("{listaNoticias}", $miseventos, $this->eventos);            
+            
+        }                
 
+        public function refactory_usuarios($datos){
+                        
+            $lusuarios = "";            
+            $aux="";
+            
+            for($i=0; count($datos); $i++){                
+                
+                $lusuarios .= '<div class="row-fluid">';                            
+                $c=0;
+                do{ 
+                    $valor=array_shift($datos);
+                   
+                    $global = new Global_var();
+                    $aux = $this->usuarios;    
+                    $aux = str_ireplace('{id}', $valor->id, $aux);
+                    $aux = str_ireplace('{url}', $global->url_usuario, $aux);
+                    $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                    $aux = str_ireplace('{nick}', $valor->nick, $aux);
+                    $lusuarios .= $aux;
+                    $c++;
+                }while((count($datos)!=0)&& $c<3);                
+                
+                $lusuarios .= '</div>';                
+            }            
+            
+            //echo $lusuarios;
+            $this->usuarios = $lusuarios;            
+            $this->usuarios = str_ireplace("{listaUsuarios}", $lusuarios, $this->usuarios);            
+            //$this->actualizar_diccionary();            
+            
+        }        
+        
         
         public function refactory_index(){ // construye el contenido del index          
             
            $this->actualizar_diccionary();
-            foreach ($this->diccionario as $clave=>$valor){
-                
-                $this->file = str_ireplace('{'.$clave.'}', $valor, $this->file);
-                
+            foreach ($this->diccionario as $clave=>$valor){                
+                $this->file = str_ireplace('{'.$clave.'}', $valor, $this->file);                
             }
         }
         

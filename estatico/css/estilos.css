@@ -749,7 +749,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 .publicacion-index .titulo{
-    margin-top: 12px;
+    margin: 12px 8px 0px 0px;
     text-align: left;
 }
 

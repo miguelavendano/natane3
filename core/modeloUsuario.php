@@ -215,6 +215,79 @@ class ModelUsuarios{
             
         }
         
+
+        public function aletorio($cant){                       
+            
+            $vector = array();            
+                                
+            while (count($vector)<$cant){
+                
+                $n = rand( 0 ,$cant);
+                                              
+                if(in_array($n, $vector)){
+                                        
+                }else{
+                    array_push($vector, $n); 
+                  
+                }   
+            }           
+            
+            return $vector;
+        } 
+        
+        public function get_usuarios_aleatorios($queryString,$cant){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $idnodos = array();            
+            
+            foreach ($result as $row){
+            
+                array_push($idnodos, $row['']->getId());                
+            }                
+            
+            $nodale='';
+            
+            $comparativo = array();
+
+            for($i=0; count($comparativo)<$cant; $i++){
+                
+                $n = rand(0,count($idnodos)-1);
+                
+                if(in_array($n, $comparativo)){
+                    
+                }else{
+                    $nodale.=$idnodos[$n];
+                    array_push($comparativo, $n);
+                    if(count($comparativo)<$cant){
+                        $nodale.=",";
+                    }                        
+                }
+            }
+
+            
+            $losconsulta = "START n=node(".$nodale.") RETURN n";
+            $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
+            $respuesta = $consul->getResultSet();       
+            
+            $array = array();            
+            
+            if($result){
+                foreach($respuesta as $row) {
+                    $usuario = new Usuario();
+                    $usuario->id = $row['']->getId();                    
+                    $usuario->nick = $row['']->getProperty('nick');
+                    $usuario->imagen = $row['']->getProperty('imagen');
+                    $usuario->nombre = $row['']->getProperty('nombre');
+                    $usuario->apellido = $row['']->getProperty('apellido');                    
+                    array_push($array, $usuario);
+                }
+                return $array;
+            }            
+            
+        }
+
         
         public function get_amigos($queryString){
             
