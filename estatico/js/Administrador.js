@@ -21,10 +21,18 @@
                                 var vector = [parseInt(data.usuarios), parseInt(data.sitios), parseInt(data.empresas), parseInt(data.experiencias), parseInt(data.servicios), parseInt(data.imagenes), parseInt(data.comentarios), parseInt(data.noticias), parseInt(data.eventos)];
                                 var contenedor="estadisticasNodos";   //id div contenedor
                                 var etiquetas = ['Usuarios', 'Sitios', 'Empresas', 'Experiencias', 'Servicios', 'Imagenes', 'Comentarios', 'Noticias', 'Eventos'];        
-                                
-                                var total = parseInt(data.usuarios)+parseInt(data.sitios)+parseInt(data.empresas)+parseInt(data.experiencias)+parseInt(data.servicios)+parseInt(data.imagenes)+parseInt(data.comentarios)+parseInt(data.noticias)+parseInt(data.eventos);                                
+
+                                var total = parseInt(data.usuarios)+parseInt(data.sitios)+parseInt(data.empresas)+parseInt(data.experiencias)+parseInt(data.servicios)+parseInt(data.imagenes)+parseInt(data.comentarios)+parseInt(data.noticias)+parseInt(data.eventos);
                                 $("#conclusion-nodos").html("EL total de nodos consultados fue: <span>" +total+"</span>");
                                 
+                                $("#Tusu").html(data.usuarios);
+                                $("#Tsiti").html(data.sitios);
+                                $("#Temp").html(data.empresas);
+                                $("#Texp").html(data.experiencias);
+                                $("#Tser").html(data.servicios);
+                                $("#Tima").html(data.imagenes);
+                                $("#Tcome").html(data.comentarios);
+                                $("#Tnodos").html(total);
 
                                 var grafica = new Highcharts.Chart({
                                             chart: {

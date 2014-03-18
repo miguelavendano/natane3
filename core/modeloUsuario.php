@@ -267,6 +267,7 @@ class ModelUsuarios{
             }
 
             
+            //$nodale="2,279,61,62,17332,19050,238,240,313";
             $losconsulta = "START n=node(".$nodale.") RETURN n";
             $consul = new Cypher\Query(Neo4Play::client(), $losconsulta);
             $respuesta = $consul->getResultSet();       
