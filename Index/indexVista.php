@@ -211,6 +211,7 @@
             
         }                
 
+        
         public function refactory_usuarios($datos){
                         
             $lusuarios = "";            
@@ -239,8 +240,7 @@
             //echo $lusuarios;
             $this->usuarios = $lusuarios;            
             $this->usuarios = str_ireplace("{listaUsuarios}", $lusuarios, $this->usuarios);            
-            //$this->actualizar_diccionary();            
-            
+            //$this->actualizar_diccionary();                        
         }        
         
         

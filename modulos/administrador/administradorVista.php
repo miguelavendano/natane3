@@ -13,6 +13,8 @@
 
         public $admin;
         public $editar;
+        public $populares;
+        public $comparten;
         public $noticias;
         public $eventos;
         public $perfil;
@@ -35,6 +37,8 @@
             $this->perfil = file_get_contents('../../plantillas/administrador/perfilAdministrador.html');
             $this->admin = file_get_contents('../../plantillas/administrador/datos_usuario.html');
             $this->editar = file_get_contents('../../plantillas/administrador/editarAdministrador.html');
+            $this->populares = file_get_contents('../../plantillas/index/listaUsuarios.html');
+            $this->comparten = file_get_contents('../../plantillas/index/listaUsuarios.html');
             $this->noticias = file_get_contents('../../plantillas/administrador/noticias.html');            
             $this->eventos = file_get_contents('../../plantillas/administrador/eventos.html');                        
             $this->creaSitio = file_get_contents('../../plantillas/sitios/registrarSitio.html');
@@ -73,6 +77,8 @@
                                         'editarUsuario'=>$this->editar,
                                         'noticias'=>$this->noticias,
                                         'eventos'=>$this->eventos,
+                                        'listaPopulares'=>$this->populares,
+                                        'listaComparten'=>$this->comparten,
                                         'registrarSitio'=>$this->creaSitio,
                                         'registrarEmpresa'=>$this->creaEmpre                    
                                         );
@@ -99,6 +105,9 @@
             $this->dic_contenido['editarUsuario'] = $this->editar;
             $this->dic_contenido['noticias'] = $this->noticias;
             $this->dic_contenido['eventos'] = $this->eventos;
+            
+            $this->dic_contenido['listaPopulares'] = $this->populares;
+            $this->dic_contenido['listaComparten'] = $this->comparten;
 
             $this->dic_contenido['registrarSitio'] = $this->creaSitio;
             $this->dic_contenido['registrarEmpresa'] = $this->creaEmpre;       
@@ -148,6 +157,42 @@
             $this->actualizar_diccionarios();          
         }
 
+        
+        /**
+         * Refactoriza los usuarios que se le mostraran al administrador, pueden ser los populares o los que mas coparten expereincias
+         * @param array $datos trae los datos de los usuarios
+         * @param array $tipo especifica el tipo de usuarios a mostrar (populares o comparten)
+         */   
+        public function refactory_usuariosAdmin($datos,$tipo){
+                        
+            $lusuarios = "";            
+            $aux="";
+            
+            for($i=0; count($datos); $i++){                
+                
+                $lusuarios .= '<div class="row-fluid">';                            
+                $c=0;
+                do{ 
+                    $valor=array_shift($datos);
+                   
+                    $global = new Global_var();
+                    $aux = $this->$tipo;    
+                    $aux = str_ireplace('{id}', $valor->id, $aux);
+                    $aux = str_ireplace('{url}', $global->url_usuario, $aux);
+                    $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                    $aux = str_ireplace('{nick}', $valor->nick, $aux);
+                    $lusuarios .= $aux;
+                    $c++;
+                }while((count($datos)!=0)&& $c<3);                
+                
+                $lusuarios .= '</div>';                
+            }            
+            
+            //echo $lusuarios;
+            $this->$tipo = $lusuarios;            
+            $this->$tipo = str_ireplace("{listaPopulares}", $lusuarios, $this->$tipo);                        
+        }        
+        
         
         /**
          * Refactoriza los datos de las noticas que publico el administrador         * 

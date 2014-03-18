@@ -2,6 +2,7 @@
 
 require_once('coneccion.php');
 require_once('Administrador.php');
+require_once('Usuario.php');
 
 use Everyman\Neo4j\Node,
     Everyman\Neo4j\Index,
@@ -125,7 +126,57 @@ class ModelAdministrador{
                 return $array;
             }                        
         }
-                                                                        
+                  
+        
+        /**
+         * Funcion que obtiene las usuarios con mas seguidores o los que han compartido mas experiencias
+         * @param string $queryString cadena de texto que contiene los ID de los nodos Usuario
+         * @param string $filtro cadena de texto que especifica si se busca los usuarios que mas seguidores tienen
+         * o los que han compartido mas experiencias
+         */
+        public static function get_usuariosVistaAdmin($queryString, $filtro){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();            
+            $array = array();
+            $populares = array();
+            
+            if($result){
+                foreach($result as $row) {
+
+                    $query="START n=node(".$row['']->getId().") ".$filtro;
+                    $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
+                    $res = $queryRes->getResultSet();
+                    
+                    $populares[$row['']->getId()] = $res[0]->offsetGet('');
+                }
+                
+                arsort($populares);
+                //print_r($populares);
+                $cont=0;
+                
+                foreach($populares as $key=>$value){                    
+                    
+                    foreach($result as $row) {
+                        
+                        if($row['']->getId() == $key AND $cont<9){
+                            
+                            $usuario = new Usuario();
+                            $usuario->id = $row['']->getId();                    
+                            $usuario->nick = $row['']->getProperty('nick');
+                            $usuario->imagen = $row['']->getProperty('imagen');
+                            $usuario->nombre = $row['']->getProperty('nombre');
+                            $usuario->apellido = $row['']->getProperty('apellido');                    
+                            array_push($array, $usuario);
+                            $cont++;
+                        }
+                    }
+                }
+                
+                return $array;
+            }           
+        }
+               
 
         /**
          * Esta funcion consulta la cantidad de nodos de un mismo tipo

@@ -99,7 +99,7 @@ class ModelPublicacion{
             $eliminar->delete();			    	
 	}
 
-       
+        
         /**
          * Funcion que obtiene las noticias publicadas por el administrados
          * @param string $queryString cadena de texto que contiene la consulta de las noticias

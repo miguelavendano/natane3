@@ -738,7 +738,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 
 #Estadisticas .span8{
-    width: auto;
+    width: 95%;
 }
 
 /*****************************************************************/
@@ -787,4 +787,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     border: solid #2e991e 1px;
     height: 80px;
     width: 80px;
+}
+
+.user-admin .cuerpo-index{
+    height: auto;
+    padding-bottom: 15px;
+}
+.user-admin .usuario-index img{
+    border: solid #2e991e 1px;
+    height: 60px;
+    width: 60px;
 }

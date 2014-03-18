@@ -22,6 +22,14 @@
             $usuario = $this->modelo->get_admin();            
             return $usuario;            
         }
+
+        public function populares(){            
+            return $this->modelo->get_populares();            
+        }
+        
+        public function comparten(){            
+            return $this->modelo->get_comparten();            
+        }
         
         public function noticias(){            
             return $this->modelo->get_noticias();            
@@ -51,6 +59,8 @@
             
             $this->vista->refactory_header($login); 
             $this->vista->refactory_administrador($this->datos_administrador());          
+            $this->vista->refactory_usuariosAdmin($this->populares(),"populares");
+            $this->vista->refactory_usuariosAdmin($this->comparten(),"comparten");
             $this->vista->refactory_noticias($this->noticias());
             $this->vista->refactory_eventos($this->eventos());          
             $this->vista->refactory_contenido();

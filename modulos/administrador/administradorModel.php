@@ -30,6 +30,24 @@
             return $resultado;            
         }  
         
+        public function get_populares(){   
+                        
+            $query = "START n=node(*) WHERE n.type='Usuario' RETURN n";            
+            $filtro = "MATCH n<-[:Amigo]-a RETURN count(a) as seguidores";
+            $resultado = $this->modeladministrador->get_usuariosVistaAdmin($query,$filtro);
+
+            return $resultado;            
+        } 
+        
+        public function get_comparten(){   
+                        
+            $query = "START n=node(*) WHERE n.type='Usuario' RETURN n";            
+            $filtro = "MATCH n-[:Comparte]->e RETURN count(e) as experiencias";
+            $resultado = $this->modeladministrador->get_usuariosVistaAdmin($query,$filtro);
+
+            return $resultado;            
+        }         
+        
         public function get_noticias(){   
                         
             $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type='Noticia' return b ORDER BY n.fecha DESC";            
