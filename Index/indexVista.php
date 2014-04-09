@@ -111,7 +111,7 @@
             switch($opcion){                                
                 case 1:
                                         
-                    $this->head = Global_var::refactory_header(true);                                        
+                    $this->head = Global_var::refactory_header(true, true);                                        
                     
                     break;
                 

@@ -119,25 +119,29 @@
          * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
          * esta accediendo.
          */
-        public function refactory_header($opcion){
-            
-            switch($opcion){                                
-                case 1:
-                    
-                    $this->head = Global_var::refactory_header(false);                                        
-                    
-                break;
-            
-                case 2:
-                    $this->head = Global_var::refactory_header(false); 
-                    
-                break;                
+        public function refactory_header($login){          
+        
+            $ruta ="../../plantillas/generales/";
+                        
+            if($login){                
                 
-                default:
-                    
-                break;               
+                $header = file_get_contents($ruta.'headLogin.html');
+                $headeadmin = file_get_contents($ruta.'headAdmin.html');
+                
+                
+                
+                //$opciones_admin = $crear_evento.$crear_noticia;                  
+
+                
+                $headeadmin = str_ireplace('{nick}',$_SESSION['nick'],$headeadmin);         
+                $headeadmin = str_ireplace('{img_user}',$_SESSION['img'],$headeadmin);     
+                $headeadmin = str_ireplace('{id_user}',$_SESSION['id'],$headeadmin);  
+                
+                $this->head = str_ireplace('{opciones_login}',$headeadmin,$header);               
+                        
+            
             }
-                 
+                   
         }
         
         

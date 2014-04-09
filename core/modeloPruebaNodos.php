@@ -58,9 +58,9 @@ class ModeloNodo
 		$node = $minodoIndex->findOne('name', $nameNodo);
 		
 		if ($node) {
-			echo "<b>ID: </b>".$node->getId()."<br />";
+			//echo "<b>ID: </b>".$node->getId()."<br />";
 			foreach ($node->getProperties() as $key => $value) {
-			    echo "<b>$key</b>: $value<br />";
+			  //  echo "<b>$key</b>: $value<br />";
 			}
 		}
 	}
@@ -71,9 +71,9 @@ class ModeloNodo
 	{			
 		$nodo = Neo4Play::client()->getNode($idNodo);
 	
-		echo "<b>ID: </b>".$nodo->getId()."<br />";
+		//echo "<b>ID: </b>".$nodo->getId()."<br />";
 		foreach ($nodo->getProperties() as $key => $value) {
-		    echo "<b>$key</b>: $value<br />";
+		    //echo "<b>$key</b>: $value<br />";
 		}	
 	}	
 

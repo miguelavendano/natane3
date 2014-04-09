@@ -1,0 +1,41 @@
+<!--<<<<<<< HEAD-->
+        <ul class="nav pull-right">                                
+            
+            <li class="active">
+                <a data-toggle="modal" href="#modalexpe">Compartir Experiencia</a>
+            </li>
+            <li>
+<!--                <a href="{url_usuario}?id={id_user}" class="cursor_link dropdown-toggle" data-toggle="dropdown">                    -->
+                <a href="{url_usuario}?id={id_user}">                   
+                    <img style="width: 30px; height: 30px;" src="{IMG_NATANE}/{img_user}">
+                    {nick}
+                    
+                </a>
+            </li>
+
+
+            <li class="dropdown">
+                <a class="cursor_link" data-toggle="dropdown">
+                    <i class="icon-cogs"></i>                 
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="cursor_link" data-toggle="modal" href="#modalCreaNoticia">
+                            <i class="icon-star"></i>
+                            Crear Noticias
+                        </a>
+                    </li>
+                    <li> 
+                        <a class="cursor_link" data-toggle="modal" href="#modalCreaEvento">
+                            <i class="icon-rocket"></i>
+                            Crear Evento
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{url_login}?enviar=Salir" class="cursor_link" id="BExit">
+                            <i class="icon-signout"></i>
+                            Salir
+                        </a>
+                    </li>                         
+                </ul>   

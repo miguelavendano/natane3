@@ -14,7 +14,7 @@
                                     
                     }    
                     ,error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                        alert("Se presentó un problema con la conexión a Internet")
+                        //alert("Se presentó un problema con la conexión a Internet")
                     }                    
                     ,success: function(data,textStatus,jqXHR){                       
                                 
@@ -130,7 +130,7 @@
                                     
                     }    
                     ,error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                        alert("Se presentó un problema con la conexión a Internet")
+                       // alert("Se presentó un problema con la conexión a Internet")
                     }                    
                     ,success: function(data,textStatus,jqXHR){                
         

@@ -86,9 +86,9 @@
                             <link href="{CSS}/bootstrap-responsive.css" rel="stylesheet">    
                             <link href="{CSS}/estilos.css" rel="stylesheet">    
                             <link href="{CSS}/estilos_perfil_empresa.css" rel="stylesheet"> 
-                            <link href="{CSS}/estilos_ferrocarril.css" rel="stylesheet">    
-                            <link href="{CSS}/estilos_resultado_busqueda.css" rel="stylesheet">    
                             <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
+                            <link href="{CSS}/estilos_ferrocarril.css" rel="stylesheet">    
+                            <link href="{CSS}/estilos_resultado_busqueda.css" rel="stylesheet">                                
                             <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    ';
 
             
@@ -164,15 +164,16 @@
             switch($opcion){                                
                 case 1:
                     
-                    $this->head = Global_var::refactory_header(false);                    
+                    $this->head = Global_var::refactory_header(true, false);                    
                     //$this->head .= "<br> <h1>Este es mi empresa</h1>";
                     break;
                 case 2:
-                    $this->head = Global_var::refactory_header(false);                                        
+                    $this->head = Global_var::refactory_header(true, false);                                        
                     break;
                 
                 default:
-                    
+                    $this->head = Global_var::refactory_header(false, false);                                        
+                                        
                 break;               
             }
             

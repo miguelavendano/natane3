@@ -60,9 +60,9 @@
         
         
         
-        public function main($id, $url_padre, $galeria){
+        public function main($id, $url_padre, $galeria, $login){
             
-            $this->vista->refactory_header(1); 
+            $this->vista->refactory_header($login); 
             $this->vista->refactory_fotos($this->fotos($id, $galeria));            
             $this->vista->refactory_galeria($id, $url_padre,$this->nombre_padre($id));
             //$this->vista->refactory_albun();
@@ -81,20 +81,33 @@
     
     $validar = $galeria->validar($id);
     
-    if($validar){
-        
-        if($validar==1){
-             $galeria->main($id, "{url_sitio}", 0);
-            
-        }else{
-            
-            $galeria->main($id, "{url_empresa}", 1);
-        }
-        
-    }else{
-        
-        
-    }
+    if(isset($_SESSION['id'])) // existe sesion ?                                    
+        $activa = true;
+    else
+        $activa = false;
 
+
+    
+    if($validar){
+
+        if($validar==1){
+             $galeria->main($id, "{url_sitio}", 0, $activa);
+
+        }else{
+
+            $galeria->main($id, "{url_empresa}", 1, $activa);
+        }
+
+    }else{
+
+
+    }
+    
+    
+    
+
+    
+    
+    
 
 ?>

@@ -428,13 +428,7 @@ class ModelSitios{
                     }
                 }                   
             
-//                echo "<br>";
-//                print_r($posiciones);
-//                echo "<br>";
-//                foreach($result as $key=>$row) {
-//                    echo $key."=>".$row[0]."<br>";
-//                }            
-//                echo "<br>";                
+       
             
                 foreach($result as $key=>$row) {
                     for($j=0; $j<count($posiciones); $j++){

@@ -153,15 +153,15 @@
             switch($opcion){                                
                 case 1:
                     
-                    $this->head = Global_var::refactory_header(false);                    
+                    $this->head = Global_var::refactory_header(true,false);                    
                     //$this->head .= "<br> <h1>Este es mi Sitio</h1>";
                     break;
                 case 2:
-                    $this->head = Global_var::refactory_header(false);                                        
+                    $this->head = Global_var::refactory_header(true, false);                                        
                     break;
                 
                 default:
-                    
+                    $this->head = Global_var::refactory_header(false, false);     
                     break;               
             }
             

@@ -74,8 +74,7 @@ class ModelExperiencia{
             $result = $query->getResultSet();
             
             $array = array();
-//                    $experiencia->imagen= $res[0]->offsetGet('');//                    
-//                    echo "<h1>".$experiencia->imagen."</h1>";                    
+         
             
             if($result){
             
@@ -105,16 +104,7 @@ class ModelExperiencia{
                             $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
                         }
                         
-                        
-                        /*
-                        if($res[0]->offsetGet('')){
-                            $experiencia->imagen = $res[0]->offsetGet('');    
-                        } 
-                        else {
-                            $experiencia->imagen= "experiencia_sin_foto.png";
-                        }
-                        */ 
-                        //echo "<h1> Id=".$experiencia->id."-->".$experiencia->imagen."</h1>";
+
                         
                     }
                     
@@ -271,7 +261,7 @@ class ModelExperiencia{
                 
                     $id_usuario = $com['']->getProperty('usuario');
                     $detalle = $com['']->getProperty('detalle');
-                    $fecha = $com['']->getProperty('fecha');                    
+                    $fecha = $com['']->getProperty('fecha');
                     $id_comentario = $com['']->getId();
                     
                     //$id_usuariod=$usuario[0]['']->getId();
@@ -304,17 +294,7 @@ class ModelExperiencia{
         }
         
         
-        /*
-         * Consulta todas las relaciones segun un tipo especifico
-         * recibe el nodo de la experiencia y el tiipo de relacion
-         
-	public static function relacionesExperiencia($idNodo,$tipoRelacion){
-		$miNodo = Neo4Play::client()->getNode($idNodo);
-		$relaciones= $miNodo->getRelationships(array($tipoRelacion));
 
-                echo $relaciones;
-	}        */
-        
         
 }
 ?>

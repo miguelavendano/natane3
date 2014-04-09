@@ -79,26 +79,16 @@
 
         $admin = new Administradores($id);
         
-        if(isset($_SESSION['id'])){ // existe sesion ?                                   
+        if(isset($_SESSION['id'])){ // existe sesion ?
             
-            if(Login::acceso_Pusuario($id)){  //El usr logueado es el dueño de este perfil ?
-                
-                $admin->principal_administrador(1);
-
-            }else{
-
-                $admin->principal_administrador(2);
-                
-            }
+            $admin->principal_administrador(true);                
+        
         }else{
             
-            $admin->principal_administrador(3);
+            header('Location: /natane3/Index/');
         }
 
-    }else{
-
-        header('Location: /natane3/Index/');
-    }  
+    }
     
 
 ?>

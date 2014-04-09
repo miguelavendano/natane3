@@ -2,6 +2,8 @@
 
     require_once '../../core/global_var.php';
 
+    
+    
     class ConsultaVista{
         
         private $base;
@@ -61,6 +63,19 @@
                                 'head'=>$this->head,
                                 'contenido'=>$this->resul);      
         }
+        
+        
+        /**
+         * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
+         * esta accediendo.
+         */
+        public function refactory_header($opcion){
+            
+            $this->head = Global_var::refactory_header($opcion, false);                                        
+                    
+        }
+        
+        
         
         
         public function refactory_elementos($datos){            

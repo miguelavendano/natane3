@@ -93,24 +93,11 @@
          * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
          * esta accediendo.
          */
-        public function refactory_header($opcion){
+        public function refactory_header($login){           
             
-            switch($opcion){                                
-                case 1:
-                    
-                    
-                    $this->head = Global_var::refactory_header(false);                                        
-                    
-                    break;
-                case 2:
-                    $this->head = Global_var::refactory_header(false); 
-                    
-                    break;
+            
                 
-                default:
-                    
-                    break;               
-            }
+            $this->head = Global_var::refactory_header($login, false);
             
 
         }        

@@ -29,9 +29,9 @@
         }        
                 
         
-        public function main($id){
+        public function principal_imagen($id, $login){
             
-            $this->vista->refactory_header(1); 
+            $this->vista->refactory_header($login); 
             $this->vista->refactory_imagen($this->imagen($id));            
             $this->vista->refactory_comentarios($this->comentarios($id));
             $this->vista->refactory_total();
@@ -42,10 +42,19 @@
     
    
     $id = $_GET['id'];
-    $imagen = new Imagenes();
-    $imagen->main($id);  
-
+    $imagen = new Imagenes();    
+    $login = false;       
     
+    if(isset($_SESSION['id'])) // existe sesion ?
+        $login = true;
+    
+    
+    $imagen->principal_imagen($id, $login);
+        
+
+        
+        
+
     
     
     

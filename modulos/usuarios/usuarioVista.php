@@ -27,7 +27,8 @@
         
         public $dic_general;
         public $dic_contenido;
-        public $dic_datos_user;        
+        public $dic_datos_user;      
+        public $bot_seguir = "";
         
         
         
@@ -50,7 +51,8 @@
             $this->creaSitio = file_get_contents('../../plantillas/sitios/registrarSitio.html');
             $this->creaEmpre = file_get_contents('../../plantillas/empresas/registrarEmpresa.html');                        
             $this->gustaria = file_get_contents('../../plantillas/usuario/sitiosAvisitar.html');            
-            $this->amigos = file_get_contents('../../plantillas/usuario/amigos.html');            
+            $this->amigos = file_get_contents('../../plantillas/usuario/amigos.html');           
+            $this->bot_seguir = "";
                      
             $this->metas = '<meta charset="utf-8">
                             <title> {TITULO}</title>
@@ -92,7 +94,8 @@
                                         'editaExp'=>$this->editExp,
                                         'verExp'=>$this->verExp,
                                         'registrarSitio'=>$this->creaSitio,
-                                        'registrarrEmpresa'=>$this->creaEmpre                    
+                                        'registrarrEmpresa'=>$this->creaEmpre,
+                                        'boton_seguir'=>$this->bot_seguir
                                         );
         }
         
@@ -125,7 +128,9 @@
             $this->dic_contenido['amigos_de_amigos']=$this->amigos;
             
             $this->dic_contenido['registrarSitio']=$this->creaSitio;
-            $this->dic_contenido['registrarEmpresa']=$this->creaEmpre;       
+            $this->dic_contenido['registrarEmpresa']=$this->creaEmpre;    
+            
+            $this->dic_contenido['boton_seguir']=$this->bot_seguir;
         }
         
         
@@ -137,43 +142,22 @@
         public function refactory_header($opcion){
             
             switch($opcion){                                
-                case 1:
+                case 1:                    
                     
-                    
-                    $this->head = Global_var::refactory_header(false);                                        
+                    $this->head = Global_var::refactory_header(true, false);                                        
                     
                     break;
                 case 2:
-                    $this->head = Global_var::refactory_header(false); 
+                    $this->head = Global_var::refactory_header(true, false); 
                     
                     break;
                 
                 default:
+                    $this->head = Global_var::refactory_header(false, false); 
                     
                     break;               
             }
-            
-
-//            $this->dic_general = array( 'metas' => $this->metas,
-//                                        'links' => $this->links ,
-//                                        'script' => $this->script,
-//                                        'head' => $this->head ,
-//                                        'contenido' => $this->perfil
-//                                        );
-//            
-//            $this->dic_contenido = array('datos_usuario' => $this->usuario, 
-//                                        'seguidores' => $this->segui, 
-//                                        'quiere_visitar' => $this->gustaria,
-//                                        'amigos_de_amigos' => $this->amigos,
-//                                        'modales'=> $this->modal,
-//                                        'editarUsuario'=> $this->editar,
-//                                        'experiencia'=>$this->expe,
-//                                        'comparteExp'=>$this->comparte,
-//                                        'editaExp'=>$this->editExp,                    
-//                                        'verExp'=>$this->verExp,
-//                                        'registrarSitio'=>$this->creaSitio,
-//                                        'registrarEmpresa'=>$this->creaEmpre                    
-//                                        );           
+                    
         }
         
         
@@ -197,6 +181,24 @@
 
 
         }
+        
+        
+        public function refactory_bot_seguir(){
+            
+            
+            
+            $this->bot_seguir  = '<div>
+                                    <button class="btn btn-blue btn-block" id="SeguirU"><i></i> Seguir</button>
+                                </div>';
+            
+            
+            
+            
+            
+        }
+        
+        
+        
         
         /**
          * Refactoriza los enlaces de amistad que posee el usuario.

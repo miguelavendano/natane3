@@ -100,24 +100,9 @@
          */
         public function refactory_header($opcion){
             
-            switch($opcion){                                
-                case 1:
-                    
-                    
-                    $this->head = Global_var::refactory_header(false);                                        
-                    
-                    break;
-                case 2:
-                    $this->head = Global_var::refactory_header(false); 
-                    
-                    break;
-                
-                default:
-                    
-                    break;               
-            }
-            
 
+            $this->head = Global_var::refactory_header($opcion, false); 
+    
         }              
         
         

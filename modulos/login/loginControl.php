@@ -79,8 +79,7 @@
          */
         public static function acceso_Pempresa($idEmpresa){
             
-            if(isset($_SESSION['id'])){
-                echo $_SESSION['id'];
+            if(isset($_SESSION['id'])){                
                 foreach($_SESSION['empresas'] as $valor)                
                     if($valor['id']==  $idEmpresa)
                         return true;

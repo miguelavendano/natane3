@@ -63,6 +63,10 @@
         public function principal_usuario($login){
             
             $this->vista->refactory_header($login); 
+            
+            if($login==2)
+                $this->vista->refactory_bot_seguir();
+            
             $this->vista->refactory_usuario($this->datos_usuario());
             $this->vista->refactory_amigos($this->seguidores(),"segui");
             $this->vista->refactory_amigos($this->siguiendo(),"sigo");
@@ -77,6 +81,7 @@
     }
 
     
+
     
     $id = $_GET['id'];
 
