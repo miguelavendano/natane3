@@ -5,36 +5,73 @@
     require_once '../login/loginControl.php';
 
     
-
+    /**
+     * Clase controlador principal del modulo administrador
+     */
     class Administradores{
 
+        /**
+         *Instancia de la clase vista.
+         * @var AdministradorVista
+         */
         public $vista;
+        /**
+         *Instancia de la clase Modelo
+         * @var AdministradorModel
+         */
         public $modelo;
+                        
         
-        
+        /**
+         * Constructor de la clase.
+         * 
+         * Inicializa los atributos de la clase
+         * @param int $id Id del nodo administrador
+         * 
+         */
         public function __construct($id) {            
             $this->vista = new AdministradorVista($id);
             $this->modelo = new administradorModel($id);
         }       
         
-        
+        /**
+         * Ejecuta el metodo get_admin() de la clase modelo
+         * 
+         * @return Array Los datos del administrador
+         */
         public function datos_administrador(){
             $usuario = $this->modelo->get_admin();            
             return $usuario;            
         }
 
+        /**
+         * Ejecuta el metodo get_populares de la clase modelo
+         * @return Array  Datos de los usuarios con mayor numero de seguidores
+         */
         public function populares(){            
             return $this->modelo->get_populares();            
         }
         
+        /**
+         * Ejecuta el metodo get_comparten de la clase modelo
+         * @return Array Datos de los usuarios que han compartido experiencias.
+         */
         public function comparten(){            
             return $this->modelo->get_comparten();            
         }
         
+        /**
+         * Ejecuta el metodo get_noticias de la clase modelo
+         * @return Array Datos de las noticias publicadas.
+         */
         public function noticias(){            
             return $this->modelo->get_noticias();            
         }
 
+        /**
+         * Ejecuta el metodo get_eventos de la clase modelo
+         * @return Array Datos de los eventos publicados 
+         */
         public function eventos(){            
             return $this->modelo->get_eventos();            
         }        
@@ -50,10 +87,9 @@
         
         
         /**
-         * funcion principal que organiza y estructura el todo
+         * Metodo principal que organiza y estructura el controlador.
          * 
-         * @param int $login valor numerico que indica el tipo de login que hay
-         * 1->loguado y  es el dueño. 2: logueado y no es el dueño y 3:no esta logueado. 
+         * @param int $login valor numerico que si existe una sesión iniciada. 1 si esta logueado y 0 si no lo esta.
          */
         public function principal_administrador($login){
             

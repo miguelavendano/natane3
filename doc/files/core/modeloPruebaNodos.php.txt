@@ -1,0 +1,82 @@
+<?php
+use Everyman\Neo4j\Index;
+
+/**
+ * Clase con las funciones para ejecutar sobre cualquier tipo de nodo
+ * (eliminar, modificar, ...) 
+ */	
+class ModeloNodo
+{
+	//funcion para eliminar la propiedad de un nodo
+	public static function eliminarPropiedadDeNodo($idnodo,$propiedad)
+	{
+		//Obtengo toda la informacion del nodo			
+		$eliminar = Neo4Play::client()->getNode($idnodo);
+		//elimina la propiedad
+		$eliminar->removeProperty($propiedad)
+		    	->save();	
+	}
+
+
+	//funcion que edita una propiedad de un nodo y si no existe la crea
+	public static function modificarPropiedadesANodo($idnodo,$propiedad,$detalle)
+	{
+		//Obtengo toda la informacion del nodo
+		$editar = Neo4Play::client()->getNode($idnodo);
+		//edita la propiedad y si no existe la crea
+		$editar->setProperty($propiedad,$detalle)
+		    	->save();
+	}
+
+
+	//funcion para eliminar un nodo buscandolo por su ID
+	public static function eliminarNodoByID($idnodo)
+	{
+		//Obtengo toda la informacion del nodo
+		$eliminar = Neo4Play::client()->getNode($idnodo);
+		//elimina el nodo
+		$eliminar->delete();			    	
+	}
+
+
+	//funcion para eliminar un nodo buscandolo por su nombre
+	public static function eliminarNodoByName($namenodo,$tipoIndexNodo)
+	{
+		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode, $tipoIndexNodo);
+		$node = $minodoIndex->findOne('name', $namenodo);
+		if ($node) {
+			//elimina el nodo
+			$node->delete();			
+		}
+	}	
+
+
+	//funcion para buscar un nodo por su nombre y tipo de index
+	public static function getNodoByName($nameNodo,$tipoIndexNodo)
+	{
+		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode, $tipoIndexNodo);
+		$node = $minodoIndex->findOne('name', $nameNodo);
+		
+		if ($node) {
+			//echo "<b>ID: </b>".$node->getId()."<br />";
+			foreach ($node->getProperties() as $key => $value) {
+			  //  echo "<b>$key</b>: $value<br />";
+			}
+		}
+	}
+
+
+	//funcion para buscar un nodo por su ID
+	public static function getNodoByID($idNodo)
+	{			
+		$nodo = Neo4Play::client()->getNode($idNodo);
+	
+		//echo "<b>ID: </b>".$nodo->getId()."<br />";
+		foreach ($nodo->getProperties() as $key => $value) {
+		    //echo "<b>$key</b>: $value<br />";
+		}	
+	}	
+
+}
+
+

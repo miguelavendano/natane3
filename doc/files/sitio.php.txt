@@ -1,0 +1,37 @@
+<?php
+require_once('core/coneccion.php');
+
+if (!empty($_POST['nombreSitio'])||!empty($_POST['describeSitio'])||!empty($_POST['tipoSitio'])||!empty($_POST['imagenSitio'])) {
+	$sitio = new Sitio();
+	$sitio->name = $_POST['nombreSitio'];
+	$sitio->desc = $_POST['describeSitio'];
+	$sitio->tipo = $_POST['tipoSitio'];
+	$sitio->img = $_POST['imagenSitio'];	
+	Sitio::guardaSitio($sitio);
+} else if (!empty($_GET['nombreSitio'])) {
+	$sitio = Sitio::getSitioByName($_GET['nombreSitio']);
+}
+
+?>
+<form action="" method="POST">
+Nombre del Sitio: <input type="text" name="nombreSitio" /><br />
+Descripcion: <input type="text" name="describeSitio" /><br />
+Tipo de sitio: <input type="text" name="tipoSitio" /><br />
+Imagen: <input type="text" name="imagenSitio" /><br />
+<input type="submit" value="Guardar" /><br />
+</form>
+
+<form action="" method="GET">
+Nombre del sitio a buscar: <input type="text" name="nombreSitio" />
+<input type="submit" value="Buscar" />
+</form>
+
+<?php if (!empty($sitio)) : ?>
+	Id: <?php echo $sitio->id; ?><br />
+	Sitio: <?php echo $sitio->name; ?><br />	
+	Descripcion: <?php echo $sitio->desc; ?><br />
+	Tipo: <?php echo $sitio->tipo; ?><br />
+	Imagen: <?php echo $sitio->img; ?><br />
+<?php elseif (!empty($_GET['nombreSitio'])) : ?>
+	No se encuentra el sitio con nombre "<?php echo $_GET['nombreSitio']; ?>"<br />
+<?php endif; ?>

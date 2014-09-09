@@ -6,62 +6,112 @@
 
     
 
+    /**
+     * Clase controlador principal del modulo Empresas.
+     */    
     class Empresas{
 
+        /**
+         *Instancia de la clase vista.
+         * @var EmpresaVista 
+         */
         public $vista;
+        
+        /**
+         *Instancia de la clase Modelo.
+         * @var EmpresaModel 
+         */
         public $modelo;
         
         
+        /**
+         * Constructor de la clase.
+         * @param int $id id del usuario visitante.
+         */
         public function __construct($id) {            
             $this->vista = new EmpresaVista($id);
             $this->modelo = new EmpresaModel($id);            
         }       
         
         
+        /**
+         * Ejecuta el metoddo get_contacto() de la clase modelo.
+         * @return Array
+         */
         public function datos_contacto(){
             $contacto = $this->modelo->get_contacto();            
             return $contacto;            
         }
         
         
+        /**
+         * Ejecuta el metodo get_slider() de la clase modelo.
+         * @return Array
+         */
         public function slider_empresa(){
             $slider = $this->modelo->get_slider();            
             return $slider;            
         }        
         
+        
+        /**
+         * Ejecuta el metodo get_amigos() de la clase Modelo.
+         * @return Array
+         */
         public function amigos(){            
             return $this->modelo->get_amigos();
         }
 
-        
+        /**
+         * Ejecuta el metodo get_clientes_aliados de las clase modelo.
+         * @return Array
+         */        
         public function clientes_aliados(){            
             return $this->modelo->get_clientes_aliados();            
         }                
         
         
+        /**
+         * Ejecuta el metodo get_ferrocarril de la case modelo.
+         * @return Array
+         */        
         public function ferrocarril(){
             $ferro = $this->modelo->get_ferrocarril();            
             return $ferro;            
         }                
         
-        
+        /**
+         * Ejecuta el metodo get_servicios de la clase modelo.
+         * @return Array
+         */        
         public function servicios(){
             $resutlados = $this->modelo->get_servicios();                       
             return $resutlados;            
         }           
         
         
+        /**
+         * Ejecuta el metodo get_experiencias de la clase modelo.
+         * @return Array
+         */       
         public function experiencias(){
             return $this->modelo->get_experiencias();
         }                
         
 
+        /**
+         * Ejecuta el metodo get_coordenadas_mapa de la clase modelo.
+         * @return Array
+         */               
         public function coordenadas(){            
             return $this->modelo->get_coordenadas_mapa();            
         }
         
         
-        
+        /**
+         * Es el metodo principal que controla la interacción entre el modelo y la vista.
+         * @param int $login Valor que indica el estado de la sesion del usuario que desea ver el perfil de la empresa.
+         */
         public function principal_empresa($login){    
             
             $this->vista->refactory_header( $login );

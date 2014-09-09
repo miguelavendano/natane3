@@ -1,0 +1,85 @@
+<?php
+
+    require_once '../../core/global_var.php';
+    
+
+    class LoginVista{
+        
+        public $base;
+        public $head;
+        public $modal;
+        public $metas;
+        public $links;
+        public $form_registro;
+        public $dic;
+        public $script;
+        
+        public function __construct() {
+            
+            
+            $this->base = file_get_contents('../../plantillas/generales/base.html');
+            $this->head = file_get_contents('../../plantillas/generales/head.html');
+            $this->form_registro = file_get_contents('../../plantillas/login/registrar.html');
+            
+            
+
+            $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                        
+            $this->metas = '<meta charset="utf-8">
+                            <title>{TITULO}</title>
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">                            
+                            <meta name="description" content="">
+                            <meta name="author" content="">';
+            
+            $this->links='  <link href="{CSS}/bootstrap.css" rel="stylesheet">
+                            <link href="{CSS}/bootstrap-responsive.css" rel="stylesheet">
+                            <link href="{CSS}/estilos.css" rel="stylesheet">    
+                            <link href="{CSS}/estilos_resultado_busqueda.css" rel="stylesheet">    
+                            <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
+                            <link href="{CSS}/datepicker.css" rel="stylesheet" />
+                            <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    
+                            <link href="{CSS}/jquery.jscrollpane.css" rel="stylesheet" />';      
+            
+            $this->script = "";
+            
+            
+            $this->dic = array('metas'=>$this->metas,
+                                'links'=>$this->links,
+                                'script' => $this->script,
+                                'head'=>$this->head,
+                                'contenido'=>$this->form_registro);             
+            
+        }
+        
+        
+        public function refactory_total(){
+            
+            
+            $globales = new Global_var();
+            
+            $registro = "";                       
+
+
+            
+            foreach ($this->dic as $clave=>$valor){
+                    
+                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
+                
+            }
+            
+            foreach ($globales->global_var as $clave => $valor){
+                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
+            }            
+            
+            
+            echo $this->base;
+                        
+            
+        }
+        
+    }
+
+
+
+
+?>
+

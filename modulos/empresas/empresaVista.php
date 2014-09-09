@@ -2,47 +2,200 @@
 
     require_once '../../core/global_var.php';
 
+    
+    /**
+     * Clase controlador de los elementos html5 utilizados en el modulo Empresa.
+     * 
+     */    
     class EmpresaVista{
-        
-        public $base;
-        public $head;
-        public $modal;
-        public $links;
-        public $metas;
-        public $nombre;
-        
-        public $empresa; 
-        public $servicios;
-        public $expe;
-        public $edi_exp;
-        public $slider_empresa;        
-        public $contacto;
-        public $seguidores;
-        public $gustaria;
-        public $ferrocarril;        
-        public $elemento_ferro;
-        public $modales;       
-        public $img_slider_act;
-        public $img_slider;
-        public $descripcion;
-        public $editar;
-        public $latitud;
-        public $longitud;   
-        public $confianza;
-        public $creaServicio;
-        public $editservicio;
 
+        
+        /**
+         *Variable que contiene el codigo html de la estructura
+         * general del la interfaz grafica. (plantillas/generales/base.html)
+         * @var String  
+         */        
+        public $base;
+        /**
+         *Variable que contiene el codigo html del header de esta interfaz. (plantillas/generales/head.html)
+         * @var String  
+         */              
+        public $head;
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. plantillas/generales/barraModal.html
+         * @var String  
+         */                
+        public $modal;
+        /**
+         *Variable que contiene el codigo html de los " meta links" que serán utlizados.
+         * @var String  
+         */                
+        public $links;
+        /**
+         *Variable que contiene el codigo html de las etiquetas "meta" utilizadas para esta interfaz
+         * @var String  
+         */                
+        public $metas;
+        
+        /**
+         *Variable que contiene el codigo html de las etiquetas "script" utilizadas para esta interfaz
+         * @var String  
+         */    
         public $script;        
         
-        public $dic_general;
-        public $dic_contenido;
+        /**
+         *Variable que contiene en nombre de la empresa.
+         * @var String 
+         */
+        public $nombre;
         
+        /**
+         *Variable la estructura html5 de la estructura del perfil de la empresa. (plantillas/empresas/perfilEmpresa.html).
+         * @var String 
+         */
+        public $empresa; 
+        
+        /**
+         *Variable la estructura html5 de la estructura de los servicios de la empresa. (plantillas/empresas/servicios.html).
+         * @var String 
+         */        
+        public $servicios;
+        
+        /**
+         *Variable la estructura html5 de la estructura de las experiencias de la empresa. (plantillas/empresas/servicios.html).
+         * @var String 
+         */                
+        public $expe;
+        
+        /**
+         *Variable la estructura html5 del formulario para editar la informacion de una experiencias de la empresa. (plantillas/empresas/editarExperienciaEmpresa.html).
+         * @var String 
+         */
+        public $edi_exp;
+        
+        /**
+         *Variable la estructura html5 del slider principal de la empresa. (plantillas/empresas/slider_empresas.html).
+         * @var String 
+         */
+        public $slider_empresa;        
+
+        /**
+         *Variable la estructura html5 de la estructura de los datos de contacto. (plantillas/sitios/contacto.html).
+         * @var String 
+         */        
+        public $contacto;
+        
+        /**
+         *Variable la estructura html5 de la sección de seguidores. (/plantillas/generales/seguidores.html).
+         * @var String 
+         */   
+        public $seguidores;
+        
+        /**
+         *Variable la estructura html5 de la sección de personas. (/plantillas/generales/seguidores.html).
+         * @var String
+         */
+        public $gustaria;
+        
+        /**
+         *Variable la estructura html5 del ferrocarril de sitios relacionados. (plantillas/generales/ferrocarril.html).
+         * @var String 
+         */  
+        public $ferrocarril;        
+
+        /**
+         *Variable la estructura html5 de los elementos del ferrocarril de sitios relacionados. (plantillas/generales/elemento_ferro.html).
+         * @var String 
+         */          
+        public $elemento_ferro;
+        
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. (plantillas/generales/barraModal.html)
+         * @var String  
+         */                     
+        public $modales;       
+
+        /**
+         *Variable que contiene el codigo html de la imagen activa que se encuentra en el Slider.
+         * @var String  
+         */                            
+        public $img_slider_act;
+
+        /**
+         *Variable que contiene el codigo html de la imagenes que se encuentran en el Slider.
+         * @var String  
+         */                                    
+        public $img_slider;
+
+        /**
+         *Descripcion de la empresa.
+         * @var String 
+         */
+        public $descripcion;
+        
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de edición de datos. (plantillas/empresas/editarEmpresa.html)
+         * @var String  
+         */            
+        public $editar;
+
+        /**
+         *Coordenada latitud de la ubicacion de la empresa.
+         * @var String 
+         */
+        public $latitud;
+
+        /**
+         *Coordenada longitud de la ubicacion de la empresa.
+         * @var String 
+         */        
+        public $longitud;   
+        
+        /**
+         *Estructura general html5 que genera el boton de confianza,,
+         * @var String 
+         */
+        public $confianza;
+
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de creacion de servicios de la empresa. (plantillas/empresas/crearServicio.html)
+         * @var String  
+         */                    
+        public $creaServicio;
+
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de edición de datos. (plantillas/empresas/editarEmpresa.html)
+         * @var String  
+         */                    
+        public $editservicio;
+                
+        /**
+         *Variable diccionario general de las variables que contienen la estructura general de la interfaz grafica de la Empresa.
+         * 
+         * @var String  
+         */                      
+        public $dic_general;
+        /**
+         *Variable diccionario general de las variables que poseen fracmentos html que generan el contenido de la interfaz grafica de la Empresa.
+         * @var String  
+         */           
+        public $dic_contenido;        
+        
+        /**
+         *Variable que contiene el id de la empresa a mostrar.
+         * @var String 
+         */
         public $id_empresa;
 
 
         
 
-        
+        /**
+         * Constructor de la clase. 
+         * Inicializa la gran mayoria de atributos de la clase
+         * 
+         * @param String $id Id de la empresa a mostrar
+         */          
         public function __construct($id) {
             
             
@@ -125,6 +278,11 @@
         }
         
         
+        /**
+         * Metodo encargado de actualizar los datos de los diccionarios
+         * a medida que se van refactorizando y cambiando constantemente.
+         * 
+         */        
         public function actualizar_diccionarios(){
             
             $this->dic_general = array('metas' => $this->metas,
@@ -158,6 +316,7 @@
         /**
          * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
          * esta accediendo.
+         * @param int $opcion Indica si existe incializada una sesión
          */
         public function refactory_header($opcion){
             
@@ -178,8 +337,13 @@
             }
             
         }  
+
         
-        
+        /**
+         * Refactoriza el eslider principal con las imagenes de la empresa.
+         * 
+         * @param Array $datos Imagenes de la empresa.
+         */
         public function refactory_slider($datos){   // contruye el slider
             
             $imagenes = str_ireplace("{url}", $datos[0], $this->img_slider_act); // carga la imagen principal del slider
@@ -195,7 +359,10 @@
         }        
         
         
-        
+        /**
+         * Refactoriza la sección de contacto de la empresa.
+         * @param Array $datos Dados de contacto de la empresa.
+         */
         public function refactory_contacto($datos){                
 
             $this->nombre = $datos[0]->nombre;
@@ -217,6 +384,10 @@
 
         }
         
+        /**
+         * Refactoriza las seccion de amigos de la empresa.
+         * @param type $datos Datos sobre amigos de la empresa
+         */
         public function refactory_amigos($datos){
             
             ///_------------
@@ -239,7 +410,10 @@
         }
                       
         
-
+        /**
+         * Refactoriza la seccion de clientes de la empresa.
+         * @param Array $datos Datos de los clientes de la empresa.
+         */
         public function refactory_clientes_aliados($datos){            
             
             $complete = "";
@@ -273,7 +447,11 @@
 
         }        
         
-        public function refactory_ferrocarril(array $datos){  // contruye el ferrocarril
+        /**
+         * Refactoriza el ferrocarril de sitios relacionados.
+         * @param Array $datos Datos sobre sitios relacionados.
+         */
+        public function refactory_ferrocarril($datos){  // contruye el ferrocarril
 
             
             $elementos="";     // variable que construirá los elementos de ferrocarril
@@ -321,6 +499,10 @@
             
         }            
 
+        /**
+         * Refactoriza la seccion de servicios ofertados por la empresa.
+         * @param type $datos Datos de los servicios que ofrece la empresa.
+         */
         public function refactory_servicios($datos){            
             
             $resultados="";
@@ -348,6 +530,10 @@
         }   
         
         
+        /**
+         * Refactoriza la seccion de experiencias publicadas por la empresa
+         * @param Array $datos Datos sobre la experiencias realacionadas a la empresa.
+         */
         public function refactory_experiencias($datos){            
             
             $experiencias = "";
@@ -367,7 +553,10 @@
                         
         }        
             
-
+        /**
+         * Refactoriza el mapa con las coordenadas de la empresa.
+         * @param Array $coordenadas Coordenadas de la empresa.
+         */
         public function refactory_mapa( $coordenadas ){            
             $this->latitud = $coordenadas[0]->latitud;
             $this->longitud = $coordenadas[0]->longitud;                      
@@ -375,7 +564,9 @@
         }        
                 
              
-        
+        /**
+         * Refactoriza todo el contenido de la interfaz grafica de la empresa.
+         */        
         public function refactory_contenido(){            
             
             foreach($this->dic_contenido as $clave=>$valor){               
@@ -385,6 +576,12 @@
                         
         }        
         
+        /**
+         * Refactoriza la pagina total, inserta: metas, liks y contenido para final mente retornar 
+         * toda la pagina y ser mostrado usuario final.
+         * 
+         * @return cadena_caracteres html final de la pagina para mostrar.
+         */                                  
         public function refactory_total(){
                         
             $globales = new Global_var();         

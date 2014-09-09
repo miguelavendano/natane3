@@ -216,6 +216,30 @@ class ModelUsuarios{
         }
         
 
+        
+        /**
+         * Funcion para realizar prueba de rendimiento del motor de bases de datos.
+         * @param String $queryString
+         * @return array
+         */
+        public function prueba_usuario($nombreUser){
+            
+            $queryString = "start n=node(*) where n.type='Usuario' and n.nombre='".$nombreUser."' return n";                    
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();            
+            
+            if($result) return true;
+            else return false;
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         public function aletorio($cant){                       
             
             $vector = array();            
@@ -500,6 +524,21 @@ class ModelUsuarios{
             return $user;
 
         }
+        
+        
+        public function get_cantidadUsuarioaTotal(){
+            
+            $query = "START n=node(*) where n.type='Usuario' RETURN count(n)";            
+            $consulta = new Cypher\Query(Neo4Play::client(), $query);
+            $result = $consulta->getResultSet();     
+            
+            foreach ($result as $row){
+                
+                $resultado = $row[0];
+            }                  
+                        
+            return $resultado;
+        }        
             
         
         

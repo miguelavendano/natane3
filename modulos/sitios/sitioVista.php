@@ -2,43 +2,193 @@
 
     require_once '../../core/global_var.php';
 
+    
+    /**
+     * Clase controlador de los elementos html5 utilizados en el modulo Empresa.
+     * 
+     */  
     class SitioVista{
         
+        /**
+         *Variable que contiene el codigo html de la estructura
+         * general del la interfaz grafica. (plantillas/generales/base.html)
+         * @var String  
+         */                
         public $base;
+        
+        /**
+         *Variable que contiene el codigo html del header de esta interfaz. (plantillas/generales/head.html)
+         * @var String  
+         */         
         public $head;
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. plantillas/generales/barraModal.html
+         * @var String  
+         */        
         public $modal;
+        /**
+         *Variable que contiene el codigo html de los " meta links" que serán utlizados.
+         * @var String  
+         */                  
         public $links;
+        
+        /**
+         *Variable que contiene el codigo html de las etiquetas "meta" utilizadas para esta interfaz
+         * @var String  
+         */             
         public $metas;
+        
+        /**
+         *Variable que contiene el codigo html de las etiquetas "script" utilizadas para esta interfaz
+         * @var String  
+         */    
+        public $script;         
+        
+        /**
+         *Variable diccionario general de las variables que poseen fracmentos html que generan el contenido de la interfaz grafica del Sitio.
+         * @var String  
+         */                   
         private $dic_base;
 
+        /**
+         *Variable que contiene el id del sitio a mostrar.
+         * @var String 
+         */        
         public $id_sitio;
+        
+        /**
+         *Variable que contiene en nombre del sitio.
+         * @var String 
+         */        
         public $nombre;
+        
+        /**
+         *Variable la estructura html5 de la estructura del perfil del sitio. (plantillas/sitios/perfilSitio.html).
+         * @var String 
+         */        
         public $sitio;        
+        
+        /**
+         *Variable la estructura html5 del slider principal del Sitio. (plantillas/sitios/slider_sitio.html).
+         * @var String 
+         */        
         public $slider_sitio;        
+        /**
+         *Variable la estructura html5 del formulario para editar el slider principal del Sitio. (plantillas/generales/editar_slider.html).
+         * @var String 
+         */                    
         public $edita_slider;
+        
+        /**
+         *Variable la estructura html5 de la estructura de los datos de contacto. (plantillas/sitios/contacto.html).
+         * @var String 
+         */          
         public $contacto;
+        
+        /**
+         *Variable la estructura html5 de la sección de seguidores. (/plantillas/generales/seguidores.html).
+         * @var String 
+         */         
         public $seguidores;
+        
+        /**
+         *Variable la estructura html5 de la sección de personas. (/plantillas/generales/seguidores.html).
+         * @var String
+         */        
         public $gustaria;
+        
+        /**
+         *Variable la estructura html5 del ferrocarril de sitios relacionados. (plantillas/generales/ferrocarril.html).
+         * @var String 
+         */          
         public $ferrocarril;
-        public $elemento_ferro;
+        
+        /**
+         *Variable la estructura html5 de los elementos del ferrocarril de sitios relacionados. (plantillas/generales/elemento_ferro.html).
+         * @var String 
+         */          
+        public $elemento_ferro;        
+        
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. (plantillas/generales/barraModal.html)
+         * @var String  
+         */                     
         public $modales;       
+
+        /**
+         *Variable que contiene el codigo html de la imagen activa que se encuentra en el Slider.
+         * @var String  
+         */                            
         public $img_slider_act;
+
+        /**
+         *Variable que contiene el codigo html de la imagenes que se encuentran en el Slider.
+         * @var String  
+         */                                    
         public $img_slider;
-        public $descripcion;        
+
+        /**
+         *Descripcion de la empresa.
+         * @var String 
+         */
+        public $descripcion;
+        
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de edición de datos. (plantillas/empresas/editarEmpresa.html)
+         * @var String  
+         */            
         public $editar;
+        
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de registro de nuevo sitio. (plantillas/sitios/registrarSitio.html)
+         * @var String  
+         */            
         public $registrar;
+        /**
+         *Coordenada latitud de la ubicacion de la empresa.
+         * @var String 
+         */
         public $latitud;
+
+        /**
+         *Coordenada longitud de la ubicacion de la empresa.
+         * @var String 
+         */        
         public $longitud;
+        
+        /**
+         *Cantidad de votos de confianza que posee el sitio.
+         * @var int  
+         */
         public $losvotos;
+        
+        /**
+         *Variable que contiene el codigo html de las experiencias de los sitio. (plantillas/sitios/registrarSitio.html)
+         * @var String 
+         */
         public $experiencias;        
                 
+        /**
+         *Variable diccionario general de las variables que contienen la estructura general de la interfaz grafica del sitio.
+         * @var String  
+         */                      
         public $dic_general;
-        public $dic_contenido;
+        /**
+         *Variable diccionario general de las variables que poseen fracmentos html que generan el contenido de la interfaz grafica del sitio.
+         * @var String  
+         */           
+        public $dic_contenido;        
+        
 
 
         
 
-        
+        /**
+         * Constructor de la clase. 
+         * Inicializa la gran mayoria de atributos de la clase
+         * 
+         * @param String $id Id del sitio.
+         */           
         public function __construct($id) {
 
             $this->id_sitio = $id;
@@ -114,6 +264,11 @@
         }
         
         
+        /**
+         * Metodo encargado de actualizar los datos de los diccionarios
+         * a medida que se van refactorizando y cambiando constantemente.
+         * 
+         */                
         public function actualizar_diccionarios(){
             
             $this->dic_general = array('metas' => $this->metas,
@@ -147,6 +302,7 @@
         /**
          * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
          * esta accediendo.
+         * @param int $opcion Indica si existe incializada una sesión
          */
         public function refactory_header($opcion){
             
@@ -168,7 +324,11 @@
         }  
         
         
-        
+        /**
+         * Refactoriza el eslider principal con las imagenes del sitio.
+         * 
+         * @param Array $datos Imagenes del sitio
+         */        
         public function refactory_slider($datos){   // contruye el slider
             
             if(count($datos)>1){
@@ -191,6 +351,10 @@
         
         
         
+        /**
+         * Refactoriza la sección de contacto del sitio.
+         * @param Array $datos Dados de contacto del sitio.
+         */        
         public function refactory_contacto($datos){                
             
             $this->nombre = $datos[0]->nombre;
@@ -208,6 +372,10 @@
         }
         
         
+        /**
+         * Refactoriza la sección de visitantes del sitio.
+         * @param type $datos Datos de los visitantes del sitio.
+         */
         public function refactory_visitantes($datos){
             
             $complete = "";
@@ -230,6 +398,10 @@
         }
         
 
+        /**
+         * Refactoriza la sección de "Gustaria" del sitio.
+         * @param Array $datos Datos de los usuarios que les gustaria ir al sito.
+         */
         public function refactory_gustaria($datos){            
             
             $quiere = "";
@@ -248,8 +420,11 @@
             $this->actualizar_diccionarios();
         }        
         
-        
-        public function refactory_ferrocarril(array $datos){  // contruye el ferrocarril
+        /**
+         * Refactoriza el ferrocarril de sitios relacionados.
+         * @param Array $datos Datos sobre sitios relacionados.
+         */
+        public function refactory_ferrocarril($datos){  // contruye el ferrocarril
             
             $elementos="";     // variable que construirá los elementos de ferrocarril
             $aux="";                        
@@ -274,7 +449,10 @@
             
         }            
      
-
+        /**
+         * Refactoriza la seccion de experiencias publicadas por los usuarios.
+         * @param Array $datos Datos las experiencias relacionadas al sitio.
+         */
         public function refactory_experiencias($datos){            
             
             $experiencias_sitio = "";
@@ -302,7 +480,9 @@
                         
         }               
         
-        
+        /**
+         * Refactoriza todo el contenido de la interfaz grafica del sitio.
+         */               
         public function refactory_contenido(){            
             
             foreach($this->dic_contenido as $clave=>$valor){
@@ -313,7 +493,12 @@
             $this->actualizar_diccionarios();
         }        
         
-        
+        /**
+         * Refactoriza la pagina total, inserta: metas, liks y contenido para final mente retornar 
+         * toda la pagina y ser mostrado usuario final.
+         * 
+         * @return String Html final de la pagina para mostrar.
+         */                                          
         public function refactory_total(){
                         
             $globales = new Global_var();         

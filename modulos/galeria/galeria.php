@@ -6,19 +6,41 @@
     session_start();
     
 
+    /**
+     * Clase controlador principal del modulo Galeria.
+     */        
     class Galerias{
 
+        /**
+         *Instancia de la clase vista.
+         * @var GaleriaVista 
+         */
         public $vista;
+        
+        /**
+         *Instancia de la clase Modelo.
+         * @var GaleriaModel 
+         */
         public $modelo;
         
-        
+
+        /**
+         * Constructor de la clase.
+         * Metodo donde se inicializan los atributos de la clase.
+         */        
         public function __construct() {
             
                 $this->vista = new GaleriaVista();
                 $this->modelo = new GaleriaModel();
         }       
         
-        
+
+        /**
+         * Ejecuta el metoddo get_img_asociadas() y get_img_empresas() de la clase modelo.
+         * @param String $id Id de la galeria.
+         * @param type $galeria Indica si la galeria pertenese a un sitio (1) o a una empresa (0)
+         * @return Array Datos de las fotos.
+         */
         public function fotos($id, $galeria){
 
             if($galeria == 0)
@@ -29,17 +51,13 @@
             
             
             return $resutlados;
-        }
+        }        
         
-        
-        /* Esta funcion valida el tipo de elemento que 
-         * esta solicitando su galeria.
-         *  
-         * retorna 0 si el id no pertenece a un sitio o empresa
-         * 
-         * retorna 1, si es un sitio o 2 si es una empresa
+        /**
+         * Metodo que valida si el id pasado por parametro get pertenese a una galeria, y si esta galeria es de una empresa o de un sitio.
+         * @param String $id Id captado por parametro get.
+         * @return int retorna 0 si el id no pertenece a un sitio o empresa y 1, si es un sitio o 2 si es una empresa
          */
-
         public function validar($id){
             
             if($this->modelo->validar_sitio($id))                
@@ -52,6 +70,11 @@
         }
     
         
+        /**
+         * Ejecuta el metodo traer_nombre() de la calse modelo.
+         * @param String $id Id de la galeria.
+         * @return String Nombre del padre de la galeria.
+         */
         public function nombre_padre($id){
             
             $nombre = $this->modelo->traer_nombre($id);            
@@ -59,7 +82,13 @@
         }
         
         
-        
+        /**
+         * Es el metodo principal que controla la interacción entre el modelo y la vista.
+         * @param String $id Id de la galeria.
+         * @param String $url_padre Url del sitio o empresa al que pertenese esta galeria.
+         * @param int $galeria Indica el origen de la galeria.
+         * @param int $login El tipo de sesion.
+         */
         public function main($id, $url_padre, $galeria, $login){
             
             $this->vista->refactory_header($login); 

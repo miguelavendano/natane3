@@ -1,0 +1,603 @@
+<?php
+
+    require_once '../../core/global_var.php';
+
+    
+    /**
+     * Clase controlador de los elementos html5 utilizados en el modulo Empresa.
+     * 
+     */    
+    class EmpresaVista{
+
+        
+        /**
+         *Variable que contiene el codigo html de la estructura
+         * general del la interfaz grafica. (plantillas/generales/base.html)
+         * @var String  
+         */        
+        public $base;
+        /**
+         *Variable que contiene el codigo html del header de esta interfaz. (plantillas/generales/head.html)
+         * @var String  
+         */              
+        public $head;
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. plantillas/generales/barraModal.html
+         * @var String  
+         */                
+        public $modal;
+        /**
+         *Variable que contiene el codigo html de los " meta links" que serán utlizados.
+         * @var String  
+         */                
+        public $links;
+        /**
+         *Variable que contiene el codigo html de las etiquetas "meta" utilizadas para esta interfaz
+         * @var String  
+         */                
+        public $metas;
+        
+        /**
+         *Variable que contiene el codigo html de las etiquetas "script" utilizadas para esta interfaz
+         * @var String  
+         */    
+        public $script;        
+        
+        /**
+         *Variable que contiene en nombre de la empresa.
+         * @var String 
+         */
+        public $nombre;
+        
+        /**
+         *Variable la estructura html5 de la estructura del perfil de la empresa. (plantillas/empresas/perfilEmpresa.html).
+         * @var String 
+         */
+        public $empresa; 
+        
+        /**
+         *Variable la estructura html5 de la estructura de los servicios de la empresa. (plantillas/empresas/servicios.html).
+         * @var String 
+         */        
+        public $servicios;
+        
+        /**
+         *Variable la estructura html5 de la estructura de las experiencias de la empresa. (plantillas/empresas/servicios.html).
+         * @var String 
+         */                
+        public $expe;
+        
+        /**
+         *Variable la estructura html5 del formulario para editar la informacion de una experiencias de la empresa. (plantillas/empresas/editarExperienciaEmpresa.html).
+         * @var String 
+         */
+        public $edi_exp;
+        
+        /**
+         *Variable la estructura html5 del slider principal de la empresa. (plantillas/empresas/slider_empresas.html).
+         * @var String 
+         */
+        public $slider_empresa;        
+
+        /**
+         *Variable la estructura html5 de la estructura de los datos de contacto. (plantillas/sitios/contacto.html).
+         * @var String 
+         */        
+        public $contacto;
+        
+        /**
+         *Variable la estructura html5 de la sección de seguidores. (/plantillas/generales/seguidores.html).
+         * @var String 
+         */   
+        public $seguidores;
+        
+        /**
+         *Variable la estructura html5 de la sección de personas. (/plantillas/generales/seguidores.html).
+         * @var String
+         */
+        public $gustaria;
+        
+        /**
+         *Variable la estructura html5 del ferrocarril de sitios relacionados. (plantillas/generales/ferrocarril.html).
+         * @var String 
+         */  
+        public $ferrocarril;        
+
+        /**
+         *Variable la estructura html5 de los elementos del ferrocarril de sitios relacionados. (plantillas/generales/elemento_ferro.html).
+         * @var String 
+         */          
+        public $elemento_ferro;
+        
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. (plantillas/generales/barraModal.html)
+         * @var String  
+         */                     
+        public $modales;       
+
+        /**
+         *Variable que contiene el codigo html de la imagen activa que se encuentra en el Slider.
+         * @var String  
+         */                            
+        public $img_slider_act;
+
+        /**
+         *Variable que contiene el codigo html de la imagenes que se encuentran en el Slider.
+         * @var String  
+         */                                    
+        public $img_slider;
+
+        /**
+         *Descripcion de la empresa.
+         * @var String 
+         */
+        public $descripcion;
+        
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de edición de datos. (plantillas/empresas/editarEmpresa.html)
+         * @var String  
+         */            
+        public $editar;
+
+        /**
+         *Coordenada latitud de la ubicacion de la empresa.
+         * @var String 
+         */
+        public $latitud;
+
+        /**
+         *Coordenada longitud de la ubicacion de la empresa.
+         * @var String 
+         */        
+        public $longitud;   
+        
+        /**
+         *Estructura general html5 que genera el boton de confianza,,
+         * @var String 
+         */
+        public $confianza;
+
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de creacion de servicios de la empresa. (plantillas/empresas/crearServicio.html)
+         * @var String  
+         */                    
+        public $creaServicio;
+
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de edición de datos. (plantillas/empresas/editarEmpresa.html)
+         * @var String  
+         */                    
+        public $editservicio;
+                
+        /**
+         *Variable diccionario general de las variables que contienen la estructura general de la interfaz grafica de la Empresa.
+         * 
+         * @var String  
+         */                      
+        public $dic_general;
+        /**
+         *Variable diccionario general de las variables que poseen fracmentos html que generan el contenido de la interfaz grafica de la Empresa.
+         * @var String  
+         */           
+        public $dic_contenido;        
+        
+        /**
+         *Variable que contiene el id de la empresa a mostrar.
+         * @var String 
+         */
+        public $id_empresa;
+
+
+        
+
+        /**
+         * Constructor de la clase. 
+         * Inicializa la gran mayoria de atributos de la clase
+         * 
+         * @param String $id Id de la empresa a mostrar
+         */          
+        public function __construct($id) {
+            
+            
+            $this->id_empresa = $id;
+            $this->img_slider_act = '<div class="item active">
+                                        <img src="{IMG_NATANE}/{url}" />
+                                    </div>';
+            $this->img_slider = '<div class="item">
+                                    <img src="{IMG_NATANE}/{url}" />
+                                </div>';            
+                  
+        
+            $this->base = file_get_contents('../../plantillas/generales/base.html');
+            $this->head = file_get_contents('../../plantillas/generales/head.html');
+            $this->modal = file_get_contents('../../plantillas/generales/barraModal.html');                                    
+            
+            $this->empresa= file_get_contents('../../plantillas/empresas/perfilEmpresa.html');   
+            $this->slider_empresa= file_get_contents('../../plantillas/empresas/slider_empresas.html');      
+            $this->servicios = file_get_contents('../../plantillas/empresas/servicios.html');      
+            $this->editservicio = file_get_contents('../../plantillas/empresas/editarServicio.html');
+            $this->expe = file_get_contents('../../plantillas/empresas/experiencia_empresa.html');      
+            $this->edi_exp = file_get_contents('../../plantillas/empresas/editarExperienciaEmpresa.html');
+            $this->contacto = file_get_contents('../../plantillas/sitios/contacto.html'); 
+            $this->seguidores = file_get_contents('../../plantillas/generales/seguidores.html');
+            $this->gustaria= $this->seguidores;
+            $this->ferrocarril= file_get_contents('../../plantillas/generales/ferrocarril.html');
+            $this->editar = file_get_contents('../../plantillas/empresas/editarEmpresa.html');
+            $this->creaServicio = file_get_contents('../../plantillas/empresas/crearServicio.html');
+            $this->elemento_ferro= file_get_contents('../../plantillas/generales/elemento_ferro.html');
+            $this->modales= file_get_contents('../../plantillas/generales/barraModal.html');
+                     
+            $this->metas = '<meta charset="utf-8">
+                            <title> {TITULO} </title>    
+                            <meta name="description" content="">
+                            <meta name="author" content="">
+                            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->';
+            
+            $this->links = '<link href="{CSS}/bootstrap.css" rel="stylesheet">
+                            <link href="{CSS}/bootstrap-responsive.css" rel="stylesheet">    
+                            <link href="{CSS}/estilos.css" rel="stylesheet">    
+                            <link href="{CSS}/estilos_perfil_empresa.css" rel="stylesheet"> 
+                            <link href="{CSS}/estilos_modal.css" rel="stylesheet" />
+                            <link href="{CSS}/estilos_ferrocarril.css" rel="stylesheet">    
+                            <link href="{CSS}/estilos_resultado_busqueda.css" rel="stylesheet">                                
+                            <link href="{CSS}/font-awesome.min.css" rel="stylesheet" />    ';
+
+            
+
+            $this->script = "";            
+            
+            
+            
+            $this->dic_general = array('metas' => $this->metas,
+                                    'links' => $this->links ,
+                                    'script' => $this->script,
+                                    'head' => $this->head ,
+                                    'contenido' => $this->empresa);
+            
+            
+            $this->dic_contenido = array('slider_empresa' => $this->slider_empresa, 
+                                        'descripcion' => $this->descripcion, 
+                                        'contacto' => $this->contacto, 
+                                        'seguidores' => $this->seguidores, 
+                                        'gustaria' => $this->gustaria, 
+                                        'ferrocarril' => $this->ferrocarril,
+                                        'modales' => $this->modal,
+                                        'servicios' => $this->servicios,
+                                        'editarservicio' => $this->editservicio,
+                                        'experiencias'=> $this->expe,
+                                        'edita_experiencia'=> $this->edi_exp,
+                                        'nombre_empresa'=>$this->nombre,
+                                        'editarEmpresa' => $this->editar,
+                                        'latitud'=>$this->latitud,                
+                                        'longitud'=>$this->longitud,
+                                        'confianza'=>$this->confianza,
+                                        'id_empresa'=>$this->id_empresa,
+                                        'crearServicio'=>$this->creaServicio);
+        }
+        
+        
+        /**
+         * Metodo encargado de actualizar los datos de los diccionarios
+         * a medida que se van refactorizando y cambiando constantemente.
+         * 
+         */        
+        public function actualizar_diccionarios(){
+            
+            $this->dic_general = array('metas' => $this->metas,
+                                    'links' => $this->links ,
+                                    'script' => $this->script,
+                                    'head' => $this->head ,
+                                    'contenido' => $this->empresa);
+            
+            $this->dic_contenido = array('slider_empresa' => $this->slider_empresa, 
+                                        'descripcion' => $this->descripcion, 
+                                        'contacto' => $this->contacto, 
+                                        'seguidores' => $this->seguidores, 
+                                        'gustaria' => $this->gustaria, 
+                                        'ferrocarril' => $this->ferrocarril,
+                                        'modales' => $this->modal,
+                                        'servicios' => $this->servicios,
+                                        'editarservicio' => $this->editservicio,                
+                                        'experiencias'=> $this->expe,
+                                        'edita_experiencia'=> $this->edi_exp,
+                                        'nombre_empresa'=>$this->nombre,
+                                        'editarEmpresa' => $this->editar,
+                                        'latitud'=>$this->latitud,                
+                                        'longitud'=>$this->longitud,
+                                        'confianza'=>$this->confianza,
+                                        'id_empresa'=>$this->id_empresa,
+                                        'crearServicio'=>$this->creaServicio);
+        }
+        
+        
+        
+        /**
+         * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
+         * esta accediendo.
+         * @param int $opcion Indica si existe incializada una sesión
+         */
+        public function refactory_header($opcion){
+            
+            switch($opcion){                                
+                case 1:
+                    
+                    $this->head = Global_var::refactory_header(true, false);                    
+                    //$this->head .= "<br> <h1>Este es mi empresa</h1>";
+                    break;
+                case 2:
+                    $this->head = Global_var::refactory_header(true, false);                                        
+                    break;
+                
+                default:
+                    $this->head = Global_var::refactory_header(false, false);                                        
+                                        
+                break;               
+            }
+            
+        }  
+
+        
+        /**
+         * Refactoriza el eslider principal con las imagenes de la empresa.
+         * 
+         * @param Array $datos Imagenes de la empresa.
+         */
+        public function refactory_slider($datos){   // contruye el slider
+            
+            $imagenes = str_ireplace("{url}", $datos[0], $this->img_slider_act); // carga la imagen principal del slider
+
+            for($i=1; $i<count($datos); $i++){  // carga el resto de imagenes                             
+                $imagenes .= str_ireplace("{url}", $datos[$i], $this->img_slider);
+            }            
+                        
+            $this->slider_empresa = str_ireplace("{imagenes}", $imagenes, $this->slider_empresa);   // se remplazan todas las imagenes sobre el template de slider
+            
+            $this->actualizar_diccionarios();
+
+        }        
+        
+        
+        /**
+         * Refactoriza la sección de contacto de la empresa.
+         * @param Array $datos Dados de contacto de la empresa.
+         */
+        public function refactory_contacto($datos){                
+
+            $this->nombre = $datos[0]->nombre;
+            
+            $this->descripcion = $datos[0]->descripcion;
+            
+            $this->contacto = str_ireplace('{tel}',$datos[0]->telefono ,$this->contacto );
+            $this->contacto = str_ireplace('{dir}',$datos[0]->direccion ,$this->contacto );
+            $this->contacto = str_ireplace('{correo}',$datos[0]->correo ,$this->contacto );
+            $this->contacto = str_ireplace('{facebook}',$datos[0]->facebook ,$this->contacto );
+            $this->contacto = str_ireplace('{twitter}',$datos[0]->twitter ,$this->contacto );
+            $this->contacto = str_ireplace('{google}',$datos[0]->youtube ,$this->contacto );         
+            
+            $this->confianza = $datos[0]->confianza;           
+
+            $this->actualizar_diccionarios();
+            
+
+
+        }
+        
+        /**
+         * Refactoriza las seccion de amigos de la empresa.
+         * @param type $datos Datos sobre amigos de la empresa
+         */
+        public function refactory_amigos($datos){
+            
+            ///_------------
+            $complete = "";
+            $global = new Global_var();
+            $url = $global->url_usuario;
+            foreach ($datos as $valor){
+                $aux = $this->seguidores;
+                $aux = str_ireplace('{url}', $url, $aux);            
+                $aux = str_ireplace('{id}', $valor->id, $aux);            
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);            
+                $aux = str_ireplace('{nombre}', $valor->nick, $aux);  
+                $complete.= $aux;
+            }
+            
+            $this->seguidores = $complete;
+            $this->actualizar_diccionarios();
+            
+
+        }
+                      
+        
+        /**
+         * Refactoriza la seccion de clientes de la empresa.
+         * @param Array $datos Datos de los clientes de la empresa.
+         */
+        public function refactory_clientes_aliados($datos){            
+            
+            $complete = "";
+            
+            
+            foreach ($datos as $valor){
+                $global = new Global_var();
+                $empresa = '';
+                $nombre = '';
+                $url = '';
+                $aux = $this->gustaria;
+                //echo $valor->type;
+                if($valor->type == "Empresa"){                                    	         
+                    $empresa = 'style="background-color: #CBFEC1"';
+                    $nombre = $valor->nombre;
+                    $url = $global->url_empresa;
+                }else{
+                    $nombre = $valor->nick;
+                    $url = $global->url_usuario;
+                }            
+                $aux = str_ireplace('{empresa}', $empresa, $aux);            
+                $aux = str_ireplace('{id}', $valor->id, $aux);
+                $aux = str_ireplace('{url}', $url, $aux);
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                $aux = str_ireplace('{nombre}', $nombre, $aux);
+                $complete .= $aux;
+            }
+            
+            $this->gustaria = $complete;
+            $this->actualizar_diccionarios();
+
+        }        
+        
+        /**
+         * Refactoriza el ferrocarril de sitios relacionados.
+         * @param Array $datos Datos sobre sitios relacionados.
+         */
+        public function refactory_ferrocarril($datos){  // contruye el ferrocarril
+
+            
+            $elementos="";     // variable que construirá los elementos de ferrocarril
+            $aux="";                        
+            
+            
+            foreach ($datos as $valor){   // construye los elementos del ferrocarril
+                
+                $aux = $this->elemento_ferro;                  
+                $aux = str_ireplace("{id_sitio}", $valor->id, $aux);
+                $aux = str_ireplace("{icono}", $valor->tipo_sitio, $aux);                
+                $aux = str_ireplace("{nombre}", $valor->nombre, $aux);                
+                $aux = str_ireplace("{imagen}", $valor->imagen, $aux);                                              
+                
+                $elementos = $elementos.$aux;  
+            }
+            
+            // termina de ensamblar los elementos del ferrocarril con la estructura general del mismo            
+            $this->ferrocarril = str_ireplace("{contenido_ferro}", $elementos, $this->ferrocarril);
+            
+            $this->actualizar_diccionarios();// actualiza los valores del diccionarios de datos            
+            
+            
+//            $elementos="";     // variable que construirá los elementos de ferrocarril
+//            $aux="";                        
+//            
+//            
+//            for ($i=0; $i<count($datos); $i++){   // construye los elementos del ferrocarril
+//                
+//                $aux = $this->elemento_ferro;                  
+//                $aux = str_ireplace("{icono}", $datos[$i]->tipo, $aux);                
+//                $aux = str_ireplace("{nombre}", $datos[$i]->name, $aux);                
+//                $aux = str_ireplace("{imagen}", $datos[$i]->img, $aux);                                              
+//                
+//                $elementos = $elementos.$aux;  
+//                
+//                
+//                
+//            }
+//            
+//            // termina de ensamblar los elementos del ferrocarril con la estructura general del mismo            
+//            $this->ferrocarril = str_ireplace("{contenido_ferro}", $elementos, $this->ferrocarril);
+//            
+//            $this->actualizar_diccionarios();// actualiza los valores del diccionarios de datos
+            
+        }            
+
+        /**
+         * Refactoriza la seccion de servicios ofertados por la empresa.
+         * @param type $datos Datos de los servicios que ofrece la empresa.
+         */
+        public function refactory_servicios($datos){            
+            
+            $resultados="";
+            
+            for($c=0; count($datos); $c++){                
+                
+                $resultados .= '<div class="row-fluid">';                            
+                $i=0;
+                do{ 
+                    $servicio=array_shift($datos);
+                    $aux = $this->servicios;
+                    $aux = str_ireplace("{id_servicio}", $servicio->id, $aux);
+                    $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);
+                    $aux = str_ireplace("{imagen}", $servicio->imagen, $aux);
+                    $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);
+                    $resultados .= $aux;
+                    $i++;
+                }while((count($datos)!=0)&& $i<3);                
+                
+                $resultados .= '</div>';
+            }
+            
+            $this->servicios = $resultados;
+            $this->actualizar_diccionarios();
+        }   
+        
+        
+        /**
+         * Refactoriza la seccion de experiencias publicadas por la empresa
+         * @param Array $datos Datos sobre la experiencias realacionadas a la empresa.
+         */
+        public function refactory_experiencias($datos){            
+            
+            $experiencias = "";
+            
+            foreach ($datos as $valor){
+                $aux = $this->expe;
+                $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
+                $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
+                $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
+                $aux = str_ireplace('{comentario}',$valor->descripcion , $aux);
+                
+                $experiencias .= $aux;
+            }
+            
+            $this->expe = $experiencias;            
+            $this->actualizar_diccionarios();
+                        
+        }        
+            
+        /**
+         * Refactoriza el mapa con las coordenadas de la empresa.
+         * @param Array $coordenadas Coordenadas de la empresa.
+         */
+        public function refactory_mapa( $coordenadas ){            
+            $this->latitud = $coordenadas[0]->latitud;
+            $this->longitud = $coordenadas[0]->longitud;                      
+            $this->actualizar_diccionarios();
+        }        
+                
+             
+        /**
+         * Refactoriza todo el contenido de la interfaz grafica de la empresa.
+         */        
+        public function refactory_contenido(){            
+            
+            foreach($this->dic_contenido as $clave=>$valor){               
+                $this->empresa = str_ireplace('{'.$clave.'}', $valor, $this->empresa);                
+            }           
+            $this->actualizar_diccionarios();
+                        
+        }        
+        
+        /**
+         * Refactoriza la pagina total, inserta: metas, liks y contenido para final mente retornar 
+         * toda la pagina y ser mostrado usuario final.
+         * 
+         * @return cadena_caracteres html final de la pagina para mostrar.
+         */                                  
+        public function refactory_total(){
+                        
+            $globales = new Global_var();         
+            
+            foreach ($this->dic_general as $clave=>$valor){                    
+                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);                
+            }
+            
+            foreach ($globales->global_var as $clave => $valor){
+                $this->base = str_ireplace('{'.$clave.'}', $valor, $this->base);
+            }            
+                        
+            echo $this->base;
+        }
+        
+
+    }
+        
+?>

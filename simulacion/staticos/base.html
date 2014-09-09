@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ULTIMO Admin Dashboard Template</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<link href="staticos/css/font-awesome.css" rel="stylesheet" type="text/css" />
+<link href="staticos/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="staticos/css/animate.css" rel="stylesheet" type="text/css" />
+<link href="staticos/css/admin.css" rel="stylesheet" type="text/css" />
+<link href="staticos/plugins/tree-view/jquery.treeview.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="staticos/plugins/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="staticos/plugins/bootstrap-timepicker/compiled/timepicker.css" />
+<link rel="stylesheet" type="text/css" href="staticos/plugins/bootstrap-colorpicker/css/colorpicker.css" />
+
+
+</head>
+<body class="light_theme ">
+<div class="wrapper">
+  <!--\\\\\\\ wrapper Start \\\\\\-->
+  <div class="header">
+    <div class="logo" style="display:block"><img src="../estatico/img/turismeta.png" alt="" style="width: 150px;"/></div>      
+  </div>
+
+
+
+
+  <div class="contentpanel">
+    <!--\\\\\\\ contentpanel start\\\\\\-->
+    <div class="pull-left breadcrumb_admin clear_both">
+      <div class="pull-left page_title theme_color">        
+        <h1> </h1>
+        <h2 class="">Turismeta - Universidad de los Llanos - Julian David Varela P. - Miguel Angel Avendaño C.</h2>
+      </div>
+    </div>
+    <div class="container clear_both padding_fix">
+      <!--\\\\\\\ container  start \\\\\\-->
+      <div id="main-content">
+
+
+        <div class="tabs_left">
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a data-toggle="tab" href="#Section1">Prueba con 100.000 nodos</a></li>
+            <li class=""><a data-toggle="tab" href="#Section2">Prueba con 1'00.000 nodos</a></li>
+            <li class=""><a data-toggle="tab" href="#Section3">Prueba con 5'000.000 nodos</a></li>
+            <li class=""><a data-toggle="tab" href="#Section4">Prueba con 10'000.000 nodos</a></li>
+            <li class=""><a data-toggle="tab" href="#Section5" onclick="cargarPrueba('cargaPrueba','TOTAL')">Resumen Total</a></li>            
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div id="Section1" class="tab-pane fade active in">
+              <div class="page-content">
+                <div class="row">
+                    <div class="col-sm-9">
+                      <div class="row" style="background: white; padding: 20px;">
+                        <h1> Prueba con 100 (mil) Nodos.</h1>
+                        <button type="button" class="btn-lg btn-primary" onclick="cargarPrueba('cargaPrueba',100)">1. Cargar Datos</button>
+                        <button type="button" onclick="generarPrueba('genPrueba',100)" class="btn-lg btn-primary">2. Generar Prueba</button>
+                        <button type="button" id="EjecutP" class="btn-lg btn-primary" onclick="ejecutarPrueba('ejecPrueba',100)">3. Ejecutar Prueba</button>
+                      </div>
+                    </div>            
+                    <div class="col-sm-3">
+                      <div class="information green_info">   
+                        <div class="information_inner">
+                          <div class="info green_symbols"><i class="fa fa-repeat icon"></i></div>
+                          <span>TOTAL DE NODOS </span>
+                          <h1 class="bolded" id="tNodos100">----</h1>
+                          <div class="infoprogress_green">
+                            <div class="greenprogress"></div>
+                          </div>                    
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row" style="background: white; padding: 20px;">
+                  <div class="col-md-12">
+                        <div class="panel-body">
+
+                          <table class="table">
+                            <thead>
+                              <tr>                          
+                                <th class="h6"><b>NODO</b></th>
+                                <th class="h6"><b>TIPO</b></th>
+                                <th class="h6"><b>CONSULTA</b></th>
+                                <th class="h6"><b>TIEMPO (ms)</b></th>
+
+                              </tr>
+                            </thead>
+                            <tbody id="registrosGenerados100">
+                            </tbody>
+                          </table>  
+
+                        </div><!--/table-responsive-->
+                        
+
+                  </div><!--/col-md-12--> 
+                </div><!--/row-->
+                  
+
+                  
+                <div class="row">                  
+                  <div class="col-md-8">
+                    <div class="block-web">                                                      
+                      <div id="graficaResultados100" style="min-width: 310px; height: 400px; margin: 0 auto"></div>                
+                      <!--/custom-bar-chart-->
+                    </div><!--/block-web-->
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h4>Desglose total de Nodos</h4>
+                      </div>
+                      <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Nodo</th>
+                                    <th>Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaNodos100">
+
+                            </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div id="Section2" class="tab-pane fade active in">
+              <div class="page-content">
+                <div class="row">
+                    <div class="col-sm-9">
+                      <div class="row" style="background: white; padding: 20px;">
+                        <h1> Prueba con 1'000.000 de Nodos.</h1>
+                        <button type="button" class="btn-lg btn-primary" onclick="cargarPrueba('cargaPrueba',1000)">1. Cargar Datos</button>
+                        <button type="button" onclick="generarPrueba('genPrueba',1000)" class="btn-lg btn-primary">2. Generar Prueba</button>
+                        <button type="button" id="EjecutP" class="btn-lg btn-primary" onclick="ejecutarPrueba('ejecPrueba',1000)">3. Ejecutar Prueba</button>
+                      </div>
+                    </div>            
+                    <div class="col-sm-3">
+                      <div class="information green_info">   
+                        <div class="information_inner">
+                          <div class="info green_symbols"><i class="fa fa-repeat icon"></i></div>
+                          <span>TOTAL DE NODOS </span>
+                          <h1 class="bolded" id="tNodos1000">----</h1>
+                          <div class="infoprogress_green">
+                            <div class="greenprogress"></div>
+                          </div>                    
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row" style="background: white; padding: 20px;">
+                  <div class="col-md-12">
+                        <div class="panel-body">
+
+                          <table class="table">
+                            <thead>
+                              <tr>                          
+                                <th class="h6"><b>NODO</b></th>
+                                <th class="h6"><b>TIPO</b></th>
+                                <th class="h6"><b>CONSULTA</b></th>
+                                <th class="h6"><b>TIEMPO (ms)</b></th>
+
+                              </tr>
+                            </thead>
+                            <tbody id="registrosGenerados1000">
+                            </tbody>
+                          </table>  
+
+                        </div><!--/table-responsive-->
+                        
+
+                  </div><!--/col-md-12--> 
+                </div><!--/row-->
+                  
+
+                  
+                <div class="row">                  
+                  <div class="col-md-8">
+                    <div class="block-web">                                                      
+                      <div id="graficaResultados1000" style="min-width: 310px; height: 400px; margin: 0 auto"></div>                
+                      <!--/custom-bar-chart-->
+                    </div><!--/block-web-->
+                  </div>
+
+                  <div class="col-md-4">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h4>Desglose total de Nodos</h4>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Nodo</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaNodos1000">
+
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div id="Section3" class="tab-pane fade active in">
+              <div class="page-content">
+                <div class="row">
+                    <div class="col-sm-9">
+                      <div class="row" style="background: white; padding: 20px;">
+                        <h1> Prueba con 5'000.000 de Nodos.</h1>
+                        <button type="button" class="btn-lg btn-primary" onclick="cargarPrueba('cargaPrueba',5000)">1. Cargar Datos</button>
+                        <button type="button" onclick="generarPrueba('genPrueba',5000)" class="btn-lg btn-primary">2. Generar Prueba</button>
+                        <button type="button" id="EjecutP" class="btn-lg btn-primary" onclick="ejecutarPrueba('ejecPrueba',5000)">3. Ejecutar Prueba</button>
+                      </div>
+                    </div>            
+                    <div class="col-sm-3">
+                      <div class="information green_info">   
+                        <div class="information_inner">
+                          <div class="info green_symbols"><i class="fa fa-repeat icon"></i></div>
+                          <span>TOTAL DE NODOS </span>
+                          <h1 class="bolded" id="tNodos5000">----</h1>
+                          <div class="infoprogress_green">
+                            <div class="greenprogress"></div>
+                          </div>                    
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row" style="background: white; padding: 20px;">
+                  <div class="col-md-12">
+                        <div class="panel-body">
+
+                          <table class="table">
+                            <thead>
+                              <tr>                          
+                                <th class="h6"><b>NODO</b></th>
+                                <th class="h6"><b>TIPO</b></th>
+                                <th class="h6"><b>CONSULTA</b></th>
+                                <th class="h6"><b>TIEMPO (ms)</b></th>
+
+                              </tr>
+                            </thead>
+                            <tbody id="registrosGenerados5000">
+                            </tbody>
+                          </table>  
+
+                        </div><!--/table-responsive-->
+                        
+
+                  </div><!--/col-md-12--> 
+                </div><!--/row-->
+                  
+
+                  
+                <div class="row">                  
+                  <div class="col-md-8">
+                    <div class="block-web">                                                      
+                      <div id="graficaResultados5000" style="min-width: 310px; height: 400px; margin: 0 auto"></div>                
+                      <!--/custom-bar-chart-->
+                    </div><!--/block-web-->
+                  </div>
+
+                  <div class="col-md-4">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h4>Desglose total de Nodos</h4>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Nodo</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaNodos5000">
+
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div id="Section4" class="tab-pane fade active in">
+              <div class="page-content">
+                <div class="row">
+                    <div class="col-sm-9">
+                      <div class="row" style="background: white; padding: 20px;">
+                        <h1> Prueba con 10'000.000 de Nodos.</h1>
+                        <button type="button" class="btn-lg btn-primary" onclick="cargarPrueba('cargaPrueba',10000)">1. Cargar Datos</button>
+                        <button type="button" onclick="generarPrueba('genPrueba',10000)" class="btn-lg btn-primary">2. Generar Prueba</button>
+                        <button type="button" id="EjecutP" class="btn-lg btn-primary" onclick="ejecutarPrueba('ejecPrueba',10000)">3. Ejecutar Prueba</button>
+                      </div>
+                    </div>            
+                    <div class="col-sm-3">
+                      <div class="information green_info">   
+                        <div class="information_inner">
+                          <div class="info green_symbols"><i class="fa fa-repeat icon"></i></div>
+                          <span>TOTAL DE NODOS </span>
+                          <h1 class="bolded" id="tNodos10000">----</h1>
+                          <div class="infoprogress_green">
+                            <div class="greenprogress"></div>
+                          </div>                    
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row" style="background: white; padding: 20px;">
+                  <div class="col-md-12">
+                        <div class="panel-body">
+
+                          <table class="table">
+                            <thead>
+                              <tr>                          
+                                <th class="h6"><b>NODO</b></th>
+                                <th class="h6"><b>TIPO</b></th>
+                                <th class="h6"><b>CONSULTA</b></th>
+                                <th class="h6"><b>TIEMPO (ms)</b></th>
+
+                              </tr>
+                            </thead>
+                            <tbody id="registrosGenerados10000">
+                            </tbody>
+                          </table>  
+
+                        </div><!--/table-responsive-->
+                        
+
+                  </div><!--/col-md-12--> 
+                </div><!--/row-->
+                  
+
+                  
+                <div class="row">                  
+                  <div class="col-md-8">
+                    <div class="block-web">                                                      
+                      <div id="graficaResultados10000" style="min-width: 310px; height: 400px; margin: 0 auto"></div>                
+                      <!--/custom-bar-chart-->
+                    </div><!--/block-web-->
+                  </div>
+
+                  <div class="col-md-4">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h4>Desglose total de Nodos</h4>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Nodo</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaNodos10000">
+
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+                    </div>
+                </div>
+              </div>
+            </div>             
+            <div id="Section5" class="tab-pane fade active in">
+              <div class="page-content">
+                <div class="col-sm-9">                   
+                  <section class="panel default blue_title h4">
+                    <h1 style="text-aling:center;">Resumen de Pruebas</h1>
+                    <div class="panel-heading"> <b>Consultas Aplicadas</b> </div>
+                    <div class="panel-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="h6"><b>Consulta</b></th>
+                            <th class="h6"><b>Descripcion</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><b>START</b> a=node("idUsuario") <b>MATCH</b> a-[:Amigo]->b-[:Amigo]->c <b>RETURN</b> b</td>
+                            <td>Retorna la lista de amigos de los amigos del usuarios sobre el que se ejecutó la consulta</td>
+                          </tr>
+                          <tr>
+                            <td>START a=node("idUsuario") MATCH a-[:Amigo]->b-[:Amigo]->c RETURN b</td>
+                            <td>Retorna la lista de usuarios que siguen a los usuarios que confian en una empresa en particular</td>
+                          </tr>
+                          <tr>
+                            <td>START a=node("idUsuario") MATCH a-[:Amigo]->b-[:Amigo]->c RETURN b</td>
+                            <td>Retorna los comentarios sobre las imagenes de una experiencia que esta asociada un sitio especifico</td>
+                          </tr>                           
+                        </tbody>
+                      </table>
+                    </div>
+                  </section>                
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <section class="panel default blue_title h4">
+                        <div class="panel-heading"> <b>Consulta 1</b> </div>
+                          <div class="panel-body">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Nodos</th>
+                                  <th>Tiempo (s)</th>
+                                </tr>
+                              </thead>
+                                <tbody id="resultadosC1">                            
+                                </tbody>
+                            </table>
+                            <table class="table">
+                              <tbody id="estadisticasC1">  
+                                <tr>
+                                  <td><b>Promedio<b></td>
+                                  <td class="red_text"><b id="pro1">3.32 s</b></td>
+                                </tr>                  
+                                <tr>
+                                  <td><b>Desviacion<b></td>
+                                  <td class="red_text"><b id="desv1">1.000</b></td>
+                                </tr>                       
+                              </tbody>
+                            </table>                            
+                          </div>                                                
+                        </section>
+                      </div>
+                      <div class="col-lg-4">
+                          <section class="panel default blue_title h4">
+                              <div class="panel-heading"> <b>Consulta 2</b> </div>
+                              <div class="panel-body">
+                                  <table class="table">
+                                      <thead>
+                                          <tr>
+                                              <th>Nodos</th>
+                                              <th>Tiempo (s)</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody id="resultadosC2">                            
+                                      </tbody>
+                                  </table>
+                                  <table class="table">
+                                      <tbody id="estadisticasC2">  
+                                          <tr>
+                                              <td><b>Promedio<b></td>
+                                              <td class="red_text"><b id="pro2">3.32 s</b></td>
+                                          </tr>                  
+                                          <tr>
+                                              <td><b>Desviacion<b></td>
+                                              <td class="red_text"><b id="desv2">1.000</b></td>
+                                          </tr>                   
+                                      </tbody>
+                                  </table>                            
+                              </div>
+                          </section>
+                      </div>
+                      <div class="col-lg-4">
+                          <section class="panel default blue_title h4">
+                              <div class="panel-heading"> <b>Consulta 3</b> </div>
+                              <div class="panel-body">
+                                  <table class="table">
+                                      <thead>
+                                          <tr>
+                                              <th>Nodos</th>
+                                              <th>Tiempo (s)</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody id="resultadosC3">  
+
+                                      </tbody>
+                                  </table>
+                                  <table class="table">
+                                      <tbody id="estadisticasC3">  
+                                          <tr>
+                                              <td><b>Promedio<b></td>
+                                              <td class="red_text"><b id="pro3">3.32 s</b></td>
+                                          </tr>                  
+                                          <tr>
+                                              <td><b>Desviacion<b></td>
+                                              <td class="red_text"><b id="desv3">1.000</b></td>
+                                          </tr>                                    
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </section>
+                      </div>              
+                  </div><!--/row-->                
+                </div>                     
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="information blue_info">   
+                      <div class="information_inner">
+                        <!-- <div class="info blue_symbols"><i class="fa fa-star icon"></i></div> -->
+                        <span>TOTAL DE NODOS </span>
+                        <h1 class="bolded" id="tNodosTOTAL">---</h1>
+                        <div class="infoprogress_blue">
+                          <div class="blueprogress"></div>
+                        </div>                    
+                      </div>
+                    </div>
+                  </div>                 
+                  <div class="row">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h4>Desglose total de Nodos</h4>
+                      </div>
+                      <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Nodo</th>
+                                    <th>Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaNodosTOTAL">
+
+                            </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>                           
+                </div>
+                     
+                <div class="row">            
+                    <div class="col-md-12">
+                    <div class="block-web">                                                      
+                      <div id="graficaResultadosTOTAL" style="min-width: 310px; height: 400px; margin: 0 auto"></div>                
+                      <!--/custom-bar-chart-->
+                    </div><!--/block-web-->
+                    </div>
+                </div>
+
+              </div>                
+            </div>
+            </div>                        
+          </div>
+
+          </div>
+        </div>
+
+
+
+      </div><!--/main-content end--> 
+    
+    </div>
+    <!--\\\\\\\ container  end \\\\\\-->
+  </div>
+
+
+
+</div>  <!-- fin del contenedor principal -->
+  
+
+
+<script src="staticos/js/jquery-2.1.0.js"></script>
+<script src="staticos/js/bootstrap.min.js"></script>
+
+<script src="staticos/js/Simulacion.js"></script>
+<script src="staticos/js/highcharts.js"></script>
+
+</body>
+</html>

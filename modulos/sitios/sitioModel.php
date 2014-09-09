@@ -7,15 +7,40 @@
     require_once('../../librerias/Neo4Play.php');    
     
 
+    /**
+     * Clase controlador de la interacción con la base de datos del modulo Sitios.
+     */
     class SitioModel{
         
+        /**
+         *Instancia de la Clase ModelSitios.
+         * @var  ModelSitios
+         */
         public $modelsitios;
+        
+        /**
+         *Instancia de la Clase ModelUsuarios.
+         * @var ModelUsuarios 
+         */        
         public $modelusuario;
+        
+        /**
+         *Instancia de la Clase ModelExperiencia.
+         * @var ModelExperiencia 
+         */                
         public $modelexpe;
+        
+        /**
+         *Id del Sitio
+         * @var String 
+         */        
         public $id_sitio;
         
         
-        
+        /**
+         * Metodo Constructor donde se inicializan los atribudos de la clase
+         * @param String $id Id del sitio a mostrar.
+         */
         public function __construct($id) {            
             $this->modelsitios = new ModelSitios();
             $this->modelusuario = new ModelUsuarios();
@@ -23,6 +48,10 @@
             $this->id_sitio = $id;            
         }       
         
+        /**
+         * Construye la consulta para retornar los datos de contacto del Sitio.
+         * @return Array
+         */
         public function get_contacto(){
             
             $query = "START n=node(".$this->id_sitio.") RETURN n";            
@@ -31,6 +60,10 @@
             
         }
         
+        /**
+         * Construye la consulta para retornar las imagenes a mostrar en el Slider Principal.
+         * @return Array 
+         */             
         public function get_slider(){
             
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Asociada]-e-[:Img]->i RETURN i.nombre";
@@ -38,11 +71,20 @@
             return $imagenes;
         }        
 
+        /**
+         * Construye la consulta para retornar la imagen principal del sitio.
+         * @return Array 
+         */            
         public function get_img_perfil(){
             
             return $this->modelsitios->get_img_perfil($this->id_sitio);
         }        
         
+        
+        /**
+         * Construye la consulta para retornar los datos para el ferrocarril de disitios relacionados.
+         * @return Array 
+         */            
         public function get_ferrocarril(){
 
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Semejantes]->b RETURN b;";
@@ -59,21 +101,33 @@
             return $final;            
         }        
         
-        
+
+        /**
+         * Construye la consulta para retornar los datos los usuarios que han visitado este sitio.
+         * @return Array 
+         */            
         public function get_visitantes(){   
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Fan]-b RETURN b;";            
             $resultado = $this->modelusuario->get_visitantes($query);
             return $resultado;
         }          
         
-        
+
+        /**
+         * Construye la consulta para retornar los datos los usuarios que les gustaría ir a este sitio.
+         * @return Array 
+         */              
         public function get_gustaria(){               
             $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Desea]-b RETURN b;";            
             $resultado = $this->modelusuario->get_desean($query);
             return $resultado;            
         } 
                 
-        
+
+        /**
+         * Construye la consulta para retornar la experiencias publicadas por los usuarios.
+         * @return Array 
+         */          
         public function get_experiencias_visitantes(){   
                         
             $query = "start n=node(".$this->id_sitio.") match n<-[:Asociada|Etiqueta]->b return b;";            

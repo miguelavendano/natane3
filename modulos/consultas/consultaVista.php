@@ -3,21 +3,80 @@
     require_once '../../core/global_var.php';
 
     
-    
+    /**
+     * Clase controlador de los elementos html5 utilizados en el modulo de consultas.
+     */
     class ConsultaVista{
         
+        /**
+         *Variable que contiene el codigo html de la estructura
+         * general del la interfaz grafica. (plantillas/generales/base.html)
+         * @var String  
+         */        
         private $base;
+        
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. (plantillas/consulta/elemento_respuesta.html')
+         * @var String  
+         */                                
         private $elem_result;
+        
+        /**
+         *Variable que contiene el codigo html de cada uno de los resultados de la consulta (plantillas/consulta/resultadoConsulta.html)
+         * @var String  
+         */                
         private $head;
+        
+        /**
+         *Variable que contiene el codigo html donde seran mostrados los resultados de la consulta (plantillas/consulta/resultadoConsulta.html)
+         * @var String 
+         */
         private $resul;
+        
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. plantillas/generales/barraModal.html
+         * @var String  
+         */                
         private $modal;
+        
+        /**
+         *Variable que contiene el codigo html de las etiquetas "meta" utilizadas para esta interfaz
+         * @var String  
+         */                
         private $links;
+        
+        /**
+         *Variable que contiene el codigo html de las etiquetas "script" utilizadas para esta interfaz
+         * @var String  
+         */                
         private $metas;
+        
+        /**
+         *Variable diccionario general de las variables que poseen fracmentos html que generan el contenido de la interfaz grafica de la Consulta.
+         * @var String  
+         */                
         private $dic_consulta;
+        
+        /**
+         *Variable diccionario general de las variables que contienen la estructura general de la interfaz grafica de consultas
+         * 
+         * @var String  
+         */                      
         private $dic_base;
+        
+        /**
+         *Variable que contiene el codigo html de las etiquetas "script" utilizadas para esta interfaz
+         * @var String  
+         */                
         public $script;
         
         
+        
+        /**
+         * Constructor de la clase.
+         * 
+         * Inicializa la gran mayoria de atributos de la clase
+         */        
         public function __construct() {
             
             $this->base = file_get_contents('../../plantillas/generales/base.html');
@@ -52,7 +111,13 @@
             
             
         }
+
         
+        /**
+         * Metodo encargado de actualizar los datos de los diccionarios
+         * a medida que se van refactorizando y cambiando constantemente.
+         * 
+         */        
         public function actualizar_diccionarios(){
             
             $this->dic_consulta = array('resultado'=>$this->elem_result, 'modales'=>$this->modal);
@@ -77,7 +142,10 @@
         
         
         
-        
+        /**
+         * Refactoriza cada uno de los elementos consultados.
+         * @param Array $datos Datos de los resultados de la consulta.
+         */
         public function refactory_elementos($datos){            
 
             if($datos){
@@ -133,7 +201,10 @@
             else { $this->elem_result = "<h2>NO se han encontrado coincidencias.</h2>"; }
         }
         
-        
+
+        /**
+         * Refactoriza totalmente la interfaz grafica del modulo consultas con sus repectivos resultados.
+         */
         public function refactory_resultados_total(){
             
             $this->actualizar_diccionarios();

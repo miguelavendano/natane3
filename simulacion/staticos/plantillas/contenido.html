@@ -1,0 +1,131 @@
+          <div class="row">
+              <div class="col-sm-9">
+                <div class="row" style="background: white; padding: 20px;">
+                  <br />
+                  <h1> {titulo}</h1>
+                  <br />
+
+                  <div class="row" style="margin-left: 20px;">
+                    <button id="{id_cargar}" type="button" class="btn-lg btn-primary">1. Cargar Datos</button>
+                    <button id="{id_generar}" type="button" class="btn-lg btn-primary">2. Gerear Prueba</button>
+                    <button id="{id_ejecut}" type="button" class="btn-lg btn-primary">3. Ejecutar Prueba</button>                                                  
+                  </div>                  
+
+                </div>
+
+              </div>            
+
+              <div class="col-sm-3">
+                <div class="information green_info">   
+                  <div class="information_inner">
+                    <div class="info green_symbols"><i class="fa fa-repeat icon"></i></div>
+                    <span>TOTAL DE NODOS </span>
+                    <h1 class="bolded">{total_nodos}</h1>
+                    <div class="infoprogress_green">
+                      <div class="greenprogress"></div>
+                    </div>
+                    
+                    <!-- <div class="pull-right" id="work-progress1"><canvas width="47" height="20" style="display: inline-block; vertical-align: top; width: 47px; height: 20px;"></canvas></div> -->
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="block-web">
+                <div class="porlets-content">
+                  <div class="table-responsive">
+
+                    <table id="{id_tabla}"class="table">
+                      <thead>
+                        <tr>
+                          <th>Nodo</th>
+                          <th>Cant</th>
+                          <th>Consulta 1</th>
+                          <th>Consulta 2</th>
+                          <th>Consulta 3</th>
+                          <th>T. C1</th>
+                          <th>T. C2</th>
+                          <th>T. C3</th>  
+                          <th>T. Promedio</th>                        
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>  
+                          <th></th>                        
+                        </tr>   
+                      </tbody>
+                    </table>  
+
+                  </div><!--/table-responsive-->
+                </div><!--/porlets-content-->
+
+              </div><!--/block-web--> 
+            </div><!--/col-md-12--> 
+          </div><!--/row-->
+
+
+            
+          <div class="row">            
+            <div class="col-md-8">
+              <div class="block-web">                                
+                
+                <div class="custom-bar-chart">
+                  <ul class="y-axis">
+                    <li><span>100</span></li>
+                    <li><span>80</span></li>
+                    <li><span>60</span></li>
+                    <li><span>40</span></li>
+                    <li><span>20</span></li>
+                    <li><span>0</span></li>
+                  </ul>
+                  <div class="bar">
+
+                  </div><!--/bar-->
+                  <div class="bar">
+                    <div class="value tooltips bar-bg-color" data-original-title="50%" data-toggle="tooltip" data-placement="top" style="height: 50%; width:50px;">   </div>
+                    <div class="title">Fab</div>
+                  </div><!--/bar-->
+                  <div class="bar ">
+                    <div class="value tooltips" data-original-title="40%" data-toggle="tooltip" data-placement="top" style="height: 40%; width:50px; margin-left:40px;"></div>
+                    <div class="title" style="margin-left:40px;">Mar</div>
+                  </div><!--/bar-->
+                  <div class="bar ">
+                    <div class="value tooltips" data-original-title="40%" data-toggle="tooltip" data-placement="top" style="height: 80%; width:50px; margin-left:80px;"></div>                    
+                    <div class="title" style="margin-left:80px;">Mar</div>
+                  </div><!--/bar-->                  
+                </div>
+                <!--/custom-bar-chart-->
+              </div><!--/block-web-->
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h4>Datos Adicionales</h4>
+                  </div>
+                  <div class="panel-body">
+                    <ul class="profile_list">
+                      <li class="profile_list-item">
+                        <p>P. General de respuesta: 10,93 ms</p>
+                      </li>
+                      <li class="profile_list-item">
+                        <p>P. General de respuesta: 10,93 ms</p>
+                      </li>                  
+                      <li class="profile_list-item">
+                        <p>P. General de respuesta: 10,93 ms</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>

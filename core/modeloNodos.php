@@ -130,5 +130,21 @@ class ModelNodos{
 //        }        
         
         
+        public function get_cantidadNodosTotal(){
+            
+            $query = "START n=node(*) RETURN count(n)";            
+            $consulta = new Cypher\Query(Neo4Play::client(), $query);
+            $result = $consulta->getResultSet();     
+            
+            foreach ($result as $row){
+                
+                $resultado = $row[0];
+            }                  
+                        
+            return $resultado;
+        }
+        
+        
+        
 }
 

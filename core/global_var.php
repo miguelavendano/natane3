@@ -28,7 +28,7 @@
             $this->CSS = '/natane3/estatico/css';
             $this->JS = '/natane3/estatico/js';
             $this->TITULO = "Natane";
-            $this->LOGO = "turismeta.png";
+            $this->LOGO = "logonatane1.png";
             $this->url_usuario = '/natane3/modulos/usuarios/usuario.php';
             $this->url_sitio = '/natane3/modulos/sitios/sitio.php';
             $this->url_empresa = '/natane3/modulos/empresas/empresa.php';

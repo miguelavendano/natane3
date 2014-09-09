@@ -349,4 +349,18 @@ class ModelEmpresa{
             
         }
         
+        public function get_cantidadEmpresasTotal(){
+            
+            $query = "START n=node(*) where n.type='Empresa' RETURN count(n)";            
+            $consulta = new Cypher\Query(Neo4Play::client(), $query);
+            $result = $consulta->getResultSet();     
+            
+            foreach ($result as $row){
+                
+                $resultado = $row[0];
+            }                  
+                        
+            return $resultado;
+        }          
+        
 }

@@ -2,23 +2,84 @@
 
     require_once '../../core/global_var.php';
 
+    
+    
+    /**
+     * Clase controlador de los elementos html5 utilizados en el modulo Empresa.
+     * 
+     */        
     class GaleriaVista{
         
-        public $base;        
-        public $head;        
+        
+        /**
+         *Variable que contiene el codigo html de la estructura
+         * general del la interfaz grafica. (plantillas/generales/base.html)
+         * @var String  
+         */        
+        public $base;
+        /**
+         *Variable que contiene el codigo html del header de esta interfaz. (plantillas/generales/head.html)
+         * @var String  
+         */              
+        public $head;
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. plantillas/generales/barraModal.html
+         * @var String  
+         */                
         public $modal;
+        /**
+         *Variable que contiene el codigo html de los " meta links" que serán utlizados.
+         * @var String  
+         */                
         public $links;
+        /**
+         *Variable que contiene el codigo html de las etiquetas "meta" utilizadas para esta interfaz
+         * @var String  
+         */                
         public $metas;
-        public $script;
         
+        /**
+         *Variable que contiene el codigo html de las etiquetas "script" utilizadas para esta interfaz
+         * @var String  
+         */    
+        public $script;          
+        
+        /**
+         *Variable la estructura html5 del maquetado de la interfaz de galeria. (plantillas/galeria/galeria.html).
+         * @var String 
+         */        
         public $galeria;
-        public $fotos;   
-        public $albun;
         
+        /**
+         *Variable la estructura html5 de las fotografias de la galeria. (plantillas/galeria/galeria.html).
+         * @var String 
+         */                
+        public $fotos;      
+        
+        /**
+         *Variable la estructura html5 del albun de la galeria. (plantillas/galeria/albun.html).
+         * @var String 
+         */                    
+        public $albun;
+        /**
+         *Variable diccionario general de las variables que poseen fracmentos html que generan el contenido de la interfaz grafica de la galeria.
+         * @var String  
+         */         
         public $dic_galeria;
+        
+        /**
+         *Variable diccionario general de las variables que contienen la estructura general de la interfaz grafica de la Empresa.
+         * 
+         * @var String  
+         */          
         public $dic_base;
         
-        
+
+        /**
+         * Constructor de la clase. 
+         * Inicializa la gran mayoria de atributos de la clase.
+         * 
+         */                
         public function __construct() {
             
             $this->base = file_get_contents('../../plantillas/generales/base.html');            
@@ -76,7 +137,11 @@
         }
         
         
-        
+        /**
+         * Metodo encargado de actualizar los datos de los diccionarios
+         * a medida que se van refactorizando y cambiando constantemente.
+         * 
+         */          
         public function actualizar_diccionarios(){
             
             $this->dic_base = array('metas'=>$this->metas,
@@ -106,7 +171,12 @@
         }              
         
         
-        
+        /**
+         * Funcion que refactoriza la interfaz de la galeria.
+         * @param String $id Id de la galeria.
+         * @param String $url_padre Url del padre de la galeria.
+         * @param String $nombre_galeria Nombre de la galeria.
+         */
         public function refactory_galeria($id, $url_padre, $nombre_galeria){
             
             $this->galeria = str_ireplace("{url_padre}", $url_padre, $this->galeria);
@@ -116,6 +186,14 @@
         }
         
         
+        /**
+         * Refactoriza todo el contenido de la interfaz grafica de la empresa.
+         */        
+        
+        /**
+         * Refactoriza todas la fotografias a mostrar en la galeria.
+         * @param Array $datos datos de las fotos.
+         */
         public function refactory_fotos($datos){            
             
             $resultados="";
@@ -180,6 +258,12 @@
 //        }
         
         
+        /**
+         * Refactoriza la Galeria totalmente, inserta: metas, liks y contenido para final mente retornar 
+         * toda la pagina y ser mostrado usuario final.
+         * 
+         * @return cadena_caracteres html final de la pagina para mostrar.
+         */            
         public function refactory_resultados_total(){
             
             $globales = new Global_var();

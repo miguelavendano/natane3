@@ -2,31 +2,114 @@
 
     require_once '../../core/global_var.php';
 
+    
+    
+    
+    /**
+     * Clase controlador de los elementos html5 utilizados en el modulo administrador.
+     * 
+     */
     class AdministradorVista{
         
+        /**
+         *Variable que contiene el codigo html de la estructura
+         * general del la interfaz grafica. (plantillas/generales/base.html)
+         * @var String  
+         */
         public $base;
+        /**
+         *Variable que contiene el codigo html del header de esta interfaz. (plantillas/generales/head.html)
+         * @var String  
+         */        
         public $head;
+        /**
+         *Variable que contiene el codigo html de la ventanas modales disponibles para esta interfaz. plantillas/generales/barraModal.html
+         * @var String  
+         */        
         public $modal;
+        /**
+         *Variable que contiene el codigo html de los " meta links" que serán utlizados.
+         * @var String  
+         */        
         public $links;
+        /**
+         *Variable que contiene el codigo html de las etiquetas "meta" utilizadas para esta interfaz
+         * @var String  
+         */        
         public $metas;
+        /**
+         *Variable que contiene el codigo html de las etiquetas "script" utilizadas para esta interfaz
+         * @var String  
+         */        
         public $script;
-
+        /**
+         *Variable que contiene el codigo html para mostrar la informacion del usuario(plantillas/administrador/datos_usuario.html)
+         * @var String  
+         */
         public $admin;
+        /**
+         *Variable que contiene el codigo html para mostrar el formulario de edición de datos. (plantillas/administrador/editarAdministrador.html)
+         * @var String  
+         */        
         public $editar;
+        /**
+         *Variable que contiene el codigo html para listar los usuarios con mas seguidores. (plantillas/index/listaUsuarios.html)
+         * @var String  
+         */        
         public $populares;
+        /**
+         *Variable que contiene el codigo html para listar los usuarios con mas seguidores. (plantillas/index/listaUsuarios.html)
+         * @var String
+         */        
         public $comparten;
+        /**
+         *Variable que contiene el codigo html de las noticias. (plantillas/administrador/noticias.html)          
+         * @var String
+         */        
         public $noticias;
+        /**
+         *Variable que contiene el codigo html de los eventos. (plantillas/administrador/eventos.html)
+         * @var String  
+         */        
         public $eventos;
+        /**
+         *Variable que contiene el codigo html de la estructura del perfil del administrador. (plantillas/administrador/perfilAdministrador.html)
+         * 
+         * @var String  
+         */        
         public $perfil;
+        /**
+         *Variable que contiene el codigo html del formulario para crear un nuevo sitio (plantillas/administrador/perfilAdministrador.html)
+         * @var String  
+         */        
         public $creaSitio;
+        /**
+         *Variable que contiene el codigo html del formulario para crear una nueva empresa (plantillas/empresas/registrarEmpresa.html)
+         * 
+         * @var String  
+         */        
         public $creaEmpre;
-        
+        /**
+         *Variable diccionario general de las variables que contienen la estructura general de la interfaz grafica del Administrador
+         * 
+         * @var String  
+         */              
         public $dic_general;
+        /**
+         *Variable diccionario general de las variables que poseen fracmentos html que generan el contenido de la interfaz grafica del Administrador.
+         * @var String  
+         */        
         public $dic_contenido;
-        public $dic_datos_user;        
+
+        //public $dic_datos_user;        
         
         
         
+        /**
+         * Constructor de la clase.
+         * 
+         * Inicializa la gran mayoria de atributos de la clase
+         */
         public function __construct() {
             
             $this->base = file_get_contents('../../plantillas/generales/base.html');
@@ -86,7 +169,7 @@
         
 
         /**
-         * Funcion encargada de actualizar los datos de los diccionarios
+         * Metodo encargado de actualizar los datos de los diccionarios
          * a medida que se van refactorizando y cambiando constantemente.
          * 
          */
@@ -118,6 +201,8 @@
         /**
          * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
          * esta accediendo.
+         * 
+         * @param Boolean $login Indica si existe incializada una sesión
          */
         public function refactory_header($login){          
         
@@ -148,7 +233,7 @@
         /**
          * Refactoriza los datos del usuario, nombre, apellidos, telefono y demas
          * 
-         * @param array $datos trae los datos del usuario.
+         * @param array $datos Contiene los datos del usuario.
          */                              
         public function refactory_administrador($datos){
                 
@@ -163,9 +248,9 @@
 
         
         /**
-         * Refactoriza los usuarios que se le mostraran al administrador, pueden ser los populares o los que mas coparten expereincias
-         * @param array $datos trae los datos de los usuarios
-         * @param array $tipo especifica el tipo de usuarios a mostrar (populares o comparten)
+         * Refactoriza indicadores que se le mostraran al administrador, pueden ser los populares o los que mas coparten expereincias
+         * @param array $datos Contiene los datos de los idicadores
+         * @param array $tipo especifica el tipo de indicadores a mostrar (populares o comparten)
          */   
         public function refactory_usuariosAdmin($datos,$tipo){
                         
@@ -199,8 +284,8 @@
         
         
         /**
-         * Refactoriza los datos de las noticas que publico el administrador         * 
-         * @param array $datos trae los datos de las noticias.
+         * Refactoriza los datos de las noticas que publico el administrador.
+         * @param array $datos Contiene los datos de las noticias.
          */                              
         public function refactory_noticias($datos){            
             
@@ -232,7 +317,7 @@
         
         /**
          * Refactoriza los datos de los eventos que publico el administrador         * 
-         * @param array $datos trae los datos de los eventos.
+         * @param array $datos Contiene los datos de los eventos.
          */                              
         public function refactory_eventos($datos){            
             
@@ -265,7 +350,9 @@
         
         
         
-
+        /**
+         * Refactoriza todo el contenido de la interfaz grafica del Administrador
+         */
         public function refactory_contenido(){            
             
             foreach($this->dic_contenido as $clave=>$valor){

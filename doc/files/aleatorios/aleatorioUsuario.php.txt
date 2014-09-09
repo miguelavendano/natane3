@@ -1,0 +1,252 @@
+<?php
+
+require_once('coneccion.php');
+require_once('modeloUsuario.php');
+
+$sexo=['M','F'];
+
+
+$mujer=['Sofia'
+,'Isabella'
+,'Camila'
+,'Valentina'
+,'Valeria'
+,'Mariana'
+,'Luciana'
+,'Victoria'
+,'Sara'
+,'Samantha'
+,'Emma'
+,'Catalina'
+,'Julieta'
+,'Mia'
+,'Antonella'
+,'Renata'
+,'Emilia'
+,'Natalia'
+,'Zoe'
+,'Nicole'
+,'Paula'
+,'Amanda'
+,'Fernanda'
+,'Emily'
+,'Antonia'
+,'Alejandra'
+,'Juana'
+,'Andrea'
+,'Manuela'
+,'Ana'
+,'Mercedes'
+,'Nancy'
+,'Guadalupe'
+,'Agustina'
+,'Elena'
+,'Maria'
+,'Jennifer'
+,'Sandra'
+,'Tatiana'
+,'Salome'];
+
+$hombre=['Santiago'
+,'Sebastian'
+,'Matías'
+,'Mateo'
+,'Nicolas'
+,'Alejandro'
+,'Diego'
+,'Samuel'
+,'Benjamin'
+,'Daniel'
+,'Joaquin'
+,'Lucas'
+,'Tomas'
+,'Gabriel'
+,'Martin'
+,'David'
+,'Emiliano'
+,'Jeronimo'
+,'Emmanuel'
+,'Agustín'
+,'José'
+,'Andres'
+,'Thiago'
+,'Leonardo'
+,'Felipe'
+,'Angel'
+,'Maximiliano'
+,'Christopher' 
+,'Juan'
+,'Adrián' 
+,'Pablo'
+,'Miguel'
+,'Rodrigo' 
+,'Alexander'
+,'Ignacio'
+,'Emilio'
+,'Dylan' 
+,'Bruno' 
+,'Carlos'
+,'Julian'];
+
+
+$apellido=['Gonzalez'
+,'Rodriguez'
+,'Gomez'
+,'Fernández'
+,'Lope'
+,'Diaz'
+,'Martinez'
+,'Perez'
+,'Garcia'
+,'Sánchez'
+,'Romero'
+,'Sosa'
+,'Álvarez'
+,'Torres'
+,'Ruiz'
+,'Ramirez'
+,'Flores'
+,'Acosta'
+,'Benitez'
+,'Medina'
+,'Suarez'
+,'Herrera'
+,'Aguirre'
+,'Pereyra'
+,'Gutierrez'
+,'Gimenez'
+,'Molina'
+,'Silva'
+,'Castro'
+,'Rojas'
+,'Ortíz'
+,'Nuñez'
+,'Luna'
+,'Juarez'
+,'Cabrera'
+,'Rios'
+,'Ferreyra'
+,'Godoy'
+,'Morales'
+,'Domínguez'];
+
+
+$municipios=['Acacias'
+,'Barranca de Upia'
+,'Cabuyaro'
+,'Castilla La Nueva'
+,'Cubarra'
+,'Cumaral'
+,'El Calvario'
+,'El Castillo'
+,'El Dorado'
+,'Fuente de Oro'
+,'Granada'
+,'Guamal'
+,'La Macarena'
+,'La Uribe'
+,'Lejanias'
+,'Mapiripán'
+,'Mesetas'
+,'Puerto Concordia'
+,'Puerto Gaitan'
+,'Puerto Lleras'
+,'Puerto Lopez'
+,'Puerto Rico'
+,'Restrepo'
+,'San Carlos de Guaroa'
+,'San Juan de Arama'
+,'San Juanito'
+,'San Martin'
+,'Villavicencio'
+,'Vista Hermosa'];
+
+$imagen=['perfil.jpg'
+,'andrea.jpg'
+,'julian.jpg'
+,'alejandro.jpg'
+,'capachos.jpg'
+,'elcielo.jpg'
+,'elrancho.png'
+,'la80.jpg'
+,'lanoche.jpg'
+,'mrfrogs.jpg'
+,'palosanto.png'
+,'paparazzi.jpg'
+,'yotoco.png'
+,'zona.jpg'];
+
+for ($j=0; $j<20; $j++) {
+
+    $s=rand(0,1);
+    $n=rand(0,30);
+    $a1=rand(0,30);
+    $a2=rand(0,30);
+    $m=rand(0,25);
+    $o=rand(0,25);
+    $i=rand(0,10);
+    
+    $gen=$sexo[$s];
+
+if($gen=='M'){
+    $nom=$hombre[$n];   
+    //echo $nom;
+    $face='http://www.facebook.com/AnDaLaTo';    
+    $twit='https://twitter.com/JulianDVarelaP';        
+}
+else if($gen=='F'){
+    $nom=$mujer[$n];      
+    //echo $nom;
+    $face='http://facebook.com/Liis.R.Jmz';    
+    $twit='https://twitter.com/andreita371';
+}   
+ 
+    
+    $ape=$apellido[$a1]." ".$apellido[$a2]; 
+    
+    echo $j." --> ".$nom." ".$ape."<br />";
+    
+    //echo " ".$ape."<br />";
+    $img=$imagen[$i];   
+    //echo $img."<br />";     
+    $nik=substr($nom,0,3)."_".substr($apellido[$a1],0,3); 
+    //echo $nik."<br />";
+    $naci=rand(1,29)."/".rand(1,12)."/".rand(1958,1997);
+    //echo $naci."<br />";
+    $orig=$municipios[$m];
+    //echo $orig."<br />";
+    $reci=$municipios[$o];;
+    //echo $reci."<br />";
+    $mail=$nom.".".$apellido[$a1]."@gmail.com";
+    //echo $mail."<br />";
+    $web=$nom.$apellido[$a1].substr($apellido[$a2],0,1).".com";
+    //echo $web."<br />";
+    $you='http://www.youtube.com/user/GisoftCo';
+    //echo $you."<br />";
+    $contra=substr($nom,0,3).substr($apellido[$a1],0,3).substr($apellido[$a2],0,3);
+    //echo $contra."<br />";    
+
+
+    $minodo = new Usuarios();
+    $minodo->nombre = $nom;
+    $minodo->apellido = $ape; 
+    $minodo->imagen = $img;
+    $minodo->nick = $nik;
+    $minodo->genero = $gen;   
+    $minodo->fecha_nacimiento = $naci;
+    $minodo->ciudad_origen = $orig;
+    $minodo->lugar_recidencia = $reci;
+    $minodo->correo = $mail;
+    $minodo->sitio_web = $web;    
+    $minodo->facebook = $face;
+    $minodo->twitter = $twit;
+    $minodo->youtube = $you;
+    $minodo->contraseña = $contra;
+    $minodo->type = 'Usuario';
+  
+    ModelUsuarios::crearNodoUsuario($minodo);
+    
+}
+    
+?>
+

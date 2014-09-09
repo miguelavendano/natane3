@@ -29,9 +29,19 @@
         
         public function ejecutar_query($query){  // query de tipo delete, update y insert
             
+            
+            try {
+                
             $this->abrir_conexion();
             $ret = $this->conexion->query($query);  // false o true
-            $this->cerrar_conexion();
+            $this->cerrar_conexion();                
+                
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+
+
+            
             return $ret;
         }
         
@@ -40,6 +50,7 @@
             $this->abrir_conexion();
             $datos = $this->conexion->query($query);           
             
+                        
             $retorno = array();
             
             while($row = $datos->fetch_array(MYSQLI_ASSOC)){

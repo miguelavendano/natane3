@@ -1,0 +1,76 @@
+<?php
+
+require_once('coneccion.php');
+
+use Everyman\Neo4j\Node,
+    Everyman\Neo4j\Index,
+    Everyman\Neo4j\Query\ResultSet,
+    Everyman\Neo4j\Relationship,
+    Everyman\Neo4j\Cypher,
+    Everyman\Neo4j\Cypher\Query,
+    Everyman\Neo4j\Command;
+
+
+class Validar{
+    
+    
+    public function __construct() {
+        ;
+    }
+    
+    
+    /**
+     * Realiza la consulta a Neo4j que se necesita para completar la validación
+     * 
+     * @param strig $id es el id del sitio que pasan por metodo get y se esta validando
+     * @return array retorna el resultado de la consulta que es el typo de nodo al que pertenese el id consultado.
+     */
+    public function aux_validar($id){
+
+        $query = "START n=node(".$id.") RETURN n.type";            
+        $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
+
+        $res = $queryRes->getResultSet();                                        
+        $tonto= $res[0]->offsetGet('n.type');                     
+        
+
+        
+        return $tonto;
+        
+    }
+    
+    
+   
+    /**
+     * valida si el ID que le pasan por metodo GET, corresponde a un sitio, empresa o usuario
+     * 
+     * @param stirng $id es el ID pasado por get
+     * @param string $caso El caso al que hace referencia ya que esta funcion es 
+     * utilizada para todos los espacios de natane.
+     * 
+     * @return bool retorna true si es verdadero false si es negativo.
+     */        
+    public function validar_id($id, $caso){  
+        
+        $array_ids = array('Empresa', 'Sitio', 'Experiencia', 'Imagen', 'Usuario', 'Administrador');
+        
+        $tipo_nodo = $this->aux_validar($id);
+        
+        if(in_array($tipo_nodo, $array_ids)){                        
+            
+            if($tipo_nodo == $caso){
+                return true;        
+            }else{
+                return false;
+            }
+            
+        }else{
+            return 0;
+        }        
+    }
+    
+}
+
+
+?>
+

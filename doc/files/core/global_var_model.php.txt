@@ -1,0 +1,45 @@
+<?php
+
+    require_once 'modeloEmpresa.php';
+    require_once 'modeloSitio.php';
+
+    class Global_var_model{            
+            
+        public $id_usuario; 
+        public $modeloEmpresa;
+        public $modeloSitio;
+        
+        public function __construct($id_user){
+            
+            $this->id_usuario = $id_user;
+            $this->modeloEmpresa = new ModelEmpresa();
+            $this->modeloSitio = new ModelSitios();
+        }
+        
+        
+        
+        public function get_sitios(){
+            
+            $cyper = "start n=node(".$this->id_usuario.") match n-[:Publica]->s return id(s) as id, s.nombre as nombre, s.imagen as imagen;";
+            
+            return $this->modeloSitio->get_sitios_usuario($this->id_usuario, $cyper);
+            
+        }
+        
+        
+        public function get_empresas(){
+            
+            $cyper = "start n=node(".$this->id_usuario.") match n-[:Crea]->e return id(e) as id, e.nombre as nombre, e.imagen as imagen;";            
+            
+            return $this->modeloEmpresa->get_empresa_usuario($this->id_usuario, $cyper);
+            
+        }
+        
+    }
+
+
+
+
+
+?>
+
