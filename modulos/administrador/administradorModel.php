@@ -49,8 +49,8 @@
         }         
         
         public function get_noticias(){   
-                        
-            $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type='Noticia' return b ORDER BY n.fecha DESC";            
+
+            $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type='Noticia' return b ORDER BY b.fecha DESC";            
             $resultado = $this->modelpublicacion->get_noticias($query);
 
             return $resultado;            
@@ -58,7 +58,7 @@
               
         public function get_eventos(){   
                         
-            $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type='Evento' return b ORDER BY n.fecha DESC";            
+            $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type='Evento' return b ORDER BY b.fecha DESC";            
             $resultado = $this->modelpublicacion->get_eventos($query);
 
             return $resultado;            
