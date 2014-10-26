@@ -28,7 +28,7 @@
             $this->CSS = '/natane3/estatico/css';
             $this->JS = '/natane3/estatico/js';
             $this->TITULO = "Natane";
-            $this->LOGO = "logonatane1.png";
+            $this->LOGO = "turismeta.png";
             $this->url_usuario = '/natane3/modulos/usuarios/usuario.php';
             $this->url_sitio = '/natane3/modulos/sitios/sitio.php';
             $this->url_empresa = '/natane3/modulos/empresas/empresa.php';
@@ -63,19 +63,23 @@
 
         
         
-        public static function refactory_header($login,$index){
+        public static function refactory_header($login,$index,$tipoUsuario){
 
             if($index)
                 $ruta = "../plantillas/generales/";                                           
             else
                 $ruta ="../../plantillas/generales/";
-                        
+                      
             
-            if($login){
-                
-                
+            $headUsuario="";
+            $headAdmin="";
+            $headEmpresa="";
+            
+            //Refactoriza el header si el usuario logeado es un usuario normal
+            if($login && $tipoUsuario=="Usuario"){
+                                
                 $head = file_get_contents($ruta.'headLogin.html');
-                $headusuario = file_get_contents($ruta.'headUsuario.html');
+                $headUsuario = file_get_contents($ruta.'headUsuario.html');
                 
                 
                 $empresashtml = 
@@ -125,31 +129,51 @@
                         $auxempresa = str_ireplace('{nombre_empresa}',$valor['nombre'],$auxempresa);                   
 
                         $todas_empresas .= $auxempresa;
-
-
                     }                
 
                 }
 
-
                 /*Refactorizar el login */
+                $headUsuario = str_ireplace('{lista_mis_sitios}',$todos_sitios,$headUsuario);
+                $headUsuario = str_ireplace('{lista_mis_empresas}',$todas_empresas,$headUsuario);         
+                $headUsuario = str_ireplace('{nick}',$_SESSION['nick'],$headUsuario);         
+                $headUsuario = str_ireplace('{img_user}',$_SESSION['img'],$headUsuario);     
+                $headUsuario = str_ireplace('{id_user}',$_SESSION['id'],$headUsuario);     
 
-                $headusuario = str_ireplace('{lista_mis_sitios}',$todos_sitios,$headusuario);
-                $headusuario = str_ireplace('{lista_mis_empresas}',$todas_empresas,$headusuario);         
-                $headusuario = str_ireplace('{nick}',$_SESSION['nick'],$headusuario);         
-                $headusuario = str_ireplace('{img_user}',$_SESSION['img'],$headusuario);     
-                $headusuario = str_ireplace('{id_user}',$_SESSION['id'],$headusuario);     
+                $head = str_ireplace('{opciones_login}',$headUsuario,$head);                
+               
 
-                $head = str_ireplace('{opciones_login}',$headusuario,$head);                
+            }    
+            //Refactoriza el header si el usuario logeado es un administrador
+            elseif($login && $tipoUsuario=="Administrador"){
+                 
+                $head = file_get_contents($ruta.'headLogin.html');
+                $headAdmin = file_get_contents($ruta.'headAdmin.html');
                 
-                
-                
-                
-                
+                /*Refactorizar el login */
+                $headAdmin = str_ireplace('{nick}',$_SESSION['nick'],$headAdmin);         
+                $headAdmin = str_ireplace('{img_user}',$_SESSION['img'],$headAdmin);     
+                $headAdmin = str_ireplace('{id_user}',$_SESSION['id'],$headAdmin);     
 
-            }else{
-                $head = file_get_contents($ruta.'head.html');
+                $head = str_ireplace('{opciones_login}',$headAdmin,$head);                                              
                 
+            }          
+            //Refactoriza el header si el usuario logeado es una empresa
+            elseif($login && $tipoUsuario=="Empresa"){
+                 
+                $head = file_get_contents($ruta.'headLogin.html');
+                $headEmpresa = file_get_contents($ruta.'headEmpresa.html');
+                
+                /*Refactorizar el login */
+                $headEmpresa = str_ireplace('{nombre}',$_SESSION['nombre'],$headEmpresa);         
+                $headEmpresa = str_ireplace('{img_user}',$_SESSION['img'],$headEmpresa);     
+                $headEmpresa = str_ireplace('{id_user}',$_SESSION['id'],$headEmpresa);     
+
+                $head = str_ireplace('{opciones_login}',$headEmpresa,$head);                                              
+                
+            }
+            else{
+                $head = file_get_contents($ruta.'head.html');                
             }
 
             
@@ -157,8 +181,7 @@
             
         }
         
-        
-        
+      
         
 
     }

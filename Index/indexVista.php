@@ -109,15 +109,14 @@
         public function refactory_header($opcion){
             
             switch($opcion){                                
-                case 1:
-                                        
-                    $this->head = Global_var::refactory_header(true, true);                                        
-                    
-                    break;
+                case 1:          
+                    //echo $_SESSION['tipo'];
+                    //echo $_SESSION['id'];
+                    $this->head = Global_var::refactory_header(true, true, $_SESSION['tipo']);
+                break;
                 
                 default:
-                    
-                    break;               
+                break;               
             }
             
         }        

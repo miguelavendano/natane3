@@ -136,14 +136,14 @@
          */                
         public function variables_session($id_usuario){
             
-            
-            
             $_SESSION['tipo'] = $usuario['tipo'];
             $_SESSION['nick'] = $usuario['nick'];
+            $_SESSION['nombre'] = $usuario['nombre'];
             
             if($usuario['empresas'])
                 $_SESSION['empresas'] = $usuario['empresas'];
-                
+
+            
                 $_SESSION['sitios'] = $usuario['sitios'];
             
             
@@ -162,8 +162,6 @@
             
             $usuario = $this->modelo->existe_usuario($user);  //si existe el usuario, retorna en id, sino retorna null
             
-            
-            
             if($usuario){
                 
                 if($usuario[0]['password'] == $pass){                   
@@ -176,36 +174,47 @@
                     $_SESSION['tipo'] = $datosuser['tipo'];
                     $_SESSION['nick'] = $datosuser['nick'];
                     $_SESSION['img'] = $datosuser['img'];
+                    $_SESSION['nombre'] = $datosuser['nombre'];
                     //$_SESSION['clave'] = $this->modelo->get_pass($_SESSION['id']);
                     
-                    $_SESSION['sitios'] = array();
-                    $_SESSION['empresas'] = array();
-                    
-                    if($datossitios){
-                        foreach ($datossitios as $valor)                                   
-                            array_push($_SESSION['sitios'], $valor);
+                    if( $_SESSION['tipo'] == "Usuario" ){
+
+                        $_SESSION['sitios'] = array();
+                        $_SESSION['empresas'] = array();
+
+                        if($datossitios){
+                            foreach ($datossitios as $valor)                                   
+                                array_push($_SESSION['sitios'], $valor);
+
+                        }
+                        if($datosempresas){
+                            foreach ($datosempresas as $valor)
+                                array_push($_SESSION['empresas'], $valor);                        
+                        }                        
                         
+                        header('Location: /natane3/modulos/usuarios/usuario.php?id='.$_SESSION['id']);
+                       
                     }
-                    if($datosempresas){
-                        foreach ($datosempresas as $valor)
-                            array_push($_SESSION['empresas'], $valor);                        
+                    elseif( $_SESSION['tipo'] == "Administrador" ){
+                        header('Location: /natane3/modulos/administrador/administrador.php?id='.$_SESSION['id']);
                     }
-                    
-                    
-//                    echo $_SESSION['id']."<br>";
-//                    echo $_SESSION['tipo']."<br>";
-//                    echo $_SESSION['nick']."<br>";
-//                    echo $_SESSION['img']."<br>";
-//                    print_r($_SESSION['empresas']);
-//                    echo "<br>";
-//                    print_r($_SESSION['sitios']);
-                                                            
-                    
+                    elseif( $_SESSION['tipo'] == "Empresa" ) {
+                        header('Location: /natane3/modulos/empresas/empresa.php?id='.$_SESSION['id']);
+                    }
                                         
-                    header('Location: /natane3/modulos/usuarios/usuario.php?id='.$_SESSION['id']);
+                    
                     
                 }
+                else{
+                   //alertaSimple("Error!","Los datos ingresados no son correctos","error");
+                   header('Location: /natane3/Index/');
+                }   
             }
+            else{
+               //alertaSimple("Error!","Los datos ingresados no son correctos","error");
+               header('Location: /natane3/Index/');
+            }            
+
         }
     }
 

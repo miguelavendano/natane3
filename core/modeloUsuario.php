@@ -217,6 +217,23 @@ class ModelUsuarios{
         
 
         
+                    
+        public function get_tipoUsuario($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array = array();
+            
+            if($result){                
+            
+                foreach($result as $row) {
+                    return $row['']->getProperty('type');                                                        
+                }
+            }            
+            
+        }
+        
         /**
          * Funcion para realizar prueba de rendimiento del motor de bases de datos.
          * @param String $queryString
@@ -506,21 +523,41 @@ class ModelUsuarios{
         
         public function get_datos_session($query, $id_usuario) {
                         
-            //echo $this->get_empresas_creadas($id_usuario);                      
-            
             $query = new Cypher\Query(Neo4Play::client(), $query);            
             $result = $query->getResultSet();                        
             
-            //echo $result[0]['tipoUser'];
+            $nick="";
+            if($result[0]['tipo']=="Usuario" || $result[0]['tipo']=="Administrador"){                
+                $queryN = "start n=node(".$id_usuario.") return n.nick as nick";            
+                $queryN = new Cypher\Query(Neo4Play::client(), $queryN);            
+                $resultNick = $queryN->getResultSet();                
+                $nick = $resultNick[0]['nick'];      
+            }
 
-            $user = array(
-                "tipo"=>$result[0]['tipoUser'],
-                "nick"=>$result[0]['nick'],
-                "img"=>$result[0]['img'],
-                "empresas"=>$this->get_empresas_creadas($id_usuario),
-                "sitios"=>$this->get_sitios_publicados($id_usuario)
-            );
-            
+            if($result[0]['tipo']=="Usuario"){
+                $user = array(
+                    "nombre"=>$result[0]['nombre'],
+                    "nick"=>$nick,
+                    "img"=>$result[0]['img'],
+                    "tipo"=>$result[0]['tipo'],
+                    "empresas"=>$this->get_empresas_creadas($id_usuario),
+                    "sitios"=>$this->get_sitios_publicados($id_usuario)
+                );                
+            }elseif($result[0]['tipo']=="Administrador"){
+                $user = array(
+                        "nombre"=>$result[0]['nombre'],
+                        "nick"=>$nick,
+                        "img"=>$result[0]['img'],
+                        "tipo"=>$result[0]['tipo']
+                    );                
+            }else{
+                $user = array(
+                    "nombre"=>$result[0]['nombre'],
+                    "img"=>$result[0]['img'],
+                    "tipo"=>$result[0]['tipo']
+                );                
+            }
+
             return $user;
 
         }

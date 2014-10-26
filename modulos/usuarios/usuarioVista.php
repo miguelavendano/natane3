@@ -28,9 +28,9 @@
         public $dic_general;
         public $dic_contenido;
         public $dic_datos_user;      
-        public $bot_seguir = "";
-        
-        
+        public $bot_seguir;
+        public $bot_img_perfil;
+                
         
         public function __construct() {
             
@@ -53,6 +53,8 @@
             $this->gustaria = file_get_contents('../../plantillas/usuario/sitiosAvisitar.html');            
             $this->amigos = file_get_contents('../../plantillas/usuario/amigos.html');           
             $this->bot_seguir = "";
+            $this->bot_img_perfil = "";
+            $this->botones_experiencia = "";
                      
             $this->metas = '<meta charset="utf-8">
                             <title> {TITULO}</title>
@@ -95,7 +97,8 @@
                                         'verExp'=>$this->verExp,
                                         'registrarSitio'=>$this->creaSitio,
                                         'registrarrEmpresa'=>$this->creaEmpre,
-                                        'boton_seguir'=>$this->bot_seguir
+                                        'boton_seguir'=>$this->bot_seguir,
+                                        'boton_img_perfil'=>$this->bot_img_perfil,
                                         );
         }
         
@@ -131,6 +134,8 @@
             $this->dic_contenido['registrarEmpresa']=$this->creaEmpre;    
             
             $this->dic_contenido['boton_seguir']=$this->bot_seguir;
+            $this->dic_contenido['boton_img_perfil']=$this->bot_img_perfil;
+            
         }
         
         
@@ -141,22 +146,27 @@
          */
         public function refactory_header($opcion){
             
-            switch($opcion){                                
-                case 1:                    
-                    
-                    $this->head = Global_var::refactory_header(true, false);                                        
-                    
-                    break;
-                case 2:
-                    $this->head = Global_var::refactory_header(true, false); 
-                    
-                    break;
-                
-                default:
-                    $this->head = Global_var::refactory_header(false, false); 
-                    
-                    break;               
+            $tipoUsuario="";
+            
+            if(isset($_SESSION['id'])){ // existe sesion ?
+                $tipoUsuario = $_SESSION['tipo'];            
             }
+            
+            switch($opcion){      
+
+                case 1:                                        
+                    $this->head = Global_var::refactory_header(true, false, $tipoUsuario);                                                            
+                break;
+
+                case 2:
+                    $this->head = Global_var::refactory_header(true, false, $tipoUsuario);                     
+                break;
+
+                default:
+                    $this->head = Global_var::refactory_header(false, false, $tipoUsuario);                     
+                break;               
+            }                
+                      
                     
         }
         
@@ -179,25 +189,34 @@
 
             $this->actualizar_diccionarios();          
 
+        }
+        
+        
+        public function refactory_bot_seguir($estado){
 
-        }
-        
-        
-        public function refactory_bot_seguir(){
-            
-            
-            
-            $this->bot_seguir  = '<div>
-                                    <button class="btn btn-blue btn-block" id="SeguirU"><i></i> Seguir</button>
-                                </div>';
-            
-            
-            
-            
+            if($estado){    //si existe $estado entonces se esta siguiendo al usuario
+                $this->bot_seguir  = '<div>
+                                        <button class="btn btn-blue btn-block active" id="NoSeguirU"><i class="icon-ok"></i> Siguiendo</button>
+                                    </div>';                            
+            }
+            else{      //si $estato es null, no se esta siguiendo al usuario
+                $this->bot_seguir  = '<div>
+                                        <button class="btn btn-blue btn-block" id="SeguirU"><i></i> Seguir</button>
+                                    </div>';                                
+            }
             
         }
+     
+
+        public function refactory_bot_cambiar_img_perfil(){
+
+            $this->bot_img_perfil  = '<div class="caja_Bfile btn btn-green active"> 
+                                        <i class="icon-folder-open-alt"> Cambiar Foto</i>
+                                        <input class="Bfile Bimg_perfil" type="file" id="foto_perfil" name="foto_perfil[]" />
+                                      </div>';
+        }   
         
-        
+     
         
         
         /**
@@ -245,16 +264,31 @@
          * 
          * @param array $datos trae los datos de las experiencias del usuario
          */                                      
-        public function refactory_experiencias($datos){            
-            
+        public function refactory_experiencias($datos,$login){            
+        
             $experiencias = "";
             
             foreach ($datos as $valor){
+                
                 $aux = $this->expe;
                 $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);                    
                 $aux = str_ireplace('{titulo_exp}', $valor->nombre, $aux);
                 $aux = str_ireplace('{comentario}', $valor->descripcion, $aux);
+                $aux = str_ireplace('{id_sitio}', $valor->id_sitio, $aux);
+                $aux = str_ireplace('{nombre_sitio}', $valor->nombre_sitio, $aux);
+                                
+                if($login==1){
+                    $botones =                 
+                            '<button class="btn icon-trash tooltip1" rel="tooltip" title="Eliminar" onclick="eliminarExperiencia('.$valor->id.')"></button>
+                             <button class="btn icon-pencil tooltip2" rel="tooltip" title="Editar" onclick="editarExperiencia('.$valor->id.')"></button>';                    
+                }
+                
+                if($login==2 || $login==3){
+                    $botones = "";
+                }
+                
+                $aux = str_ireplace('{botones_experiencia}', $botones, $aux);
                 
                 $experiencias .= $aux;
             }
@@ -272,7 +306,6 @@
          */                              
 //        public function refactory_gustaria($datos){            
         public function refactory_visitaria($datos){            
-
             
             $global = new Global_var();
             $url = $global->url_sitio;

@@ -5,6 +5,7 @@
     require_once('../../librerias/Neo4Play.php');    
     require_once('../../core/modeloSitio.php');  
     require_once('../../core/modeloExperiencia.php');  
+        require_once('../../core/modeloRelaciones.php');
     
     
     /**
@@ -23,6 +24,12 @@
          * @var ModelSitios 
          */
         public $modelemsitios;
+        
+        /**
+         *Instancia de la Clase ModelRelaciones.
+         * @var ModeloRelaciones 
+         */        
+        public $modelrelaciones;
         
         /**
          *Instancia de la Clase ModelExperiencia
@@ -45,6 +52,7 @@
             $this->modelempresas = new ModelEmpresa();
             $this->modelemsitios = new ModelSitios();
             $this->modelexpe = new ModelExperiencia();
+            $this->modelrelaciones = new ModeloRelaciones();
             $this->id_empresa= $id;
         }       
         
@@ -131,6 +139,20 @@
             $resultado = $this->modelempresas->get_empresa($query);
             return $resultado;                        
         } 
+        
+        
+        /**
+         * Construye la consulta para retornar si existe confianza entre le usuario logeado y la empresa consultada
+         * @return Array 
+         */
+        public function get_confianza_sitio(){     
+            
+            $resultado = $this->modelrelaciones->existeRelacion($_SESSION['id'],$this->id_empresa,"Cliente");
+
+            return $resultado;                     
+        } 
+        
+        
         
                   
     }

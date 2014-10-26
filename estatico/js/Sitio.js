@@ -247,12 +247,13 @@ $(document).ready(function(){
 
     /*
      * Crea la relacion haber visitado el sitio "Fan"
-     */            
-    $("#ha-estado").toggle(
-      function() {      
-                      
-            $(this).addClass("active");
-            $("#quiere-ir").addClass("disabled");
+     */     
+    $("#haEstado").toggle(
+      function() {    
+          
+            $(this).addClass("active btn-block");
+            //$("#deseaIr").addClass("disabled");   
+            $("#deseaIr").css('display', 'none');
             
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
@@ -269,11 +270,12 @@ $(document).ready(function(){
                 ,success: function(data,textStatus,jqXHR){                                                   
                 }
             });                                   
+            
+        }, function() {      //descinula al usuario que ya no deseaa ir al sitio                                    
         
-      }, function() {   
-          
-            $(this).removeClass("active");            
-            $("#quiere-ir").removeClass("disabled");
+            $(this).removeClass("active btn-block");            
+            //$("#deseaIr").removeClass("disabled");   
+            $("#deseaIr").css('display', 'inline');
             
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
@@ -283,25 +285,71 @@ $(document).ready(function(){
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'elimina-visita',
-                    sitio: id_url[1],
-                    usuario: '62'
+                    sitio: id_url[1]
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
                 }
             });                                   
-      }
+            
+      });
+      
+      $("#noHaEstado").toggle(
+      function() {    
+          
+            $(this).removeClass("active btn-block");            
+            //$("#deseaIr").removeClass("disabled");
+            $("#deseaIr").css('display', 'inline');
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'elimina-visita',
+                    sitio: id_url[1]
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                }
+            });                                   
+            
+        }, function() {      //descinula al usuario que ya no deseaa ir al sitio                        
+                                  
+            $(this).addClass("active btn-block");
+            //$("#deseaIr").addClass("disabled");  
+            $("#deseaIr").css('display', 'none');
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'visito',                   
+                    sitio: id_url[1]
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                                                   
+                }
+            });              
+            
+          }
     );
 
     /*
      * Crea la relacion de querer ir al sitio "Desea"
-     */            
-    $("#quiere-ir").toggle(
-      function() {      
+     */         
+    $("#deseaIr").toggle(
+      function() {      //vincula al usuario que deseaa ir al sitio
                       
-            $(this).addClass("active");
-            $("#ha-estado").addClass("disabled");
-            
+            $(this).addClass("active btn-block");            
+            //$("#haEstado").addClass("disabled");
+            $("#haEstado").css('display', 'none');
+                        
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
             
@@ -316,12 +364,13 @@ $(document).ready(function(){
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                                                   
                 }
-            });                                   
+            });  
+            
+    }, function() {      //descinula al usuario que ya no deseaa ir al sitio            
         
-      }, function() {   
-          
-            $(this).removeClass("active");            
-            $("#ha-estado").addClass("disabled");
+            $(this).removeClass("active btn-block");            
+            //$("#haEstado").removeClass("disabled");      
+            $("#haEstado").css('display', 'inline');
             
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
@@ -331,15 +380,60 @@ $(document).ready(function(){
                 ,type:'POST'                    
                 ,data:{
                     opcion: 'elimina-intencion-visitar',
-                    sitio: id_url[1],
-                    usuario: '62'
+                    sitio: id_url[1]
                 }
                 ,dataType:'html'
                 ,success: function(data,textStatus,jqXHR){                           
                 }
             });                                   
-      }
-    );
+            
+    });
+      
+    $("#noDeseaIr").toggle(
+      function() {      //vincula al usuario que deseaa ir al sitio
+                             
+            $(this).removeClass("active btn-block");            
+            $("#haEstado").removeClass("disabled");  
+            $("#haEstado").css('display', 'inline');
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'elimina-intencion-visitar',
+                    sitio: id_url[1]
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                }
+            });                                   
+            
+    }, function() {      //descinula al usuario que ya no deseaa ir al sitio
+        
+            $(this).addClass("active btn-block");            
+            //$("#haEstado").addClass("disabled");
+            $("#haEstado").css('display', 'none');
+            
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesSitio.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'quiere-visitar',
+                    sitio: id_url[1]                    
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                                                   
+                }
+            });       
+        
+    }); 
 
 
     /*

@@ -86,6 +86,21 @@
         }
         
         /**
+         * Ejecuta el metodo validaSeguimiento de las clase modelo.
+         * @return Array
+         */                
+        public function deseaIrSitio(){            
+                        
+            return $this->modelo->validaSeguimientoSitio("Desea");            
+        }        
+        
+        public function FanSitio(){            
+            
+            return $this->modelo->validaSeguimientoSitio("Fan");
+        }                
+        
+        
+        /**
          * Ejecuta el metodo get_experiencias_visitantes() de las clase modelo.
          * @return Array
          */                
@@ -100,6 +115,11 @@
          * @param int login Valor que indica el estado de la sesion del usuario que desea ver el perfil de la empresa.
          */        
         public function principal_sitio($login){
+              
+            if($login==2){
+                $this->vista->refactory_botones_confianza();                                                                           
+                $this->vista->refactory_botones_de_relacion($this->deseaIrSitio(),$this->FanSitio());
+            }
             
             $this->vista->refactory_header( $login );
             $this->vista->refactory_slider( $this->slider_sitio() );

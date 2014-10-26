@@ -1,21 +1,31 @@
 $(document).ready(function(){
       
-
+    function ejecutaBusqueda(){
+        
+        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
+            alert("No hay datos para relizar una busqueda");
+            //exit();
+        }else{
+            location.href="/natane3/modulos/consultas/consulta.php?busqueda="+$("#loBusca").val();
+        }                
+    }
+    
+    
+    $('#loBusca').keypress(function (e) {
+        var key = e.which;
+        if(key == 13){  // the enter key code
+            ejecutaBusqueda();            
+            return false;  
+        }
+        
+    });     
+     
+     
     /*
      * Consulta Todos los elementos
      */
     $(".BarraBuscaTodo").click(function(){        
-        
-        if( $("#loBusca").val().length == 0 || /^\s+$/.test($("#loBusca").val()) ){
-            alert("No hay datos para relizar una busqueda");
-            exit();
-        }else{
-
-            document.location.href="http://localhost/natane3/modulos/consultas/consulta.php?busqueda="+$("#loBusca").val();                        
-
-        }        
-        
-        $("#loBusca").val(busqueda[1]);        
+        ejecutaBusqueda();        
     });      
 
     /*

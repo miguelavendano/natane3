@@ -150,7 +150,8 @@ if(isset($_POST['opcion'])){
             
             $id_exp = $nodo_experiencia->id;  //obtengo el id del nodo creado                                    
             ModeloRelaciones::crearRelacion($_SESSION['id'], $id_exp, "Comparte");   //crea la relacion entre el autor y la experiencia
-
+            ModeloRelaciones::crearRelacion($id_exp, $_POST['sitio'], "Asociada");   //crea la relacion entre la experiencia y elsitio
+            
             //guarda las imagenes de la experiencia
             $upload_folder ='../../estatico/imagenes/';
             foreach($_FILES['imagenes_experiencia']['error'] as $key => $error){                
@@ -328,7 +329,6 @@ if(isset($_POST['opcion'])){
         case "no_seguir":  
 
             $idRelacion = ModeloRelaciones::consultarIDRelacion($_SESSION["id"], $_POST['a_seguir'], "Amigo");  //consulto el ID de la relacion
-           
             ModeloRelaciones::eliminarRelacion($idRelacion);   //elimina la relacion entre el usuario y la empresa
             $band = 'true';
             

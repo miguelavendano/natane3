@@ -177,8 +177,11 @@
          *Variable diccionario general de las variables que poseen fracmentos html que generan el contenido de la interfaz grafica del sitio.
          * @var String  
          */           
-        public $dic_contenido;        
+        public $dic_contenido;    
+                
+        public $botones_confianza;
         
+        public $botones_relacion;
 
 
         
@@ -260,7 +263,10 @@
                                         'votos' => $this->losvotos, 
                                         'experienciaSitio' => $this->experiencias,
                                         'modales' => $this->modal,                                        
-                                        'id_sitio'=>$this->id_sitio);
+                                        'id_sitio'=>$this->id_sitio,                                        
+                                        'botones_confianza' => $this->botones_confianza,
+                                        'botones_relacion' => $this->botones_relacion
+                                        );
         }
         
         
@@ -292,7 +298,10 @@
                                         'votos' => $this->losvotos, 
                                         'experienciaSitio' => $this->experiencias,
                                         'modales' => $this->modal,                                        
-                                        'id_sitio'=>$this->id_sitio);            
+                                        'id_sitio'=>$this->id_sitio,
+                                        'botones_confianza' => $this->botones_confianza,
+                                        'botones_relacion' => $this->botones_relacion                    
+                                        );            
             
         }
 
@@ -306,20 +315,26 @@
          */
         public function refactory_header($opcion){
             
-            switch($opcion){                                
-                case 1:
-                    
-                    $this->head = Global_var::refactory_header(true,false);                    
-                    //$this->head .= "<br> <h1>Este es mi Sitio</h1>";
-                    break;
-                case 2:
-                    $this->head = Global_var::refactory_header(true, false);                                        
-                    break;
-                
-                default:
-                    $this->head = Global_var::refactory_header(false, false);     
-                    break;               
+            $tipoUsuario="";
+            
+            if(isset($_SESSION['id'])){ // existe sesion ?
+                $tipoUsuario = $_SESSION['tipo'];            
             }
+  
+            switch($opcion){      
+
+                case 1:                                        
+                    $this->head = Global_var::refactory_header(true, false, $tipoUsuario);                                                            
+                break;
+
+                case 2:
+                    $this->head = Global_var::refactory_header(true, false, $tipoUsuario);                     
+                break;
+
+                default:
+                    $this->head = Global_var::refactory_header(false, false, $tipoUsuario);                     
+                break;               
+            }                                  
             
         }  
         
@@ -365,7 +380,13 @@
             $this->contacto = str_ireplace('{twitter}', $datos[0]->twitter, $this->contacto );
             $this->contacto = str_ireplace('{google}', $datos[0]->youtube, $this->contacto );        
             
-            $this->losvotos = $datos[0]->votos;
+            if(!$datos[0]->votos){
+                $this->losvotos = 0;    
+            }
+            else{
+                $this->losvotos = $datos[0]->votos;
+            }
+            
             $this->descripcion = $datos[0]->descripcion;
 
             $this->actualizar_diccionarios();
@@ -382,6 +403,7 @@
             $empresa = '';
             $global = new Global_var();
             $url = $global->url_usuario;            
+            
             foreach ($datos as $valor){
                 $aux = $this->seguidores;        
                 $aux = str_ireplace('{url}', $url, $aux);
@@ -467,7 +489,10 @@
                     $aux = str_ireplace('{id_experiencia}', $expe->id, $aux);                
                     $aux = str_ireplace('{imagen}', $expe->imagen, $aux);
                     $aux = str_ireplace('{titulo}', $expe->nombre, $aux);
-                    $aux = str_ireplace('{descripcion}', $expe->descripcion , $aux);
+                    $aux = str_ireplace('{descripcion}', $expe->descripcion , $aux);                    
+                    $aux = str_ireplace('{id_usuario}', $expe->id_usuario, $aux);
+                    $aux = str_ireplace('{nick_usuario}', $expe->nick_usuario, $aux);                
+                    
                     $experiencias_sitio .= $aux;
                     $i++;
                 }while((count($datos)!=0)&& $i<3);                
@@ -478,7 +503,47 @@
             $this->experiencias = $experiencias_sitio;            
             $this->actualizar_diccionarios();
                         
-        }               
+        }      
+       
+        
+        /**
+         * Refactoriza los botones de estar o quiero estar en un sitio
+         */               
+        public function refactory_botones_de_relacion($desea,$fan){
+                        
+            if($desea){
+                $this->botones_relacion = 
+                          '<button id="haEstado" class="btn btn-red-wine" style="display:none">He estado allí</button>
+                           <button id="noDeseaIr" class="btn btn-blue active btn-block">Quiero estar allí</button>';
+            }
+            
+            if($fan){
+                $this->botones_relacion =
+                            '<button id="noHaEstado" class="btn btn-red-wine active btn-block">He estado allí</button>
+                             <button id="deseaIr" class="btn btn-blue" style="display:none">Quiero estar allí</button>';                
+            }
+            
+            if(!$desea && !$fan){
+                $this->botones_relacion = '
+                            <button id="haEstado" class="btn btn-red-wine">He estado allí</button>
+                            <button id="deseaIr" class="btn btn-blue">Quiero estar allí</button>';                
+            } 
+
+        }
+        
+        
+        /**
+         * Refactoriza los botones de confianza en el sitio
+         */               
+        public function refactory_botones_confianza(){
+                $this->boton_confianza = 
+                                        '<h4 class="titulo-votos">Confías en este sitio?</h4>
+                                         <div class="box-votos">                                                
+                                             <a data-value="1" class="voto-up"><i class="icon-thumbs-up-alt icon-3x"></i></a>                                                                                            
+                                             <a data-value="2" class="voto-down">&nbsp;<i class="icon-thumbs-down-alt icon-3x"></i></a>-
+                                         </div>';                
+        }        
+        
         
         /**
          * Refactoriza todo el contenido de la interfaz grafica del sitio.

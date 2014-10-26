@@ -4,9 +4,16 @@
     {metas}  <!--Incluidas en cada vista -->
     {links}    <!--Incluidas en cada vista -->
 
+    <!--<link href="{CSS}/pnotify.custom.min.css" rel="stylesheet" />-->
     <link href="{IMG_SYS}/favicon.ico" rel="shortcut icon" />
-    <link rel="icon" type="image/png" href="{IMG_SYS}/favicon.png" />        
-
+    <link rel="icon" type="image/png" href="{IMG_SYS}/favicon.png" />    
+ 
+    <link rel="stylesheet" href="{CSS}/jquery-ui.css">
+    <style type="text/css"> 
+        .ui-autocomplete-loading {
+           background: white url("/natane3/estatico/img/ajaxSpinner.gif") right center no-repeat;
+         }        
+    </style>
 </head>
 <!--<body onload="initialize()">-->
 <body>
@@ -104,6 +111,36 @@
 
         document.getElementById('imagenes_experiencia').addEventListener('change', vistaPreviaImagenes, false);
         
+        /*FUNCION PARA LA VISTA PREVIA EN LOS SERVICIOS*/
+        function vistaPreviaImgServ(evt) {
+          var files = evt.target.files; // FileList object
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+
+            // Solo procesa archivos de tipo imagen
+            if (!!f.type.match('image.*')) {
+            
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                  return function(e) {
+                    // Render thumbnail.
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="vista_imgExp" src="', e.target.result,
+                                      '" title="', escape(theFile.name), '"/>'].join('');
+                    document.getElementById('list_img_serv').insertBefore(span, null);
+                  };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }//cierre if
+          }//cierra for
+        }//cierra funcion
+
+        document.getElementById('imagen_servicio').addEventListener('change', vistaPreviaImgServ, false);
+        
         /*FUNCION PARA LA VISTA PREVIA DE LA IMAGEN DE PERFIL*/
         function vistaPreviaImgPerfil(evt) {
           var files = evt.target.files; // FileList object
@@ -167,7 +204,7 @@
         document.getElementById('imgs_edit_experiencia').addEventListener('change', vistaPreviaImgEditExp, false);
 
         /*FUNCION PARA LA VISTA PREVIA DE LA IMAGEN DEL SERVICIO*/
-        function vistaPreviaImgServicio(evt) {
+        function vistaPreviaImgEdiServicio(evt) {
           var files = evt.target.files; // FileList object
           var output = [];
           // Loop through the FileList and render image files as thumbnails.
@@ -184,7 +221,7 @@
                     // Render thumbnail.
                     output.push('<img class="img-polaroid previa_fotoPerfil" src="', e.target.result,
                                       '" title="', escape(theFile.name), '"/>');                                  
-                    document.getElementById('img_servi').innerHTML =  output.join('');
+                    document.getElementById('list_img_serv').innerHTML =  output.join('');
                     
                   };
                 })(f);
@@ -195,7 +232,7 @@
           }//cierra for
         }//cierra funcion
 
-        document.getElementById('imagen_servicio').addEventListener('change', vistaPreviaImgServicio, false);
+        document.getElementById('imagen_edit_servicio[]').addEventListener('change', vistaPreviaImgEdiServicio, false);
         
         
         /*FUNCION PARA LA VISTA PREVIA DE LA IMAGEN AL CREAR SITIO*/
@@ -276,6 +313,8 @@
     <!-- ....Elementos para el ferrocaril de imagenes.... -->   
         <!-- include jQuery + carouFredSel plugin -->
     <script type="text/javascript" language="javascript" src="{JS}/jquery.carouFredSel-6.1.0-packed.js"></script>
+    <!--<script type="text/javascript" language="javascript" src="{JS}/jquery.carouFredSel-6.2.1.js"></script>-->
+    
         <!-- optionally include helper plugins -->
     <script type="text/javascript" language="javascript" src="{JS}/helper-plugins/jquery.mousewheel.min.js"></script>
     <script type="text/javascript" language="javascript" src="{JS}/helper-plugins/jquery.touchSwipe.min.js"></script>
@@ -310,8 +349,12 @@
             });
     </script>
     
+    <!--<script src="{JS}/jquery-1.11.1.min.js"></script>-->
     <script src="{JS}/highcharts.js"></script>
-
+    
+    <!--<script src="{JS}/pnotify.custom.min.js"></script>
+    <script src="{JS}/notificaciones.js"></script>-->
+    
     <script src="{JS}/Usuario.js"></script>
     <script src="{JS}/Sitio.js"></script>
     <script src="{JS}/Empresa.js"></script>
@@ -319,9 +362,16 @@
     <script src="{JS}/Administrador.js"></script>
     <script src="{JS}/Mapa.js"></script>
     
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>-->
+    <!--<script src="jquery.carouFredSel.js" type="text/javascript"></script>-->
     
-    
+    <!--<script src="{JS}/jquery-2.1.0.js"></script>-->
+    <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
+    <!--<script src="{JS}/jquery-ui.js"></script>-->
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="{JS}/autocompletar/listaSitios.js"></script>  
 
+    
     
     {script}    
     

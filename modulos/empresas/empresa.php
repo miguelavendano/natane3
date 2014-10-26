@@ -107,21 +107,37 @@
             return $this->modelo->get_coordenadas_mapa();            
         }
         
+
+        /**
+         * Ejecuta el metodo get_confianza_sitio de la clase modelo.
+         * @return Array
+         */               
+        public function confiaEmpresa(){            
+            return $this->modelo->get_confianza_sitio();            
+        }        
+          
+        
         
         /**
          * Es el metodo principal que controla la interacción entre el modelo y la vista.
          * @param int $login Valor que indica el estado de la sesion del usuario que desea ver el perfil de la empresa.
          */
         public function principal_empresa($login){    
+                       
+            if($login==2){
+                $this->vista->refactory_boton_confianza($this->confiaEmpresa());
+                
+            }
             
             $this->vista->refactory_header( $login );
-            $this->vista->refactory_slider( $this->slider_empresa());
-            $this->vista->refactory_contacto( $this->datos_contacto());
-            $this->vista->refactory_amigos( $this->amigos());
-            $this->vista->refactory_clientes_aliados( $this->clientes_aliados());
-            $this->vista->refactory_ferrocarril( $this->ferrocarril());            
-            $this->vista->refactory_servicios($this->servicios());
-            $this->vista->refactory_experiencias($this->experiencias());
+            $this->vista->refactory_slider( $this->slider_empresa() );
+            $this->vista->refactory_btn_admin_empresa( $login );
+            $this->vista->refactory_contacto( $this->datos_contacto() );
+            $this->vista->refactory_amigos( $this->amigos() );
+            $this->vista->refactory_clientes_aliados( $this->clientes_aliados() );
+            $this->vista->refactory_ferrocarril( $this->ferrocarril() );            
+            $this->vista->refactory_servicios( $this->servicios(),$login );
+            $this->vista->refactory_experiencias( $this->experiencias(), $login );
             $this->vista->refactory_mapa( $this->coordenadas() );              
             $this->vista->refactory_contenido();
             $this->vista->refactory_total();            

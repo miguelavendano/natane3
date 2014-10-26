@@ -14,6 +14,7 @@
         public $contenido;
         public $imagen;   
         public $comentarios;
+        public $nuevo_comentario;
         
         public $dic_galeria;
         public $dic_base;
@@ -65,6 +66,7 @@
             
             $this->dic_imagen = array('imagen'=>  $this->imagen,
                                     'comentarios'=>  $this->comentarios,
+                                    'nuevo_comentario'=>  $this->nuevo_comentario,
                                     'modales'=>  $this->modal);
             
             
@@ -82,6 +84,7 @@
             
             $this->dic_imagen = array('imagen'=>  $this->imagen,
                                     'comentarios'=>  $this->comentarios,
+                                    'nuevo_comentario'=>  $this->nuevo_comentario,
                                     'modales'=>  $this->modal);
             
             
@@ -93,13 +96,17 @@
          * Funcion que refactoriza el header dependiendo del tipo de usuario que lo 
          * esta accediendo.
          */
-        public function refactory_header($login){           
-            
-            
-                
-            $this->head = Global_var::refactory_header($login, false);
+        public function refactory_header($login){      
             
 
+            $tipoUsuario="";
+            
+            if(isset($_SESSION['id'])){ // existe sesion ?
+                $tipoUsuario = $_SESSION['tipo'];            
+            }            
+
+            $this->head = Global_var::refactory_header($login, false, $tipoUsuario);                               
+            
         }        
        
         
@@ -178,6 +185,28 @@
             $this->actualizar_diccionarios();
             
         }
+        
+
+        /**
+         * Refactoriza el cambpo para ingresar un nuevo comentario solo si el usario esta logead
+         */               
+        public function refactory_nuevo_comentario($login){
+            
+            if($login==1){    //si esta logeado se habilitar el cuadro de texto para ingresar el comentario
+                $this->nuevo_comentario = 
+                            '<div class="row-fluid">
+                                <div class="tucomen">
+                                    <textarea id="detalleComenta" name="detalleComenta" rows="2" class="span12" placeholder="Escribe tu comentario..."></textarea>
+                                </div>
+                            </div>                    
+                            <button id="comentar" class="btn btn-blue">Publicar</button>';
+            }
+            else{  //si no esta logeado no se muestra nada
+                $this->nuevo_comentario = '';
+            }            
+            
+            $this->actualizar_diccionarios();
+        }          
         
         
         public function refactory_total(){

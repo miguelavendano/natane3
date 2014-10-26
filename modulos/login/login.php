@@ -4,7 +4,7 @@
     //session_start();
     
     /*
-     * Este modulo será utilizado para loguin y
+     * Este modulo será utilizado para login y
      * para registro de nuevos usuarios.
      * 
      * Inicialmente se valida si es para login o para registrar

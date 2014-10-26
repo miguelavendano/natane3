@@ -129,7 +129,51 @@ class ModelSitios{
         }
         
         
-        /**
+        /*
+         * Retorna el ID y nombre del sitio para relacionarlo en las experiencias
+         */     
+        public function get_sitio_exp($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array_sitios = array();
+            $sitio = "";
+                        
+            if($result){
+                
+                foreach($result as $row) {   
+                                     
+                    $sitio = array('id'=>$row['id'],'label'=>$row['nombre']);
+                    
+                    array_push($array_sitios,$sitio);
+                }         
+                
+                return $array_sitios;
+            }                        
+        }        
+        
+        /*
+         * Retorna el nombre de los sitio
+         */     
+        public function get_nombre_sitios($queryString){
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+            $result = $query->getResultSet();
+            
+            $array_sitios = array();
+            $sitio = "";
+                        
+            if($result){
+                
+                foreach($result as $row) {                                                           
+                    array_push($array_sitios, $row['nombre'] );
+                }         
+                
+                return $array_sitios;
+            }                        
+        }             
+        
          * Retorna el valor de la propiedad especificada 
          * @param String $queryString Consulta a realizar
          * @param String $propiedad Nombre de la propiedad

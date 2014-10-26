@@ -212,11 +212,8 @@
                 
                 $header = file_get_contents($ruta.'headLogin.html');
                 $headeadmin = file_get_contents($ruta.'headAdmin.html');
-                
-                
-                
+                                
                 //$opciones_admin = $crear_evento.$crear_noticia;                  
-
                 
                 $headeadmin = str_ireplace('{nick}',$_SESSION['nick'],$headeadmin);         
                 $headeadmin = str_ireplace('{img_user}',$_SESSION['img'],$headeadmin);     

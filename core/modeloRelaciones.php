@@ -45,6 +45,8 @@ class ModeloRelaciones{
 			echo "Se encontraron <b>".count($relaciones)."</b> relaciones";
 		else echo "El nodo <b>NO</b> tiene relaciones";
 
+                var_dump($relaciones);
+                print_r($relaciones);
 		/*
 		foreach ($relaciones->getProperties() as $key => $value) {
 		    echo "<b>$key</b>: $value<br />";
@@ -59,8 +61,7 @@ class ModeloRelaciones{
 
 		if($relaciones)
 			echo "Se encontraron <b>".count($relaciones)."</b> relaciones";
-		else echo "El nodo <b>NO</b> tiene relaciones";
-
+		else echo "El nodo <b>NO</b> tiene relaciones";                              
 
 	}	
 
@@ -203,6 +204,26 @@ class ModeloRelaciones{
                     $eliminar->delete();			    	                                                                            
             }
             
+	}        
+        
+        
+        /*
+         * Corrobora si existe la relacion eviada por parametro entre dos nodos
+         */        
+	public static function existeRelacion($nodosStart,$nodoEnd,$tipoRelacion){
+                    
+                $queryString = "START i=node(".$nodosStart."), f=node(".$nodoEnd.") MATCH i-[r:".$tipoRelacion."]->f RETURN r";                
+
+                $query = new Cypher\Query(Neo4Play::client(), $queryString);            
+                $resultado = $query->getResultSet();
+                
+                if($resultado){
+                    foreach($resultado as $row) {
+                        //echo $row['']->getId()."--".$row['']->getType();                        
+                        return $row['']->getId();                        
+                   }
+                }
+                else return null;//echo "El usuario actual no sigue al usuario que se esta visitando";
 	}        
 
 }

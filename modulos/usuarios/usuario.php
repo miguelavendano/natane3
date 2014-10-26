@@ -17,7 +17,7 @@
             $this->modelo = new UsuarioModel($id);
         }       
         
-        
+       
         public function datos_usuario(){
             $usuario = $this->modelo->get_resultados();            
             return $usuario;            
@@ -43,6 +43,15 @@
             return $this->modelo->get_AmigosDeAmigos();            
         }        
         
+        public function sigueUsuario(){            
+            return $this->modelo->validaSeguimiento();            
+        }
+
+        public function tipoUsuario(){            
+            return $this->modelo->tipoUsuario();
+        }
+        
+        
         public function principal_Nousuario(){
             
         }        
@@ -58,20 +67,26 @@
          * funcion principal que organiza y estructura el todo
          * 
          * @param int $login valor numerico que indica el tipo de login que hay
-         * 1->loguado y  es el dueño. 2: logueado y no es el dueño y 3:no esta logueado. 
+         * 1->loguado y es el dueño. 2: logueado y no es el dueño y 3:no esta logueado. 
          */
         public function principal_usuario($login){
             
+            
             $this->vista->refactory_header($login); 
             
-            if($login==2)
-                $this->vista->refactory_bot_seguir();
+            if($login==1){                
+                $this->vista->refactory_bot_cambiar_img_perfil();                
+            }           
             
+            if($login==2){
+                $this->vista->refactory_bot_seguir($this->sigueUsuario());                
+            }
+             
             $this->vista->refactory_usuario($this->datos_usuario());
             $this->vista->refactory_amigos($this->seguidores(),"segui");
             $this->vista->refactory_amigos($this->siguiendo(),"sigo");
             $this->vista->refactory_AmigosDeAmigos($this->AmigosDeAmigos());
-            $this->vista->refactory_experiencias($this->experiencias());
+            $this->vista->refactory_experiencias($this->experiencias(),$login);
 //            $this->vista->refactory_gustaria($this->gustaria());
             $this->vista->refactory_visitaria($this->visitaria());            
             $this->vista->refactory_contenido();

@@ -147,7 +147,7 @@ $(document).ready(function(){
 
     /*
      * Guardar edicion de los datos de la empresa
-
+     */
     $("#guarda_edicion_empresa").click(function(){
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
@@ -183,7 +183,7 @@ $(document).ready(function(){
                     }
                 });                        
     });    
-*/        
+   
 
     /*
      * Cancelar edicion de los datos de la empresa
@@ -240,9 +240,10 @@ $(document).ready(function(){
 
     });
     
+
     /*
      * Le da o le quita un punto de confianza a la empresa, crear su relacion con esa empresa
-     */            
+     */     
     $("#Bconfio").toggle(
       function() {      //le da un punto de confianza
           
@@ -290,8 +291,111 @@ $(document).ready(function(){
 
                 }
             });                                   
-      }
+        }
     );
+        
+    $("#BNoConfio").toggle(
+      function() {      //le quita un punto de confianza
+          
+            $(this).removeClass("active");            
+            $("#BNoConfio i").removeClass("icon-ok");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'quita_confianza',                   
+                    empresa: id_url[1]
+                    //usuario: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                        
+                        $("#puntos_confianza").html(data);    
+
+                }
+            });                                   
+        
+      }, function() {      //le da un punto de confianza
+          
+            $(this).addClass("active");
+            $("#BNoConfio i").addClass("icon-ok");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'da_confianza',                   
+                    empresa: id_url[1],
+                    usuario: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+
+                        $("#puntos_confianza").html(data);    
+                }
+            });                                    
+        }
+    );
+        
+
+/*
+    $("#Bconfio").click(function(){ //le da un punto de confianza
+                
+            $(this).addClass("active");
+            $("#Bconfio i").addClass("icon-ok");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'da_confianza',                   
+                    empresa: id_url[1]
+                    //usuario: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+
+                        $("#puntos_confianza").html(data);    
+                }
+            });                                   
+        
+      });
+      
+      $("#BNoConfio").click(function(){ //le quita el punto de confianza
+          
+            $(this).removeClass("active");            
+            $("#BNoConfio i").removeClass("icon-ok");
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesEmpresa.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'quita_confianza',                   
+                    empresa: id_url[1]
+                    //usuario: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+                        
+                        $("#puntos_confianza").html(data);    
+
+                }
+            });                                   
+      });
+*/
         
         
     /*
@@ -338,6 +442,7 @@ $(document).ready(function(){
     $("#BcrearServi").click(function(){        
              $("#crearServicio").css({display:'inline'});                
              $("#slider_empresa").css({display:'none'});
+             $("#campoConfio").css({display:'none'});
     });      
 
 
@@ -363,7 +468,7 @@ $(document).ready(function(){
 
                         if(/true/.test(data)) {                                
                             alert("Servicio creado :D");                                                                          
-                            document.location.reload();                                     
+                            //document.location.reload();                                     
                         }
                         else alert("No se ha podido ingresar su servicio"); 
                 }
@@ -377,6 +482,7 @@ $(document).ready(function(){
     $(".cancelarServicio").click(function(){        
              $("#crearServicio").css({display:'none'});                
              $("#slider_empresa").css({display:'inline'});
+             $("#campoConfio").css({display:'inline'});
     }); 
 
 
