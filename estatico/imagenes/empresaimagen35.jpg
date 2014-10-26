@@ -1,0 +1,1005 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es">
+<head>
+<title>Hotel Benicassim Balneario Talaso Spa Bodas El Palasiet Benicasim</title>
+<meta name="description" content="Hotel Balneario Talaso El Palasiet Benicassim. Hotel en Benicasim. Bodas en Castellón. Estética y Restaurante Benicassim. Hotel Spa en Benicassim. Hotel Benicassim.">
+<meta name="keywords" content="hotel balneario, benicassim, el palasiet, hoteles benicassim, hotel benicassim, benicassim hoteles, hotel en benicassim, bodas Castellon, palasiet, balneario talaso, restaurante benicasim, hotel spa">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="Perfect Wide - Centro Internacional de producciones web y soluciones para internet - www.perfectwide.com">
+<link rel="shortcut icon" href="favicon.ico">
+<script language="JavaScript" type="text/javascript" src="includes/menu.js"></script>
+<link rel="stylesheet" type="text/css" href="includes/style.css">
+<!-- SITE MAP --->
+<link href="sitemapstyler/sitemapstyler.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="sitemapstyler/sitemapstyler.js"></script>
+<!-- SITE MAP --->
+<!-- ARCHIVOS PARA LOS MENUS DESPEGABLES DE LAS PAGINAS ILIMITADAS-->
+<script type="text/javascript" src="includes/zpmenu/utils/utils.js"></script>
+<script type="text/javascript" src="includes/zpmenu/src/menu.js"></script>
+
+
+<!--<link href="includes/estilos_zpMenu.css" rel="stylesheet" type="text/css">-->
+<link href="includes/zpmenu/themes/contrast_blue.css" rel="stylesheet" type="text/css">
+<!-- TERMINAN ARCHIVOS -->
+<!--[if lt IE 7.]>
+<script defer type="text/javascript" src="includes/pngfix.js"></script>
+<![endif]-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<link href="css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+<script src="js/jquery-ui-1.10.0.custom.js"></script>
+
+<script type="text/javascript" src="fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+
+<script type="text/javascript" language="javascript" src="includes/jquery.carouFredSel-6.1.0-packed.js"></script>
+
+<script type="text/javascript" language="javascript" src="js/jquery.simpleWeather-2.1.1.min.js"></script>
+
+
+
+<script type="text/javascript">
+
+
+function setCookie(nombre, valor, tiempo){
+    var fecha = new Date();
+    fecha.setTime(fecha.getTime() + tiempo);
+    document.cookie = nombre + ' = ' + escape(valor) + ((tiempo == null) ? '' : '; expires = ' + fecha.toGMTString()) + '; path=/';
+ }
+function AceptarCookies () {
+	jQuery("#c_cookie").hide();
+	setCookie('palasiet_cookie_aceptacion', 'Aceptacion-el-13/05/2014-a-las-10h-30m', 365*24*60*60*1000);
+}	
+function OcultarTeLlamamos(pos) {
+	jQuery("#capa_te_llamamos").hide();
+	if (pos==0) setCookie('palasiet_cookie_aceptacion', 'Ocultado-el-13/05/2014-a-las-10h-30m', 7*24*60*60*1000);
+}
+function CerrarFancybox() {
+	$.fancybox.close();
+}
+
+
+
+
+function mostrarResultadosBusquedaHome() {
+	document.location.href="buscadorhome.asp?search="+$("#searchInputT").val();
+} 
+$(function () {
+	$('input.search')
+    	.focus(function () { this.select(); })
+        .mouseup(function (e) { e.preventDefault(); })
+        .autocomplete({
+        	position: { my: "left top", at: "left bottom", offset: "0, 5", collision: "none" },
+        	source: function (request, response) {
+				$.ajax({
+                	url: "http://clients1.google.com/complete/search?q=" + request.term + "&hl=en&client=partner&source=gcsc&partnerid=009049182705423981273:y-sl8nu5stm&ds=cse&nocache=" + Math.random().toString(),
+                    dataType: "jsonp",
+                    success: function (data) {
+                    	response($.map(data[1], function (item) {
+                        	return {
+                            	label: item[0],
+                                value: item[0]
+                            };
+                        }));
+                    }//success
+              	});//ajax
+            },
+            autoFill: true,
+            minChars: 0,
+            select: function (event, ui) {
+				$(this).closest('input').val(ui.item.value);
+				mostrarResultadosBusquedaHome()
+				//      $(this).closest('form').trigger('submit');
+			}
+		}).keyup(function (e) {
+			if(e.which === 13) {
+				$(".ui-autocomplete").hide();
+			}            
+		});
+})
+$(document).ready(function(){
+	$("#searchInputT").keypress(function(e) {
+    	if(e.which == 13) mostrarResultadosBusquedaHome();
+	});
+	
+	
+	$( "#mostrar_detalles_ico_redes_contenido" ).dialog({ 
+		autoOpen: false,
+		closeOnEscape: false,
+		closeText: "Cerrar",
+		draggable: false,
+		modal: true,
+		resizable: false,
+		title: "El Palasiet en las Redes Sociales",
+		position: { my: "left center", at: "top", of: "#mostrar_detalles_ico_redes" }
+	});
+	$('#mostrar_detalles_ico_redes').click(function(){
+		$( "#mostrar_detalles_ico_redes_contenido" ).dialog( "open" )
+	});
+	$.simpleWeather({
+		zipcode: '',
+		woeid: '754250',
+		location: '',
+		unit: 'c',
+		success: function(weather) {
+			//html = '<h2>'+weather.city+', '+weather.region+'</h2>';
+			html = '<table border=0 align=right cellspacing=0 cellpadding=0 style="border-collapse:collapse"><tr>';
+			html += '<td align=right valign=top><img width="80px" src="'+weather.image+'" border=0 align=absbottom"></td>';
+			html += '<td align=left valign=top style="font-size:35px; color:#777777; font-family:Helvetica, Arial; line-height:37px"><b>'+weather.temp+'&deg;'+weather.units.temp+'</b></td>';
+			html += '<td align=left valign=top style="font-size:11px; padding-left:10px">min. '+weather.low+'&deg;'+weather.units.temp+'<br>max. '+weather.high+'&deg;'+weather.units.temp+'</td>';
+			//html += 'CODE:'+weather.code+'<span>-'+weather.currently+'-</span>';
+			html += '</tr></table><div style="clear:both"></div>';
+			$("#weather").html(html);
+		},
+		error: function(error) { $("#weather").html('<p>'+error+'</p>'); }
+	});
+	$("a[rel=example_group]").fancybox({
+		'transitionIn'	:	'elastic',
+		'transitionOut'	:	'elastic',
+		'speedIn'		:	600, 
+		'speedOut'		:	200, 
+		'overlayShow'	:	true,
+		'overlayColor':	'#FFFFFF',
+		'showNavArrows': true,
+		'cyclic': true
+	});
+	if ($("#carousel_vertical").length) {
+		$("#carousel_vertical").carouFredSel({
+			height: 179,
+			items				: 1,
+			direction			: "up",
+			scroll : {
+				items			: 1,
+				duration		: 1000,	
+				timeoutDuration	: 5000,
+				pauseOnHover	: true
+			},
+			prev	: "#foo1_prev",
+			next	: "#foo1_next"						
+		});		
+	}
+	if ($("#carousel_vertical2").length) {
+		$("#carousel_vertical2").carouFredSel({
+			height: 358,
+			items				: 2,
+			direction			: "up",
+			scroll : {
+				items			: 2,
+				duration		: 1000,	
+				timeoutDuration	: 5000,
+				pauseOnHover	: true
+			},
+			prev	: "#foo1_prev",
+			next	: "#foo1_next"						
+		});	
+	}
+	$(".abrir_fancybox").fancybox({
+		'transitionIn'	:	'elastic',
+		'transitionOut'	:	'elastic',
+		'speedIn'		:	600, 
+		'speedOut'		:	200, 
+		'overlayShow'	:	true,
+		'overlayColor':	'#FFFFFF'
+	});
+	$("#fancybox_iframe").fancybox({
+		'overlayColor':'#000000',
+		'overlayOpacity':0.7,
+		'margin':0,
+		'padding':0,
+		'showCloseButton': false,
+		'type': 'iframe',
+		'width': 260,
+		'height': 413
+	});
+});
+
+</script>
+</head>
+<body>
+
+<div id="c_cookie" style="line-height: 13px;background:#000000; border-bottom:1px solid #CECECE;color:#ffffff; font-size:10px; font-family:Arial">
+	<center>
+	<div style="width:960px; text-align:left; padding:10px">
+		<table width="100%" cellpadding=0 cellspacing=0 border=0><tr>
+		<td align=left>
+			Este sitio web utiliza cookies, tanto propias como de terceros, para recopilar información estadística sobre tu navegación y mostrarte publicidad relacionada con tus preferencias, generada a partir de tus pautas de navegación. Si continúas navegando, consideramos que aceptas su uso.
+		</td>
+		<td width="150" align=center><input onclick="AceptarCookies()" type=button value=" " style="cursor:pointer; border:0px; background:url(images/ico_cookie_acepto.png) no-repeat top left; width:120px; height:22px"></td>
+		<td width="100" align=center>
+			<a href="cookies.asp" style="color:#ffffff; text-decoration:none">Más información</a>
+		</td>
+		</tr></table><div style="clear:both"></div>
+	</div>
+	</center>
+</div>
+
+<center>
+<div class="contenedor">
+	<div id="cabecera">
+		<div id="logo"><a href="index.asp" title="Hotel Balneario Benicassim El Palasiet"><img src="images/logo.png" border=0 align="absbottom" alt="Hotel Balneario Benicassim El Palasiet"></a></div>
+		<div id="top_menu">
+					
+	
+	<ul id='myMenu'>
+		
+		
+			<li><a href="Hotel.asp">Hotel</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="turismo-de-salud.asp">Turismo de salud</a>
+				
+			</li>
+			
+			<li><a href="Habitaciones.asp">Habitaciones</a>
+				
+			</li>
+			
+			<li><a href="hotel-con-encanto-espacios.asp">Espacios</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="hotel-con-encanto-salones.asp">Salones</a>
+				
+			</li>
+			
+			<li><a href="hotel-con-encanto-bodeguita.asp">Bodeguita</a>
+				
+			</li>
+			
+			<li><a href="hotel-con-encanto-terraza.asp">Terraza</a>
+				
+			</li>
+			
+			<li><a href="via-verde.asp">Vía Verde Benicassim - Oropesa</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="centros-eventos-congresos.asp">Eventos</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="hotel-castellon-celebraciones.asp">Celebraciones</a>
+				
+			</li>
+			
+			<li><a href="hoteles-en-castellon-empresas.asp">Empresas</a>
+				
+			</li>
+			
+			<li><a href="hotel-en-castellon-convenciones.asp">Convenciones</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="grupos-solicitud-informacion.asp">Grupos</a>
+				
+			</li>
+			
+			<li><a href="Programas-de-hotel-con-talaso.asp">Programas de hotel con talaso</a>
+				
+			</li>
+			
+			<li><a href="escapadas-romanticas.asp">Escapadas</a>
+				
+			</li>
+			
+			<li><a href="Ofertas-de-hotel-con-programa.asp">Ofertas</a>
+				
+			</li>
+			
+			<li><a href="Observaciones-programas.asp">Observaciones programas</a>
+				
+			</li>
+			
+			<li><a href="sorteo_consultorio_vida_saludable.asp">Concurso Consultorio Vida Saludable</a>
+				
+			</li>
+			
+			<li><a href="testimonios.asp">Ver más testimonios</a>
+				
+			</li>
+			
+			<li><a href="Trabajar-en-El-Palasiet.asp">Trabajar en El Palasiet</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="talaso.asp">Talaso</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="indicaciones_talaso.asp">Servicios sanitarios</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="talasoterapia.asp">Servicios de talasoterapia</a>
+				
+			</li>
+			
+			<li><a href="programas_termales.asp">Programas médico-termales</a>
+				
+			</li>
+			
+			<li><a href="tratamientos.asp">Tratamientos médicos</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="Presoterapia.asp">Presoterapia</a>
+				
+			</li>
+			
+			<li><a href="Terapia-asistida-por-fisioterapeuta.asp">Terapia asistida por fisioterapeuta</a>
+				
+			</li>
+			
+			<li><a href="Rehabilitacion-de-Protesis-de-Cadera-.asp">Rehabilitación de Prótesis de Cadera</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="centro-termal-talasoterapia.asp">Centro termal</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="masajes.asp">Masajes</a>
+				
+			</li>
+			
+			<li><a href="terapias_termales.asp">Actividades complementarias</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="recorrido_con_entrenador.asp">Recorrido con entrenador</a>
+				
+			</li>
+			
+			<li><a href="tai_chi.asp">Tai Chi</a>
+				
+			</li>
+			
+			<li><a href="estiramientos_de_cadenas_musculares.asp">Estiramientos de cadenas musculares</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="tecnicas_orientales.asp">Técnicas orientales</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="masaje_tailandes.asp">Masaje Tailandes</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="coaching_deportivo.asp">Coaching deportivo</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="fit-ball.asp">Fit-ball</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="diccionario-termal-talaso.asp">Diccionario Termal</a>
+				
+			</li>
+			
+			<li><a href="programas_no_alojados.asp">Programas para no alojados</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="programas_de_adelgazamiento.asp">Programas de adelgazamiento</a>
+				
+			</li>
+			
+			<li><a href="Del-malestar-al-bienestar.asp">Del malestar al bienestar</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="centro-de-estetica.asp">Centro de Estética</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="tratamientos-esteticos.asp">Tratamientos estéticos</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="estetica_facial.asp">Estética Facial</a>
+				
+			</li>
+			
+			<li><a href="estetica_corporal.asp">Estética Corporal</a>
+				
+			</li>
+			
+			<li><a href="especial_silueta.asp">Especial Silueta</a>
+				
+			</li>
+			
+			<li><a href="estetica-manicura-pedicura.asp">Estética Manos y Pies</a>
+				
+			</li>
+			
+			<li><a href="programas-tratamientos-esteticos.asp">Programas Estéticos</a>
+				
+			</li>
+			
+			<li><a href="micropigmentacion.asp">Micropigmentación</a>
+				
+			</li>
+			
+			<li><a href="otros_tratamientos.asp">Otros tratamientos</a>
+				
+			</li>
+			
+			<li><a href="peluqueria.asp">Peluquería</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="medicina-estetica.asp">Medicina-estética</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="tratamientos-para-adelgazar.asp">Tratamientos sobrepeso</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="Endermologie_lpg.asp">La Endermologie-LPG</a>
+				
+			</li>
+			
+			<li><a href="Mesoterapia_corporal.asp">Mesoterapia corporal</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="rejuvenecimiento-facial.asp">Rejuvenecimiento facial</a>
+						
+	
+	<ul >
+		
+		
+			<li><a href="mesoterapia-facial-con-vitaminas.asp">Mesoterapia facial con vitaminas</a>
+				
+			</li>
+			
+			<li><a href="bioestimulacion_cutanea.asp">Bioestimulación cutánea</a>
+				
+			</li>
+			
+			<li><a href="Toxina_botulinica.asp">Toxina Botulínica</a>
+				
+			</li>
+			
+			<li><a href="Acido-Hialuronico.asp">Acido hialurónico</a>
+				
+			</li>
+			
+			<li><a href="Peeling-quimico.asp">Peelings químicos</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="Programas-Especiales.asp">Programas Especiales</a>
+				
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+		
+	</ul>	
+	
+			</li>
+			
+			<li><a href="bodas-en-castellon-palasiet.asp">Bodas</a></li>
+			
+			<li><a href="restaurante.asp">Restaurante</a></li>
+			<li><a href="benicassim-hoteles-accesotren.asp">Información</a>
+				<ul>
+				<li><a href="localizacion.asp">Localización</a></li>
+				<li><a href="contacto.asp">Contacto</a></li>
+				<li><a href="http://www.comunitatvalenciana.com/webcam/castellon-costa-azahar-benicassim-benicassim-0">Webcam</a></li>
+				<li><a href="http://www.comunitatvalenciana.com/webcam/castellon-costa-azahar-benicassim-benicassim-0">Temperatura</a></li>
+				<li><a href="formcurriculum.asp">Ofertas de trabajo</a></li>
+				</ul>
+			</li>
+		
+		
+	</ul>	
+	
+<script type="text/javascript">
+	var menu = new Zapatec.Menu('myMenu', {vertical:false});
+</script>
+			<div style="clear:both"></div>
+		</div>
+		<div id="idiomas">
+			
+			<a href="index.asp" class="enlace_idiomas" onMouseOver="activar();ocultar_submenus(); mostrar_idiomas();" onMouseOut="retardo();" alt="Talaso Benicasim El Palasiet Idiomas">Español</a>
+			<div id="capa_idiomas" onMouseOver="activar();" onMouseOut="retardo();">
+			<a href="home.asp" alt="Hotel Spa El Palasiet Benicasim - English">English</a><a href="indice.asp" alt="Hôtel Spa El Palasiet Benicasim - Français">Français</a><a href="anfang.asp" alt="Hotel Spa El Palasiet Benicassim - Deutsch">Deutsch</a><a href="start.asp" alt="Hotel Spa El Palasiet Benicassim - Pусский">Pусский</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="c_reservas">
+	<div class=contenedor>
+		
+		
+		<script>
+		function cambiarNumeroHabitaciones(){
+			$("#texto_adunin").css("display","none");
+			$(".linea_habitacion").hide();
+			max_habitaciones = parseInt($("#frmReserva input[name=max_habitaciones]").val());
+			num_habi =$("#numero_habitaciones").val();
+			if (num_habi == "") {
+				num_habi=0;
+			}
+			if (num_habi>0) {
+				for (c=0;c<num_habi;c++){
+					if (c==0) $("#texto_adunin").css("display","table-row");
+					$("#habi"+c).css("display","table-row");
+				}
+			}
+		}
+		$(document).ready(function(){
+			$( "#frmReserva input[name=fecha_entrada]" ).datepicker({
+				defaultDate: "+1d",
+				dateFormat: "dd/mm/yy",
+				minDate: "+1d",
+				dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
+				dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sá"],
+				monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+				monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+				nextText: "Siguiente",
+				prevText: "Anterior",
+				buttonText: "Seleccionar",
+				showOn: "button",
+				buttonImageOnly: true,
+				buttonImage: "images/ico_calendar.png",
+				changeMonth: true,
+				numberOfMonths: 2,
+				firstDay: 1,
+				onClose: function( selectedDate ) {
+					$( "#frmReserva input[name=fecha_salida]" ).datepicker( "option", "minDate", selectedDate );
+				}
+			});
+			$( "#frmReserva input[name=fecha_salida]" ).datepicker({
+				defaultDate: "+2d",
+				dateFormat: "dd/mm/yy",
+				minDate: "+2d",
+				dayNames: [ "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" ],
+				dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sá"],
+				monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+				monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+				nextText: "Siguiente",
+				prevText: "Anterior",
+				buttonText: "Seleccionar",
+				showOn: "button",
+				buttonImageOnly: true,
+				buttonImage: "images/ico_calendar.png",
+				changeMonth: true,
+				numberOfMonths: 2,
+				firstDay: 1,
+				onClose: function( selectedDate ) {
+					$( "#frmReserva input[name=fecha_entrada]" ).datepicker( "option", "maxDate", selectedDate );
+				}
+			});
+			$( "#numero_habitaciones" ).spinner({
+				max: 5,
+				min: 0,
+				stop: function( event, ui ) {
+					if ($("#capa_submenu_reservas").css("visibility")=="hidden") $("#capa_submenu_reservas").css("visibility","visible")
+					cambiarNumeroHabitaciones();
+				}
+			});
+			$( ".spinner_small_adulto" ).spinner({
+				max: 4,
+				min: 0
+			});
+			$( ".spinner_small_ninyos" ).spinner({
+				max: 2,
+				min: 0
+			});
+		});
+		function checkLocation() {
+			mostrar_reservas();
+			var res=false;
+			if ($("#frmReserva input[name=fecha_entrada]").val()=="") {
+				alert("Para reservar es necesario que seleccione una fecha de entrada.");
+				$("#frmReserva input[name=fecha_entrada]").focus();
+			}
+			else if ($("#frmReserva input[name=fecha_salida]").val()=="") {
+				alert("Para reservar es necesario que seleccione una fecha de salida.");
+				$("#frmReserva input[name=fecha_salida]").focus();
+			}
+			else if ($("#frmReserva input[name=fecha_entrada]").val()==$("#frmReserva input[name=fecha_salida]").val()) {
+				alert("La fecha de salida es igual o anterior a la fecha de entrada.");
+				$("#frmReserva input[name=fecha_salida]").focus();
+			}
+			else if ($("#frmReserva input[name=numero_habitaciones]").val()=="" || $("#frmReserva input[name=numero_habitaciones]").val()=="0") {
+				alert("Para reservar es necesario que indique el número de habitaciones.");
+				$("#frmReserva input[name=numero_habitaciones]").focus();
+			}
+			else if ($('#frmReserva input:radio[name=pension]:checked').map(function () { return this.value;}).get() == "")  {
+				alert("Para reservar es necesario que seleccione un tipo de pensión.");
+			}
+			else {
+				//Comprobar adultos
+				val = parseInt($("#numero_habitaciones").val());
+				var puedo=true;
+				for(c=0;c<val;c++){
+					val2 = parseInt($("#adultos"+c).val())
+					if (isNaN(val2)){
+						alert("Para reservar es necesario que indique los adultos de la habitación");
+						$("#adultos"+c).focus();
+						puedo=false;
+						return false;
+					}else if(val2==0){
+						alert("Para reservar es necesario que indique los adultos de la habitación");
+						$("#adultos"+c).focus();
+						puedo=false;
+						return false;
+					}
+				}
+				if (puedo) res=true;
+			}
+			return res;
+		}
+		</script>
+		
+		
+		<form name="frmReserva" id="frmReserva" action="http://reservas.palasiet.com/reservas_hotel_balneario.asp" method="post" style="display:inline" onsubmit="return checkLocation();">
+		<input type="hidden" name="pagina" value="/404.asp">
+		<input type="hidden" name="max_habitaciones" value="5">
+		<input type="hidden" name="formulario" value="10" />
+		
+		<div id="c_reservas_mini">		
+			
+			<table border=0 align=left cellpadding=0 cellspacing=0 style="border-collapse:collapse" height=40><tr align=left valign=middle>
+			<td style="padding-right:10px;  text-transform:uppercase;">Entrada</td>
+			
+			<td align=right nowrap><input type="text" name="fecha_entrada" class="input_fecha_reservas_mini" value="" readonly="readonly" id="fecha_entrada"></td>
+			<td style="padding:0px 10px 0px 20px;  text-transform:uppercase;">Salida</td>
+			<td align=right nowrap><input type="text" name="fecha_salida" class="input_fecha_reservas_mini" value="" readonly="readonly" id="fecha_salida"></td>
+			<td style="padding:0px 10px 0px 20px;  text-transform:uppercase;">Habitaciones</td>
+			<td align=right>
+				
+				<input id="numero_habitaciones" name="numero_habitaciones" readonly="readonly" value="" class=spinner>
+			</td>
+			</tr></table><div style="clear:both"></div>			
+			
+			<div id="capa_submenu_reservas">
+				<table border=0 align=left cellpadding=10 cellspacing=0 style="border-collapse:collapse" width="100%"><tr align=left valign=top>
+				<td width="20%" align=right>Pensión</td>
+				<td width="30%" style="font-size:12px">
+				
+					<input type="radio" name="pension" value="1"  class="no-borde">&nbsp;Alojamiento y Desayuno<br>
+					
+					<input type="radio" name="pension" value="2"  class="no-borde">&nbsp;Media Pensión<br>
+					
+					<input type="radio" name="pension" value="3"  class="no-borde">&nbsp;Pensión Completa<br>
+											
+				</td>
+				<td>
+					<table>
+					<tr id="texto_adunin" style="display:none">
+						<td></td>
+						<td>Adultos</td>
+						<td>Niños&nbsp;(3-10)</td>
+					</tr>
+					
+							<tr id="habi0" style="display:none;" class="linea_habitacion"><td>Habitación&nbsp;1</td>
+							
+						<td>
+							<input type="text" name="adultos0" id="adultos0" value="0" class=spinner_small_adulto>
+						</td>
+						<td>
+							<input type="text" name="ninos0" id="ninos0" value="0" class=spinner_small_ninyos>
+						</td></tr>
+						
+							<tr id="habi1" style="display:none;" class="linea_habitacion"><td>Habitación&nbsp;2</td>
+							
+						<td>
+							<input type="text" name="adultos1" id="adultos1" value="0" class=spinner_small_adulto>
+						</td>
+						<td>
+							<input type="text" name="ninos1" id="ninos1" value="0" class=spinner_small_ninyos>
+						</td></tr>
+						
+							<tr id="habi2" style="display:none;" class="linea_habitacion"><td>Habitación&nbsp;3</td>
+							
+						<td>
+							<input type="text" name="adultos2" id="adultos2" value="0" class=spinner_small_adulto>
+						</td>
+						<td>
+							<input type="text" name="ninos2" id="ninos2" value="0" class=spinner_small_ninyos>
+						</td></tr>
+						
+							<tr id="habi3" style="display:none;" class="linea_habitacion"><td>Habitación&nbsp;4</td>
+							
+						<td>
+							<input type="text" name="adultos3" id="adultos3" value="0" class=spinner_small_adulto>
+						</td>
+						<td>
+							<input type="text" name="ninos3" id="ninos3" value="0" class=spinner_small_ninyos>
+						</td></tr>
+						
+							<tr id="habi4" style="display:none;" class="linea_habitacion"><td>Habitación&nbsp;5</td>
+							
+						<td>
+							<input type="text" name="adultos4" id="adultos4" value="0" class=spinner_small_adulto>
+						</td>
+						<td>
+							<input type="text" name="ninos4" id="ninos4" value="0" class=spinner_small_ninyos>
+						</td></tr>
+						
+					</table>
+					<div style="clear:both"></div>		
+				</td>
+				</tr></table>
+				<div style="clear:both" align=right>
+					<img src="images/ico_mini_close.jpg" alt="Cerrar" border=0 align=absbottom onclick="ocultar_reservas()" style="cursor:pointer" hspace=5 vspace=5></a>
+				</div>
+			</div>
+			
+			
+			<div style="clear:both"></div>	
+		</div>
+		<div id="c_reservas_mini_boton_reservar">
+			<input type="submit" name="enviar" value="Reservar">
+		</div>
+		<div id="telefono_reservas">
+			
+			+34 900 300 255
+			
+		</div>
+		
+		<input type="hidden" name="max_adultos" value="4">
+		<input type="hidden" name="max_ninos" value="2">
+		</form>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+<div id="flash_inside" style="background: #777 url('media/cabeceras/404.png') no-repeat top center"></div>
+
+
+<div class=contenedor>
+	
+<div id="col1">&nbsp;</div>
+<div style="float:left; padding:40px 0px; line-height:40px">
+	<p class=titulo2>Página no encontrada</p>
+	<p>Lo sentimos pero esta página no existe o ha sido cambiado.</p>
+	<p>Por favor, pulsa el botón de ‘atrás’ o usa el menú para encontrar lo que buscabas.</p>
+</div>
+<div style="clear:both"></div>
+	<div style="clear:both"></div>
+</div>
+<!-- desde aqui se copia y pega en el dominio de reservas... aunq modificando las funciones para que consltesn a la bd de palasiet y no de reservas--->
+<div id="pie_barra">
+	<div class=contenedor>
+		<a href="galeria.asp">Fotos</a>
+		<a href="videos.asp">Videos</a>
+		<a href="recorrido-virtual.asp">Recorrido virtual</a>
+		
+			<a href="Tarifas2013.asp">Programas</a>
+		
+			<a href="Ofertas.asp">Ofertas</a>
+		
+		<a href="tarifas.asp">Tarifas</a>
+	</div>
+</div>
+<div id="pie_callactions">
+	<div class=contenedor>
+		<table border=0 align=left width="100%" cellpadding=0 cellspacing=0 style="border-collapse:collapse"><tr align=left valign=middle>
+		<td width="25%">
+			
+				<a href="http://www.facebook.com/pages/Benicasin-Spain/Hotel-Termas-Marinas-El-Palasiet/108397887601" target="_blank"><img src="images/ico_fb.png" border=0 align=absbottom style="padding-right:6px" alt="Palasiet Benicassim - Facebook"></a>
+				<a href="http://twitter.com/palasiet" target="_blank"><img src="images/ico_tw.png" border=0 align=absbottom style="padding-right:6px" alt="Palasiet Benicassim - Twitter"></a>
+				<a href="http://www.youtube.com/user/palasietvideos" target="_blank"><img src="images/ico_yt.png" border=0 align=absbottom style="padding-right:6px" alt="Palasiet Benicassim - YouTube"></a>
+				<a href="https://plus.google.com/u/0/b/101066844779316760024/" target="_blank"><img src="images/ico_go.png" border=0 align=absbottom style="padding-right:6px" alt="Palasiet Benicasim - Google+"></a>
+				<a href="blog" title="Blog El Palasiet"><img src="images/ico_blog.png" border=0 align=absbottom style="padding-right:6px" alt="Hotel Benicassim Blog Palasiet"></a>
+			
+			<img src="images/ico_masredes1.png" border=0 align=absbottom alt="El Palasiet en las Redes Sociales"  id="mostrar_detalles_ico_redes">
+			<div id="mostrar_detalles_ico_redes_contenido">
+				<iframe width="280" height="310" src="redes-sociales-palasiet1.asp" align=left frameborder=0 marginheight=0 marginwidth=0></iframe>
+			</div>
+		</td>
+		<td width="25%" align=center>			
+			<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="145" height="43">
+			<param name="movie" value="images/hotel_balneario_hotel_benicasim_palasiet.swf">
+			<param name="quality" value="high">
+			<param name="wmode" value="transparent">
+			<embed src="images/hotel_balneario_hotel_benicasim_palasiet.swf" quality="high"  wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="145" height="43"></embed>
+			</object>			
+		</td>
+		<td width="25%"><p>Hotel termas Marinas El Palasiet<br />
+C/ Pontazgo,11- 12.560<br />
+Benicassim (Castell&oacute;n)<br />
++34 900 300 255</p></td>
+		<td width="25%" align=left id="weather">
+			<p align=center><img src="images/ajax-loader.gif" border=0 align=absbottom>&nbsp;<b style="color:#00B4BF">Loading weather...</b></p>
+		</td>
+		</tr></table><div style="clear:both"></div>
+	</div>
+</div>
+<div class="contenedor" id="pie">
+	<table border=0 align=left width="100%" cellpadding=0 cellspacing=0 style="border-collapse:collapse"><tr valign=top>
+	<td align=left width="75%">
+		
+			<table border=0 align=left width="85%" cellpadding=0 cellspacing=0 style="border-collapse:collapse">
+			<tr align=left valign=middle>
+				<td width="25%"><b><a href="hotel-balneario.asp" title="Hotel Balneario Benicassim">Hotel Balneario Benicassim</a></b></td>
+				<td width="25%"><b><a href="talasoterapia.asp" title="Talasoterapia">Talasoterapia</a></b></td>
+				<td width="25%"><b><a href="tarifas-palasiet.asp" title="Hotel en Benicassim Tarifas">Hotel en Benicassim Tarifas</a></b></td>
+				<td width="25%"><b><a href="restaurante.asp" title="Hotel Restaurante">Hotel Restaurante</a></b></td>
+			</tr>
+			<tr align=left valign=middle>
+				<td><a href="hotel.asp" title="Hotel El Palasiet">Hotel El Palasiet</a></td>
+				<td><a href="programas_termales.asp" title="Talasoterapia Programas">Talasoterapia Programas</a></td>
+				<td><b><a href="ofertas.asp" title="Hoteles Benicassim Ofertas">Hoteles Benicassim Ofertas</a></b></td>
+				<td><a href="tratamientos.asp" title="Talaso Tratamientos">Talaso Tratamientos</a></td>
+			</tr>
+			<tr align=left valign=middle>
+				<td><a href="habitaciones.asp" title="Hotel Balneario Habitaciones">Hotel Balneario Habitaciones</a></td>
+				<td><a href="carta_masajes.asp" title="Talasoterapia Masajes">Talasoterapia Masajes</a></td>
+				<td><b><a href="centros-eventos-congresos.asp" title="Hoteles Centro Eventos">Hoteles Centro Eventos</a></b></td>
+				<td><b><a href="hotel-benicassim.asp" title="Hotel Benicassim">Hotel Benicassim</a></b></td>
+			</tr>
+			<tr align=left valign=middle>
+				<td><a href="galeria.asp" title="Hotel en Benicasim Galeria">Hotel en Benicasim Galeria</a></td>
+				<td><b><a href="talaso.asp" title="Talaso">Talaso</a></b></td>
+				<td><a href="salones-boda-castellon.asp" title="Hoteles Salones Bodas">Hoteles Salones Bodas</a></td>
+				<td><b><a href="hotel-benicasim.asp" title="Hotel Benicasim">Hotel Benicasim</a></b></td>
+			</tr>
+			<tr align=left valign=middle>
+				<td><b><a href="localizacion.asp" title="Localización Hotel">Localización hotel</a></b></td>
+				<td><a href="terapias_termales.asp" title="Talaso Terapias">Talaso Terapias</a></td>
+				<td><b><a href="belleza.asp" title="Belleza y estética">Belleza y estética</a></b></td>
+				<td><a href="indicaciones_talaso.asp" title="Talaso Indicaciones">Talaso Indicaciones</a></td>
+			</tr>
+			<tr align=left valign=middle>
+				<td colspan=4><b><a href="contacto.asp" title="Contacto Hotel">Contacto hotel</a></b></td>
+			</tr></table><div style="clear:both"></div>
+		
+	</td>
+	<td width="25%" align=right>
+		
+		<div style="float:right">
+			<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="163" height="20">
+			<param name="movie" value="images/hotel_balneario_pie.swf">
+			<param name="quality" value="high">
+			<param name="wmode" value="transparent">
+			<embed src="images/hotel_balneario_pie.swf" quality="high"  wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="163" height="20"></embed>
+			</object>
+		</div>
+		<div style="float:right; line-height:22px; font-size:9px;">&copy;&nbsp;2001-2014&nbsp;</div>
+		
+		<div align=right style="clear:both">
+			<a href="politicaprivacidad.asp" target="_blank">Política de Privacidad</a> - <a href="avisolegal.asp" target="_blank">Aviso Legal</a>
+		</div>
+	</td>
+	</tr></table><div style="clear:both"></div>
+</div>
+<!-- hasta aqui -->
+</center>
+
+
+<div id="capa_te_llamamos">
+	<div style="float:left; font-size:18px"><b>¿Necesitas ayuda?</b></div>
+	<div style="float:right"><img src="images/1px.gif" border="0" align="absbottom" height="10" width="10" style="cursor:pointer" onclick="OcultarTeLlamamos(0)" /></div>
+	<div class=clear style="padding:10px 0px">Nosotros te llamamos. Deja aquí tu teléfono y dinos cuándo</div>
+	<div align="right"><a id="fancybox_iframe" href="te_llamamos.asp"><img src="images/te_llamamos_boton.png" border="0" align="absbottom" style="cursor:pointer" onclick="OcultarTeLlamamos(1)" /></a></div>
+</div>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10737176-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

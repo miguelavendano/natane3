@@ -17,7 +17,7 @@
 
 .usuario{
     background-color: white;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
 /*
 background: -moz-linear-gradient(top,  rgba(96,96,96,1) 0%, rgba(191,191,191,0.5) 3%, rgba(255,255,255,0.54) 5%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 70%, rgba(255,255,255,0.54) 95%, rgba(191,191,191,0.5) 97%, rgba(96,96,96,1) 100%);  FF3.6+ 
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,96,96,1)), color-stop(3%,rgba(191,191,191,0.5)), color-stop(5%,rgba(255,255,255,0.54)), color-stop(30%,rgba(255,255,255,1)), color-stop(70%,rgba(255,255,255,1)), color-stop(95%,rgba(255,255,255,0.54)), color-stop(97%,rgba(191,191,191,0.5)), color-stop(100%,rgba(96,96,96,1)));  Chrome,Safari4+ 

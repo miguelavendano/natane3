@@ -33,6 +33,7 @@ class ModelComentario{
 				->save();
 
 		$minodo->id = $minodo->node->getId();                
+                echo $minodo->id;
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Comentario');
 		$minodoIndex->add($minodo->node, 'detalle', $minodo->nombre);
                 

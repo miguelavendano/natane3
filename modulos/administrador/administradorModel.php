@@ -62,7 +62,7 @@
          */
         public function get_populares(){   
                         
-            $query = "START n=node(*) WHERE n.type='Usuario' RETURN n";            
+            $query = "START n=node(*) WHERE n.type='Usuario' RETURN n limit 50";            
             $filtro = "MATCH n<-[:Amigo]-a RETURN count(a) as seguidores";
             $resultado = $this->modeladministrador->get_usuariosVistaAdmin($query,$filtro);
 
@@ -75,7 +75,7 @@
          */
         public function get_comparten(){   
                         
-            $query = "START n=node(*) WHERE n.type='Usuario' RETURN n";            
+            $query = "START n=node(*) WHERE n.type='Usuario' RETURN n limit 50";            
             $filtro = "MATCH n-[:Comparte]->e RETURN count(e) as experiencias";
             $resultado = $this->modeladministrador->get_usuariosVistaAdmin($query,$filtro);
 
@@ -90,7 +90,7 @@
          */
         public function get_noticias(){   
 
-            $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type='Noticia' return b ORDER BY b.fecha DESC";            
+            $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type?='Noticia' return b ORDER BY b.fecha DESC";            
             $resultado = $this->modelpublicacion->get_noticias($query);
 
             return $resultado;            
@@ -103,7 +103,7 @@
          */
         public function get_eventos(){   
                         
-            $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type='Evento' return b ORDER BY b.fecha DESC";            
+            $query = "START n=node(".$this->id_user.") MATCH n-[:Informa]->b WHERE b.type?='Evento' return b ORDER BY b.fecha DESC";            
             $resultado = $this->modelpublicacion->get_eventos($query);
 
             return $resultado;            

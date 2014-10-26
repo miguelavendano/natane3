@@ -1,8 +1,8 @@
 <?php
 
-require_once('coneccion.php');
-require_once('modeloPublicacion.php');
-require_once('Publicacion.php');
+require_once('../../../core/coneccion.php');
+require_once('../../../core/modeloPublicacion.php');
+require_once('../../../core/Publicacion.php');
 
 function creaNodoExperiencia($titulo,$detalle){
     

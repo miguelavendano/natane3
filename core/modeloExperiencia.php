@@ -36,9 +36,10 @@ class ModelExperiencia{
 		$minodo->node->setProperty('nombre', $minodo->nombre)
 				->setProperty('descripcion', $minodo->descripcion)
                                 ->setProperty('type', $minodo->type)
-				->save();
-
-		$minodo->id = $minodo->node->getId();
+				->save();              
+                
+                
+		$minodo->id = $minodo->node->getId();                
 
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Experiencia');
 		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);

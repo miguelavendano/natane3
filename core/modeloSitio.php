@@ -75,8 +75,9 @@ class ModelSitios{
 	}      
 
         
-        /*
-         * funcion que edita una propiedad de un sitio y si no existe la crea
+        /**
+         * Edita una propiedad de un sitio y si no existe la crea
+         * 
          */     
 	public static function editar_sitio($idnodo, $propiedad, $detalle){
 		//Obtengo toda la informacion del nodo
@@ -87,8 +88,9 @@ class ModelSitios{
 	}    
         
         
-        /*
+        /**
          * Retorna todos los valores del nodo tipo Sitio
+         * 
          */     
         public function get_sitio($queryString){
             
@@ -126,10 +128,13 @@ class ModelSitios{
             }                        
         }
         
-        /*
+        
+        /**
          * Retorna el valor de la propiedad especificada 
-         * Parametros: consulta y propiedad del nodo
-         */              
+         * @param String $queryString Consulta a realizar
+         * @param String $propiedad Nombre de la propiedad
+         * @return array 
+         */
         public function get_property_sitio($queryString, $propiedad){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
@@ -147,6 +152,14 @@ class ModelSitios{
            }
         }
                 
+        /**
+         * Retorna las coordenadas para la ubicación del sitio
+         * 
+         * @param type $queryString
+         * @param type $latitud
+         * @param type $longitud
+         * @return array
+         */
         public function get_property_mapa($queryString,$latitud,$longitud){
             
             $query = new Cypher\Query(Neo4Play::client(), $queryString);            
@@ -166,6 +179,14 @@ class ModelSitios{
         }
         
         
+        
+        /**
+         * Retorna listado de sitios aleatorios.
+         * 
+         * @param type $queryString Cypher para la consulta
+         * @param type $cant cantidad de sitios aleatorios requeridos.
+         * @return array Array de sitios consultados
+         */
         public function get_sitio_aleatorio($queryString, $cant){
             
                         
@@ -475,7 +496,29 @@ class ModelSitios{
             }                  
                         
             return $resultado;
-        }                
+        }    
+        
+        
+        public function get_ids_sitios(){
+            
+            $queryString = 'start n=node(*) where n.type="Sitio" return id(n) as i;';
+            
+            $query = new Cypher\Query(Neo4Play::client(), $queryString);      
+            
+            $result = $query->getResultSet();               
+            
+            $todosIds = array();
+            
+            foreach ($result as $row){
+                
+                array_push($todosIds, $row[0]);
+                //echo $row[0];
+            }                  
+                        
+            return $todosIds;            
+            
+            
+        }
         
         
         

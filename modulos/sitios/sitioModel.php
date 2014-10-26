@@ -87,12 +87,12 @@
          */            
         public function get_ferrocarril(){
 
-            $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Semejantes]->b RETURN b;";
+            $query = "START n=node(".$this->id_sitio.") MATCH n<-[:Semejantes]->b RETURN b limit 50;";
             
             $resultado = $this->modelsitios->get_semejantes($query);
             $resultado = array();
             if(count($resultado)<10){
-                $query = "START n=node(*) WHERE n.type='Sitio' RETURN n;";
+                $query = "START n=node(*) WHERE n.type='Sitio' RETURN n limit 50;";
                 $resultado2 = $this->modelsitios->get_sitio_aleatorio($query, 10 - count($resultado));
             }
             

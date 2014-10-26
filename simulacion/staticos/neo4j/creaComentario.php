@@ -1,19 +1,19 @@
 <?php
 
-require_once('coneccion.php');
-require_once('modeloComentario.php');
-require_once('Comentario.php');
+require_once('../../../core/coneccion.php');
+require_once('../../../core/modeloComentario.php');
+require_once('../../../core/Comentario.php');
 
-function creaNodoComentario($idUsuario,$comentario){
+function creaNodoComentario($comentario){
     
     $minodo = new Comentario();
-    $minodo->usuario = $idUsuario;
-    $minodo->detalle = $comentario;    
+    $minodo->usuario = '';
+    $minodo->detalle = $comentario;
     $minodo->fecha = date("d")." de ".date("F")." de ".date("Y")." a la(s) ".date("H:i");
-    $minodo->nombre = "";    
-    $minodo->type = 'Comentario';      
+    $minodo->nombre = "";
+    $minodo->type = 'Comentario';
   
-    ModelComentario::crearNodoComentario($minodo);        
+    ModelComentario::crearNodoComentario($minodo);
 }    
     
 

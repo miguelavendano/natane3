@@ -26,7 +26,7 @@
         
         public function get_seguidores(){   
                         
-            $query = "START a=node(".$this->id_user.") MATCH a<-[:Amigo]-b RETURN b";            
+            $query = "START a=node(".$this->id_user.") MATCH a<-[:Sigue]-b RETURN b";            
             $resultado = $this->modelusuarios->get_amigos($query);
 
             return $resultado;            
@@ -34,7 +34,7 @@
         
         public function get_siguiendo(){   
                         
-            $query = "START a=node(".$this->id_user.") MATCH a-[:Amigo]->b RETURN b";            
+            $query = "START a=node(".$this->id_user.") MATCH a-[:Sigue]->b RETURN b";            
             $resultado = $this->modelusuarios->get_amigos($query);
 
             return $resultado;            
@@ -67,7 +67,7 @@
         public function get_AmigosDeAmigos(){   
             
             //$query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a<-[:Amigo]->o return o";
-            $query = "START n=node(".$this->id_user.") MATCH n-[:Amigo]->a<-[:Amigo]->o return o";
+            $query = "START n=node(".$this->id_user.") MATCH n-[:Sigue]->a<-[:Sigue]->o return o";
             //$query = "start n=node(".$this->id_user.") match n<-[:Amigo]->a return a";
             $resultado = $this->modelusuarios->get_AmigosDeAmigos($query);
 

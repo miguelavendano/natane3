@@ -6,14 +6,14 @@ require_once('Usuario.php');
 require_once('Servicio.php');
 
 
-
-use Everyman\Neo4j\Node,
-    Everyman\Neo4j\Index,
-    Everyman\Neo4j\Query\ResultSet,
-    Everyman\Neo4j\Relationship,
-    Everyman\Neo4j\Cypher,
-    Everyman\Neo4j\Cypher\Query,
-    Everyman\Neo4j\Command;
+    use Everyman\Neo4j\Node,
+        Everyman\Neo4j\Index,
+        Everyman\Neo4j\Query\ResultSet,
+        Everyman\Neo4j\Relationship,
+        Everyman\Neo4j\Cypher,
+        Everyman\Neo4j\Cypher\Query,
+        Everyman\Neo4j\Command,
+        Everyman\Neo4j\Exception;    
 
 
 class ModelEmpresa{
@@ -29,10 +29,16 @@ class ModelEmpresa{
          */	
 	public static function crearNodoEmpresa(Empresa $minodo)
 	{
+            
 		if (!$minodo->node) {
-			$minodo->node = new Node(Neo4Play::client());
+            
+                    echo "Antes";
+                    $minodo->node = new Node(Neo4Play::client());           
+                    echo "despues";
+                    
 		}
 
+                echo "<h3>0</h3>";
 		$minodo->node->setProperty('nombre', $minodo->nombre)
 				->setProperty('imagen', $minodo->imagen)
 				->setProperty('nit', $minodo->nit)
@@ -42,7 +48,7 @@ class ModelEmpresa{
                                 ->setProperty('direccion', $minodo->direccion)
                                 ->setProperty('latitud', $minodo->latitud)
                                 ->setProperty('longitud', $minodo->longitud)
-                                ->setProperty('longitud', $minodo->confianza)                                
+                                ->setProperty('confianza', $minodo->confianza)                                
                                 ->setProperty('correo', $minodo->correo)
                                 ->setProperty('sitio_web', $minodo->sitio_web)
                                 ->setProperty('facebook', $minodo->facebook)
@@ -50,11 +56,18 @@ class ModelEmpresa{
                                 ->setProperty('youtube', $minodo->youtube)
                                 ->setProperty('contraseña', $minodo->contraseña)
                                 ->setProperty('type', $minodo->type)
-				->save();        
+				->save();       
+             
+                
+                
+                echo "<h3>1</h3>";
                       
-		$minodo->id = $minodo->node->getId();                
+		$minodo->id = $minodo->node->getId();
+                
+                echo "<h3>".$minodo->id."</h3>";
+            
 		$minodoIndex = new Index(Neo4Play::client(), Index::TypeNode,'Empresa');
-		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);
+		$minodoIndex->add($minodo->node, 'nombre', $minodo->nombre);                
 	}      
 
         

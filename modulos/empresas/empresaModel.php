@@ -73,7 +73,7 @@
          * @return Array 
          */        
         public function get_ferrocarril(){
-            $query = "START n=node(*) WHERE n.type='Sitio' RETURN n;";
+            $query = "START n=node(*) WHERE n.type='Sitio' RETURN n limit 50;";
             $resultado = $this->modelemsitios->get_sitio_aleatorio($query, 10);
             return $resultado;     
         }        

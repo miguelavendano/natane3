@@ -1,8 +1,8 @@
 <?php
 
-require_once('coneccion.php');
-require_once('modeloImagen.php');
-require_once('Imagen.php');
+require_once('../../../core/coneccion.php');
+require_once('../../../core/modeloImagen.php');
+require_once('../../../core/Imagen.php');
 
 function creaNodoImagen($nombre,$descipcion){
   

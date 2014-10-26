@@ -21,7 +21,7 @@ function creaNodoUsuario($nom,$ape,$img,$gen,$nik, $orig,$reci,$mail){
     $minodo->twitter = 'https://twitter.com/';
     $minodo->youtube = 'http://www.youtube.com/';
     $minodo->contraseña = '123';
-    $minodo->type = 'Usuario';
+    $minodo->type = 'Usuario';  
 
     ModelUsuarios::crearNodoUsuario($minodo);
     
