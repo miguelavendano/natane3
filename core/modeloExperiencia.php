@@ -82,18 +82,21 @@ class ModelExperiencia{
                 foreach($result as $row) {
                     $experiencia = new Experiencia();
                     $experiencia->id = $row['']->getId();
-                    
+                    $experiencia->nombre = $row['']->getProperty('nombre');
+                    $experiencia->descripcion = $row['']->getProperty('descripcion');
+                                        
+                    //consulto imagenes de la experiencia
                     $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
                     $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
                     
-                    if($queryRes){
+                    $resImg = $queryRes->getResultSet();
+                    
+                    if($resImg){
                         
-                        $res = $queryRes->getResultSet();
-                        
-                        if(count($res)>0){
-                            $img_ran = rand (0, count($res)-1);   //elemento aleatorio de las imagenes de la experiencia
+                        if(count($resImg)>0){
+                            $img_ran = rand (0, count($resImg)-1);   //elemento aleatorio de las imagenes de la experiencia
 
-                            foreach($res as $img){                            
+                            foreach($resImg as $img){                            
                                 $imagenes[]=$img[''];                            
                             }
 
@@ -102,17 +105,30 @@ class ModelExperiencia{
                         }
                         else {
                             $experiencia->imagen= "experiencia_sin_foto.png";  //si la experienci no tiene imagen muestra esta por defecto
-                        }
-                        
-
-                        
+                        }                        
                     }
                     
+                    //consulta el id del sitio relacionado a la experiencia
+                    $query = "START e=node(".$experiencia->id.") MATCH e-[:Asociada]->s RETURN s";
+                    $queryRes2 = new Cypher\Query(Neo4Play::client(), $query);                          
+                    $resSitio = $queryRes2->getResultSet();
                     
-                    $experiencia->nombre = $row['']->getProperty('nombre');
-                    $experiencia->descripcion = $row['']->getProperty('descripcion');
+                    if($resSitio){     
+                        
+                        foreach($resSitio as $row) {                                                                       
+                            //$experiencia->id_sitio = $row['id'];
+                            //$experiencia->nombre_sitio = $row['nombre'];
+                            //echo $row['']->getId(); 
+                            //echo $row['']->getProperty('nombre');
+                             $experiencia->id_sitio = $row['']->getId();
+                             $experiencia->nombre_sitio = $row['']->getProperty('nombre');
+                        }         
+                    }
+                    
                     array_push($array, $experiencia);
                     $res=null;
+                    $resSitio=null;
+                    $resImg=null;
                 }
                 return $array;
             }
@@ -133,6 +149,8 @@ class ModelExperiencia{
                 foreach($result as $row) {
                     $experiencia = new Experiencia();
                     $experiencia->id = $row['']->getId();
+                    $experiencia->nombre = $row['']->getProperty('nombre');
+                    $experiencia->descripcion = $row['']->getProperty('descripcion');                    
                     
                     $query = "START n=node(".$experiencia->id.") MATCH n-[:Img]->i RETURN i.nombre;";                    
                     $queryRes = new Cypher\Query(Neo4Play::client(), $query);      
@@ -157,12 +175,25 @@ class ModelExperiencia{
                         }                        
                     }
                     
-                    $experiencia->nombre = $row['']->getProperty('nombre');
-                    $experiencia->descripcion = $row['']->getProperty('descripcion');
+                    //consulta el id del sitio relacionado a la experiencia
+                    $query = "START e=node(".$experiencia->id.") MATCH e<-[:Comparte]-u RETURN u";
+                    $queryRes2 = new Cypher\Query(Neo4Play::client(), $query);                          
+                    $resSitio = $queryRes2->getResultSet();
+                    
+                    if($resSitio){     
+                        
+                        foreach($resSitio as $row) {                                                                       
+                            //$experiencia->id_sitio = $row['id'];
+                            //$experiencia->nombre_sitio = $row['nombre'];
+                            //echo $row['']->getId(); 
+                            //echo $row['']->getProperty('nombre');
+                             $experiencia->id_usuario = $row['']->getId();
+                             $experiencia->nick_usuario = $row['']->getProperty('nick');
+                        }         
+                    }
+                    
                     array_push($array, $experiencia);
                     $res=null;
-                    
-                    
                 }
                 return $array;
             }

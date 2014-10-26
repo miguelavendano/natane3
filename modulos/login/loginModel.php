@@ -113,8 +113,7 @@
          */
         
         public function existe_usuario($user){      
-            
-            
+                        
             $query = "SELECT email, password, idneo4j FROM usuario WHERE email = '".$user."';";
             $mysql = new Conexion();
             $resultado = $mysql->get_resultados_query($query);
@@ -126,7 +125,6 @@
             
             return false;
                 
-            
         }
         
         /**
@@ -136,11 +134,12 @@
          * session como tipo, cant empresas creadas, cant de sitios creados, nick
          */       
         
-        public function get_inicio_session($id_usaurio){
+        public function get_inicio_session($id_usurio){
             
-            $query = "start a=node(".$id_usaurio.") return a.type as tipoUser, a.nick as nick, a.imagen as img";
+            //$query = "start n=node(".$id_usurio.") return n.nick as nick, n.imagen as img, n.type as tipo, n.nombre as nombre";
+            $query = "start n=node(".$id_usurio.") return n.nombre as nombre, n.imagen as img, n.type as tipo";
             
-            return $this->modelusuario->get_datos_session($query, $id_usaurio);
+            return $this->modelusuario->get_datos_session($query, $id_usurio);           
                         
         }
         

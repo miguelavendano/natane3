@@ -165,8 +165,13 @@
          */
         public function refactory_header($opcion){
             
+            $tipoUsuario="";
+            
+            if(isset($_SESSION['id'])){ // existe sesion ?
+                $tipoUsuario = $_SESSION['tipo'];            
+            }            
 
-            $this->head = Global_var::refactory_header($opcion, false); 
+            $this->head = Global_var::refactory_header($opcion, false, $tipoUsuario); 
     
         }              
         

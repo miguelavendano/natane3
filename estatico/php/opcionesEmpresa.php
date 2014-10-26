@@ -105,8 +105,8 @@ if(isset($_POST['opcion'])){
             ModelEmpresa::editar_empresa($_POST['empresa'], "facebook", $_POST['face']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "twitter", $_POST['twit']);
             ModelEmpresa::editar_empresa($_POST['empresa'], "youtube", $_POST['youtube']);
-            ModelEmpresa::editar_empresa($_POST['empresa'], "contraseña", $_POST['pass']);
-            //ModelEmpresa::editar_empresa($_POST['usuario'], "imagen", );    
+            //ModelEmpresa::editar_empresa($_POST['empresa'], "contraseña", $_POST['pass']);
+            //ModelEmpresa::editar_empresa($_POST['empresa'], "imagen", );    
             
             if(count($_POST['lat_lon'])>0){
                 ModelEmpresa::editar_empresa($_POST['empresa'], "latitud", $_POST['lat_lon']['latitud']);
@@ -194,8 +194,8 @@ if(isset($_POST['opcion'])){
 
         case "guardar_edicionExpEmp":                                                                      
 
-            ModelExperiencia::editar_experiencia($_POST['servicio'], "nombre", $_POST['titulo']);
-            ModelExperiencia::editar_experiencia($_POST['servicio'], "descripcion", $_POST['descripcion']);            
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "nombre", $_POST['titulo']);
+            ModelExperiencia::editar_experiencia($_POST['experiencia'], "descripcion", $_POST['descripcion']);            
             $band="true";
             
         break;        

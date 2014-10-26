@@ -30,10 +30,11 @@
                 
         
         public function principal_imagen($id, $login){
-            
+
             $this->vista->refactory_header($login); 
             $this->vista->refactory_imagen($this->imagen($id));            
             $this->vista->refactory_comentarios($this->comentarios($id));
+            $this->vista->refactory_nuevo_comentario($login);
             $this->vista->refactory_total();
             
         }

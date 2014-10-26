@@ -2,7 +2,8 @@
     
     require_once('../../core/modeloUsuario.php');    
     require_once('../../core/modeloExperiencia.php');
-    require_once('../../core/modeloSitio.php');    
+    require_once('../../core/modeloSitio.php');   
+    require_once('../../core/modeloRelaciones.php');
     require_once('../../librerias/neo4jphp.phar');
     require_once('../../librerias/Neo4Play.php');    
     
@@ -12,6 +13,7 @@
         public $modelusuarios;
         public $modelexpe;
         public $modelsitio;
+        public $modelrelaciones;
         public $id_user;
         
         
@@ -20,9 +22,17 @@
             $this->modelusuarios = new ModelUsuarios();
             $this->modelexpe = new ModelExperiencia();
             $this->modelsitio = new ModelSitios();
+            $this->modelrelaciones = new ModeloRelaciones();
+            
             $this->id_user = $id;
             
-        }       
+        }      
+
+        
+        public function get_tipoUsuario(){
+            
+            return $this->modelusuarios->get_tipo($this->id_user);            
+        } 
         
         public function get_seguidores(){   
                         
@@ -72,7 +82,22 @@
             $resultado = $this->modelusuarios->get_AmigosDeAmigos($query);
 
             return $resultado;
-        }           
+        }  
+        
+        
+        public function validaSeguimiento(){   
+                       
+            $resultado = $this->modelrelaciones->existeRelacion($_SESSION['id'],$this->id_user,"Amigo");
+
+            return $resultado;
+        }         
+        
+        public function tipoUsuario(){   
+                       
+            $resultado = $this->modelusuarios->get_tipo($_SESSION['id']);
+
+            return $resultado;
+        }         
         
 //        public function get_usuario_gustaria($queryString){           
 //            

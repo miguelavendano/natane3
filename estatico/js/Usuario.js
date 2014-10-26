@@ -315,6 +315,8 @@ $(document).ready(function(){
             var datosform = new FormData(document.getElementById('formComparteExperiencia'));            
             datosform.append( "opcion", "crea_experiencia");            
             datosform.append( "autor", id_url[1] );
+            datosform.append( "sitio", id_sitio_auto );  //id_sitio_auto variable global definida en ListaSItios.js
+            
             
             //$("#imagenes_experiencia").css({display: 'none'});                    
             /*
@@ -486,12 +488,13 @@ $(document).ready(function(){
     
     /*
      * Crea o elimina la relacion de seguir a otro usuario
-     */            
+     */
     $("#SeguirU").toggle(
       function() {      //le da un punto de confianza
           
             $(this).addClass("active");
-            $("#SeguirU i").addClass("icon-ok");
+            //$("#SeguirU i").addClass("icon-ok");
+            $(this).html('<i class="icon-ok"></i> Siguiendo');
             
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
@@ -521,6 +524,7 @@ $(document).ready(function(){
           
             $(this).removeClass("active");            
             //$("#SeguirU i").removeClass("icon-ok");
+            $(this).html('Seguir');
             
             var mi_url=document.location.href;
             var id_url=mi_url.split("=");  
@@ -548,9 +552,77 @@ $(document).ready(function(){
                 }
             });                                   
       }
-    );    
-        
+    );            
+
+   
+   
+    /*
+     * Crea la relacion de seguir a otro usuario
+     */
+    $("#NoSeguirU").toggle(
+      function() {      //le da un punto de confianza
+                     
+            $(this).removeClass("active");            
+            //$("#NoSeguirU i").removeClass("icon-ok");
+            $(this).html('Seguir');
             
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'no_seguir',                   
+                    a_seguir: id_url[1]
+                    //seguidor: '61'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+     
+                        if(/true/.test(data)) {           
+                            
+                            $("#NoSeguirU").html("Seguir");                        
+                            
+                        }
+                        else alert("Se presento un error");                                                    
+     
+                        //$("#puntos_confianza").html(data);    
+                }
+            });  
+        
+      }, function() {       //le quita el punto de confianza
+                 
+            $(this).addClass("active");
+            //$("#NoSeguirU i").addClass("icon-ok");
+            $(this).html('<i class="icon-ok"></i> Siguiendo');
+            
+            var mi_url=document.location.href;
+            var id_url=mi_url.split("=");  
+            
+            $.ajax({
+                url:'/natane3/estatico/php/opcionesUsuario.php'
+                ,type:'POST'                    
+                ,data:{
+                    opcion: 'seguir',                   
+                    a_seguir: id_url[1]
+                    //seguidor: '279'
+                }
+                ,dataType:'html'
+                ,success: function(data,textStatus,jqXHR){                           
+
+                        if(/true/.test(data)) {                                                
+                            
+                            var html="<i class='icon-ok'></i> Siguiendo";
+                            $("#SeguirU").html(html);  
+                        }
+                        else alert("Se presento un error");                                                     
+                        //$("#puntos_confianza").html(data);    
+                }
+            });                 
+      });            
+
+   
 });
 
 

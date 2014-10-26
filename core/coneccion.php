@@ -11,7 +11,7 @@ if (!defined('APPLICATION_ENV')) {
 }
 
 $host = 'localhost';
-$port = (APPLICATION_ENV == 'development') ? 7477 : 7474;
+$port = (APPLICATION_ENV == 'development') ? 7476 : 7474;
 $transport = new Everyman\Neo4j\Transport($host, $port);
 $client = new Everyman\Neo4j\Client($transport);
 

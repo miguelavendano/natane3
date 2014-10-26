@@ -7,14 +7,16 @@
     <div class="span9 info_exp">                     
         
         <div class="btn-block opc_exp">          
-            <button class="btn icon-trash tooltip1" rel="tooltip" title="Eliminar" onclick="eliminarExperiencia({id_experiencia})"></button>            
-            <button class="btn icon-pencil tooltip2" rel="tooltip" title="Editar" onclick="editarExperiencia({id_experiencia})"></button>                                    
+            <!--<button class="btn icon-trash tooltip1" rel="tooltip" title="Eliminar" onclick="eliminarExperiencia({id_experiencia})"></button>            
+            <button class="btn icon-pencil tooltip2" rel="tooltip" title="Editar" onclick="editarExperiencia({id_experiencia})"></button>-->
+            {botones_experiencia}
         </div>                                   
 
         <h4><a href="#">{titulo_exp}</a></h4>
         <p> 
             {comentario}                        
             <p><a onclick="verExperiencia({id_experiencia})" class="cursor_link">leer mas...</a></p>  
+            <p><i>Vivida en: </i><b><a href="{url_sitio}?id={id_sitio}" style="color:rgb(49, 192, 49)">{nombre_sitio}</a></b></p>
         </p>
     </div>        
     

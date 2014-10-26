@@ -2,7 +2,8 @@
     
     require_once('../../core/modeloSitio.php');   
     require_once('../../core/modeloUsuario.php'); 
-    require_once('../../core/modeloExperiencia.php');    
+    require_once('../../core/modeloExperiencia.php');   
+    require_once('../../core/modeloRelaciones.php');    
     require_once('../../librerias/neo4jphp.phar');
     require_once('../../librerias/Neo4Play.php');    
     
@@ -29,6 +30,12 @@
          * @var ModelExperiencia 
          */                
         public $modelexpe;
+
+        /**
+         *Instancia de la Clase ModeloRelaciones.
+         * @var ModelRelaciones
+         */                
+        public $modelrelaciones;
         
         /**
          *Id del Sitio
@@ -45,6 +52,7 @@
             $this->modelsitios = new ModelSitios();
             $this->modelusuario = new ModelUsuarios();
             $this->modelexpe = new ModelExperiencia();
+            $this->modelrelaciones = new ModeloRelaciones();
             $this->id_sitio = $id;            
         }       
         
@@ -136,7 +144,22 @@
             
 
             return $resultado;            
-        }                  
+        }   
+        
+
+        /**
+         * Confirma si el usuario desea visitar un sitio o si ya lo havisitado
+         * @return Array 
+         */          
+        public function validaSeguimientoSitio($tipoRelacion){   
+                        
+            $resultado = $this->modelrelaciones->existeRelacion($_SESSION['id'],$this->id_sitio,$tipoRelacion);    
+            
+            return $resultado;
+            
+        }   
+
+        
         /*
         public function get_coordenadas_mapa(){            
             $query = "START n=node(".$this->id_sitio.") RETURN n.latitud,n.longitud";

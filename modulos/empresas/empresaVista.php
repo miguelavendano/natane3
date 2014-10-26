@@ -186,7 +186,18 @@
          * @var String 
          */
         public $id_empresa;
+        
+        /**
+         *Variable que contiene el codigo html para visutalizar el boton de confianza en las empresas
+         * @var String 
+         */
+        public $btn_confianza;        
 
+        /**
+         *Variable que contiene el codigo html para visutalizar los botones de administracion de la empresa
+         * @var String 
+         */
+        public $btn_admin;        
 
         
 
@@ -274,7 +285,10 @@
                                         'longitud'=>$this->longitud,
                                         'confianza'=>$this->confianza,
                                         'id_empresa'=>$this->id_empresa,
-                                        'crearServicio'=>$this->creaServicio);
+                                        'crearServicio'=>$this->creaServicio,
+                                        'boton_confianza'=>$this->btn_confianza,
+                                        'btn_admin'=>$this->btn_admin 
+                                        );
         }
         
         
@@ -308,7 +322,10 @@
                                         'longitud'=>$this->longitud,
                                         'confianza'=>$this->confianza,
                                         'id_empresa'=>$this->id_empresa,
-                                        'crearServicio'=>$this->creaServicio);
+                                        'crearServicio'=>$this->creaServicio,
+                                        'boton_confianza'=>$this->btn_confianza,
+                                        'btn_admin'=>$this->btn_admin                                         
+                                        );
         }
         
         
@@ -320,19 +337,24 @@
          */
         public function refactory_header($opcion){
             
+            $tipoUsuario="";
+            
+            if(isset($_SESSION['id'])){ // existe sesion ?
+                $tipoUsuario = $_SESSION['tipo'];            
+            }
+            
             switch($opcion){                                
-                case 1:
-                    
-                    $this->head = Global_var::refactory_header(true, false);                    
+                case 1:                    
+                    $this->head = Global_var::refactory_header(true, false, $tipoUsuario);                    
                     //$this->head .= "<br> <h1>Este es mi empresa</h1>";
-                    break;
+                break;
+            
                 case 2:
-                    $this->head = Global_var::refactory_header(true, false);                                        
-                    break;
+                    $this->head = Global_var::refactory_header(true, false, $tipoUsuario);                                        
+                break;
                 
                 default:
-                    $this->head = Global_var::refactory_header(false, false);                                        
-                                        
+                    $this->head = Global_var::refactory_header(false, false, $tipoUsuario);                                                                                
                 break;               
             }
             
@@ -502,8 +524,9 @@
         /**
          * Refactoriza la seccion de servicios ofertados por la empresa.
          * @param type $datos Datos de los servicios que ofrece la empresa.
+         * @param type $login Tipo de login del usuario (si es dueño o no de la empresa)
          */
-        public function refactory_servicios($datos){            
+        public function refactory_servicios($datos,$login){            
             
             $resultados="";
             
@@ -518,6 +541,20 @@
                     $aux = str_ireplace("{nombre}", $servicio->nombre, $aux);
                     $aux = str_ireplace("{imagen}", $servicio->imagen, $aux);
                     $aux = str_ireplace("{descripcion}", $servicio->descripcion, $aux);
+                    
+
+                    if($login==1){
+                        $botones =                 
+                                '<button class="btn icon-trash tooltip1" rel="tooltip" title="Eliminar" onclick="eliminarServicio('.$servicio->id.')"></button>
+                                 <button class="btn icon-pencil tooltip2" rel="tooltip" title="Editar" data-toggle="modal" href=".modalEditaServicio" onclick="editarServicio('.$servicio->id.')"></button>';                    
+                    }
+
+                    if($login==2 || $login==3){
+                        $botones = "";
+                    }
+
+                    $aux = str_ireplace('{botones_servicio}', $botones, $aux);  
+
                     $resultados .= $aux;
                     $i++;
                 }while((count($datos)!=0)&& $i<3);                
@@ -533,17 +570,31 @@
         /**
          * Refactoriza la seccion de experiencias publicadas por la empresa
          * @param Array $datos Datos sobre la experiencias realacionadas a la empresa.
+         * @param type $login Tipo de login del usuario (si es dueño o no de la empresa) 
          */
-        public function refactory_experiencias($datos){            
+        public function refactory_experiencias($datos,$login){            
             
-            $experiencias = "";
+            $experiencias = "";            
             
             foreach ($datos as $valor){
+                
                 $aux = $this->expe;
                 $aux = str_ireplace('{id_experiencia}', $valor->id, $aux);                
                 $aux = str_ireplace('{imagen}', $valor->imagen, $aux);
                 $aux = str_ireplace('{dirigido_a}', $valor->nombre, $aux);
                 $aux = str_ireplace('{comentario}',$valor->descripcion , $aux);
+                
+                if($login==1){
+                    $botones =                 
+                            '<button class="btn icon-trash tooltip1" rel="tooltip" title="Eliminar" onclick="eliminaExperienciaEmpresa('.$valor->id.')"></button>
+                            <button class="btn icon-pencil tooltip2" rel="tooltip" title="Editar" onclick="editaExperienciaEmpresa('.$valor->id .')"></button>';                    
+                }
+                
+                if($login==2 || $login==3){
+                    $botones = "";
+                }
+                
+                $aux = str_ireplace('{botones_experiencia}', $botones, $aux);                
                 
                 $experiencias .= $aux;
             }
@@ -563,7 +614,48 @@
             $this->actualizar_diccionarios();
         }        
                 
-             
+        
+      
+        /**
+         * Refactoriza el boton de confianza en la empresa
+         */               
+        public function refactory_boton_confianza($confianza){
+            
+            if($confianza){    //si existe $confianza se muestra el boton seleccionado
+                $this->btn_confianza = 
+                            '<div id="campoConfio" class="span3 contenido">
+                                <button class="btn btn-cyan btn-block active" id="BNoConfio"><i class="icon-ok"></i> Confias en esta empresa</button>                
+                             </div>';
+            }
+            else{  //si no existe $confianza se muestra el boton deseleccionado
+                $this->btn_confianza = 
+                            '<div id="campoConfio" class="span3 contenido">
+                                <button class="btn btn-cyan btn-block" id="Bconfio"><i></i> Confio en esta empresa</button>                
+                             </div>';                
+            }             
+        }  
+        
+
+        /**
+         * Refactoriza el boton de confianza en la empresa
+         */               
+        public function refactory_btn_admin_empresa($login){
+
+                    if($login==1){
+                        $this->btn_admin =                
+                            '<div id="campoConfio" class="span3 btn-group btn-block">
+                              <button type="button" class="btn btn-blue" id="BeditarE"><i class="icon-building"></i> Editar Perfil</button>
+                              <button type="button" class="btn btn-red" id="BcrearServi"><i class="icon-star"></i> Crear Servicio</button>
+                            </div>';                        
+                    }
+
+                    if($login==2 || $login==3){
+                        $this->btn_admin = "";
+                    }            
+        }
+        
+        
+        
         /**
          * Refactoriza todo el contenido de la interfaz grafica de la empresa.
          */        
